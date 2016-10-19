@@ -1,0 +1,28 @@
+{
+    "name": "libre-informatique/product-bundle",
+    "type": "symfony-bundle",
+    "description": "Product Bundle for Symfony",
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/symfony": "2.8.*",
+        "libre-informatique/core-bundle": "dev-master",
+        "libre-informatique/doctrine-bundle": "dev-master",
+        "libre-informatique/base-entities-bundle": "dev-master"
+    },
+    "license":  "GPL-3.0",
+    "keywords": ["e-commerce", "libio", "sonata", "symfony"],
+    "homepage": "https://github.com/libre-informatique/SymfonyLibrinfoProductBundle",
+    "authors": [
+        {
+           "name": "Marcos Bezerra de Menezes",
+           "email": "marcos.bezerra@libre-informatique.fr"
+        },
+        {
+            "name": "Libre Informatique",
+            "homepage": "http://www.libre-informatique.fr/"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Librinfo\\ProductBundle\\": "" }
+    }
+}
