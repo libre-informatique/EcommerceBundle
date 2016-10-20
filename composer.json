@@ -2,12 +2,14 @@
     "name": "libre-informatique/product-bundle",
     "type": "symfony-bundle",
     "description": "Product Bundle for Symfony",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "symfony/symfony": "2.8.*",
         "libre-informatique/core-bundle": "dev-master",
         "libre-informatique/doctrine-bundle": "dev-master",
-        "libre-informatique/base-entities-bundle": "dev-master"
+        "libre-informatique/base-entities-bundle": "dev-master",
+        "sylius/product-bundle": "^1.0@dev" 
     },
     "license":  "GPL-3.0",
     "keywords": ["e-commerce", "libio", "sonata", "symfony"],
