@@ -9,8 +9,8 @@
         "libre-informatique/core-bundle": "dev-master",
         "libre-informatique/doctrine-bundle": "dev-master",
         "libre-informatique/base-entities-bundle": "dev-master",
-        "sylius/product-bundle": "^0.19.0",
-        "sylius/locale-bundle": "^0.19.0" 
+        "sylius/locale-bundle": "^1.0", 
+        "sylius/product-bundle": "^1.0"
     },
     "license":  "GPL-3.0",
     "keywords": ["e-commerce", "libio", "sonata", "symfony"],
