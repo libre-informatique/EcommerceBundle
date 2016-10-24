@@ -1,0 +1,26 @@
+doctrine:
+    orm:
+        mappings:
+            SyliusProductBundle:
+                type: xml
+                prefix: Sylius\Component\Product\Model
+                dir: Resources/config/doctrine/model
+
+sylius_product:
+    driver: doctrine/orm
+    resources:
+        product:
+            classes:
+                model: Librinfo\ProductBundle\Entity\Product
+        product_option:
+            classes:
+                model: Librinfo\ProductBundle\Entity\ProductOption
+
+sylius_association:
+    resources:
+        product:
+            subject: Librinfo\ProductBundle\Entity\Product
+            association:
+                classes:
+                    model: Sylius\Component\Product\Model\ProductAssociation
+                    interface: Sylius\Component\Product\Model\ProductAssociationInterface
