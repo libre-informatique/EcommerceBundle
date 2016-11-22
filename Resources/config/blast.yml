@@ -69,7 +69,8 @@ parameters:
 
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    translations.name: ~
+                    translations.name:
+                        label: librinfo.label.name
                     code: ~
 #                    available:
 #                        type: boolean
