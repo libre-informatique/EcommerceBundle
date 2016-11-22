@@ -1,0 +1,80 @@
+# Copyright (C) 2015-2016 Libre Informatique
+#
+# This file is licenced under the GNU GPL v3.
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+parameters:
+    librinfo:
+
+##########
+# PRODUCT
+##########
+
+        Librinfo\ProductBundle\Entity\Product:
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    form_group_general:
+                        '':
+                            name: ~
+                            code: ~
+                            available:
+                                type: boolean
+
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_group_general:
+                        '':
+                            name:
+                                type: text
+                            code: ~
+                            availableOn:
+                                type: sonata_type_datetime_picker
+                                required: false
+                                dp_use_current: false
+                                dp_pick_time: true
+                            availableUntil:
+                                type: sonata_type_datetime_picker
+                                required: false
+                                dp_use_current: true
+                                dp_pick_time: true
+
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    name:
+                        identifier: true
+                    code:
+                        identifier: true
+                    available:
+                        type: boolean
+                    _options:
+                        fieldsOrder:
+                            - code
+                            - name
+                            - available
+                    _export_format:
+                        csv: [code, name, available]
+                        xls: csv
+                        json: csv
+                        xml: csv
+                    _actions:
+                        type: actions
+                        label: Action
+                        actions:
+                            show: ~
+                            edit: ~
+                            delete: ~
+                            duplicate:
+                                template: LibrinfoCoreBundle:CRUD:list__action_duplicate.html.twig
+
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    translations.name: ~
+                    code: ~
+#                    available:
+#                        type: boolean
+                    _options:
+                        fieldsOrder:
+                            - code
+#                            - name
+#                            - available
