@@ -1,3 +1,9 @@
+# Copyright (C) 2015-2016 Libre Informatique
+#
+# This file is licenced under the GNU GPL v3.
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
 doctrine:
     orm:
         mappings:
@@ -16,11 +22,11 @@ sylius_product:
             classes:
                 model: Librinfo\ProductBundle\Entity\ProductOption
 
-sylius_association:
-    resources:
-        product:
-            subject: Librinfo\ProductBundle\Entity\Product
-            association:
-                classes:
-                    model: Sylius\Component\Product\Model\ProductAssociation
-                    interface: Sylius\Component\Product\Model\ProductAssociationInterface
+#sylius_product_association:
+#    resources:
+#        product:
+#            subject: Librinfo\ProductBundle\Entity\Product
+#            association:
+#                classes:
+#                    model: Sylius\Component\Product\Model\ProductAssociation
+#                    interface: Sylius\Component\Product\Model\ProductAssociationInterface

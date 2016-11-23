@@ -8,10 +8,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\ProductBundle;
+namespace Librinfo\ProductBundle\Admin;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Librinfo\CoreBundle\Admin\CoreAdmin;
 
-class LibrinfoProductBundle extends Bundle
+/**
+ * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
+ */
+class ProductAdmin extends CoreAdmin
 {
+    //put your code here
 }

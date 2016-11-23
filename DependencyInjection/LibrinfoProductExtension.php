@@ -11,5 +11,6 @@ use Librinfo\CoreBundle\DependencyInjection\LibrinfoCoreExtension;
  */
 class LibrinfoProductExtension extends LibrinfoCoreExtension
 {
-    
+
+ 
 }

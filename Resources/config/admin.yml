@@ -1,0 +1,17 @@
+# Copyright (C) 2015-2016 Libre Informatique
+#
+# This file is licenced under the GNU GPL v3.
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+services:
+
+    librinfo_product.admin.product:
+        class: Librinfo\ProductBundle\Admin\ProductAdminConcrete
+        arguments: [~, Librinfo\ProductBundle\Entity\Product, LibrinfoCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: librinfo.product.product_admin.label
+              label_translator_strategy: librinfo_core.label.strategy.librinfo
