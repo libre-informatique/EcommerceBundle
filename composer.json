@@ -7,7 +7,6 @@
         "php": ">=5.4.0",
         "symfony/symfony": "2.8.*",
         "blast-project/core-bundle": "dev-master",
-        "libre-informatique/doctrine-bundle": "dev-master",
         "libre-informatique/base-entities-bundle": "dev-master",
         "sylius/locale-bundle": "^1.0",
         "sylius/product-bundle": "^1.0"
