@@ -8,7 +8,7 @@ services:
 
     librinfo_product.admin.product:
         class: Librinfo\ProductBundle\Admin\ProductAdminConcrete
-        arguments: [~, Librinfo\ProductBundle\Entity\Product, LibrinfoCoreBundle:CRUD]
+        arguments: [~, Librinfo\ProductBundle\Entity\Product, BlastCoreBundle:CRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
