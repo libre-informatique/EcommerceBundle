@@ -10,7 +10,7 @@
 
 namespace Librinfo\ProductBundle\Admin;
 
-use Librinfo\CoreBundle\Admin\Traits\HandlesRelationsAdmin;
+use Blast\CoreBundle\Admin\Traits\HandlesRelationsAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
