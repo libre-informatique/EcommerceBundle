@@ -79,3 +79,54 @@ parameters:
                             - code
 #                            - name
 #                            - available
+
+
+
+####################
+# PRODUCT ATTRIBUTE
+####################
+
+        Sylius\Component\Product\Model\ProductAttribute:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    form_group_general:
+                        '':
+                            code: ~
+                            name: ~
+                            type: ~
+                            position: ~
+                    show_tab_history:
+                        show_group_history:
+                            createdAt: ~
+                            updatedAt: ~
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_group_general:
+                        '':
+                            code: ~
+                            name:
+                                type: text
+                            type:
+                                type: Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType
+                            position: ~
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    code: ~
+                    name: ~
+                    type: ~
+                    storageType: ~
+                    position: ~
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    code: ~
+                    translations.name:
+                        label: librinfo.label.name
+                    type: ~
+                    storageType: ~
+                    position: ~
+                    createdAt: ~
+                    updatedAt: ~

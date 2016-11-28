@@ -1,0 +1,25 @@
+Action: Action
+
+show_group_history: Historique
+
+librinfo:
+    link:
+        product_list: Liste des articles
+        product_create: Nouvel Article
+        productattribute_list: Liste des attributs d'article
+        product_attribute_list: Liste des attributs d'article
+        product_attribute_create: Nouvel attribut d'article
+    label:
+        available: Disponible
+        available_on: Disponible à partir de
+        available_until: Disponible jusqu'à
+        type: Type
+        storage_type: Type d'enregistrement
+        position: Position
+    product:
+        product_admin:
+            label: Article
+        product_attribute_admin:
+            label: Attribut d'article
+
+

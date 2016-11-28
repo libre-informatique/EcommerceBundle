@@ -22,6 +22,14 @@ sylius_product:
             classes:
                 model: Librinfo\ProductBundle\Entity\ProductOption
 
+sylius_attribute:
+    resources:
+        product:
+            subject: Librinfo\ProductBundle\Entity\Product
+            attribute:
+                classes:
+                    model: Librinfo\ProductBundle\Entity\ProductAttribute
+
 #sylius_product_association:
 #    resources:
 #        product:

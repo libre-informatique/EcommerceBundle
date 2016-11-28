@@ -10,9 +10,9 @@
 
 namespace Librinfo\ProductBundle\Entity;
 
-use Sylius\Component\Product\Model\ProductOption as BaseProductOption;
+use Sylius\Component\Product\Model\ProductAttribute as BaseProductAttribute;
 
-class ProductOption extends BaseProductOption
+class ProductAttribute extends BaseProductAttribute
 {
 
 }
