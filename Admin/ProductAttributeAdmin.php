@@ -11,7 +11,13 @@
 namespace Librinfo\ProductBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
+use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
+use Sylius\Component\Attribute\AttributeType\DateAttributeType;
+use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
+use Sylius\Component\Attribute\AttributeType\IntegerAttributeType;
+use Sylius\Component\Attribute\AttributeType\PercentAttributeType;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 
 class ProductAttributeAdmin extends CoreAdmin
@@ -33,10 +39,33 @@ class ProductAttributeAdmin extends CoreAdmin
         return $object;
     }
 
+    /**
+     * @param ProductAttributeInterface $object
+     * @param string $method
+     */
     public function prePersistOrUpdate($object, $method)
     {
         parent::prePersistOrUpdate($object, $method);
 
-        dump($object->getType());
+        switch($object->getType()) {
+            case IntegerAttributeType::TYPE:
+                $object->setStorageType(AttributeValueInterface::STORAGE_INTEGER);
+                break;
+            case PercentAttributeType::TYPE:
+                $object->setStorageType(AttributeValueInterface::STORAGE_FLOAT);
+                break;
+            case CheckboxAttributeType::TYPE:
+                $object->setStorageType(AttributeValueInterface::STORAGE_BOOLEAN);
+                break;
+            case DateAttributeType::TYPE:
+                $object->setStorageType(AttributeValueInterface::STORAGE_DATE);
+                break;
+            case DatetimeAttributeType::TYPE:
+                $object->setStorageType(AttributeValueInterface::STORAGE_DATETIME);
+                break;
+            default:
+                $object->setStorageType(AttributeValueInterface::STORAGE_TEXT);
+        }
+
     }
 }

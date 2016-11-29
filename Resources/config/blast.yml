@@ -95,7 +95,6 @@ parameters:
                             code: ~
                             name: ~
                             type: ~
-                            position: ~
                     show_tab_history:
                         show_group_history:
                             createdAt: ~
@@ -110,15 +109,12 @@ parameters:
                                 type: text
                             type:
                                 type: Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType
-                            position: ~
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     code: ~
                     name: ~
                     type: ~
-                    storageType: ~
-                    position: ~
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
@@ -127,6 +123,5 @@ parameters:
                         label: librinfo.label.name
                     type: ~
                     storageType: ~
-                    position: ~
                     createdAt: ~
                     updatedAt: ~
