@@ -7,7 +7,7 @@
 services:
 
     librinfo_product.admin.product:
-        class: Librinfo\ProductBundle\Admin\ProductAdminConcrete
+        class: Librinfo\ProductBundle\Admin\ProductAdmin
         arguments: [~, Librinfo\ProductBundle\Entity\Product, BlastCoreBundle:CRUD]
         tags:
             - name: sonata.admin
