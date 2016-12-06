@@ -52,21 +52,11 @@ parameters:
                             - code
                             - name
                             - available
-                    _export_format:
+                    _export_formats:
                         csv: [code, name, available]
                         xls: csv
                         json: csv
                         xml: csv
-                    _actions:
-                        type: actions
-                        label: Action
-                        actions:
-                            show: ~
-                            edit: ~
-                            delete: ~
-                            duplicate:
-                                template: BlastCoreBundle:CRUD:list__action_duplicate.html.twig
-
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     translations.name:
