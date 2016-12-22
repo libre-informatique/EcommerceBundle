@@ -16,6 +16,7 @@ librinfo:
         type: Type
         storage_type: Type d'enregistrement
         position: Position
+        weight: Poids
     product:
         product_admin:
             label: Article
