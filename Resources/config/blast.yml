@@ -13,13 +13,23 @@ parameters:
 
         Librinfo\ProductBundle\Entity\Product:
             Sonata\AdminBundle\Show\ShowMapper:
+                forceTabs: true
                 add:
                     form_group_general:
                         '':
                             name: ~
                             code: ~
+                        form_tab_availability:
                             available:
                                 type: boolean
+                            availableOn: ~
+                            availableUntil: ~
+                    form_tab_history:
+                        form_group_history:
+                            createdAt: ~
+                            updatedAt: ~
+                            createdBy: ~
+                            updatedBy: ~
 
             Sonata\AdminBundle\Form\FormMapper:
                 add:
