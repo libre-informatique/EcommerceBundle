@@ -125,3 +125,89 @@ parameters:
                     storageType: ~
                     createdAt: ~
                     updatedAt: ~
+
+####################
+# PRODUCT OPTION
+####################
+
+        Librinfo\ProductBundle\Entity\ProductOption:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    form_group_general:
+                        '':
+                            code: ~
+                            name: ~
+                    show_tab_values:
+                        '':
+                            values: ~
+                    show_tab_history:
+                        show_group_history:
+                            createdAt: ~
+                            updatedAt: ~
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_group_general:
+                        '':
+                            code: ~
+                            name:
+                                type: text
+                    form_tab_values:
+                        '':
+                            values: ~
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    code:
+                        identifier: true
+                    name:
+                        identifier: true
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    code: ~
+                    translations.name:
+                        label: librinfo.label.name
+                    createdAt: ~
+                    updatedAt: ~
+
+
+####################
+# PRODUCT OPTION
+####################
+
+        Librinfo\ProductBundle\Entity\ProductOptionValue:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    form_group_general:
+                        '':
+                            code: ~
+                            value: ~
+                            option:
+                                label: librinfo.label.product_option
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_group_general:
+                        '':
+                            code: ~
+                            value:
+                                type: text
+                            option:
+                                label: librinfo.label.product_option
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    code:
+                        identifier: true
+                    value: ~
+                    option:
+                        label: librinfo.label.product_option
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    code: ~
+                    translations.value:
+                        label: librinfo.label.value

@@ -16,6 +16,26 @@ services:
               label: librinfo.product.product_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
 
+    librinfo_product_option.admin.product:
+        class: Librinfo\ProductBundle\Admin\ProductOptionAdmin
+        arguments: [~, Librinfo\ProductBundle\Entity\ProductOption, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: librinfo.product.product_option_admin.label
+              label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_product_option_value.admin.product:
+        class: Librinfo\ProductBundle\Admin\ProductOptionValueAdmin
+        arguments: [~, Librinfo\ProductBundle\Entity\ProductOptionValue, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: librinfo.product.product_option_value_admin.label
+              label_translator_strategy: blast_core.label.strategy.librinfo
+
     librinfo_product.admin.product_attribute:
         class: Librinfo\ProductBundle\Admin\ProductAttributeAdmin
         arguments: [~, Librinfo\ProductBundle\Entity\ProductAttribute, BlastCoreBundle:CRUD]

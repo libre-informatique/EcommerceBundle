@@ -4,11 +4,15 @@ show_group_history: Historique
 
 librinfo:
     link:
-        product_list: Liste des articles
-        product_create: Nouvel Article
-        productattribute_list: Liste des attributs d'article
-        product_attribute_list: Liste des attributs d'article
         product_attribute_create: Nouvel attribut d'article
+        product_attribute_list: Liste des attributs d'article
+        product_create: Nouvel Article
+        product_list: Liste des articles
+        product_option_list: Liste des options d'article
+        product_option_value_list: Liste des contenus options d'article
+        productattribute_list: Liste des attributs d'article
+        productoptionvalue_list: Liste des contenus options d'article
+        productoption_list: Liste des options d'article
     label:
         available: Disponible
         available_on: Disponible à partir de
@@ -16,11 +20,17 @@ librinfo:
         type: Type
         storage_type: Type d'enregistrement
         position: Position
+        values: Valeurs
         weight: Poids
+        product_option: Option d'article
     product:
         product_admin:
             label: Article
         product_attribute_admin:
             label: Attribut d'article
+        product_option_admin:
+            label: Option d'article
+        product_option_value_admin:
+            label: Contenu d'option d'article
 
 
