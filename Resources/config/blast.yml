@@ -19,17 +19,27 @@ parameters:
                         '':
                             name: ~
                             code: ~
-                        form_tab_availability:
+                            enabled: boolean
+                            description: ~
+                            options:
+                                label: librinfo.label.product_options
+                            shortDescription: ~
+                            metaKeywords: ~
+                            metaDescription: ~
+                        show_group_availability:
                             available:
                                 type: boolean
                             availableOn: ~
                             availableUntil: ~
+                    show_tab_variants:
+                        '':
+                            variants: ~
                     form_tab_history:
                         form_group_history:
                             createdAt: ~
                             updatedAt: ~
-                            createdBy: ~
-                            updatedBy: ~
+                    _options:
+                        tabsOrder: [form_group_general, show_tab_variants, form_tab_history]
 
             Sonata\AdminBundle\Form\FormMapper:
                 add:
@@ -38,6 +48,22 @@ parameters:
                             name:
                                 type: text
                             code: ~
+                            enabled: boolean
+                            description:
+                                type: textarea
+                                required: false
+                            shortDescription:
+                                type: textarea
+                                required: false
+                            metaKeywords:
+                                type: text
+                                required: false
+                            metaDescription:
+                                type: textarea
+                                required: false
+                            options:
+                                label: librinfo.label.product_options
+                                required: false
                             availableOn:
                                 type: sonata_type_datetime_picker
                                 required: false
@@ -48,6 +74,25 @@ parameters:
                                 required: false
                                 dp_use_current: true
                                 dp_pick_time: true
+                    form_tab_variants:
+                        '':
+                            variants:
+                                type: sonata_type_collection
+                                label: false
+                                by_reference: false
+                                type_options:
+                                    btn_add: false
+                                    delete_options:
+                                        type: checkbox
+                                        type_options:
+                                            mapped: false
+                                            required: false
+                                required: true    # if not true, child form fields cannot be required (why ??)
+                                _options:
+                                    edit: inline
+                                    inline: table
+                    _options:
+                        tabsOrder: [form_group_general, form_tab_history]
 
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
@@ -55,12 +100,15 @@ parameters:
                         identifier: true
                     code:
                         identifier: true
+                    enabled:
+                        type: boolean
                     available:
                         type: boolean
                     _options:
                         fieldsOrder:
                             - code
                             - name
+                            - enabled
                             - available
                     _export_formats:
                         csv: [code, name, available]
@@ -72,13 +120,128 @@ parameters:
                     translations.name:
                         label: librinfo.label.name
                     code: ~
-#                    available:
-#                        type: boolean
+                    translations.description:
+                        label: librinfo.label.description
+                    translations.shortDescription:
+                        label: librinfo.label.short_description
+                    translations.metaKeywords:
+                        label: librinfo.label.meta_keywords
+                    translations.metaDescription:
+                        label: librinfo.label.meta_description
+                    enabled: ~
+#                    available: ~
                     _options:
                         fieldsOrder:
                             - code
-#                            - name
-#                            - available
+                            - translations.name
+
+
+##################
+# PRODUCT VARIANT
+##################
+
+        Librinfo\ProductBundle\Entity\ProductVariant:
+            Sonata\AdminBundle\Show\ShowMapper:
+                forceTabs: true
+                add:
+                    form_group_general:
+                        '':
+                            product: ~
+                            name: ~
+                            code: ~
+                            price: ~
+                        show_group_stock:
+                            onHand: ~
+                            onHold: ~
+                            tracked:
+                                type: boolean
+                                label: librinfo.label.tracked_stock
+                        show_group_availability:
+                            available:
+                                type: boolean
+                            availableOn: ~
+                            availableUntil: ~
+                        show_group_properties:
+                            width: ~
+                            height: ~
+                            depth: ~
+                            weight: ~
+                    form_tab_history:
+                        form_group_history:
+                            createdAt: ~
+                            updatedAt: ~
+                    _options:
+                        tabsOrder: [form_group_general, form_tab_history]
+
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_group_general:
+                        '':
+                            product: ~
+                            name: ~
+                            code: ~
+                            price: ~
+                        form_group_stock:
+                            onHand:
+                                required: false
+                            onHold:
+                                required: false
+                            tracked:
+                                label: librinfo.label.tracked_stock
+                        form_group_availability:
+                            availableOn:
+                                type: sonata_type_datetime_picker
+                                required: false
+                                dp_use_current: false
+                                dp_pick_time: true
+                            availableUntil:
+                                type: sonata_type_datetime_picker
+                                required: false
+                                dp_use_current: true
+                                dp_pick_time: true
+                        form_group_properties:
+                            width: ~
+                            height: ~
+                            depth: ~
+                            weight: ~
+                    _options:
+                        tabsOrder: [form_group_general, form_tab_history]
+
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    name:
+                        identifier: true
+                    code:
+                        identifier: true
+                    product: ~
+                    available: boolean
+                    price: ~
+                    onHand: ~
+                    onHold: ~
+                    tracked:
+                        type: boolean
+                        label: librinfo.label.tracked_stock
+                    _options:
+                        fieldsOrder:
+                            - code
+                            - name
+                            - product
+                            - available
+                    _export_formats:
+                        csv: [code, name, available]
+                        xls: csv
+                        json: csv
+                        xml: csv
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    name: ~
+                    code: ~
+                    product: ~  # TODO: optimize this (loads all the products in the variant list view !)
+                    _options:
+                        fieldsOrder:
+                            - name
+                            - code
+                            - product
 
 
 
@@ -174,7 +337,7 @@ parameters:
 
 
 ####################
-# PRODUCT OPTION
+# PRODUCT OPTION VALUE
 ####################
 
         Librinfo\ProductBundle\Entity\ProductOptionValue:

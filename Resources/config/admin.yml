@@ -16,6 +16,16 @@ services:
               label: librinfo.product.product_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
 
+    librinfo_product.admin.product_variant:
+        class: Librinfo\ProductBundle\Admin\ProductVariantAdmin
+        arguments: [~, Librinfo\ProductBundle\Entity\ProductVariant, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: librinfo.product.product_variant_admin.label
+              label_translator_strategy: blast_core.label.strategy.librinfo
+
     librinfo_product_option.admin.product:
         class: Librinfo\ProductBundle\Admin\ProductOptionAdmin
         arguments: [~, Librinfo\ProductBundle\Entity\ProductOption, BlastCoreBundle:CRUD]
