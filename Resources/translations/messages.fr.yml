@@ -10,6 +10,11 @@ show_group_stock: Stock
 show_tab_variants: Déclinaisons
 
 librinfo:
+    action:
+        manage_variants: Gérer les déclinaisons
+        list_variants: Liste des déclinaisons
+        add_variant: Ajouter une déclinaison
+        generate_variants: Générer les déclinaisons
     link:
         product_attribute_create: Nouvel attribut d'article
         product_attribute_list: Liste des attributs d'article
@@ -37,6 +42,7 @@ librinfo:
         on_hold: Stock réservé
         position: Position
         product: Article
+        product_code: Code produit
         product_option: Option d'article
         product_options: Options d'article
         short_description: Brève description

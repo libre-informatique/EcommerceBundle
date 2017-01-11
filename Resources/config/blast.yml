@@ -110,6 +110,9 @@ parameters:
                             - name
                             - enabled
                             - available
+                    _actions:
+                        variants:
+                            template: 'LibrinfoProductBundle:CRUD:list__action_variants.html.twig'
                     _export_formats:
                         csv: [code, name, available]
                         xls: csv
@@ -146,7 +149,8 @@ parameters:
                 add:
                     form_group_general:
                         '':
-                            product: ~
+                            product:
+                                admin_code: librinfo_product.admin.product
                             name: ~
                             code: ~
                             price: ~
@@ -177,7 +181,9 @@ parameters:
                 add:
                     form_group_general:
                         '':
-                            product: ~
+                            product:
+                                _options:
+                                    admin_code: librinfo_product.admin.product
                             name: ~
                             code: ~
                             price: ~
@@ -213,7 +219,8 @@ parameters:
                         identifier: true
                     code:
                         identifier: true
-                    product: ~
+                    product:
+                        admin_code: librinfo_product.admin.product
                     available: boolean
                     price: ~
                     onHand: ~
@@ -236,12 +243,12 @@ parameters:
                 add:
                     name: ~
                     code: ~
-                    product: ~  # TODO: optimize this (loads all the products in the variant list view !)
+                    product.code: ~
                     _options:
                         fieldsOrder:
                             - name
                             - code
-                            - product
+                            - product.code
 
 
 

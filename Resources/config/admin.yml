@@ -18,7 +18,7 @@ services:
 
     librinfo_product.admin.product_variant:
         class: Librinfo\ProductBundle\Admin\ProductVariantAdmin
-        arguments: [~, Librinfo\ProductBundle\Entity\ProductVariant, BlastCoreBundle:CRUD]
+        arguments: [~, Librinfo\ProductBundle\Entity\ProductVariant, LibrinfoProductBundle:ProductVariant]
         tags:
             - name: sonata.admin
               manager_type: orm
