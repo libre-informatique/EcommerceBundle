@@ -1,28 +1,58 @@
 Action: Action
-form_tab_availability: Disponibilité
+form_group_availability: Disponibilité
+form_group_properties: Dimensions & poids
+form_group_stock: Stock
+form_tab_variants: Déclinaisons
+show_group_availability: Disponibilité
 show_group_history: Historique
+show_group_properties: Dimensions & poids
+show_group_stock: Stock
+show_tab_variants: Déclinaisons
 
 librinfo:
+    action:
+        manage_variants: Gérer les déclinaisons
+        list_variants: Liste des déclinaisons
+        add_variant: Ajouter une déclinaison
+        generate_variants: Générer les déclinaisons
     link:
         product_attribute_create: Nouvel attribut d'article
         product_attribute_list: Liste des attributs d'article
         product_create: Nouvel Article
         product_list: Liste des articles
+        product_option_create: Nouvelle option d'article
         product_option_list: Liste des options d'article
+        product_option_value_create: Nouveau contenu d'option d'article
         product_option_value_list: Liste des contenus options d'article
+        product_variant_create: Nouvelle déclinaisons d'article
+        product_variant_list: Liste des déclinaisons d'article
         productattribute_list: Liste des attributs d'article
-        productoptionvalue_list: Liste des contenus options d'article
         productoption_list: Liste des options d'article
+        productoptionvalue_list: Liste des contenus options d'article
+        productvariant_list: Liste des déclinaisons d'article
     label:
         available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
-        type: Type
-        storage_type: Type d'enregistrement
+        depth: profondeur
+        height: hauteur
+        meta_description: Meta description
+        meta_keywords: Meta keywords
+        on_hand: Stock disponible
+        on_hold: Stock réservé
         position: Position
-        values: Valeurs
-        weight: Poids
+        product: Article
+        product_code: Code produit
         product_option: Option d'article
+        product_options: Options d'article
+        short_description: Brève description
+        storage_type: Type d'enregistrement
+        tracked_stock: Suivi des stocks
+        type: Type
+        values: Valeurs
+        variants: Déclinaisons
+        weight: Poids
+        width: largeur
     product:
         product_admin:
             label: Article
@@ -32,5 +62,7 @@ librinfo:
             label: Option d'article
         product_option_value_admin:
             label: Contenu d'option d'article
+        product_variant_admin:
+            label: Déclinaison d'article
 
 
