@@ -33,7 +33,8 @@ parameters:
                             availableUntil: ~
                     show_tab_variants:
                         '':
-                            variants: ~
+                            variants:
+                                admin_code: librinfo_product.admin.product_variant
                     form_tab_history:
                         form_group_history:
                             createdAt: ~
@@ -91,6 +92,7 @@ parameters:
                                 _options:
                                     edit: inline
                                     inline: table
+                                    admin_code: librinfo_product.admin.product_variant
                     _options:
                         tabsOrder: [form_group_general, form_tab_history]
 
@@ -144,6 +146,7 @@ parameters:
 ##################
 
         Librinfo\ProductBundle\Entity\ProductVariant:
+            # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 forceTabs: true
                 add:
@@ -181,7 +184,7 @@ parameters:
                             updatedAt: ~
                     _options:
                         tabsOrder: [form_group_general, form_tab_history]
-
+            # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_group_general:
@@ -199,6 +202,8 @@ parameters:
                             price: ~
                             optionValues:
                                 property: fullName
+                            _options:
+                                fieldsOrder: [product, name, code, price, optionValues]
                         form_group_stock:
                             onHand:
                                 required: false
@@ -224,15 +229,15 @@ parameters:
                             weight: ~
                     _options:
                         tabsOrder: [form_group_general, form_tab_history]
-
+            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
-                    name:
-                        identifier: true
-                        label: librinfo.label.product_variant_name
                     code:
                         identifier: true
                         label: librinfo.label.product_variant_code
+                    name:
+                        identifier: true
+                        label: librinfo.label.product_variant_name
                     product:
                         admin_code: librinfo_product.admin.product
                     available:
@@ -251,11 +256,17 @@ parameters:
                             - name
                             - product
                             - available
+                            - price
+                            - optionValues
+                            - onHand
+                            - onHold
+                            - tracked
                     _export_formats:
                         csv: [code, name, available]
                         xls: csv
                         json: csv
                         xml: csv
+            # FILTER
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     name:
