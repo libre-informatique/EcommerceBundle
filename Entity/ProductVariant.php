@@ -17,4 +17,28 @@ use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
 class ProductVariant extends BaseProductVariant
 {
     use OuterExtensible, ProductVariantExtension;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $string = $this->getProduct()->getName();
+
+        if (!$this->getOptionValues()->isEmpty()) {
+            $string .= ' (';
+
+            foreach ($this->getOptionValues() as $option) {
+                $string .= $option->getOption()->getName().': '.$option->getValue().', ';
+            }
+
+            $string = substr($string, 0, -2).')';
+        }
+        elseif ($this->getName())
+            $string .= ' (' . $this->getName() . ')';
+        elseif ($this->getCode())
+            $string .= ' (CODE: ' . $this->getCode() . ')';
+
+        return $string;
+    }
 }

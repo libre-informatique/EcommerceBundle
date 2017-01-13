@@ -10,7 +10,7 @@
 
 namespace Librinfo\ProductBundle\Controller;
 
-use Sonata\AdminBundle\Controller\CRUDController;
+use Blast\CoreBundle\Controller\CRUDController;
 use Sylius\Component\Product\Model\Product;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

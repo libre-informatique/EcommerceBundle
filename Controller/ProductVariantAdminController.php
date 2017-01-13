@@ -10,8 +10,9 @@
 
 namespace Librinfo\ProductBundle\Controller;
 
-use Sonata\AdminBundle\Controller\CRUDController;
+use Blast\CoreBundle\Controller\CRUDController;
 use Sylius\Component\Product\Model\ProductVariant;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,6 +21,21 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ProductVariantAdminController extends CRUDController
 {
+    public function createAction($object = null)
+    {
+        $request = $this->getRequest();
+
+        if (null !== $request->get('btn_create_for_product')) {
+            $form = $this->admin->getForm();
+            $form->handleRequest($request);
+            $product_id = $form->getData()->getProduct()->getId();
+            $url =  $this->admin->generateUrl('create', ['product_id' => $product_id]);
+            return new RedirectResponse($url);
+        }
+
+        return parent::createAction($object);
+    }
+
     /**
      * This method is called from createAction.
      *
@@ -30,12 +46,12 @@ class ProductVariantAdminController extends CRUDController
      */
     protected function preCreate(Request $request, $object)
     {
-        if ($product_id = $request->get('product_id')) {
-            $product = $this->get('sylius.repository.product')->find($product_id);
-            if (!$product)
-                throw $this->createNotFoundException(sprintf('unable to find Product with id : %s', $product_id));
-            $object->setProduct($product);
-        }
+//        if ($product_id = $request->get('product_id')) {
+//            $product = $this->get('sylius.repository.product')->find($product_id);
+//            if (!$product)
+//                throw $this->createNotFoundException(sprintf('unable to find Product with id : %s', $product_id));
+//            $object->setProduct($product);
+//        }
         return null;
     }
 }

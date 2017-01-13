@@ -2,6 +2,7 @@ Action: Action
 form_group_availability: Disponibilité
 form_group_properties: Dimensions & poids
 form_group_stock: Stock
+form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_variants: Déclinaisons
 show_group_availability: Disponibilité
 show_group_history: Historique
@@ -15,6 +16,8 @@ librinfo:
         list_variants: Liste des déclinaisons
         add_variant: Ajouter une déclinaison
         generate_variants: Générer les déclinaisons
+    button:
+        continue: Continuer
     link:
         product_attribute_create: Nouvel attribut d'article
         product_attribute_list: Liste des attributs d'article
@@ -40,11 +43,14 @@ librinfo:
         meta_keywords: Meta keywords
         on_hand: Stock disponible
         on_hold: Stock réservé
+        option_values: Options
         position: Position
         product: Article
         product_code: Code produit
         product_option: Option d'article
         product_options: Options d'article
+        product_variant_code: Code déclinaison
+        product_variant_name: Nom déclinaison
         short_description: Brève description
         storage_type: Type d'enregistrement
         tracked_stock: Suivi des stocks

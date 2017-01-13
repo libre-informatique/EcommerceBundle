@@ -151,9 +151,14 @@ parameters:
                         '':
                             product:
                                 admin_code: librinfo_product.admin.product
-                            name: ~
-                            code: ~
+                            name:
+                                label: librinfo.label.product_variant_name
+                            code:
+                                label: librinfo.label.product_variant_code
                             price: ~
+                            optionValues:
+                                template: 'LibrinfoProductBundle:ProductVariantAdmin:show_field_optionvalues.html.twig'
+
                         show_group_stock:
                             onHand: ~
                             onHold: ~
@@ -182,11 +187,18 @@ parameters:
                     form_group_general:
                         '':
                             product:
+                                type: sonata_type_model_autocomplete
+                                property: [translations.name, code]
+                                read_only: true
                                 _options:
                                     admin_code: librinfo_product.admin.product
-                            name: ~
-                            code: ~
+                            name:
+                                label: librinfo.label.product_variant_name
+                            code:
+                                label: librinfo.label.product_variant_code
                             price: ~
+                            optionValues:
+                                property: fullName
                         form_group_stock:
                             onHand:
                                 required: false
@@ -217,12 +229,17 @@ parameters:
                 add:
                     name:
                         identifier: true
+                        label: librinfo.label.product_variant_name
                     code:
                         identifier: true
+                        label: librinfo.label.product_variant_code
                     product:
                         admin_code: librinfo_product.admin.product
-                    available: boolean
+                    available:
+                        type: boolean
                     price: ~
+                    optionValues:
+                        associated_property: fullCode
                     onHand: ~
                     onHold: ~
                     tracked:
@@ -241,8 +258,10 @@ parameters:
                         xml: csv
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    name: ~
-                    code: ~
+                    name:
+                        label: librinfo.label.product_variant_name
+                    code:
+                        label: librinfo.label.product_variant_code
                     product.code: ~
                     _options:
                         fieldsOrder:

@@ -25,6 +25,8 @@ services:
               group: admin
               label: librinfo.product.product_variant_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
+        calls:
+            - [ setTemplate, [ edit, LibrinfoProductBundle:ProductVariantAdmin:edit.html.twig ] ]
 
     librinfo_product_option.admin.product:
         class: Librinfo\ProductBundle\Admin\ProductOptionAdmin

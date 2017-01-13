@@ -14,5 +14,19 @@ use Sylius\Component\Product\Model\ProductOptionValue as BaseProductOptionValue;
 
 class ProductOptionValue extends BaseProductOptionValue
 {
+    /**
+     * @return string    "Option name: OptionValue value"
+     */
+    public function getFullName()
+    {
+        return sprintf('%s: %s', $this->option->getName(), $this->getValue());
+    }
 
+    /**
+     * @return string    "Option code: OptionValue code"
+     */
+    public function getFullCode()
+    {
+        return sprintf('%s: %s', $this->option->getCode(), $this->getCode());
+    }
 }
