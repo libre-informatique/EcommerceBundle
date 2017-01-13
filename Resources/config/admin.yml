@@ -57,8 +57,4 @@ services:
               group: admin
               label: librinfo.product.product_attribute_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
-#        calls:
-#            - [ setTemplate, [ edit, BlastCoreBundle:CRUD:base_edit.html.twig ] ]
-#            - [ setTemplate, [ list, BlastCoreBundle:CRUD:base_list.html.twig ] ]
-#            - [ setTemplate, [ show, BlastCoreBundle:CRUD:base_show.html.twig ] ]
 
