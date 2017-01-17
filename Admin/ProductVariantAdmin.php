@@ -25,17 +25,26 @@ class ProductVariantAdmin extends CoreAdmin
      */
     private $product;
 
+    /**
+     * @var string
+     */
+    protected $productAdminCode = 'librinfo_product.admin.product';
+
     public function configureFormFields(FormMapper $mapper)
     {
         $product = $this->getProduct();
         $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && !$request->get($this->getIdParameter()) && !$product) {
             // First step creation form with just the Product field
+            $options = ['property' => ['code', 'translations.name'],  'required' => true];
+            $productAdmin = $this->getConfigurationPool()->getInstance($this->productAdminCode);
+            if (is_callable([$productAdmin, 'SonataTypeModelAutocompleteCallback']))
+                $options['callback'] = function($admin, $property, $value) {
+                    $admin->SonataTypeModelAutocompleteCallback($admin, $property, $value);
+                };
             $mapper
                 ->with('form_tab_new_product_variant')
-                    ->add('product', 'sonata_type_model_autocomplete',
-                        ['property' => ['translations.name', 'code'],  'required' => true],
-                        ['admin_code' => 'librinfo_product.admin.product'])
+                    ->add('product', 'sonata_type_model_autocomplete', $options, ['admin_code' => $this->productAdminCode])
             ;
             return;
         }

@@ -27,7 +27,7 @@ librinfo:
         product_option_list: Liste des options d'article
         product_option_value_create: Nouveau contenu d'option d'article
         product_option_value_list: Liste des contenus options d'article
-        product_variant_create: Nouvelle déclinaisons d'article
+        product_variant_create: Nouvelle déclinaison d'article
         product_variant_list: Liste des déclinaisons d'article
         productattribute_list: Liste des attributs d'article
         productoption_list: Liste des options d'article
