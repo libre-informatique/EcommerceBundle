@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-class ProductVariantAdminController extends CRUDController
+class ProductVariantCRUDController extends CRUDController
 {
     public function createAction($object = null)
     {

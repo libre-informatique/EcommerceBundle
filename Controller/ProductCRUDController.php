@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-class ProductAdminController extends CRUDController
+class ProductCRUDController extends CRUDController
 {
     /**
      * Generate product variant, based on product options

@@ -17,8 +17,10 @@ parameters:
                 add:
                     form_group_general:
                         '':
-                            name: ~
-                            code: ~
+                            name:
+                                label: librinfo.label.product_name
+                            code:
+                                label: librinfo.label.product_code
                             enabled: boolean
                             description: ~
                             options:
@@ -48,7 +50,9 @@ parameters:
                         '':
                             name:
                                 type: text
-                            code: ~
+                                label: librinfo.label.product_name
+                            code:
+                                label: librinfo.label.product_code
                             enabled: boolean
                             description:
                                 type: textarea
@@ -100,8 +104,10 @@ parameters:
                 add:
                     name:
                         identifier: true
+                        label: librinfo.label.product_name
                     code:
                         identifier: true
+                        label: librinfo.label.product_code
                     enabled:
                         type: boolean
                     available:
@@ -123,8 +129,9 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     translations.name:
-                        label: librinfo.label.name
-                    code: ~
+                        label: librinfo.label.product_name
+                    code:
+                        label: librinfo.label.product_code
                     translations.description:
                         label: librinfo.label.description
                     translations.shortDescription:

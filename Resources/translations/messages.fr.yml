@@ -46,7 +46,8 @@ librinfo:
         option_values: Options
         position: Position
         product: Article
-        product_code: Code produit
+        product_code: Code article
+        product_name: Nom article
         product_option: Option d'article
         product_options: Options d'article
         product_variant_code: Code déclinaison
