@@ -12,51 +12,51 @@ namespace Librinfo\ProductBundle\Entity\OuterExtension;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Librinfo\ProductBundle\Entity\Product;
+use Librinfo\ProductBundle\Entity\ProductVariant;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-trait HasProducts
+trait HasProductVariants
 {
     /**
      * @var Collection
      */
-    private $products;
+    private $productVariants;
 
-    public function initProducts()
+    public function initProductVariants()
     {
-        $this->products = new ArrayCollection();
+        $this->productVariants = new ArrayCollection();
     }
 
     /**
-     * @param Product $product
+     * @param ProductVariant $productVariant
      * @return self
      */
-    public function addProduct(Product $product)
+    public function addProductVariant(ProductVariant $productVariant)
     {
-        $this->products->add($product);
+        $this->productVariants->add($productVariant);
 
-        $this->setOwningSideRelation($product);
+        $this->setOwningSideRelation($productVariant);
 
         return $this;
     }
 
     /**
-     * @param Product $product
+     * @param ProductVariant $productVariant
      * @return self
      */
-    public function removeProduct(Product $product)
+    public function removeProductVariant(ProductVariant $productVariant)
     {
-        $this->products->removeElement($product);
+        $this->productVariants->removeElement($productVariant);
         return $this;
     }
 
     /**
      * @return Collection
      */
-    public function getProducts()
+    public function getProductVariants()
     {
-        return $this->products;
+        return $this->productVariants;
     }
 }
