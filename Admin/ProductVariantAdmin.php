@@ -11,6 +11,7 @@
 namespace Librinfo\ProductBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
@@ -54,14 +55,8 @@ class ProductVariantAdmin extends CoreAdmin
 
         // Limit the variant option values to the product options
         if ($product) {
-            $repository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.product_option_value');
-            $qb = $repository->createQueryBuilder('o')
-                ->andWhere('o.option IN (SELECT o2 FROM LibrinfoProductBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
-                ->setParameter('product', $product)
-            ;
-
             $mapper->add('optionValues', 'entity', [
-                'query_builder' => $qb,
+                'query_builder' => $this->optionValuesQueryBuilder(),
                 'class' => 'Librinfo\\ProductBundle\\Entity\\ProductOptionValue',
                 'multiple' => true,
                 'required' => false,
@@ -113,6 +108,19 @@ class ProductVariantAdmin extends CoreAdmin
         }
 
         return null;
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    protected function optionValuesQueryBuilder()
+    {
+        $repository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.product_option_value');
+        $queryBuilder = $repository->createQueryBuilder('o')
+            ->andWhere('o.option IN (SELECT o2 FROM LibrinfoProductBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
+            ->setParameter('product', $this->product)
+        ;
+        return $queryBuilder;
     }
 
 
