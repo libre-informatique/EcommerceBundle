@@ -11,6 +11,7 @@
 namespace Librinfo\ProductBundle\DependencyInjection;
 
 use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -20,5 +21,13 @@ use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
 class LibrinfoProductExtension extends BlastCoreExtension
 {
 
-
+    /**
+     * {@inheritdoc}
+     */
+    public function loadCodeGenerators(ContainerBuilder $container, array $config)
+    {
+        foreach(['product', 'product_variant'] as $cg)
+            $container->setParameter("librinfo_product.code_generator.$cg", $config['code_generator'][$cg]);
+        return $this;
+    }
 }
