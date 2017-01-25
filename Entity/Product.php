@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\ProductBundle\Entity;
+namespace Librinfo\EcommerceBundle\Entity;
 
-use AppBundle\Entity\OuterExtension\LibrinfoProductBundle\ProductExtension;
+use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ProductExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\Product as BaseProduct;
 

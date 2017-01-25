@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\ProductBundle\Controller;
+namespace Librinfo\EcommerceBundle\Controller;
 
 use Blast\CoreBundle\Controller\CRUDController;
 use Sylius\Component\Product\Model\ProductVariant;

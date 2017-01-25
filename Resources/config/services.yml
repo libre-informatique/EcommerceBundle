@@ -2,16 +2,16 @@ services:
 
 # ENTITY CODE GENERATORS
 
-    librinfo_product.code_generator.product:
-        class: Librinfo\ProductBundle\CodeGenerator\ProductCodeGenerator
+    librinfo_ecommerce.code_generator.product:
+        class: Librinfo\EcommerceBundle\CodeGenerator\ProductCodeGenerator
         factory:   ['@blast_core.code_generator_factory', create]
-        arguments: ['%librinfo_product.code_generator.product%', '@doctrine.orm.entity_manager']
+        arguments: ['%librinfo_ecommerce.code_generator.product%', '@doctrine.orm.entity_manager']
         tags:
             - { name: blast.entity_code_generator }
 
-    librinfo_product.code_generator.product_variant:
-        class: Librinfo\ProductBundle\CodeGenerator\ProductVariantCodeGenerator
+    librinfo_ecommerce.code_generator.product_variant:
+        class: Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator
         factory:   ['@blast_core.code_generator_factory', create]
-        arguments: ['%librinfo_product.code_generator.product_variant%', '@doctrine.orm.entity_manager']
+        arguments: ['%librinfo_ecommerce.code_generator.product_variant%', '@doctrine.orm.entity_manager']
         tags:
             - { name: blast.entity_code_generator }

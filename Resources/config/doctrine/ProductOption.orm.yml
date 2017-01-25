@@ -1,2 +1,2 @@
-Librinfo\ProductBundle\Entity\ProductOption:
+Librinfo\EcommerceBundle\Entity\ProductOption:
     type: entity

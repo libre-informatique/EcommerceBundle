@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\ProductBundle\DependencyInjection;
+namespace Librinfo\EcommerceBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('librinfo_product');
+        $rootNode = $treeBuilder->root('librinfo_ecommerce');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
@@ -36,8 +36,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('code_generator')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('product')->defaultValue('Librinfo\ProductBundle\CodeGenerator\ProductCodeGenerator')->end()
-                        ->scalarNode('product_variant')->defaultValue('Librinfo\ProductBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
+                        ->scalarNode('product')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductCodeGenerator')->end()
+                        ->scalarNode('product_variant')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
                     ->end()
                 ->end()
             ->end()

@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\ProductBundle;
+namespace Librinfo\EcommerceBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class LibrinfoProductBundle extends Bundle
+class LibrinfoEcommerceBundle extends Bundle
 {
 }

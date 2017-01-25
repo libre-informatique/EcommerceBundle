@@ -6,9 +6,9 @@
 
 services:
 
-    librinfo_product.admin.product:
-        class: Librinfo\ProductBundle\Admin\ProductAdmin
-        arguments: [~, Librinfo\ProductBundle\Entity\Product, LibrinfoProductBundle:ProductCRUD]
+    librinfo_ecommerce.admin.product:
+        class: Librinfo\EcommerceBundle\Admin\ProductAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\Product, LibrinfoEcommerceBundle:ProductCRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
@@ -16,9 +16,9 @@ services:
               label: librinfo.product.product_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
 
-    librinfo_product.admin.product_variant:
-        class: Librinfo\ProductBundle\Admin\ProductVariantAdmin
-        arguments: [~, Librinfo\ProductBundle\Entity\ProductVariant, LibrinfoProductBundle:ProductVariantCRUD]
+    librinfo_ecommerce.admin.product_variant:
+        class: Librinfo\EcommerceBundle\Admin\ProductVariantAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\ProductVariant, LibrinfoEcommerceBundle:ProductVariantCRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
@@ -26,11 +26,11 @@ services:
               label: librinfo.product.product_variant_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
         calls:
-            - [ setTemplate, [ edit, LibrinfoProductBundle:ProductVariantAdmin:edit.html.twig ] ]
+            - [ setTemplate, [ edit, LibrinfoEcommerceBundle:ProductVariantAdmin:edit.html.twig ] ]
 
-    librinfo_product_option.admin.product:
-        class: Librinfo\ProductBundle\Admin\ProductOptionAdmin
-        arguments: [~, Librinfo\ProductBundle\Entity\ProductOption, BlastCoreBundle:CRUD]
+    librinfo_ecommerce_option.admin.product:
+        class: Librinfo\EcommerceBundle\Admin\ProductOptionAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\ProductOption, BlastCoreBundle:CRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
@@ -38,9 +38,9 @@ services:
               label: librinfo.product.product_option_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
 
-    librinfo_product_option_value.admin.product:
-        class: Librinfo\ProductBundle\Admin\ProductOptionValueAdmin
-        arguments: [~, Librinfo\ProductBundle\Entity\ProductOptionValue, BlastCoreBundle:CRUD]
+    librinfo_ecommerce_option_value.admin.product:
+        class: Librinfo\EcommerceBundle\Admin\ProductOptionValueAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\ProductOptionValue, BlastCoreBundle:CRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
@@ -48,9 +48,9 @@ services:
               label: librinfo.product.product_option_value_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
 
-    librinfo_product.admin.product_attribute:
-        class: Librinfo\ProductBundle\Admin\ProductAttributeAdmin
-        arguments: [~, Librinfo\ProductBundle\Entity\ProductAttribute, BlastCoreBundle:CRUD]
+    librinfo_ecommerce.admin.product_attribute:
+        class: Librinfo\EcommerceBundle\Admin\ProductAttributeAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\ProductAttribute, BlastCoreBundle:CRUD]
         tags:
             - name: sonata.admin
               manager_type: orm

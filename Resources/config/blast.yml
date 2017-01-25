@@ -11,7 +11,7 @@ parameters:
 # PRODUCT
 ##########
 
-        Librinfo\ProductBundle\Entity\Product:
+        Librinfo\EcommerceBundle\Entity\Product:
             Sonata\AdminBundle\Show\ShowMapper:
                 forceTabs: true
                 add:
@@ -36,7 +36,7 @@ parameters:
                     show_tab_variants:
                         '':
                             variants:
-                                admin_code: librinfo_product.admin.product_variant
+                                admin_code: librinfo_ecommerce.admin.product_variant
                     form_tab_history:
                         form_group_history:
                             createdAt: ~
@@ -96,7 +96,7 @@ parameters:
                                 _options:
                                     edit: inline
                                     inline: table
-                                    admin_code: librinfo_product.admin.product_variant
+                                    admin_code: librinfo_ecommerce.admin.product_variant
                     _options:
                         tabsOrder: [form_group_general, form_tab_history]
 
@@ -120,7 +120,7 @@ parameters:
                             - available
                     _actions:
                         variants:
-                            template: 'LibrinfoProductBundle:CRUD:list__action_variants.html.twig'
+                            template: 'LibrinfoEcommerceBundle:CRUD:list__action_variants.html.twig'
                     _export_formats:
                         csv: [code, name, available]
                         xls: csv
@@ -152,7 +152,7 @@ parameters:
 # PRODUCT VARIANT
 ##################
 
-        Librinfo\ProductBundle\Entity\ProductVariant:
+        Librinfo\EcommerceBundle\Entity\ProductVariant:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 forceTabs: true
@@ -160,14 +160,14 @@ parameters:
                     form_group_general:
                         '':
                             product:
-                                admin_code: librinfo_product.admin.product
+                                admin_code: librinfo_ecommerce.admin.product
                             name:
                                 label: librinfo.label.product_variant_name
                             code:
                                 label: librinfo.label.product_variant_code
                             price: ~
                             optionValues:
-                                template: 'LibrinfoProductBundle:ProductVariantAdmin:show_field_optionvalues.html.twig'
+                                template: 'LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_optionvalues.html.twig'
 
                         show_group_stock:
                             onHand: ~
@@ -201,7 +201,7 @@ parameters:
                                 property: [translations.name, code]
                                 read_only: true
                                 _options:
-                                    admin_code: librinfo_product.admin.product
+                                    admin_code: librinfo_ecommerce.admin.product
                             name:
                                 label: librinfo.label.product_variant_name
                             code:
@@ -246,7 +246,7 @@ parameters:
                         identifier: true
                         label: librinfo.label.product_variant_name
                     product:
-                        admin_code: librinfo_product.admin.product
+                        admin_code: librinfo_ecommerce.admin.product
                     available:
                         type: boolean
                     price: ~
@@ -337,7 +337,7 @@ parameters:
 # PRODUCT OPTION
 ####################
 
-        Librinfo\ProductBundle\Entity\ProductOption:
+        Librinfo\EcommerceBundle\Entity\ProductOption:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
@@ -384,7 +384,7 @@ parameters:
 # PRODUCT OPTION VALUE
 ####################
 
-        Librinfo\ProductBundle\Entity\ProductOptionValue:
+        Librinfo\EcommerceBundle\Entity\ProductOptionValue:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 add:

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\ProductBundle\DependencyInjection;
+namespace Librinfo\EcommerceBundle\DependencyInjection;
 
 use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,16 +18,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class LibrinfoProductExtension extends BlastCoreExtension
+class LibrinfoEcommerceExtension extends BlastCoreExtension
 {
-
     /**
      * {@inheritdoc}
      */
     public function loadCodeGenerators(ContainerBuilder $container, array $config)
     {
         foreach(['product', 'product_variant'] as $cg)
-            $container->setParameter("librinfo_product.code_generator.$cg", $config['code_generator'][$cg]);
+            $container->setParameter("librinfo_ecommerce.code_generator.$cg", $config['code_generator'][$cg]);
         return $this;
     }
 }

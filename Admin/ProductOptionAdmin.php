@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\ProductBundle\Admin;
+namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
 use Sylius\Component\Product\Model\ProductOptionInterface;

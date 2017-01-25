@@ -6,12 +6,12 @@
     </a>
     <ul class="dropdown-menu">
         <li>
-            <a href="{{ path('admin_librinfo_product_productvariant_list', {'filter[product__code][type]': filter_type, 'filter[product__code][value]': object.code}) }}">
+            <a href="{{ path('admin_librinfo_ecommerce_productvariant_list', {'filter[product__code][type]': filter_type, 'filter[product__code][value]': object.code}) }}">
                 {{ 'librinfo.action.list_variants'|trans() }}
             </a>
         </li>
         <li>
-            <a href="{{ path('admin_librinfo_product_productvariant_create', {'product_id': object.id}) }}">
+            <a href="{{ path('admin_librinfo_ecommerce_productvariant_create', {'product_id': object.id}) }}">
                 {{ 'librinfo.action.add_variant'|trans() }}
             </a>
         </li>

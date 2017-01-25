@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\ProductBundle\Admin;
+namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
 use Doctrine\ORM\QueryBuilder;
@@ -29,7 +29,7 @@ class ProductVariantAdmin extends CoreAdmin
     /**
      * @var string
      */
-    protected $productAdminCode = 'librinfo_product.admin.product';
+    protected $productAdminCode = 'librinfo_ecommerce.admin.product';
 
     public function configureFormFields(FormMapper $mapper)
     {
@@ -117,7 +117,7 @@ class ProductVariantAdmin extends CoreAdmin
     {
         $repository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.product_option_value');
         $queryBuilder = $repository->createQueryBuilder('o')
-            ->andWhere('o.option IN (SELECT o2 FROM LibrinfoProductBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
+            ->andWhere('o.option IN (SELECT o2 FROM LibrinfoEcommerceBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
             ->setParameter('product', $this->product)
         ;
         return $queryBuilder;

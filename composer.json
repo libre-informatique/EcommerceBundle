@@ -1,7 +1,7 @@
 {
-    "name": "libre-informatique/product-bundle",
+    "name": "libre-informatique/ecommerce-bundle",
     "type": "symfony-bundle",
-    "description": "Product Bundle for Symfony",
+    "description": "Bridge bundle between librinfo bundles and sylius",
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
@@ -13,7 +13,7 @@
     },
     "license":  "GPL-3.0",
     "keywords": ["e-commerce", "libio", "sonata", "symfony"],
-    "homepage": "https://github.com/libre-informatique/SymfonyLibrinfoProductBundle",
+    "homepage": "https://github.com/libre-informatique/SymfonyLibrinfoEcommerceBundle",
     "authors": [
         {
            "name": "Marcos Bezerra de Menezes",

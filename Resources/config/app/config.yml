@@ -17,29 +17,29 @@ sylius_product:
     resources:
         product:
             classes:
-                model: Librinfo\ProductBundle\Entity\Product
+                model: Librinfo\EcommerceBundle\Entity\Product
         product_variant:
             classes:
-                model: Librinfo\ProductBundle\Entity\ProductVariant
+                model: Librinfo\EcommerceBundle\Entity\ProductVariant
         product_option:
             classes:
-                model: Librinfo\ProductBundle\Entity\ProductOption
+                model: Librinfo\EcommerceBundle\Entity\ProductOption
         product_option_value:
             classes:
-                model: Librinfo\ProductBundle\Entity\ProductOptionValue
+                model: Librinfo\EcommerceBundle\Entity\ProductOptionValue
 
 sylius_attribute:
     resources:
         product:
-            subject: Librinfo\ProductBundle\Entity\Product
+            subject: Librinfo\EcommerceBundle\Entity\Product
             attribute:
                 classes:
-                    model: Librinfo\ProductBundle\Entity\ProductAttribute
+                    model: Librinfo\EcommerceBundle\Entity\ProductAttribute
 
 #sylius_product_association:
 #    resources:
 #        product:
-#            subject: Librinfo\ProductBundle\Entity\Product
+#            subject: Librinfo\EcommerceBundle\Entity\Product
 #            association:
 #                classes:
 #                    model: Sylius\Component\Product\Model\ProductAssociation

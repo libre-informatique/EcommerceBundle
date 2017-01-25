@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\ProductBundle\Entity\OuterExtension;
+namespace Librinfo\EcommerceBundle\Entity\OuterExtension;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Librinfo\ProductBundle\Entity\Product;
+use Librinfo\EcommerceBundle\Entity\Product;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
