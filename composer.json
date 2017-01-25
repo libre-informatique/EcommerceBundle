@@ -25,6 +25,6 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Librinfo\\ProductBundle\\": "" }
+        "psr-4": { "Librinfo\\EcommerceBundle\\": "" }
     }
 }
