@@ -53,6 +53,7 @@ librinfo:
         product_variant_code: Code déclinaison
         product_variant_name: Nom déclinaison
         short_description: Brève description
+        slug: Slug
         storage_type: Type d'enregistrement
         tracked_stock: Suivi des stocks
         type: Type

@@ -1,0 +1,3 @@
+lisem:
+    product_slug:
+        not_unique: Ce slug produit est déjà utilisé

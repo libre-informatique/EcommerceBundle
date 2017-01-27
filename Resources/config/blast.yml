@@ -19,6 +19,7 @@ parameters:
                         '':
                             name:
                                 label: librinfo.label.product_name
+                            slug: ~
                             code:
                                 label: librinfo.label.product_code
                             enabled: boolean
@@ -51,6 +52,8 @@ parameters:
                             name:
                                 type: text
                                 label: librinfo.label.product_name
+                            slug:
+                                type: text
                             code:
                                 label: librinfo.label.product_code
                             enabled: boolean

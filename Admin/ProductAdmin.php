@@ -13,6 +13,7 @@ namespace Librinfo\EcommerceBundle\Admin;
 use Blast\CoreBundle\Admin\Traits\HandlesRelationsAdmin;
 use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -25,6 +26,12 @@ class ProductAdmin extends CoreAdmin
     use HandlesRelationsAdmin {
         configureFormFields as configFormHandlesRelations;
         configureShowFields as configShowHandlesRelations;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        parent::configureRoutes($collection);
+        $collection->add('generateProductSlug', 'generate_product_slug');
     }
 
     /**
