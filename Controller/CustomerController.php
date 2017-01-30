@@ -13,13 +13,11 @@ use Sylius\Component\Resource\ResourceActions;
 class CustomerController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
-     * @return Response
+     * {@inheritdoc}
      */
     public function createAction(Request $request)
     {
-        $admin = $this->container->get('librinfo_crm.admin.customer');
+        $admin = $this->container->get('librinfo_ecommerce.admin.customer');
         
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -34,7 +32,7 @@ class CustomerController extends ResourceController
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
             
             $newResource->setIsIndividual(true);
-            
+
             //make sure admin lifecycle hooks are called
             $admin->create($newResource);
             
