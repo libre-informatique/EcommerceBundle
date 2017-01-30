@@ -78,4 +78,68 @@ class CustomerController extends ResourceController
 
         return $this->viewHandler->handle($configuration, $view);
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function updateAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+        $resource = $this->findOr404($configuration);
+        
+        $name = explode(' ', $resource->getName());
+        $resource->setFirstName($name[0]);
+        $resource->setLastName($name[1]);
+        
+        $form = $this->resourceFormFactory->create($configuration, $resource);
+
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+            $resource = $form->getData();
+
+            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
+
+            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+                throw new HttpException($event->getErrorCode(), $event->getMessage());
+            }
+            if ($event->isStopped()) {
+                $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+                return $this->redirectHandler->redirectToResource($configuration, $resource);
+            }
+
+            if ($configuration->hasStateMachine()) {
+                $this->stateMachine->apply($configuration, $resource);
+            }
+
+            $this->manager->flush();
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+            }
+
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+
+            return $this->redirectHandler->redirectToResource($configuration, $resource);
+        }
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+        }
+
+        $view = View::create()
+            ->setData([
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resource' => $resource,
+                $this->metadata->getName() => $resource,
+                'form' => $form->createView(),
+            ])
+            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
+        ;
+
+        return $this->viewHandler->handle($configuration, $view);
+    }
 }
