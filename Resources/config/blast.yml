@@ -19,6 +19,9 @@ parameters:
                         '':
                             name:
                                 label: librinfo.label.product_name
+                            slug:
+                                label: librinfo.label.product_shop_url
+                                template: "LibrinfoEcommerceBundle:ProductAdmin:show_field_shop_link.html.twig"
                             code:
                                 label: librinfo.label.product_code
                             enabled: boolean
@@ -51,6 +54,8 @@ parameters:
                             name:
                                 type: text
                                 label: librinfo.label.product_name
+                            slug:
+                                type: text
                             code:
                                 label: librinfo.label.product_code
                             enabled: boolean
@@ -119,6 +124,8 @@ parameters:
                             - enabled
                             - available
                     _actions:
+                        shop_link:
+                            template: 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'
                         variants:
                             template: 'LibrinfoEcommerceBundle:CRUD:list__action_variants.html.twig'
                     _export_formats:

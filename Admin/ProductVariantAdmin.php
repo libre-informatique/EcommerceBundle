@@ -57,7 +57,7 @@ class ProductVariantAdmin extends CoreAdmin
         if ($product) {
             $mapper->add('optionValues', 'entity', [
                 'query_builder' => $this->optionValuesQueryBuilder(),
-                'class' => 'Librinfo\\ProductBundle\\Entity\\ProductOptionValue',
+                'class' => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
                 'multiple' => true,
                 'required' => false,
                 'choice_label' => 'fullName',

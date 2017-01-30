@@ -12,6 +12,7 @@ namespace Librinfo\EcommerceBundle\Controller;
 
 use Blast\CoreBundle\Controller\CRUDController;
 use Sylius\Component\Product\Model\Product;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,4 +28,14 @@ class ProductCRUDController extends CRUDController
     public function generateVariantsAction(Request $request)
     {
     }
+
+    public function generateProductSlugAction(Request $request)
+    {
+        $name = $request->query->get('name');
+
+        return new JsonResponse([
+            'slug' => $this->get('sylius.generator.slug')->generate($name),
+        ]);
+    }
+
 }
