@@ -57,4 +57,3 @@ services:
               group: admin
               label: librinfo.product.product_attribute_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
-

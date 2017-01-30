@@ -35,6 +35,14 @@ sylius_attribute:
             attribute:
                 classes:
                     model: Librinfo\EcommerceBundle\Entity\ProductAttribute
+                    
+sylius_customer:
+    driver: doctrine/orm
+    resources:
+        customer:
+            classes:
+                model: Librinfo\CRMBundle\Entity\Organism
+                controller: Librinfo\EcommerceBundle\Controller\CustomerController
 
 #sylius_product_association:
 #    resources:
