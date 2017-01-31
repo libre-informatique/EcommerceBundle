@@ -816,4 +816,17 @@ trait OrganismExtension
     {
         $this->subscribedToNewsletter = $subscribedToNewsletter;
     }
+    
+    
+    public function updateName()
+    {
+        $firstname = mb_convert_case($this->getFirstName(), MB_CASE_TITLE);
+        $name = mb_strtoupper($this->getLastName());
+        
+        $this->setName(sprintf(
+            '%s %s',
+            $firstname,
+            $name
+        ));
+    }
 }

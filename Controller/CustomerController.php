@@ -84,14 +84,11 @@ class CustomerController extends ResourceController
      */
     public function updateAction(Request $request)
     {
+        $admin = $this->container->get('librinfo_ecommerce.admin.customer');
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
         $resource = $this->findOr404($configuration);
-        
-        $name = explode(' ', $resource->getName());
-        $resource->setFirstName($name[0]);
-        $resource->setLastName($name[1]);
         
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
@@ -112,6 +109,7 @@ class CustomerController extends ResourceController
             if ($configuration->hasStateMachine()) {
                 $this->stateMachine->apply($configuration, $resource);
             }
+            $admin->update($resource);
 
             $this->manager->flush();
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);

@@ -22,9 +22,15 @@ class CustomerAdmin extends BaseCustomerAdmin
      */
     public function prePersist($object)
     {
-        $firstname = mb_convert_case($object->getFirstName(), MB_CASE_TITLE);
-        $name = mb_strtoupper($object->getLastName());
-        $object->setName($firstname . " " . $name);
+        $object->updateName();
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function preUpdate($object)
+    {
+        $object->updateName();
     }
     
     
