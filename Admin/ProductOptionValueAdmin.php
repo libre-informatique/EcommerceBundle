@@ -11,13 +11,39 @@
 namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
 class ProductOptionValueAdmin extends CoreAdmin
 {
+    public function configureFormFields(FormMapper $mapper)
+    {
+        parent::configureFormFields($mapper);
+
+        // If form is embedded
+        if ( $this->getParentFieldDescription() )
+            $mapper->remove($this->getParentFieldDescription()->getAssociationMapping()['mappedBy']);
+
+        // This is a hack to prevent having the "No locale has been set and current locale is undefined" error
+        // during the creation of a new ProductOptionValue in the ProductOption form.
+        // TODO: build the ProductOption form differently to handle multiple locales...
+        $builder = $mapper->getFormBuilder();
+        $admin = $this;
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use ($admin) {
+            if (!$event->getData()) {
+                $entity = $admin->getNewInstance();  // This will set the locale
+                $event->setData($entity);
+            }
+        });
+
+
+    }
+
     /**
      * @return ProductOptionValueInterface
      */
@@ -31,12 +57,6 @@ class ProductOptionValueAdmin extends CoreAdmin
             $extension->alterNewInstance($this, $object);
         }
         return $object;
-    }
-
-
-    public function prePersist($product)
-    {
-        parent::prePersist($product);
     }
 
 

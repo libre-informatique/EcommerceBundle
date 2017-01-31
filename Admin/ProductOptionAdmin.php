@@ -32,12 +32,4 @@ class ProductOptionAdmin extends CoreAdmin
         }
         return $object;
     }
-
-
-    public function prePersist($product)
-    {
-        parent::prePersist($product);
-    }
-
-
 }

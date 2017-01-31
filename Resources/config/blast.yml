@@ -352,8 +352,6 @@ parameters:
                         '':
                             code: ~
                             name: ~
-                    show_tab_values:
-                        '':
                             values: ~
                     show_tab_history:
                         show_group_history:
@@ -367,9 +365,21 @@ parameters:
                             code: ~
                             name:
                                 type: text
-                    form_tab_values:
-                        '':
-                            values: ~
+                            values:
+                                type: sonata_type_collection
+#                                by_reference: false
+                                type_options:
+                                    btn_add: false
+                                    delete_options:
+                                        type: checkbox
+                                        type_options:
+                                            mapped: false
+                                            required: false
+                                required: true    # if not true, child form fields cannot be required (why ??)
+                                _options:
+                                    edit: inline
+                                    inline: table
+
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:

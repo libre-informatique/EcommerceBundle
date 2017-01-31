@@ -3,6 +3,7 @@ form_group_availability: Disponibilité
 form_group_properties: Dimensions & poids
 form_group_stock: Stock
 form_tab_new_product_variant : Nouvelle déclinaison d'article
+form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
 show_group_availability: Disponibilité
 show_group_history: Historique
