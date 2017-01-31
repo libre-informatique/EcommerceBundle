@@ -21,6 +21,10 @@ use Symfony\Component\Form\FormEvents;
  */
 class ProductOptionValueAdmin extends CoreAdmin
 {
+    /**
+     * @param FormMapper $mapper
+     * @todo  handle multiple locales
+     */
     public function configureFormFields(FormMapper $mapper)
     {
         parent::configureFormFields($mapper);
