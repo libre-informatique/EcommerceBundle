@@ -1,8 +1,24 @@
 Librinfo\CRMBundle\Entity\Organism:
     type: entity
     repositoryClass: Librinfo\EmailCRMBundle\Entity\Repository\OrganismRepository
-
-
+    fields:
+        emailCanonical:
+            type: string
+            nullable: false
+            unique: true
+        firstName:
+            type: string
+            nullable: true
+        lastName:
+            type: string
+            nullable: true
+        birthday:
+            type: datetime
+            nullable: true
+        gender:
+            type: string(1)
+            nullable: true
+            default: u
     oneToOne:
         defaultAddress:
             targetEntity: Sylius\Component\Addressing\Model\AddressInterface
