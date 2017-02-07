@@ -10,10 +10,14 @@
 
 namespace Librinfo\EcommerceBundle\Entity;
 
+use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ProductOptionValueExtension;
+use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Product\Model\ProductOptionValue as BaseProductOptionValue;
 
 class ProductOptionValue extends BaseProductOptionValue
 {
+    use OuterExtensible, ProductOptionValueExtension;
+
     /**
      * @return string    "Option name: OptionValue value"
      */
