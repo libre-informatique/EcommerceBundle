@@ -24,11 +24,6 @@ services:
         calls:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
-            
-    librinfo_ecommerce.listener.address:
-        class: Librinfo\EcommerceBundle\EventListener\AddressListener
-        tags:
-            - { name: doctrine.event_subscriber }
 
 # USER BUNDLE OVERRIDES
     
