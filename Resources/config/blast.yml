@@ -435,3 +435,43 @@ parameters:
                     code: ~
                     translations.value:
                         label: librinfo.label.value
+
+# USER BUNDLE OVERRIDES
+                        
+        Librinfo\UserBundle\Entity\Traits\Traceable:
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    form_tab_history:
+                        form_group_history:
+                            createdBy: ~
+                            updatedBy: ~
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_tab_history:
+                        form_group_history:
+                            createdBy:
+                                type: entity
+                                class: Librinfo\EcommerceBundle\Entity\AdminUser
+                                read_only: true
+                                disabled: true
+                                required: false
+                            updatedBy:
+                                type: entity
+                                class: Librinfo\EcommerceBundle\Entity\AdminUser
+                                read_only: true
+                                disabled: true
+                                required: false
+
+        Librinfo\UserBundle\Entity\Traits\Ownable:
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    createdBy: ~
+                    updatedBy: ~
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_group_specifics:
+                        form_group_misc:
+                            owner:
+                                type: entity
+                                class: Librinfo\EcommerceBundle\Entity\AdminUser
+                                required: false

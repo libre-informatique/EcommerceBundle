@@ -43,6 +43,19 @@ sylius_customer:
             classes:
                 model: Librinfo\CRMBundle\Entity\Organism
                 controller: Librinfo\EcommerceBundle\Controller\CustomerController
+                
+sylius_addressing:
+    resources:
+        address:
+            classes:
+                model: Librinfo\CRMBundle\Entity\Address
+                
+sylius_user:
+    resources:
+        admin:
+            user:
+                classes:
+                    model: Librinfo\EcommerceBundle\Entity\AdminUser
 
 #sylius_product_association:
 #    resources:

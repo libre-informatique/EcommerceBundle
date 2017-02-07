@@ -36,7 +36,6 @@ Librinfo\CRMBundle\Entity\Organism:
             targetEntity: Sylius\Component\Addressing\Model\AddressInterface
             mappedBy: customer
             cascade: [all]
-            orphanRemoval: true
         orders:
             targetEntity: Sylius\Component\Order\Model\OrderInterface
             mappedBy: customer

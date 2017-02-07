@@ -1,5 +1,4 @@
-services:
-
+services:    
 # ENTITY CODE GENERATORS
 
     librinfo_ecommerce.code_generator.product:
@@ -15,3 +14,40 @@ services:
         arguments: ['%librinfo_ecommerce.code_generator.product_variant%', '@doctrine.orm.entity_manager']
         tags:
             - { name: blast.entity_code_generator }
+
+# EVENT LISTENERS
+
+    librinfo_ecommerce.listener.sylius_guidable:
+        class: Librinfo\EcommerceBundle\EventListener\SyliusGuidableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [setLogger, [@logger]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            
+    librinfo_ecommerce.listener.address:
+        class: Librinfo\EcommerceBundle\EventListener\AddressListener
+        tags:
+            - { name: doctrine.event_subscriber }
+
+# USER BUNDLE OVERRIDES
+    
+    librinfo_user.listener.traceable:
+        class: Librinfo\EcommerceBundle\EventListener\TraceableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [setLogger,[@logger]]
+            - [setTokenStorage, [@security.token_storage]]
+            - [setUserClass, [Librinfo\EcommerceBundle\Entity\AdminUser]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+
+    librinfo_user.listener.ownable:
+        class: Librinfo\UserBundle\EventListener\OwnableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [setLogger,[@logger]]
+            - [setTokenStorage, [@security.token_storage]]
+            - [setUserClass, [Librinfo\EcommerceBundle\Entity\AdminUser]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]

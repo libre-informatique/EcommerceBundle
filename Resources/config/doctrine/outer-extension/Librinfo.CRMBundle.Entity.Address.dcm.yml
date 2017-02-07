@@ -1,0 +1,7 @@
+Librinfo\CRMBundle\Entity\Address:
+    type: entity
+    
+    manyToOne:
+        customer:
+            targetEntity: Sylius\Component\Customer\Model\CustomerInterface
+            inversedBy: addresses
