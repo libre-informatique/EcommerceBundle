@@ -44,8 +44,6 @@ class ProductOptionValueAdmin extends CoreAdmin
                 $event->setData($entity);
             }
         });
-
-
     }
 
     /**

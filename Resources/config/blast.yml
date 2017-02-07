@@ -216,6 +216,8 @@ parameters:
                             price: ~
                             optionValues:
                                 property: fullName
+                                _options:
+                                    admin_code: librinfo_ecommerce_option_value.admin.product
                             _options:
                                 fieldsOrder: [product, name, code, price, optionValues]
                         form_group_stock:
@@ -352,7 +354,8 @@ parameters:
                         '':
                             code: ~
                             name: ~
-                            values: ~
+                            values:
+                                admin_code: librinfo_ecommerce_option_value.admin.product
                     show_tab_history:
                         show_group_history:
                             createdAt: ~
@@ -379,6 +382,7 @@ parameters:
                                 _options:
                                     edit: inline
                                     inline: table
+                                    admin_code: librinfo_ecommerce_option_value.admin.product
 
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
