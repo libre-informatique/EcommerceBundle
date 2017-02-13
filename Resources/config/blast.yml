@@ -439,9 +439,9 @@ parameters:
                     code: ~
                     translations.value:
                         label: librinfo.label.value
-
+########################
 # USER BUNDLE OVERRIDES
-                        
+########################                        
         Librinfo\UserBundle\Entity\Traits\Traceable:
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
@@ -479,3 +479,201 @@ parameters:
                                 type: entity
                                 class: Librinfo\EcommerceBundle\Entity\AdminUser
                                 required: false
+
+#######################
+# CRM bundle overrides
+######################
+        Librinfo\CRMBundle\Admin\OrganismAdmin:
+            Sonata\AdminBundle\Show\ShowMapper:
+                forceTabs: true
+                remove:
+                    positions: ~
+                    description: ~
+                    phones: ~
+                    email: ~
+                    emailNpai: ~
+                    emailNoNewsletter: ~
+                    vcard_uid: ~
+                    address: ~
+                    zip: ~
+                    city: ~
+                    country: ~
+                    npai: ~
+                add:
+                    form_group_general:
+                        '':
+                            active: ~
+                            isCustomer:
+                                template: 'LibrinfoCRMBundle:CRUD:show_field_customer.html.twig'
+                            isSupplier:
+                                template: 'LibrinfoCRMBundle:CRUD:show_field_supplier.html.twig'
+                            category.name: ~
+                            url: ~
+                            description:
+                                label: librinfo.label.organism_description
+                            email:
+                                template: 'LibrinfoCRMBundle:CRUD:show_field_email.html.twig'
+                            _options:
+                                fieldsOrder:
+                                    - name
+                                    - isCustomer
+                                    - isSupplier
+                                    - circles
+                                    - category.name
+                                    - description
+                                    - email
+                                    - url
+                        form_group_main_address:
+                            fulltext_address:
+                                template: LibrinfoCRMBundle:CRUD:show_field_fulltext_address.html.twig
+                                label: librinfo.label.main_address
+                        form_group_phones:
+                            phones: ~
+                        form_group_administrative:
+                            vat:
+                                template: 'LibrinfoCRMBundle:CRUD:show_field_vat.html.twig'
+                            iban: ~
+                        _options:
+                            groupsOrder:
+                                - ''
+                                - form_group_main_address
+                                - form_group_phones
+                                - form_group_administrative
+                    form_group_contacts:
+                        '':
+                            positions:
+                                associated_property: organismDescription
+                                label: librinfo.label.contacts
+                                template: 'LibrinfoCRMBundle:CRUD:show_field_organism_positions.html.twig'
+                                cascade_validation: true
+    #                                admin_code: test_code
+                            _options:
+                                class: positions-box
+                        _options:
+                            #TODO tabs descriptions should be translated (improve Sonata Admin)
+                            description: "Liste des Contacts appartenant à ce Tiers"
+                    form_tab_info:
+                        '':
+                            source:
+                                type: blast_custom_choice
+                                choices_field: organism.source
+                                blast_choices: [Catalogue, Foire, Ami, Internet, Magazine]
+                                required: false
+                                attr:
+                                    class: new-line
+                                    width: 30
+                            catalogue_sent: ~
+                            catalogue_send_mean: ~
+                            first_catalogue_sent_date: ~
+                            last_catalogue_sent_date: ~
+                    _options:
+                        tabsOrder:
+                            - form_group_general
+                            - form_tab_info
+                            - form_group_contacts
+                            - form_group_specifics
+                    _helper_links:
+                        - url: https://framacalc.org/libio_validation_crm
+                          title: Framacalc de validation
+                          class: framacalc
+            Sonata\AdminBundle\Form\FormMapper:
+                remove:
+                    address: ~
+                    zip: ~
+                    city: ~
+                    country: ~
+                    npai: ~
+                add:
+                    form_tab_address_book:
+                        form_group_default_address:
+                            defaultAddress:
+                                type: text
+                                disabled: true
+                                label: false
+                        form_group_other_addresses:
+                            addresses:
+                                type: sonata_type_collection
+                                label: false
+                                by_reference: false
+                                type_options:
+                                    btn_add: false
+                                    delete_options:
+                                        type: checkbox
+                                        type_options:
+                                            mapped: false
+                                            required: false
+                                required: true
+                                _options:
+                                    sortable: updatedAt
+                                    edit: inline
+                        _options:
+                            groupsOrder:
+                                - form_group_default_address
+                                - form_group_addresses
+
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+                    createdAt: ~
+                    zip: ~
+                    country: ~
+                    email: ~
+                add:
+                    name:
+                        identifier: true
+                        label: librinfo.label.list_organism_name
+                    city: ~
+                    customerCode:
+                        template: LibrinfoCRMBundle:OrganismAdmin:list_field_customer.html.twig
+                    supplierCode:
+                        template: LibrinfoCRMBundle:OrganismAdmin:list_field_supplier.html.twig
+                    category.name: ~
+                    circles: ~
+                    alert: ~
+                    active: ~
+                    _options:
+                        fieldsOrder:
+                            - name
+                            - customerCode
+                            - supplierCode
+                            - city
+                            - category.name
+                            - circles
+                            - alert
+                            - active
+                    _export_formats:
+                        csv: [name, address, zip, city, country, alert, email, url, category, administrativeNumber, description, createdAt, updatedAt, vcardUid, npai, emailNpai, emailNoNewsletter, phones]
+                        xls: csv
+                        json: csv
+                        xml: csv
+                        vcard: [name, address, zip, city, country, email, url, description, phones, personal]
+                    _helper_links:
+                        - url: https://framacalc.org/libio_validation_crm
+                          title: Framacalc de validation
+                          class: framacalc
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    active: ~
+                    name:
+                        label: librinfo.label.organism_name_filter
+                    positions.contact.name:
+                        type: doctrine_orm_callback
+                        callback: [Librinfo\CRMBundle\Admin\OrganismAdmin, contactFilterQueryBuilder]
+                        label: librinfo.label.organism_contact_filter
+                    category: ~
+                    isCustomer: ~
+                    customerCode: ~
+                    isSupplier: ~
+                    supplierCode: ~
+                    circles: ~
+                    alert: ~
+                    _options:
+                        fieldsOrder:
+                            - name
+                            - positions.contact.name
+                            - category
+                            - isCustomer
+                            - customerCode
+                            - isSupplier
+                            - supplierCode
+                            - circles
+                            - alert
