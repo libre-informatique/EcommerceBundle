@@ -21,7 +21,7 @@ Librinfo\CRMBundle\Entity\Organism:
             default: u
     oneToOne:
         defaultAddress:
-            targetEntity: Sylius\Component\Addressing\Model\AddressInterface
+            targetEntity: Librinfo\CRMBundle\Entity\Address
             joinColumn:
                 name: default_address_id
             onDelete: SET NULL
@@ -33,7 +33,7 @@ Librinfo\CRMBundle\Entity\Organism:
             
     oneToMany:
         addresses:
-            targetEntity: Sylius\Component\Addressing\Model\AddressInterface
+            targetEntity: Librinfo\CRMBundle\Entity\Address
             mappedBy: customer
             cascade: [all]
         orders:
