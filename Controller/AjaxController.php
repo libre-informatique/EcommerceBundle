@@ -10,32 +10,28 @@
 
 namespace Librinfo\EcommerceBundle\Controller;
 
-use Blast\CoreBundle\Controller\CRUDController;
-use Sylius\Component\Product\Model\Product;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
+ * @author Romain SANCHEZ <romain.sanchez@libre-informatique.fr>
  */
-class ProductCRUDController extends CRUDController
+class AjaxController extends Controller
 {
-    /**
-     * Generate product variant, based on product options
-     * @todo !!
-     */
-    public function generateVariantsAction(Request $request)
+    public function setCustomerDefaultAddressAction($customerId, $addressId)
     {
-    }
-
-    public function generateProductSlugAction(Request $request)
-    {
-        $name = $request->query->get('name');
-
-        return new JsonResponse([
-            'slug' => $this->get('sylius.generator.slug')->generate($name),
-        ]);
+        $manager = $this->getDoctrine()->getManager();
+        $customer = $manager->getRepository('LibrinfoCRMBundle:Organism')->find($customerId);
+        $address = $manager->getRepository('LibrinfoCRMBundle:Address')->find($addressId);
+        
+        if($customer->hasAddress($address))
+        {
+            $customer->setDefaultAddress($address);
+            $manager->persist($customer);
+            $manager->flush();
+        }
+        
+        return new RedirectResponse($this->get('librinfo_crm.admin.organism')->generateObjectUrl('edit', $customer));
     }
 
 }
