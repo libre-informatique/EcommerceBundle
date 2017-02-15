@@ -25,7 +25,7 @@ Librinfo\CRMBundle\Entity\Organism:
             joinColumn:
                 name: default_address_id
             onDelete: SET NULL
-            cascade: [persist]
+            cascade: [persist, remove]
         user:
             targetEntity: Sylius\Component\User\Model\UserInterface
             mappedBy: customer
@@ -35,9 +35,9 @@ Librinfo\CRMBundle\Entity\Organism:
         addresses:
             targetEntity: Librinfo\CRMBundle\Entity\Address
             mappedBy: customer
-            cascade: [all]
+            cascade: [persist, remove]
         orders:
             targetEntity: Sylius\Component\Order\Model\OrderInterface
             mappedBy: customer
-            cascade: [all]
+            cascade: [persist, remove]
            
