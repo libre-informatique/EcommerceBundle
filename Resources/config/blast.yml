@@ -484,6 +484,8 @@ parameters:
 # CRM bundle overrides
 ######################
         Librinfo\CRMBundle\Admin\OrganismAdmin:
+            form_theme:
+                - LibrinfoEcommerceBundle:OrganismAdmin:theme.html.twig
             Sonata\AdminBundle\Show\ShowMapper:
                 forceTabs: true
                 remove:
@@ -590,18 +592,11 @@ parameters:
                                 type: text
                                 disabled: true
                                 label: false
-                        form_group_other_addresses:
+                        form_group_addresses:
                             addresses:
                                 type: sonata_type_collection
                                 label: false
                                 by_reference: false
-                                type_options:
-                                    btn_add: false
-                                    delete_options:
-                                        type: checkbox
-                                        type_options:
-                                            mapped: false
-                                            required: false
                                 required: true
                                 _options:
                                     sortable: updatedAt

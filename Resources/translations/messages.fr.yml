@@ -39,6 +39,8 @@ librinfo:
         available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
+        customer:
+            set_default_address: Adresse principale
         depth: profondeur
         height: hauteur
         meta_description: Meta description
@@ -75,5 +77,5 @@ librinfo:
             label: Contenu d'option d'article
         product_variant_admin:
             label: Déclinaison d'article
-
-
+            
+            
