@@ -17,21 +17,6 @@ trait AddressExtension
     protected $company;
 
     /**
-     * @var string
-     */
-    protected $countryCode;
-
-    /**
-     * @var string
-     */
-    protected $provinceCode;
-
-    /**
-     * @var string
-     */
-    protected $provinceName;
-    
-    /**
      * @var CustomerInterface
      */
     protected $customer;
@@ -52,7 +37,7 @@ trait AddressExtension
         $this->customer = $customer;
     }
 
-    
+
     /**
      * {@inheritdoc}
      */
@@ -85,62 +70,6 @@ trait AddressExtension
         $this->company = $company;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCountryCode()
-    {
-        return $this->countryCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCountryCode($countryCode = null)
-    {
-        if (null === $countryCode) {
-            $this->provinceCode = null;
-        }
-
-        $this->countryCode = $countryCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProvinceCode()
-    {
-        return $this->provinceCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProvinceCode($provinceCode = null)
-    {
-        if (null === $this->countryCode) {
-            return;
-        }
-
-        $this->provinceCode = $provinceCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProvinceName()
-    {
-        return $this->provinceName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProvinceName($provinceName = null)
-    {
-        $this->provinceName = $provinceName;
-    }
-    
     /**
      * @return string
      */
