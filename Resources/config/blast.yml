@@ -441,7 +441,7 @@ parameters:
                         label: librinfo.label.value
 ########################
 # USER BUNDLE OVERRIDES
-########################                        
+########################
         Librinfo\UserBundle\Entity\Traits\Traceable:
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
@@ -605,6 +605,13 @@ parameters:
                             groupsOrder:
                                 - form_group_default_address
                                 - form_group_addresses
+                    _options:
+                        tabsOrder:
+                            - form_group_general
+                            - form_tab_address_book
+                            - form_group_contacts
+                            - form_tab_info
+                            - form_group_specifics
 
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
