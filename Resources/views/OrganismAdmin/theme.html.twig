@@ -20,7 +20,7 @@
                         {% if name == 'addresses' and sonata_admin.admin.classnameLabel == 'Organism' %}
                             <div class="sonata-ba-tabs">
                                 {% for nested_group_field in form.children %}
-                                    
+
                                     <div>
                                         <div class="nav-tabs-custom">
                                             <ul class="nav nav-tabs">
@@ -67,14 +67,14 @@
                                         </div>
                                         {% if nested_group_field.vars.value.id != sonata_admin.admin.subject.defaultaddress.id %}
                                             <a href="{{ path(
-                                                'librinfo_ecommerce.ajax.set_customer_default_address', 
+                                                'librinfo_ecommerce.ajax.set_customer_default_address',
                                                 {
-                                                    'customerId': sonata_admin.admin.subject.id, 
+                                                    'customerId': sonata_admin.admin.subject.id,
                                                     'addressId': nested_group_field.vars.value.id
                                                 }
-                                            ) 
+                                            )
                                             }}">
-                                                {{ 'librinfo.label.customer.set_default_address'|trans() }}
+                                                {{ 'librinfo.label.set_default_customer_address'|trans() }}
                                             </a>
                                         {% endif %}
                                         {% if nested_group_field['_delete'] is defined %}

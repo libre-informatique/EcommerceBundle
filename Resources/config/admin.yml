@@ -64,12 +64,22 @@ services:
         class: Librinfo\EcommerceBundle\Admin\CustomerAdmin
         arguments: [~, Librinfo\CRMBundle\Entity\Organism, LibrinfoCRMBundle:OrganismAdmin]
         tags:
-            -   name: sonata.admin
-                manager_type: orm
-                group: Customers Relationship Management
-                label: librinfo.crm.customer_admin.label
-                label_translator_strategy: blast_core.label.strategy.librinfo
+            - name: sonata.admin
+              manager_type: orm
+              group: Customers Relationship Management
+              label: librinfo.crm.customer_admin.label
+              label_translator_strategy: blast_core.label.strategy.librinfo
         calls:
             - [setCodeGenerator, [@librinfo_crm.code_generator.customer]]
             - [ setTemplate, [edit, LibrinfoCRMBundle:OrganismAdmin:edit.html.twig]]
             - [ setTemplate, [show, LibrinfoCRMBundle:OrganismAdmin:show.html.twig]]
+
+    librinfo_ecommerce.admin.order:
+        class: Librinfo\EcommerceBundle\Admin\OrderAdmin
+        arguments: [~, Sylius\Component\Core\Model\Order, LibrinfoEcommerceBundle:OrderCRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: librinfo.label.order_admin
+              label_translator_strategy: blast_core.label.strategy.librinfo

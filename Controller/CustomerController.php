@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * Copyright (C) 2015-2016 Libre Informatique
+ *
+ * This file is licenced under the GNU GPL v3.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Librinfo\EcommerceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +26,7 @@ class CustomerController extends ResourceController
     public function createAction(Request $request)
     {
         $admin = $this->container->get('librinfo_ecommerce.admin.customer');
-        
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
@@ -30,12 +38,12 @@ class CustomerController extends ResourceController
             $newResource = $form->getData();
 
             $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
-            
+
             $newResource->setIsIndividual(true);
 
             //make sure admin lifecycle hooks are called
             $admin->create($newResource);
-            
+
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
                 throw new HttpException($event->getErrorCode(), $event->getMessage());
             }
@@ -78,7 +86,7 @@ class CustomerController extends ResourceController
 
         return $this->viewHandler->handle($configuration, $view);
     }
-    
+
     /**
      * {@inheritdoc}
      */

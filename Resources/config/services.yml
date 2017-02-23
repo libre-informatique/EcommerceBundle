@@ -1,4 +1,4 @@
-services:    
+services:
 # ENTITY CODE GENERATORS
 
     librinfo_ecommerce.code_generator.product:
@@ -15,6 +15,23 @@ services:
         tags:
             - { name: blast.entity_code_generator }
 
+# FORM TYPES
+
+    librinfo_ecommerce.form.type.order_state:
+        class: Librinfo\EcommerceBundle\Form\Type\OrderStateType
+        tags:
+            - { name: form.type, alias: librinfo_type_order_state }
+
+    librinfo_ecommerce.form.type.payment_state:
+        class: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
+        tags:
+            - { name: form.type, alias: librinfo_type_payment_state }
+
+    librinfo_ecommerce.form.type.shipping_state:
+        class: Librinfo\EcommerceBundle\Form\Type\ShippingStateType
+        tags:
+            - { name: form.type, alias: librinfo_type_shipping_state }
+
 # EVENT LISTENERS
 
     librinfo_ecommerce.listener.sylius_guidable:
@@ -26,7 +43,7 @@ services:
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # USER BUNDLE OVERRIDES
-    
+
     librinfo_user.listener.traceable:
         class: Librinfo\EcommerceBundle\EventListener\TraceableListener
         tags:
