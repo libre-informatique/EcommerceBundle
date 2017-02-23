@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * Copyright (C) 2015-2016 Libre Informatique
+ *
+ * This file is licenced under the GNU GPL v3.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Librinfo\EcommerceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +50,7 @@ class CustomerController extends ResourceController
 
             //make sure admin lifecycle hooks are called
             $admin->create($newResource);
-            
+
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
                 throw new HttpException($event->getErrorCode(), $event->getMessage());
             }
@@ -85,7 +93,7 @@ class CustomerController extends ResourceController
 
         return $this->viewHandler->handle($configuration, $view);
     }
-    
+
     /**
      * {@inheritdoc}
      */

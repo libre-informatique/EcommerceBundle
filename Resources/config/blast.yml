@@ -1,3 +1,5 @@
+
+
 # Copyright (C) 2015-2016 Libre Informatique
 #
 # This file is licenced under the GNU GPL v3.
@@ -441,7 +443,7 @@ parameters:
                         label: librinfo.label.value
 ########################
 # USER BUNDLE OVERRIDES
-########################                        
+########################
         Librinfo\UserBundle\Entity\Traits\Traceable:
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
@@ -605,6 +607,13 @@ parameters:
                             groupsOrder:
                                 - form_group_default_address
                                 - form_group_addresses
+                    _options:
+                        tabsOrder:
+                            - form_group_general
+                            - form_tab_address_book
+                            - form_group_contacts
+                            - form_tab_info
+                            - form_group_specifics
 
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
@@ -672,3 +681,124 @@ parameters:
                             - supplierCode
                             - circles
                             - alert
+
+########
+# ORDER
+########
+
+        Sylius\Component\Core\Model\Order:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            number: ~
+                            notes: ~
+                            state: ~
+                            checkoutCompletedAt: ~
+                            itemsTotal: ~
+                            adjustmentsTotal: ~
+                            total: ~
+                            createdAt: ~
+                            updatedAt: ~
+                            currencyCode: ~
+                            exchangeRate: ~
+                            localeCode: ~
+                            checkoutState: ~
+                            paymentState: ~
+                            shippingState: ~
+                            tokenValue: ~
+                            customerIp: ~
+                            id: ~
+
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            number: ~
+                            notes: ~
+                            state: ~
+                            checkoutCompletedAt: ~
+                            itemsTotal: ~
+                            adjustmentsTotal: ~
+                            total: ~
+                            createdAt: ~
+                            updatedAt: ~
+                            currencyCode: ~
+                            exchangeRate: ~
+                            localeCode: ~
+                            checkoutState: ~
+                            paymentState: ~
+                            shippingState: ~
+                            tokenValue: ~
+                            customerIp: ~
+                            id: ~
+
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+                    _actions: [edit, duplicate]
+                    _batch_actions: [delete]
+                    _list_actions: [create]
+                add:
+                    number:
+                        label: librinfo.label.order_number
+                        identifier: true
+                    createdAt: ~
+                    updatedAt: ~
+                    channel:
+                        label: librinfo.label.order_channel
+                    customer:
+                        admin_code: librinfo_ecommerce.admin.customer
+                    notes: ~
+                    state:
+                        label: librinfo.label.order_state
+                        template: 'LibrinfoEcommerceBundle:OrderAdmin:list_field_state.html.twig'
+                    #checkoutState: ~
+                    paymentState:
+                        template: 'LibrinfoEcommerceBundle:OrderAdmin:list_field_payment_state.html.twig'
+                    shippingState:
+                        template: 'LibrinfoEcommerceBundle:OrderAdmin:list_field_shipping_state.html.twig'
+                    total:
+                        type: text
+                        label: librinfo.label.order_total
+                        template: 'LibrinfoEcommerceBundle:OrderAdmin:list_field_total.html.twig'
+                    _actions:
+                        delete:
+                            template: LibrinfoEcommerceBundle:OrderAdmin:list__action_delete.html.twig
+
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    number:
+                        label: librinfo.label.order_number
+                    customer.name: ~
+                    customer.customerCode: ~
+                    notes: ~
+                    state:
+                        label: librinfo.label.order_state
+                        type: doctrine_orm_string
+                        field_type: librinfo_type_order_state
+                        field_options:
+                            no_cart: true
+                    paymentState:
+                        type: doctrine_orm_string
+                        field_type: librinfo_type_payment_state
+                        field_options:
+                            no_cart: true
+                    shippingState:
+                        type: doctrine_orm_string
+                        field_type: librinfo_type_shipping_state
+                        field_options:
+                            no_cart: true
+                    itemsTotal: ~
+                    # TODO euros to cents transformer:
+                    adjustmentsTotal: ~
+                    # TODO euros to cents transformer:
+                    total:
+                        label: librinfo.label.order_total
+                    createdAt: ~
+                    updatedAt: ~
+                    checkoutCompletedAt: ~
+                    customerIp: ~

@@ -21,6 +21,7 @@ librinfo:
     button:
         continue: Continuer
     link:
+        order_list: Liste des commandes
         product_attribute_create: Nouvel attribut d'article
         product_attribute_list: Liste des attributs d'article
         product_create: Nouvel Article
@@ -36,18 +37,30 @@ librinfo:
         productoptionvalue_list: Liste des contenus options d'article
         productvariant_list: Liste des déclinaisons d'article
     label:
+        adjustments_total: Total ajustements
         available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
-        customer:
-            set_default_address: Adresse principale
+        checkout_completed_at: Validation effectuée le
+        checkout_state: Statut validation
+        customer: Client
+        customer_customer_code: Code client
+        customer_ip: Adresse IP client
+        customer_name: Nom client
         depth: profondeur
         height: hauteur
+        items_total: Total articles
         meta_description: Meta description
         meta_keywords: Meta keywords
+        notes: Notes
         on_hand: Stock disponible
         on_hold: Stock réservé
         option_values: Options
+        order_channel: Canal
+        order_number: N° commande
+        order_state: Statut commande
+        order_total: Total commande
+        payment_state: Statut paiement
         position: Position
         product: Article
         product_code: Code article
@@ -57,15 +70,36 @@ librinfo:
         product_shop_url: URL boutique
         product_variant_code: Code déclinaison
         product_variant_name: Nom déclinaison
+        set_default_customer_address: Adresse principale
+        shipping_state: Statut livraison
         short_description: Brève description
         slug: Slug
         storage_type: Type d'enregistrement
+        total: Total
         tracked_stock: Suivi des stocks
         type: Type
         values: Valeurs
         variants: Déclinaisons
         weight: Poids
         width: largeur
+    order_state:
+        cancelled: Annulée
+        cart: Panier
+        fulfilled: Exécutée
+        new: Nouvelle
+    payment_state:
+        awaiting_payment: En attente
+        cancelled: Annulé
+        cart: Panier
+        paid: Payé
+        partially_paid: Partiellement payé
+        partially_refunded: Partiellement remboursé
+        refunded: Remboursé
+    shipping_state:
+        cart: Panier
+        cancelled: Annulé
+        ready: Prêt
+        shipped: Expédié
     product:
         product_admin:
             label: Article
@@ -77,5 +111,5 @@ librinfo:
             label: Contenu d'option d'article
         product_variant_admin:
             label: Déclinaison d'article
-            
-            
+
+

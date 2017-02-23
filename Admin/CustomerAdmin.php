@@ -10,13 +10,10 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-//use Librinfo\CRMBundle\Entity\Contact;
-//use Librinfo\CRMBundle\Entity\ContactPhone;
-//use Librinfo\CRMBundle\Entity\Position;
 use Librinfo\CRMBundle\Admin\CustomerAdmin as BaseCustomerAdmin;
 
 class CustomerAdmin extends BaseCustomerAdmin
-{   
+{
     /**
      * {@inheritdoc}
      */
@@ -24,7 +21,7 @@ class CustomerAdmin extends BaseCustomerAdmin
     {
         $object->updateName();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -32,41 +29,5 @@ class CustomerAdmin extends BaseCustomerAdmin
     {
         $object->updateName();
     }
-    
-    
-    /**
-     * {@inheritdoc}
-     */
-//    public function postPersist($organism)
-//    {
-//        if ( $organism->isIndividual() )
-//        {
-//            // Create a new Contact & Position associated to the organism
-//            $contact = new Contact;
-//            $contact->setTitle("");
-//            $contact->setFirstname($organism->getFirstName());
-//            $contact->setName($organism->getLastName());
-//            $contact->setEmail($organism->getEmail());
-//            $contact->addAddress($organism->getDefaultAddress());
-//            $contact->setZip($organism->getZip());
-//            $contact->setCity($organism->getCity());
-//            $contact->setCountry($organism->getCountry());
-//            $this->getModelManager()->create($contact);
-//
-//            foreach($organism->getPhones() as $oPhone)
-//            {
-//                $cPhone = new ContactPhone;
-//                $cPhone->setPhoneType($oPhone->getPhoneType());
-//                $cPhone->setNumber($oPhone->getNumber());
-//                $cPhone->setContact($contact);
-//                $this->getModelManager()->create($cPhone);
-//            }
-//
-//            $position = new Position;
-//            $position->setOrganism($organism);
-//            $position->setContact($contact);
-//            $position->setEmail($organism->getEmail());
-//            $this->getModelManager()->create($position);
-//        }
-//    }
+
 }
