@@ -1,5 +1,3 @@
-
-
 # Copyright (C) 2015-2016 Libre Informatique
 #
 # This file is licenced under the GNU GPL v3.
@@ -798,7 +796,16 @@ parameters:
                     # TODO euros to cents transformer:
                     total:
                         label: librinfo.label.order_total
-                    createdAt: ~
-                    updatedAt: ~
-                    checkoutCompletedAt: ~
+                    # TODO doctrine_orm_date:
+                    createdAt:
+                        type: doctrine_orm_date
+                        field_type: sonata_type_date_picker
+                    # TODO doctrine_orm_date:
+                    updatedAt:
+                        type: doctrine_orm_date
+                        field_type: sonata_type_date_picker
+                    # TODO doctrine_orm_date:
+                    checkoutCompletedAt:
+                        type: doctrine_orm_date
+                        field_type: sonata_type_date_picker
                     customerIp: ~
