@@ -790,22 +790,20 @@ parameters:
                         field_type: librinfo_type_shipping_state
                         field_options:
                             no_cart: true
+                    # TODO euros to cents transformer:
                     itemsTotal: ~
                     # TODO euros to cents transformer:
                     adjustmentsTotal: ~
                     # TODO euros to cents transformer:
                     total:
                         label: librinfo.label.order_total
-                    # TODO doctrine_orm_date:
                     createdAt:
-                        type: doctrine_orm_date
-                        field_type: sonata_type_date_picker
-                    # TODO doctrine_orm_date:
+                        type: doctrine_orm_date_range
+                        field_type: sonata_type_datetime_range_picker
                     updatedAt:
-                        type: doctrine_orm_date
-                        field_type: sonata_type_date_picker
-                    # TODO doctrine_orm_date:
+                        type: doctrine_orm_date_range
+                        field_type: sonata_type_datetime_range_picker
                     checkoutCompletedAt:
-                        type: doctrine_orm_date
-                        field_type: sonata_type_date_picker
+                        type: doctrine_orm_date_range
+                        field_type: sonata_type_datetime_range_picker
                     customerIp: ~
