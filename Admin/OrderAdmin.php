@@ -26,4 +26,17 @@ class OrderAdmin extends CoreAdmin
         return $query;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function configureActionButtons($action, $object = null)
+    {
+        $list = parent::configureActionButtons($action, $object);
+
+        if (isset($list['create']))
+            unset($list['create']);
+
+        return $list;
+    }
+
 }
