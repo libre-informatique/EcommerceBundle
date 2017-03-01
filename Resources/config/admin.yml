@@ -83,3 +83,13 @@ services:
               group: admin
               label: librinfo.label.order_admin
               label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.admin_user:
+        class: Librinfo\EcommerceBundle\Admin\AdminUserAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\AdminUser, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: AdminUser
+

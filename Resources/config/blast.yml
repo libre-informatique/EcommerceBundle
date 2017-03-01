@@ -1,3 +1,5 @@
+
+
 # Copyright (C) 2015-2016 Libre Informatique
 #
 # This file is licenced under the GNU GPL v3.
@@ -832,3 +834,119 @@ parameters:
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
                     customerIp: ~
+        ### AdminUser  ###
+        Librinfo\EcommerceBundle\Entity\AdminUser:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            username: ~
+                            usernameCanonical: ~
+                            enabled: ~
+                            salt: ~
+                            password: ~
+                            lastLogin: ~
+                            passwordResetToken: ~
+                            passwordRequestedAt: ~
+                            emailVerificationToken: ~
+                            verifiedAt: ~
+                            locked: ~
+                            expiresAt: ~
+                            credentialsExpireAt: ~
+                            roles: ~
+                            email: ~
+                            emailCanonical: ~
+                            createdAt: ~
+                            updatedAt: ~
+                            firstName: ~
+                            lastName: ~
+                            localeCode: ~
+                            id: ~
+    
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            username: ~
+                            usernameCanonical: ~
+                            enabled: ~
+                            salt: ~
+                            password: ~
+                            lastLogin: ~
+                            passwordResetToken: ~
+                            passwordRequestedAt: ~
+                            emailVerificationToken: ~
+                            verifiedAt: ~
+                            locked: ~
+                            expiresAt: ~
+                            credentialsExpireAt: ~
+                            roles: ~
+                            email: ~
+                            emailCanonical: ~
+                            createdAt: ~
+                            updatedAt: ~
+                            firstName: ~
+                            lastName: ~
+                            localeCode: ~
+                            id: ~
+    
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    username: ~
+                    usernameCanonical: ~
+                    enabled: ~
+                    salt: ~
+                    password: ~
+                    lastLogin: ~
+                    passwordResetToken: ~
+                    passwordRequestedAt: ~
+                    emailVerificationToken: ~
+                    verifiedAt: ~
+                    locked: ~
+                    expiresAt: ~
+                    credentialsExpireAt: ~
+                    roles: ~
+                    email: ~
+                    emailCanonical: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    firstName: ~
+                    lastName: ~
+                    localeCode: ~
+                    id: ~
+    
+                    _actions:
+                        show: ~
+                        edit: ~
+                        delete: ~
+                        duplicate:
+                            template: BlastCoreBundle:CRUD:list__action_duplicate.html.twig
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    username: ~
+                    usernameCanonical: ~
+                    enabled: ~
+                    salt: ~
+                    password: ~
+                    lastLogin: ~
+                    passwordResetToken: ~
+                    passwordRequestedAt: ~
+                    emailVerificationToken: ~
+                    verifiedAt: ~
+                    locked: ~
+                    expiresAt: ~
+                    credentialsExpireAt: ~
+                    roles: ~
+                    email: ~
+                    emailCanonical: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    firstName: ~
+                    lastName: ~
+                    localeCode: ~
+                    id: ~
+    
