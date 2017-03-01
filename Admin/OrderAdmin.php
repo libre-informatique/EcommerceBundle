@@ -39,4 +39,9 @@ class OrderAdmin extends CoreAdmin
         return $list;
     }
 
+    public function toString($object)
+    {
+        return $object->getNumber() ?: $object->getId();
+    }
+
 }
