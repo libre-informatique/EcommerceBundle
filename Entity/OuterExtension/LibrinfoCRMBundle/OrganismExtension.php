@@ -600,6 +600,9 @@ trait OrganismExtension
         if (!$this->hasAddress($address)) {
             $this->addresses[] = $address;
             $address->setCustomer($this);
+            
+            if(!$this->getDefaultAddress())
+                $this->setDefaultAddress($address);
         }
     }
 
