@@ -1,0 +1,8 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field_value %}
+    {% if value %}
+        {{ value|nl2br }}<br>
+    {% endif %}
+    <a href="#" onclick="alert('TODO: not implemented yet !')">{{ 'librinfo.action.edit'|trans }}</a>
+{% endblock %}

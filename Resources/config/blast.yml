@@ -687,52 +687,78 @@ parameters:
         Sylius\Component\Core\Model\Order:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
+                titleTemplate: LibrinfoEcommerceBundle:OrderAdmin/Show:show_title.html.twig
+                forceTabs: true
                 add:
-                    main_tab:
-                        main_group:
-                            number: ~
-                            notes: ~
-                            state: ~
-                            checkoutCompletedAt: ~
-                            itemsTotal: ~
-                            adjustmentsTotal: ~
-                            total: ~
-                            createdAt: ~
-                            updatedAt: ~
+                    show_tab_order_details:
+                        show_group_order:
+                            number:
+                                label: librinfo.label.order_number
+                            channel:
+                                label: librinfo.label.order_channel
+                            state:
+                                label: librinfo.label.order_state
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_order_state.html.twig
+                            paymentState:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_payment_state.html.twig
+                            shippingState:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_shipping_state.html.twig
+                            notes:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_notes.html.twig
+                        show_group_customer:
+                            customer:
+                                admin_code: librinfo_ecommerce.admin.customer
+                            customer.createdAt: ~
+                            customerIp: ~
+                            localeCode:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_locale_code.html.twig
+                            tokenValue: ~
+                        show_group_totals:
+                            itemsTotal:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                            adjustmentsTotal:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                            total:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
                             currencyCode: ~
                             exchangeRate: ~
-                            localeCode: ~
-                            checkoutState: ~
-                            paymentState: ~
-                            shippingState: ~
-                            tokenValue: ~
-                            customerIp: ~
-                            id: ~
-
+                            #checkoutState: ~
+                    show_tab_order_summary:
+                        '':
+                            summary:
+                                mapped: false
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_summary.html.twig
+                    show_tab_payment_delivery:
+                        show_group_addresses:
+                            shipping_address:
+                                mapped: false
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_shipping_address.html.twig
+                            billing_address:
+                                mapped: false
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_billing_address.html.twig
+                        show_group_payments:
+                            payment_state:
+                                mapped: false
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_payment_state_header.html.twig
+                            payments_list:
+                                mapped: false
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_payments.html.twig
+                        show_group_shipments:
+                            shipments:
+                                mapped: false
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_shipments.html.twig
+                    show_tab_history:
+                        '':
+                            createdAt: ~
+                            updatedAt: ~
+                            checkoutCompletedAt: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     main_tab:
                         main_group:
-                            number: ~
+                            shipping_address: ~
                             notes: ~
-                            state: ~
-                            checkoutCompletedAt: ~
-                            itemsTotal: ~
-                            adjustmentsTotal: ~
-                            total: ~
-                            createdAt: ~
-                            updatedAt: ~
-                            currencyCode: ~
-                            exchangeRate: ~
-                            localeCode: ~
-                            checkoutState: ~
-                            paymentState: ~
-                            shippingState: ~
-                            tokenValue: ~
-                            customerIp: ~
-                            id: ~
-
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
@@ -752,20 +778,19 @@ parameters:
                     notes: ~
                     state:
                         label: librinfo.label.order_state
-                        template: 'LibrinfoEcommerceBundle:OrderAdmin:list_field_state.html.twig'
+                        template: LibrinfoEcommerceBundle:OrderAdmin:list_field_state.html.twig
                     #checkoutState: ~
                     paymentState:
-                        template: 'LibrinfoEcommerceBundle:OrderAdmin:list_field_payment_state.html.twig'
+                        template: LibrinfoEcommerceBundle:OrderAdmin:list_field_payment_state.html.twig
                     shippingState:
-                        template: 'LibrinfoEcommerceBundle:OrderAdmin:list_field_shipping_state.html.twig'
+                        template: LibrinfoEcommerceBundle:OrderAdmin:list_field_shipping_state.html.twig
                     total:
                         type: text
                         label: librinfo.label.order_total
-                        template: 'LibrinfoEcommerceBundle:OrderAdmin:list_field_total.html.twig'
+                        template: LibrinfoEcommerceBundle:OrderAdmin:list_field_total.html.twig
                     _actions:
                         delete:
                             template: LibrinfoEcommerceBundle:OrderAdmin:list__action_delete.html.twig
-
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:

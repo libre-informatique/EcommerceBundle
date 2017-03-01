@@ -6,17 +6,28 @@ form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
 show_group_availability: Disponibilité
+show_group_addresses: Adresses
+show_group_customer: Client
 show_group_history: Historique
+show_group_order: Commande
+show_group_payments: Paiements
 show_group_properties: Dimensions & poids
+show_group_shipments: Expéditions
 show_group_stock: Stock
+show_group_totals: Totaux
+show_tab_order_details: Commande
+show_tab_order_summary: Récapitulatif
+show_tab_payment_delivery: Paiement / Livraison
+show_tab_history: Historique
 show_tab_variants: Déclinaisons
 
 librinfo:
     action:
-        manage_variants: Gérer les déclinaisons
-        list_variants: Liste des déclinaisons
         add_variant: Ajouter une déclinaison
+        edit: Modifier
         generate_variants: Générer les déclinaisons
+        list_variants: Liste des déclinaisons
+        manage_variants: Gérer les déclinaisons
         product_shop_link: Voir sur la boutique
     button:
         continue: Continuer
@@ -41,15 +52,20 @@ librinfo:
         available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
-        checkout_completed_at: Validation effectuée le
+        billing_address: Adresse de facturation
+        checkout_completed_at: Panier validé le
         checkout_state: Statut validation
+        currency_code: Devise
         customer: Client
         customer_customer_code: Code client
+        customer_created_at: Client depuis
         customer_ip: Adresse IP client
         customer_name: Nom client
         depth: profondeur
+        exchange_rate: Taux de change
         height: hauteur
         items_total: Total articles
+        locale_code: Langue
         meta_description: Meta description
         meta_keywords: Meta keywords
         notes: Notes
@@ -57,10 +73,13 @@ librinfo:
         on_hold: Stock réservé
         option_values: Options
         order_channel: Canal
+        order: Commande
+        order_admin: Commande
         order_number: N° commande
         order_state: Statut commande
         order_total: Total commande
         payment_state: Statut paiement
+        payments_list: Liste des paiements
         position: Position
         product: Article
         product_code: Code article
@@ -70,11 +89,14 @@ librinfo:
         product_shop_url: URL boutique
         product_variant_code: Code déclinaison
         product_variant_name: Nom déclinaison
+        purchased_from: Achété sur
         set_default_customer_address: Adresse principale
+        shipping_address: Adresse de livraison
         shipping_state: Statut livraison
         short_description: Brève description
         slug: Slug
         storage_type: Type d'enregistrement
+        token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks
         type: Type

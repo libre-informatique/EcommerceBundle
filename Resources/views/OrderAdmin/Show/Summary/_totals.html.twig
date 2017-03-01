@@ -1,0 +1,91 @@
+{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set itemPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT') %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
+
+<tr class="active">
+    <th colspan="8" id="items-total" style="text-align: right">
+        <strong>{{ 'sylius.ui.subtotal'|trans }}</strong>:
+        {{ order.itemsTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+    </th>
+</tr>
+<tr>
+    <td colspan="4" id="shipping-charges">
+        {% if not order.adjustments(shippingAdjustment).isEmpty() %}
+            <div class="ui relaxed divided list">
+                {% for adjustment in order.adjustments(shippingAdjustment) %}
+                    <div class="item">
+                        <div class="">
+                            <span class="header">{{ adjustment.label }}</span>
+                            <div class="description">
+                                {{ adjustment.amount|sylius_price(order.currencyCode, order.exchangeRate) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p><small>{{ 'sylius.ui.no_shipping_charges'|trans }}</small></p>
+        {% endif %}
+    </td>
+    <td colspan="4" id="shipping-total" style="text-align: right">
+        <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
+        {{ order.shippingTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+    </td>
+</tr>
+<tr>
+    <td colspan="4" id="taxes">
+        {% set taxAdjustments = order.getAdjustmentsRecursively(taxAdjustment) %}
+        {% if taxAdjustments is not empty %}
+            <div class="ui relaxed divided list">
+                {% for taxLabel, taxAmount in sylius_aggregate_adjustments(taxAdjustments) %}
+                    <div class="item">
+                        <div class="">
+                            <span class="header">{{ taxLabel }}</span>
+                            <div class="description">
+                                {{ taxAmount|sylius_price(order.currencyCode, order.exchangeRate) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>{{ 'sylius.ui.no_taxes'|trans }}.</p>
+        {% endif %}
+    </td>
+    <td colspan="4" id="tax-total" style="text-align: right">
+        <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>:
+        {{ order.taxTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+    </td>
+</tr>
+<tr>
+    <td colspan="4" id="promotion-discounts">
+        {% set orderPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}
+        {% if not orderPromotions is empty %}
+            <div class="ui relaxed divided list">
+                {% for label, amount in orderPromotions %}
+                    <div class="item">
+                        <div class="">
+                            <span class="header">{{ label }}</span>
+                            <div class="description">
+                                {{ amount|sylius_price(order.currencyCode, order.exchangeRate) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>{{ 'sylius.ui.no_promotion'|trans }}.</p>
+        {% endif %}
+    </td>
+    <td colspan="4" id="promotion-total" style="text-align: right">
+        <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
+        {{ order.orderPromotionTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+    </td>
+</tr>
+<tr class="active">
+    <td colspan="8" id="total" class="ui large header" style="text-align: right; font-size: 1.5em">
+        <strong>{{ 'sylius.ui.total'|trans }}</strong>:
+        {{ order.total|sylius_price(order.currencyCode, order.exchangeRate) }}
+    </td>
+</tr>
