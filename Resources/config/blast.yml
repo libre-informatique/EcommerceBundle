@@ -174,9 +174,10 @@ parameters:
                                 label: librinfo.label.product_variant_name
                             code:
                                 label: librinfo.label.product_variant_code
-                            price: ~
+                            price:
+                                template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_price.html.twig
                             optionValues:
-                                template: 'LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_optionvalues.html.twig'
+                                template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_optionvalues.html.twig
                                 admin_code: librinfo_ecommerce_option_value.admin.product
                         show_group_stock:
                             onHand: ~
@@ -260,7 +261,8 @@ parameters:
                         admin_code: librinfo_ecommerce.admin.product
                     available:
                         type: boolean
-                    price: ~
+                    price:
+                        template: LibrinfoEcommerceBundle:ProductVariantAdmin:list_field_price.html.twig
                     optionValues:
                         associated_property: fullCode
                         admin_code: librinfo_ecommerce_option_value.admin.product
