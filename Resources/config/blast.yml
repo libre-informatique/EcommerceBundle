@@ -177,7 +177,7 @@ parameters:
                             price: ~
                             optionValues:
                                 template: 'LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_optionvalues.html.twig'
-
+                                admin_code: librinfo_ecommerce_option_value.admin.product
                         show_group_stock:
                             onHand: ~
                             onHold: ~
@@ -263,6 +263,7 @@ parameters:
                     price: ~
                     optionValues:
                         associated_property: fullCode
+                        admin_code: librinfo_ecommerce_option_value.admin.product
                     onHand: ~
                     onHold: ~
                     tracked:
@@ -863,8 +864,8 @@ parameters:
                             lastName: ~
                             localeCode: ~
                             id: ~
-    
-            # FORM    
+
+            # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     main_tab:
@@ -891,8 +892,8 @@ parameters:
                             lastName: ~
                             localeCode: ~
                             id: ~
-    
-            # LIST    
+
+            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     username: ~
@@ -917,14 +918,14 @@ parameters:
                     lastName: ~
                     localeCode: ~
                     id: ~
-    
+
                     _actions:
                         show: ~
                         edit: ~
                         delete: ~
                         duplicate:
                             template: BlastCoreBundle:CRUD:list__action_duplicate.html.twig
-            # FILTERS 
+            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     username: ~
@@ -949,4 +950,4 @@ parameters:
                     lastName: ~
                     localeCode: ~
                     id: ~
-    
+
