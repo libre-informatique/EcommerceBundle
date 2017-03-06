@@ -8,7 +8,7 @@
         "symfony/symfony": "2.8.*",
         "blast-project/core-bundle": "dev-master",
         "blast-project/base-entities-bundle": "dev-master",
-        "sylius/sylius": "^1.0",
+        "sylius/sylius": "1.0.0-alpha.2",
         "sylius/locale-bundle": "^1.0",
         "sylius/product-bundle": "^1.0"
     },
