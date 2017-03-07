@@ -39,7 +39,7 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # USER BUNDLE OVERRIDES
@@ -49,8 +49,8 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger,[@logger]]
-            - [setTokenStorage, [@security.token_storage]]
+            - [setLogger,['@logger']]
+            - [setTokenStorage, ['@security.token_storage']]
             - [setUserClass, [Librinfo\EcommerceBundle\Entity\AdminUser]]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
@@ -59,7 +59,7 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger,[@logger]]
-            - [setTokenStorage, [@security.token_storage]]
+            - [setLogger,['@logger']]
+            - [setTokenStorage, ['@security.token_storage']]
             - [setUserClass, [Librinfo\EcommerceBundle\Entity\AdminUser]]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]

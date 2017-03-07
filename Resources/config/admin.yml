@@ -70,7 +70,7 @@ services:
               label: librinfo.crm.customer_admin.label
               label_translator_strategy: blast_core.label.strategy.librinfo
         calls:
-            - [setCodeGenerator, [@librinfo_crm.code_generator.customer]]
+            - [setCodeGenerator, ['@librinfo_crm.code_generator.customer']]
             - [ setTemplate, [edit, LibrinfoCRMBundle:OrganismAdmin:edit.html.twig]]
             - [ setTemplate, [show, LibrinfoCRMBundle:OrganismAdmin:show.html.twig]]
 
