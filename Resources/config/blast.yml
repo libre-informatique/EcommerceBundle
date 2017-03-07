@@ -174,10 +174,11 @@ parameters:
                                 label: librinfo.label.product_variant_name
                             code:
                                 label: librinfo.label.product_variant_code
-                            price: ~
+                            price:
+                                template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_price.html.twig
                             optionValues:
-                                template: 'LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_optionvalues.html.twig'
-
+                                template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_optionvalues.html.twig
+                                admin_code: librinfo_ecommerce_option_value.admin.product
                         show_group_stock:
                             onHand: ~
                             onHold: ~
@@ -260,9 +261,11 @@ parameters:
                         admin_code: librinfo_ecommerce.admin.product
                     available:
                         type: boolean
-                    price: ~
+                    price:
+                        template: LibrinfoEcommerceBundle:ProductVariantAdmin:list_field_price.html.twig
                     optionValues:
                         associated_property: fullCode
+                        admin_code: librinfo_ecommerce_option_value.admin.product
                     onHand: ~
                     onHold: ~
                     tracked:
@@ -863,8 +866,8 @@ parameters:
                             lastName: ~
                             localeCode: ~
                             id: ~
-    
-            # FORM    
+
+            # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     main_tab:
@@ -891,8 +894,8 @@ parameters:
                             lastName: ~
                             localeCode: ~
                             id: ~
-    
-            # LIST    
+
+            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     username: ~
@@ -917,14 +920,14 @@ parameters:
                     lastName: ~
                     localeCode: ~
                     id: ~
-    
+
                     _actions:
                         show: ~
                         edit: ~
                         delete: ~
                         duplicate:
                             template: BlastCoreBundle:CRUD:list__action_duplicate.html.twig
-            # FILTERS 
+            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     username: ~
@@ -949,4 +952,4 @@ parameters:
                     lastName: ~
                     localeCode: ~
                     id: ~
-    
+
