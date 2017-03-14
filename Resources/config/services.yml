@@ -55,7 +55,7 @@ services:
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
     librinfo_user.listener.ownable:
-        class: Librinfo\UserBundle\EventListener\OwnableListener
+        class: Librinfo\SonataSyliusUserBundle\EventListener\OwnableListener
         tags:
             - { name: doctrine.event_subscriber }
         calls:

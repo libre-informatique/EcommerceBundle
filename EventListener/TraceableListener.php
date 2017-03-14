@@ -14,7 +14,7 @@ use DateTime;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Librinfo\UserBundle\EventListener\TraceableListener as BaseTraceableListener;
+use Librinfo\SonataSyliusUserBundle\EventListener\TraceableListener as BaseTraceableListener;
 
 class TraceableListener extends BaseTraceableListener
 {
@@ -27,7 +27,7 @@ class TraceableListener extends BaseTraceableListener
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->hasTrait($entity, 'Librinfo\UserBundle\Entity\Traits\Traceable'))
+        if (!$this->hasTrait($entity, 'Librinfo\SonataSyliusUserBundle\Entity\Traits\Traceable'))
             return;
 
         $this->logger->debug("[TraceableListener] Entering TraceableListener for « prePersist » event");
@@ -58,10 +58,10 @@ class TraceableListener extends BaseTraceableListener
 
         $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : NULL;
         $now = new DateTime('NOW');
-        
+
         if ( $user instanceof UserInterface && !$user instanceof ShopUserInterface )
             $entity->setUpdatedBy($user);
-        
+
         $entity->setUpdatedAt($now);
     }
 }

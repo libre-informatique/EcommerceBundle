@@ -447,7 +447,7 @@ parameters:
 ########################
 # USER BUNDLE OVERRIDES
 ########################
-        Librinfo\UserBundle\Entity\Traits\Traceable:
+        Librinfo\SonataSyliusUserBundle\Entity\Traits\Traceable:
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
                     form_tab_history:
@@ -471,7 +471,7 @@ parameters:
                                 disabled: true
                                 required: false
 
-        Librinfo\UserBundle\Entity\Traits\Ownable:
+        Librinfo\SonataSyliusUserBundle\Entity\Traits\Ownable:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     createdBy: ~
