@@ -35,7 +35,7 @@ sylius_attribute:
             attribute:
                 classes:
                     model: Librinfo\EcommerceBundle\Entity\ProductAttribute
-                    
+
 sylius_customer:
     driver: doctrine/orm
     resources:
@@ -43,19 +43,19 @@ sylius_customer:
             classes:
                 model: Librinfo\CRMBundle\Entity\Organism
                 controller: Librinfo\EcommerceBundle\Controller\CustomerController
-                
+
 sylius_addressing:
     resources:
         address:
             classes:
                 model: Librinfo\CRMBundle\Entity\Address
-                
+
 sylius_user:
     resources:
         admin:
             user:
                 classes:
-                    model: Librinfo\EcommerceBundle\Entity\AdminUser
+                    model: Librinfo\SonataSyliusUserBundle\Entity\SonataUser
 
 #sylius_product_association:
 #    resources:
