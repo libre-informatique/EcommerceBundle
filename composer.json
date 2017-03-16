@@ -4,11 +4,11 @@
     "description": "Bridge bundle between librinfo bundles and sylius",
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.4.0",
-        "symfony/symfony": "2.8.*",
-        "blast-project/core-bundle": "dev-master",
-        "blast-project/base-entities-bundle": "dev-master",
-        "sylius/sylius": "1.0.0-alpha.2",
+        "php": "^5.6|^7.0",
+        "symfony/symfony": "3.2.*",
+        "blast-project/core-bundle": "dev-sf3.2",
+        "blast-project/base-entities-bundle": "dev-sf3.2",
+        "sylius/sylius": "^1.0",
         "sylius/locale-bundle": "^1.0",
         "sylius/product-bundle": "^1.0"
     },

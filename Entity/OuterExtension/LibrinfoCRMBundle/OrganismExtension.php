@@ -14,7 +14,7 @@ use Librinfo\EcommerceBundle\Entity\OuterExtension\HasCustomerConstructor;
 trait OrganismExtension
 {
     use ToggleableTrait, HasCustomerConstructor;
-    
+
     /**
      * @var string
      */
@@ -108,12 +108,12 @@ trait OrganismExtension
      * @var string
      */
     protected $emailCanonical;
-    
+
     /**
      * @var CustomerInterface
      */
     protected $customer;
-    
+
     /**
      * @var string
      */
@@ -148,7 +148,7 @@ trait OrganismExtension
      * @var bool
      */
     protected $subscribedToNewsletter = false;
-    
+
     /**
      * @var Collection|OrderInterface[]
      */
@@ -563,7 +563,7 @@ trait OrganismExtension
             $customer->setUser($this);
         }
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -600,7 +600,7 @@ trait OrganismExtension
         if (!$this->hasAddress($address)) {
             $this->addresses[] = $address;
             $address->setCustomer($this);
-            
+
             if(!$this->getDefaultAddress())
                 $this->setDefaultAddress($address);
         }
@@ -638,7 +638,7 @@ trait OrganismExtension
     {
         return $this->user;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -783,7 +783,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setGroup(CustomerGroupInterface $group)
+    public function setGroup(CustomerGroupInterface $group = null)
     {
         $this->group = $group;
     }
@@ -819,13 +819,13 @@ trait OrganismExtension
     {
         $this->subscribedToNewsletter = $subscribedToNewsletter;
     }
-    
-    
+
+
     public function updateName()
     {
         $firstname = mb_convert_case($this->getFirstName(), MB_CASE_TITLE);
         $name = mb_strtoupper($this->getLastName());
-        
+
         $this->setName(sprintf(
             '%s %s',
             $firstname,

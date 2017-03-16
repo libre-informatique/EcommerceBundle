@@ -44,22 +44,24 @@ services:
 
 # USER BUNDLE OVERRIDES
 
-    librinfo_user.listener.traceable:
-        class: Librinfo\EcommerceBundle\EventListener\TraceableListener
-        tags:
-            - { name: doctrine.event_subscriber }
-        calls:
-            - [setLogger,['@logger']]
-            - [setTokenStorage, ['@security.token_storage']]
-            - [setUserClass, [Librinfo\EcommerceBundle\Entity\AdminUser]]
-            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+# TODO: refactor this since it does not work well with SonataSyliusUserBundle
 
-    librinfo_user.listener.ownable:
-        class: Librinfo\UserBundle\EventListener\OwnableListener
-        tags:
-            - { name: doctrine.event_subscriber }
-        calls:
-            - [setLogger,['@logger']]
-            - [setTokenStorage, ['@security.token_storage']]
-            - [setUserClass, [Librinfo\EcommerceBundle\Entity\AdminUser]]
-            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+#    librinfo_user.listener.traceable:
+#        class: Librinfo\EcommerceBundle\EventListener\TraceableListener
+#        tags:
+#            - { name: doctrine.event_subscriber }
+#        calls:
+#            - [setLogger,['@logger']]
+#            - [setTokenStorage, ['@security.token_storage']]
+#            - [setUserClass, [Librinfo\EcommerceBundle\Entity\AdminUser]]
+#            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+#
+#    librinfo_user.listener.ownable:
+#        class: Librinfo\SonataSyliusUserBundle\EventListener\OwnableListener
+#        tags:
+#            - { name: doctrine.event_subscriber }
+#        calls:
+#            - [setLogger,['@logger']]
+#            - [setTokenStorage, ['@security.token_storage']]
+#            - [setUserClass, [Librinfo\EcommerceBundle\Entity\AdminUser]]
+#            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
