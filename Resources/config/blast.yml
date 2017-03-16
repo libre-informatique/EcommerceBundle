@@ -209,7 +209,7 @@ parameters:
                             product:
                                 type: sonata_type_model_autocomplete
                                 property: [translations.name, code]
-                                read_only: true
+                                disabled: true
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
                             name:
@@ -461,13 +461,11 @@ parameters:
                             createdBy:
                                 type: entity
                                 class: Librinfo\EcommerceBundle\Entity\AdminUser
-                                read_only: true
                                 disabled: true
                                 required: false
                             updatedBy:
                                 type: entity
                                 class: Librinfo\EcommerceBundle\Entity\AdminUser
-                                read_only: true
                                 disabled: true
                                 required: false
 
@@ -562,7 +560,7 @@ parameters:
                     form_tab_info:
                         '':
                             source:
-                                type: blast_custom_choice
+                                type: Blast\UtilsBundle\Form\Type\CustomChoiceType
                                 choices_field: organism.source
                                 blast_choices: [Catalogue, Foire, Ami, Internet, Magazine]
                                 required: false
@@ -807,17 +805,17 @@ parameters:
                     state:
                         label: librinfo.label.order_state
                         type: doctrine_orm_string
-                        field_type: librinfo_type_order_state
+                        field_type: Librinfo\EcommerceBundle\Form\Type\OrderStateType
                         field_options:
                             no_cart: true
                     paymentState:
                         type: doctrine_orm_string
-                        field_type: librinfo_type_payment_state
+                        field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                         field_options:
                             no_cart: true
                     shippingState:
                         type: doctrine_orm_string
-                        field_type: librinfo_type_shipping_state
+                        field_type: Librinfo\EcommerceBundle\Form\Type\ShippingStateType
                         field_options:
                             no_cart: true
                     # TODO euros to cents transformer:
