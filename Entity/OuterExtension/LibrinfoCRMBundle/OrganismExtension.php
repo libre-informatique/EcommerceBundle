@@ -1,15 +1,23 @@
 <?php
 
+/*
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU GPL v3.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Librinfo\EcommerceBundle\Entity\OuterExtension\LibrinfoCRMBundle;
 
-use Sylius\Component\Resource\Model\ToggleableTrait;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\Customer\Model\CustomerGroupInterface;
-use Sylius\Component\User\Model\UserOAuthInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Librinfo\EcommerceBundle\Entity\OuterExtension\HasCustomerConstructor;
+use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Model\ToggleableTrait;
+use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Model\UserOAuthInterface;
 
 trait OrganismExtension
 {
@@ -155,6 +163,11 @@ trait OrganismExtension
     protected $orders;
 
     /**
+     * @var ShopUserInterface
+     */
+    protected $user;
+
+   /**
      * @var AddressInterface
      */
     protected $defaultAddress;
@@ -163,11 +176,6 @@ trait OrganismExtension
      * @var Collection|AddressInterface[]
      */
     protected $addresses;
-
-    /**
-     * @var ShopUserInterface
-     */
-    protected $user;
 
     /**
      * {@inheritdoc}
@@ -575,65 +583,6 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getDefaultAddress()
-    {
-        return $this->defaultAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultAddress(AddressInterface $defaultAddress = null)
-    {
-        $this->defaultAddress = $defaultAddress;
-
-        if (null !== $defaultAddress) {
-            $this->addAddress($defaultAddress);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAddress(AddressInterface $address)
-    {
-        if (!$this->hasAddress($address)) {
-            $this->addresses[] = $address;
-            $address->setCustomer($this);
-
-            if(!$this->getDefaultAddress())
-                $this->setDefaultAddress($address);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAddress(AddressInterface $address)
-    {
-        $this->addresses->removeElement($address);
-        $address->setCustomer(null);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAddress(AddressInterface $address)
-    {
-        return $this->addresses->contains($address);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAddresses()
-    {
-        return $this->addresses;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getUser()
     {
         return $this->user;
@@ -831,5 +780,81 @@ trait OrganismExtension
             $firstname,
             $name
         ));
+    }
+
+    /**
+     * @return AddressInterface
+     */
+    public function getDefaultAddress()
+    {
+        return $this->defaultAddress;
+    }
+
+    /**
+     * @param AddressInterface $defaultAddress
+     * @return self
+     */
+    public function setDefaultAddress(AddressInterface $defaultAddress = null)
+    {
+        $this->defaultAddress = $defaultAddress;
+
+        if (null !== $defaultAddress)
+            $this->addAddress($defaultAddress);
+
+        return $this;
+    }
+
+    /**
+     * @param AddressInterface $address
+     * @return self
+     */
+    public function addAddress(AddressInterface $address)
+    {
+        if (!$this->hasAddress($address))
+        {
+            $this->addresses->add($address);
+
+            if(!$this->getDefaultAddress())
+                $this->setDefaultAddress($address);
+        }
+        return $this;
+    }
+
+    /**
+     * @param AddressInterface $address
+     * @return self
+     */
+    public function removeAddress(AddressInterface $address)
+    {
+        $this->addresses->removeElement($address);
+
+        if( $address->getId() == $this->defaultAddress->getId())
+        {
+            if( $this->addresses->count() > 0 )
+                $this->defaultAddress = $this->addresses[0];
+            else
+                $this->defaultAddress = null;
+        }
+
+        return $this;
+
+    }
+
+    /**
+     *
+     * @param AddressInterface $address
+     * @return boolean
+     */
+    public function hasAddress(AddressInterface $address)
+    {
+        return $this->addresses->contains($address);
+    }
+
+    /**
+     * @return Collection|AddressInterface[]
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
     }
 }
