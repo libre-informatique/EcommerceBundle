@@ -8,9 +8,9 @@
         "symfony/symfony": "3.2.*",
         "blast-project/core-bundle": "dev-master",
         "blast-project/base-entities-bundle": "dev-master",
-        "sylius/sylius": "^1.0",
-        "sylius/locale-bundle": "^1.0",
-        "sylius/product-bundle": "^1.0"
+        "sylius/sylius": "dev-master",
+        "sylius/locale-bundle": "dev-master",
+        "sylius/product-bundle": "dev-master"
     },
     "license":  "GPL-3.0",
     "keywords": ["e-commerce", "libio", "sonata", "symfony"],
