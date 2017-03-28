@@ -1,3 +1,0 @@
-librinfo_ecommerce.ajax.set_customer_default_address:
-    path:     librinfo/customer/default_address/{customerId}/{addressId}
-    defaults: { _controller: LibrinfoEcommerceBundle:Ajax:setCustomerDefaultAddress }
