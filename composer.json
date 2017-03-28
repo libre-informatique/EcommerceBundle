@@ -10,7 +10,8 @@
         "blast-project/base-entities-bundle": "dev-master",
         "sylius/sylius": "dev-master",
         "sylius/locale-bundle": "dev-master",
-        "sylius/product-bundle": "dev-master"
+        "sylius/product-bundle": "dev-master",
+        "libre-informatique/crm-bundle": "dev-master"
     },
     "license":  "GPL-3.0",
     "keywords": ["e-commerce", "libio", "sonata", "symfony"],
