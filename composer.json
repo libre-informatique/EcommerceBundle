@@ -11,6 +11,7 @@
         "sylius/sylius": "dev-master",
         "sylius/locale-bundle": "dev-master",
         "sylius/product-bundle": "dev-master",
+        "libre-informatique/sonata-sylius-user-bundle": "dev-master",
         "libre-informatique/crm-bundle": "dev-master"
     },
     "license":  "GPL-3.0",
