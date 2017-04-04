@@ -1,43 +1,43 @@
 Librinfo\CRMBundle\Entity\Organism:
     type: entity
-    repositoryClass: Librinfo\EmailCRMBundle\Entity\Repository\OrganismRepository
-    fields:
-        emailCanonical:
-            type: string
-            nullable: false
-            unique: true
-        firstName:
-            type: string
-            nullable: true
-        lastName:
-            type: string
-            nullable: true
-        birthday:
-            type: datetime
-            nullable: true
-        gender:
-            type: string(1)
-            nullable: true
-            default: u
-    oneToOne:
-        defaultAddress:
-            targetEntity: Librinfo\CRMBundle\Entity\Address
-            joinColumn:
-                name: default_address_id
-            onDelete: SET NULL
-            cascade: [persist, remove]
-        user:
-            targetEntity: Sylius\Component\User\Model\UserInterface
-            mappedBy: customer
-            cascade: [all]
-            
-    oneToMany:
-        addresses:
-            targetEntity: Librinfo\CRMBundle\Entity\Address
-            mappedBy: customer
-            cascade: [persist, remove]
-        orders:
-            targetEntity: Sylius\Component\Order\Model\OrderInterface
-            mappedBy: customer
-            cascade: [persist, remove]
+#    repositoryClass: Librinfo\EmailCRMBundle\Entity\Repository\OrganismRepository
+#    fields:
+#        emailCanonical:
+#            type: string
+#            nullable: false
+#            unique: true
+#        firstName:
+#            type: string
+#            nullable: true
+#        lastName:
+#            type: string
+#            nullable: true
+#        birthday:
+#            type: datetime
+#            nullable: true
+#        gender:
+#            type: string(1)
+#            nullable: true
+#            default: u
+#    oneToOne:
+#        defaultAddress:
+#            targetEntity: Librinfo\CRMBundle\Entity\Address
+#            joinColumn:
+#                name: default_address_id
+#            onDelete: SET NULL
+#            cascade: [persist, remove]
+#        user:
+#            targetEntity: Sylius\Component\User\Model\UserInterface
+#            mappedBy: customer
+#            cascade: [all]
+#            
+#    oneToMany:
+#        addresses:
+#            targetEntity: Librinfo\CRMBundle\Entity\Address
+#            mappedBy: customer
+#            cascade: [persist, remove]
+#        orders:
+#            targetEntity: Sylius\Component\Order\Model\OrderInterface
+#            mappedBy: customer
+#            cascade: [persist, remove]
            

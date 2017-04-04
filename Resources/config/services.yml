@@ -42,6 +42,15 @@ services:
             - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
+# SYLIUS INSTALLER
+
+    librinfo_ecommerce.sylius.setup.currency:
+        class: Librinfo\EcommerceBundle\Services\Sylius\Setup\CurrencySetup
+        arguments:
+            - '@sylius.repository.currency'
+            - '@sylius.factory.currency'
+            - '%sylius_currency%'
+
 # USER BUNDLE OVERRIDES
 
 # TODO: refactor this since it does not work well with SonataSyliusUserBundle
