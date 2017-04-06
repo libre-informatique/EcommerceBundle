@@ -29,7 +29,7 @@ class CustomerController extends ResourceController
             ->get('sonata.admin.pool')
             ->getAdminByAdminCode('librinfo_ecommerce.admin.customer')
         ;
-        
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
@@ -37,15 +37,15 @@ class CustomerController extends ResourceController
 
         $form = $this->resourceFormFactory->create($configuration, $newResource);
 
-        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $newResource = $form->getData();
 
             $event = $this->eventDispatcher->dispatchPreEvent(
-                ResourceActions::CREATE, 
+                ResourceActions::CREATE,
                 $configuration, 
                 $newResource
             );
-            
+
             $newResource->setIsIndividual(true);
 
             //make sure admin lifecycle hooks are called
