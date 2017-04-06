@@ -30,14 +30,9 @@ Librinfo\CRMBundle\Entity\Organism:
 #            targetEntity: Sylius\Component\User\Model\UserInterface
 #            mappedBy: customer
 #            cascade: [all]
-#            
-#    oneToMany:
-#        addresses:
-#            targetEntity: Librinfo\CRMBundle\Entity\Address
-#            mappedBy: customer
-#            cascade: [persist, remove]
-#        orders:
-#            targetEntity: Sylius\Component\Order\Model\OrderInterface
-#            mappedBy: customer
-#            cascade: [persist, remove]
-           
+#
+    oneToMany:
+        orders:
+            targetEntity: Sylius\Component\Order\Model\OrderInterface
+            mappedBy: customer
+            cascade: [persist, remove]
