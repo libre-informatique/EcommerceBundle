@@ -42,7 +42,6 @@ sylius_customer:
         customer:
             classes:
                 model: Librinfo\CRMBundle\Entity\Organism
-                controller: Librinfo\EcommerceBundle\Controller\CustomerController
 
 sylius_addressing:
     resources:
