@@ -6,19 +6,6 @@ Librinfo\CRMBundle\Entity\Organism:
             type: string
             nullable: false
             unique: true
-#        firstName:
-#            type: string
-#            nullable: true
-#        lastName:
-#            type: string
-#            nullable: true
-#        birthday:
-#            type: datetime
-#            nullable: true
-#        gender:
-#            type: string(1)
-#            nullable: true
-#            default: u
     oneToOne:
         user:
             targetEntity: Sylius\Component\Core\Model\ShopUser
