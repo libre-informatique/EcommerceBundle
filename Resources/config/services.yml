@@ -51,6 +51,25 @@ services:
             - '@sylius.factory.currency'
             - '%currency%'
 
+# SYLIUS FIXTURES & FIXTURE FACTORIES
+
+    librinfo_ecommerce.sylius.fixture.channel:
+        class: Librinfo\EcommerceBundle\Fixture\ChannelFixture
+        arguments:
+            - '@sylius.manager.channel'
+            - '@librinfo_ecommerce.sylius.fixture.example_factory.channel'
+        tags:
+            - { name: sylius_fixtures.fixture }
+
+    librinfo_ecommerce.sylius.fixture.example_factory.channel:
+        class: Librinfo\EcommerceBundle\Fixture\Factory\ChannelExampleFactory
+        arguments:
+            - '@sylius.factory.channel'
+            - '@sylius.repository.locale'
+            - '@sylius.repository.currency'
+            - '@sylius.repository.zone'
+
+
 # USER BUNDLE OVERRIDES
 
 # TODO: refactor this since it does not work well with SonataSyliusUserBundle
