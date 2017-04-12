@@ -51,6 +51,16 @@ services:
             - '@sylius.factory.currency'
             - '%currency%'
 
+# SYLIUS FACTORIES
+
+    librinfo_ecommerce.sylius.factory.customer:
+        class: Librinfo\EcommerceBundle\Factory\CustomerFactory
+        decorates: 'sylius.factory.customer'
+        public: false
+        arguments:
+            - '@librinfo_ecommerce.sylius.factory.customer.inner'
+            - '@librinfo_crm.code_generator.customer'
+
 # SYLIUS FIXTURES & FIXTURE FACTORIES
 
     librinfo_ecommerce.sylius.fixture.channel:
