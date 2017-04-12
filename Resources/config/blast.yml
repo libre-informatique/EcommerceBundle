@@ -36,7 +36,6 @@ parameters:
                         show_group_availability:
                             available:
                                 type: boolean
-                            availableOn: ~
                             availableUntil: ~
                     show_tab_variants:
                         '':
@@ -76,11 +75,6 @@ parameters:
                             options:
                                 label: librinfo.label.product_options
                                 required: false
-                            availableOn:
-                                type: sonata_type_datetime_picker
-                                required: false
-                                dp_use_current: false
-                                dp_pick_time: true
                             availableUntil:
                                 type: sonata_type_datetime_picker
                                 required: false
