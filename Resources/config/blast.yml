@@ -1,5 +1,3 @@
-
-
 # Copyright (C) 2015-2016 Libre Informatique
 #
 # This file is licenced under the GNU GPL v3.
@@ -110,7 +108,6 @@ parameters:
                             - code
                             - name
                             - enabled
-                            - available
                     _actions:
                         shop_link:
                             template: 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'
@@ -157,6 +154,7 @@ parameters:
                             product:
                                 admin_code: librinfo_ecommerce.admin.product
                             name:
+                                type: text
                                 label: librinfo.label.product_variant_name
                             code:
                                 label: librinfo.label.product_variant_code
@@ -198,15 +196,17 @@ parameters:
                                     admin_code: librinfo_ecommerce.admin.product
                             name:
                                 label: librinfo.label.product_variant_name
+                                type: text
                             code:
                                 label: librinfo.label.product_variant_code
-                            price: ~
+#                            price:
+#                                type: text
                             optionValues:
                                 property: fullName
                                 _options:
                                     admin_code: librinfo_ecommerce_option_value.admin.product
                             _options:
-                                fieldsOrder: [product, name, code, price, optionValues]
+                                fieldsOrder: [product, name, code, optionValues]
                         form_group_stock:
                             onHand:
                                 required: false
@@ -227,7 +227,7 @@ parameters:
                     code:
                         identifier: true
                         label: librinfo.label.product_variant_code
-                    name:
+                    translations.name:
                         identifier: true
                         label: librinfo.label.product_variant_name
                     product:
@@ -247,7 +247,7 @@ parameters:
                     _options:
                         fieldsOrder:
                             - code
-                            - name
+                            - translations.name
                             - product
                             - available
                             - price
@@ -263,14 +263,14 @@ parameters:
             # FILTER
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    name:
+                    translations.name:
                         label: librinfo.label.product_variant_name
                     code:
                         label: librinfo.label.product_variant_code
                     product.code: ~
                     _options:
                         fieldsOrder:
-                            - name
+                            - translations.name
                             - code
                             - product.code
 

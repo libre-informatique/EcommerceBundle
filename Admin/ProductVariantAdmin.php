@@ -61,6 +61,8 @@ class ProductVariantAdmin extends CoreAdmin
                 'multiple' => true,
                 'required' => false,
                 'choice_label' => 'fullName',
+            ], [
+                'admin_code' => 'librinfo_ecommerce_option_value.admin.product'
             ]);
         }
     }
