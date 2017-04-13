@@ -36,7 +36,6 @@ parameters:
                         show_group_availability:
                             available:
                                 type: boolean
-                            availableUntil: ~
                     show_tab_variants:
                         '':
                             variants:
@@ -75,11 +74,6 @@ parameters:
                             options:
                                 label: librinfo.label.product_options
                                 required: false
-                            availableUntil:
-                                type: sonata_type_datetime_picker
-                                required: false
-                                dp_use_current: true
-                                dp_pick_time: true
                     form_tab_variants:
                         '':
                             variants:
@@ -110,8 +104,6 @@ parameters:
                         identifier: true
                         label: librinfo.label.product_code
                     enabled:
-                        type: boolean
-                    available:
                         type: boolean
                     _options:
                         fieldsOrder:
@@ -182,8 +174,6 @@ parameters:
                         show_group_availability:
                             available:
                                 type: boolean
-                            availableOn: ~
-                            availableUntil: ~
                         show_group_properties:
                             width: ~
                             height: ~
@@ -224,17 +214,6 @@ parameters:
                                 required: false
                             tracked:
                                 label: librinfo.label.tracked_stock
-                        form_group_availability:
-                            availableOn:
-                                type: sonata_type_datetime_picker
-                                required: false
-                                dp_use_current: false
-                                dp_pick_time: true
-                            availableUntil:
-                                type: sonata_type_datetime_picker
-                                required: false
-                                dp_use_current: true
-                                dp_pick_time: true
                         form_group_properties:
                             width: ~
                             height: ~
