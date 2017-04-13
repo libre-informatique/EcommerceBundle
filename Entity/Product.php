@@ -16,5 +16,13 @@ use Sylius\Component\Core\Model\Product as BaseProduct;
 
 class Product extends BaseProduct
 {
-    use OuterExtensible, ProductExtension;
+
+    use OuterExtensible,
+        ProductExtension;
+
+    public function __toString()
+    {
+        return (string) parent::__toString();
+    }
+
 }
