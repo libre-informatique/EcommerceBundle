@@ -3,10 +3,12 @@
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 <tr class="active">
     <th colspan="8" id="items-total" style="text-align: right">
         <strong>{{ 'sylius.ui.subtotal'|trans }}</strong>:
-        {{ order.itemsTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(order.itemsTotal) }}
     </th>
 </tr>
 <tr>
@@ -18,7 +20,7 @@
                         <div class="">
                             <span class="header">{{ adjustment.label }}</span>
                             <div class="description">
-                                {{ adjustment.amount|sylius_price(order.currencyCode, order.exchangeRate) }}
+                                {{ money.convertAndFormat(adjustment.amount) }}
                             </div>
                         </div>
                     </div>
@@ -30,7 +32,7 @@
     </td>
     <td colspan="4" id="shipping-total" style="text-align: right">
         <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
-        {{ order.shippingTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(order.shippingTotal) }}
     </td>
 </tr>
 <tr>
@@ -43,7 +45,7 @@
                         <div class="">
                             <span class="header">{{ taxLabel }}</span>
                             <div class="description">
-                                {{ taxAmount|sylius_price(order.currencyCode, order.exchangeRate) }}
+                                {{ money.convertAndFormat(taxAmount) }}
                             </div>
                         </div>
                     </div>
@@ -55,7 +57,7 @@
     </td>
     <td colspan="4" id="tax-total" style="text-align: right">
         <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>:
-        {{ order.taxTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(order.taxTotal) }}
     </td>
 </tr>
 <tr>
@@ -68,7 +70,7 @@
                         <div class="">
                             <span class="header">{{ label }}</span>
                             <div class="description">
-                                {{ amount|sylius_price(order.currencyCode, order.exchangeRate) }}
+                                {{ money.convertAndFormat(amount) }}
                             </div>
                         </div>
                     </div>
@@ -80,12 +82,12 @@
     </td>
     <td colspan="4" id="promotion-total" style="text-align: right">
         <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
-        {{ order.orderPromotionTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(order.orderPromotionTotal) }}
     </td>
 </tr>
 <tr class="active">
     <td colspan="8" id="total" class="ui large header" style="text-align: right; font-size: 1.5em">
         <strong>{{ 'sylius.ui.total'|trans }}</strong>:
-        {{ order.total|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(order.total) }}
     </td>
 </tr>

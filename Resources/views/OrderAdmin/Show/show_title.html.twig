@@ -1,4 +1,5 @@
 {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 <a class="navbar-brand" href="#">
     {{ 'librinfo.label.order'|trans() }} #{{ admin.toString(object) }}
@@ -7,7 +8,7 @@
 <p class="navbar-text" style="color: #EEE">
     {% include('LibrinfoEcommerceBundle:OrderAdmin:_state_label.html.twig') with {'category': 'order', 'value': object.state} %}
 </p>
-<p class="navbar-text" style="color: #EEE">{{ object.total|sylius_price(object.currencyCode, object.exchangeRate) }}</p>
+<p class="navbar-text" style="color: #EEE">{{ money.convertAndFormat(object.total) }}</p>
 <p class="navbar-text" style="color: #EEE">{{ object.currencyCode }}</p>
 <p class="navbar-text" style="color: #EEE">{{ flags.fromLocaleCode(object.localeCode) }}{{ object.localeCode|locale }}</p>
 <p class="navbar-text" style="color: #EEE">

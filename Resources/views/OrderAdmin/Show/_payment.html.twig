@@ -1,6 +1,8 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 <th>
     {{ payment.method }}<br>
-    {{ payment.amount|sylius_price(payment.order.currencyCode, payment.order.exchangeRate) }}
+    {{ money.convertAndFormat(payment.amount) }}
 </th>
 <td>
     {{ ('sylius.ui.'~payment.state)|trans }}

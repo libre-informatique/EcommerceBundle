@@ -6,6 +6,8 @@
 {% set variant = item.variant %}
 {% set product = variant.product %}
 
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 <tr>
     <td class="single line">
         <div class="ui header">
@@ -34,24 +36,24 @@
         </div>
     </td>
     <td class="unit-price" style="text-align: right">
-        {{ item.unitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(item.unitPrice) }}
     </td>
     <td class="discounted-unit-price" style="text-align: right">
-        {{ item.discountedUnitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(item.discountedUnitPrice) }}
     </td>
     <td class="quantity" style="text-align: right">
         {{ item.quantity }}
     </td>
     <td class="subtotal" style="text-align: right">
-        {{ item.subtotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(item.subtotal) }}
     </td>
     <td class="discount" style="text-align: right">
-        {{ item.getAdjustmentsTotalRecursively(orderPromotionAdjustment)|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(item.getAdjustmentsTotalRecursively(orderPromotionAdjustment)) }}
     </td>
     <td class="tax" style="text-align: right">
-        {{ item.taxTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(item.taxTotal) }}
     </td>
     <td class="total" style="text-align: right">
-        {{ item.total|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ money.convertAndFormat(item.total) }}
     </td>
 </tr>

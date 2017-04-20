@@ -1,5 +1,7 @@
 {% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
 
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 {% block field_value %}
-    {{ value|sylius_price(object.currencyCode, object.exchangeRate) }}
+    {{ money.convertAndFormat(value) }}
 {% endblock %}
