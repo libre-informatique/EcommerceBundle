@@ -14,13 +14,18 @@
         "libre-informatique/sonata-sylius-user-bundle": "dev-master",
         "libre-informatique/crm-bundle": "dev-master"
     },
-    "license":  "GPL-3.0",
-    "keywords": ["e-commerce", "libio", "sonata", "symfony"],
+    "license": "GPL-3.0",
+    "keywords": [
+        "e-commerce",
+        "libio",
+        "sonata",
+        "symfony"
+    ],
     "homepage": "https://github.com/libre-informatique/SymfonyLibrinfoEcommerceBundle",
     "authors": [
         {
-           "name": "Marcos Bezerra de Menezes",
-           "email": "marcos.bezerra@libre-informatique.fr"
+            "name": "Marcos Bezerra de Menezes",
+            "email": "marcos.bezerra@libre-informatique.fr"
         },
         {
             "name": "Libre Informatique",
@@ -28,6 +33,9 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Librinfo\\EcommerceBundle\\": "" }
+        "psr-4": {
+            "Librinfo\\EcommerceBundle\\": "src/",
+            "Librinfo\\EcommerceBundle\\Tests\\": "tests/"
+        }
     }
 }
