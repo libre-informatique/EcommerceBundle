@@ -1,0 +1,3 @@
+payum:
+    resource: "@PayumBundle/Resources/config/routing/capture.xml"
+    prefix: /
