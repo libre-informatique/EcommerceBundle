@@ -906,6 +906,8 @@ parameters:
                                 label: librinfo.label.order_number
                             order.channel:
                                 label: librinfo.label.channel
+                            method:
+                                label: librinfo.label.payment_method
                             state:
                                 label: librinfo.label.payment_state
                                 template: LibrinfoEcommerceBundle:PaymentAdmin/Show:_payment_state.html.twig
@@ -975,7 +977,6 @@ parameters:
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
-#                    _actions: [edit]
                     _actions: ~
                     _batch_actions: ~
                     _list_actions: [create,edit]
@@ -987,6 +988,8 @@ parameters:
                     order.customer:
                         label: librinfo.label.customer
                         admin_code: librinfo_ecommerce.admin.customer
+                    method:
+                        label: librinfo.label.payment_method
                     state:
                         label: librinfo.label.payment_state
                         template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_state.html.twig
