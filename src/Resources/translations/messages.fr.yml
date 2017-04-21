@@ -20,6 +20,7 @@ show_tab_order_summary: Récapitulatif
 show_tab_payment_delivery: Paiement / Livraison
 show_tab_history: Historique
 show_tab_variants: Déclinaisons
+show_tab_payment_details: Détails du paiement
 
 librinfo:
     action:
@@ -47,6 +48,7 @@ librinfo:
         productoption_list: Liste des options d'article
         productoptionvalue_list: Liste des contenus options d'article
         productvariant_list: Liste des déclinaisons d'article
+        payment_list: Liste des paiements
     label:
         adjustments_total: Total ajustements
         available: Disponible
@@ -78,6 +80,9 @@ librinfo:
         order_number: N° commande
         order_state: Statut commande
         order_total: Total commande
+        payment_id: Identifiant de paiement
+        payment_admin: Paiement
+        payment_amount: Montant
         payment_state: Statut paiement
         payments_list: Liste des paiements
         position: Position
@@ -117,6 +122,7 @@ librinfo:
         partially_paid: Partiellement payé
         partially_refunded: Partiellement remboursé
         refunded: Remboursé
+        new: Nouveau
     shipping_state:
         cart: Panier
         cancelled: Annulé

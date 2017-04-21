@@ -11,7 +11,7 @@
 namespace Librinfo\EcommerceBundle\Controller;
 
 use Blast\CoreBundle\Controller\CRUDController;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -19,29 +19,29 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-class PaymentCRUDController extends CRUDController
+class OrderCRUDController extends CRUDController
 {
-//    /**
-//     * @param Request $request
-//     * @param mixed   $object
-//     *
-//     * @return Response|null
-//     */
-//    protected function preCreate(Request $request, $object)
-//    {
-//        throw new AccessDeniedException();
-//    }
-//
-//    /**
-//     * @param Request $request
-//     * @param mixed   $object
-//     *
-//     * @return Response|null
-//     */
-//    protected function preEdit(Request $request, $object)
-//    {
-//        throw new AccessDeniedException();
-//    }
+    /**
+     * @param Request $request
+     * @param mixed   $object
+     *
+     * @return Response|null
+     */
+    protected function preCreate(Request $request, $object)
+    {
+        throw new AccessDeniedException();
+    }
+
+    /**
+     * @param Request $request
+     * @param mixed   $object
+     *
+     * @return Response|null
+     */
+    protected function preEdit(Request $request, $object)
+    {
+        throw new AccessDeniedException();
+    }
 
     /**
      * @param Request $request
@@ -51,8 +51,8 @@ class PaymentCRUDController extends CRUDController
      */
     protected function preDelete(Request $request, $object)
     {
-        
-        if ($object->getState() != PaymentInterface::STATE_NEW)
+        // Orders must not be deleted after the checkout is completed
+        if ($object->getState() != OrderInterface::STATE_CART)
             throw new AccessDeniedException('An order cannot be deleted after the checkout is completed. You should cancel it instead.');
     }
 

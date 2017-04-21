@@ -771,7 +771,11 @@ parameters:
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
                     customerIp: ~
-        ### AdminUser  ###
+
+################
+# ADMIN USER
+################
+
         Librinfo\EcommerceBundle\Entity\AdminUser:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
@@ -887,3 +891,100 @@ parameters:
                     localeCode: ~
                     id: ~
 
+################
+# ORDER PAYMENT
+################
+
+        Sylius\Component\Core\Model\Payment:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                forceTabs: true
+                add:
+                    show_tab_payment_details:
+                        show_group_payments:
+                            order.number:
+                                label: librinfo.label.order_number
+                            order.channel:
+                                label: librinfo.label.channel
+                            state:
+                                label: librinfo.label.payment_state
+                                template: LibrinfoEcommerceBundle:PaymentAdmin/Show:_payment_state.html.twig
+                            amount:
+                                label: librinfo.label.payment_amount
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                        show_group_order:
+                            order.customer:
+                                label: librinfo.label.customer
+                                admin_code: librinfo_ecommerce.admin.customer
+                            order.tokenValue:
+                                label: librinfo.label.token_value
+                        show_group_totals:
+                            order.itemsTotal:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                label: librinfo.label.items_total
+                            order.adjustmentsTotal:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                label: librinfo.label.adjustments_total
+                            order.total:
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                            order.currencyCode:
+                                label: librinfo.label.currency_code
+                            order.exchangeRate:
+                                label: librinfo.label.exchange_rate
+                    show_tab_history:
+                        '':
+                            createdAt: ~
+                            updatedAt: ~
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            amount: ~
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+#                    _actions: [edit]
+                    _actions: ~
+                    _batch_actions: ~
+                    _list_actions: [create,edit]
+                add:
+                    order.number:
+                        label: librinfo.label.order_number
+                    order.channel:
+                        label: librinfo.label.order_channel
+                    order.customer:
+                        label: librinfo.label.customer
+                        admin_code: librinfo_ecommerce.admin.customer
+                    state:
+                        label: librinfo.label.payment_state
+                        template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_state.html.twig
+                    amount:
+                        type: text
+                        label: librinfo.label.payment_total
+                        template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_amount.html.twig
+                    createdAt: ~
+                    updatedAt: ~
+                    _actions:
+                        delete:
+                            template: LibrinfoEcommerceBundle:OrderAdmin:list__action_delete.html.twig
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    order.number:
+                        label: librinfo.label.order_number
+                    order.customer.name: ~
+                    order.customer.customerCode: ~
+                    state:
+                        label: librinfo.label.order_state
+                        type: doctrine_orm_string
+                        field_type: Librinfo\EcommerceBundle\Form\Type\OrderStateType
+                        field_options:
+                            no_cart: true
+                    amount: ~
+                    createdAt:
+                        type: doctrine_orm_date_range
+                        field_type: sonata_type_datetime_range_picker
+                    updatedAt:
+                        type: doctrine_orm_date_range
+                        field_type: sonata_type_datetime_range_picker

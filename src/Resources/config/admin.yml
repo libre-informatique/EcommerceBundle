@@ -83,5 +83,13 @@ services:
               group: admin
               label: librinfo.label.order_admin
               label_translator_strategy: blast_core.label.strategy.librinfo
-
-
+              
+    librinfo_ecommerce.admin.payment:
+        class: Librinfo\EcommerceBundle\Admin\PaymentAdmin
+        arguments: [~, Sylius\Component\Core\Model\Payment, LibrinfoEcommerceBundle:PaymentCRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: librinfo.label.payment_admin
+              label_translator_strategy: blast_core.label.strategy.librinfo
