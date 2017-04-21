@@ -1,14 +1,59 @@
 {% if category == 'order' %}
-    {% set colors = {'cancelled': 'orange', 'cart': 'gray', 'fulfilled': 'green', 'new': 'blue'} %}
-    {% set icons = {'cancelled': 'ban', 'cart': 'shopping-cart', 'fulfilled': 'check', 'new': 'clock-o'} %}
+
+    {% set colors = {
+        'cancelled': 'orange', 
+        'cart':      'gray', 
+        'fulfilled': 'green', 
+        'new':       'blue'
+    } %}
+
+    {% set icons = {
+        'cancelled':  'ban', 
+        'cart':       'shopping-cart',
+        'fulfilled':  'check', 
+        'new':        'clock-o'
+    } %}
+
 {% elseif category == 'payment' %}
-    {% set colors = {'awaiting_payment': 'blue', 'cart': 'gray', 'cancelled': 'orange', 'paid': 'green', 'partilally-paid': 'yellow',
-                     'partilally-refunded': 'yellow', 'refunded': 'purple','new':'green'} %}
-    {% set icons = {'awaiting_payment': 'clock-o', 'cart': 'shopping-cart', 'cancelled': 'ban', 'paid': 'check', 'partilally-paid': 'check',
-                    'partilally-refunded': 'reply-all', 'refunded': 'reply-all','new':'clock-o'} %}
+
+    {% set colors = {
+        'awaiting_payment':   'blue', 
+        'cart':               'gray', 
+        'cancelled':          'orange', 
+        'paid':               'green', 
+        'partially_paid':     'yellow',
+        'partially_refunded': 'yellow', 
+        'refunded':           'purple',
+        'new':                'green'
+    } %}
+
+    {% set icons = {
+        'awaiting_payment':   'clock-o', 
+        'cart':               'shopping-cart', 
+        'cancelled':          'ban', 
+        'paid':               'check', 
+        'partially_paid':     'check',
+        'partially_refunded': 'reply-all', 
+        'refunded':           'reply-all',
+        'new':                'clock-o'
+    } %}
+
 {% elseif category == 'shipping' %}
-    {% set colors = {'cancelled': 'orange', 'cart': 'gray', 'ready': 'blue', 'shipped': 'green'} %}
-    {% set icons = {'cancelled': 'ban', 'cart': 'shopping-cart', 'ready': 'clock-o', 'shipped': 'truck'} %}
+
+    {% set colors = {
+        'cancelled': 'orange', 
+        'cart':      'gray', 
+        'ready':     'blue', 
+        'shipped':   'green'
+    } %}
+
+    {% set icons = {
+        'cancelled': 'ban', 
+        'cart':      'shopping-cart', 
+        'ready':     'clock-o', 
+        'shipped':   'truck'
+    } %}
+
 {% endif %}
 
 <span class="label bg-{{ colors[value]|default('black')  }}">

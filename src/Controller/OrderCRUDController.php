@@ -19,29 +19,29 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-class PaymentCRUDController extends CRUDController
+class OrderCRUDController extends CRUDController
 {
-//    /**
-//     * @param Request $request
-//     * @param mixed   $object
-//     *
-//     * @return Response|null
-//     */
-//    protected function preCreate(Request $request, $object)
-//    {
-//        throw new AccessDeniedException();
-//    }
-//
-//    /**
-//     * @param Request $request
-//     * @param mixed   $object
-//     *
-//     * @return Response|null
-//     */
-//    protected function preEdit(Request $request, $object)
-//    {
-//        throw new AccessDeniedException();
-//    }
+    /**
+     * @param Request $request
+     * @param mixed   $object
+     *
+     * @return Response|null
+     */
+    protected function preCreate(Request $request, $object)
+    {
+        throw new AccessDeniedException();
+    }
+
+    /**
+     * @param Request $request
+     * @param mixed   $object
+     *
+     * @return Response|null
+     */
+    protected function preEdit(Request $request, $object)
+    {
+        throw new AccessDeniedException();
+    }
 
     /**
      * @param Request $request

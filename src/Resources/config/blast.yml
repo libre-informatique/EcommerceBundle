@@ -938,9 +938,40 @@ parameters:
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    main_tab:
-                        main_group:
-                            amount: ~
+                    '':
+                        '':
+                            
+                            state: 
+                                type: choice
+                                choices:
+                                    librinfo.payment_state.cart: cart
+                                    librinfo.payment_state.new: new
+                                    librinfo.payment_state.awaiting_payment: awaiting_payment
+                                    librinfo.payment_state.cancelled: cancelled
+                                    librinfo.payment_state.partially_paid: partially_paid
+                                    librinfo.payment_state.paid: paid
+                                    librinfo.payment_state.partially_refunded: partially_refunded
+                                    librinfo.payment_state.refunded: refunded
+                            amount:
+                                type: \Librinfo\EcommerceBundle\Form\Type\PriceCentsType
+                            currencyCode: ~
+                            order:
+                                type: sonata_type_model
+                                multiple: false
+                                expanded: false
+                                property: number
+                                btn_add: false
+                                attr:
+                                    width: 30
+                            method:
+                                label: librinfo.label.payment_method
+                                type: sonata_type_model
+                                multiple: false
+                                expanded: false
+                                property: code
+                                btn_add: false
+                                attr:
+                                    width: 30
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
@@ -961,7 +992,7 @@ parameters:
                         template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_state.html.twig
                     amount:
                         type: text
-                        label: librinfo.label.payment_total
+                        label: librinfo.label.amount
                         template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_amount.html.twig
                     createdAt: ~
                     updatedAt: ~

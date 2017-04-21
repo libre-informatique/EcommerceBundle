@@ -31,6 +31,11 @@ services:
         class: Librinfo\EcommerceBundle\Form\Type\ShippingStateType
         tags:
             - { name: form.type, alias: librinfo_type_shipping_state }
+    
+    librinfo_ecommerce.form.type.price_cents:
+        class: Librinfo\EcommerceBundle\Form\Type\PriceCentsType
+        tags:
+            - { name: form.type, alias: librinfo_type_price_cents }
 
 # EVENT LISTENERS
 

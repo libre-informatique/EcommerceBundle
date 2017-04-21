@@ -51,6 +51,7 @@ librinfo:
         payment_list: Liste des paiements
     label:
         adjustments_total: Total ajustements
+        amount: Montant
         available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
@@ -83,6 +84,7 @@ librinfo:
         payment_id: Identifiant de paiement
         payment_admin: Paiement
         payment_amount: Montant
+        payment_method: Méthode de paiement
         payment_state: Statut paiement
         payments_list: Liste des paiements
         position: Position
@@ -100,6 +102,7 @@ librinfo:
         shipping_state: Statut livraison
         short_description: Brève description
         slug: Slug
+        state: État
         storage_type: Type d'enregistrement
         token_value: Jeton
         total: Total
