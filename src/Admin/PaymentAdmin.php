@@ -3,7 +3,6 @@
 namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class PaymentAdmin extends CoreAdmin

@@ -1016,7 +1016,11 @@ parameters:
                     updatedAt:
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
-                        
+               
+
+################
+# SALES JOURNAL
+################
                         
         Librinfo\EcommerceBundle\Admin\SalesJournalAdmin:
 #            # LIST
@@ -1050,6 +1054,11 @@ parameters:
                         label: librinfo.label.sale_date
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
+                        
+                        
+#################
+# PAYMENT METHOD
+#################
                         
         Librinfo\EcommerceBundle\Admin\PaymentMethodAdmin:
             Sonata\AdminBundle\Datagrid\ListMapper:
