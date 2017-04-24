@@ -944,16 +944,7 @@ parameters:
                         '':
                             
                             state: 
-                                type: choice
-                                choices:
-                                    librinfo.payment_state.cart: cart
-                                    librinfo.payment_state.new: new
-                                    librinfo.payment_state.awaiting_payment: awaiting_payment
-                                    librinfo.payment_state.cancelled: cancelled
-                                    librinfo.payment_state.partially_paid: partially_paid
-                                    librinfo.payment_state.paid: paid
-                                    librinfo.payment_state.partially_refunded: partially_refunded
-                                    librinfo.payment_state.refunded: refunded
+                                type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                             amount:
                                 type: \Librinfo\EcommerceBundle\Form\Type\PriceCentsType
                             currencyCode: ~
@@ -965,11 +956,11 @@ parameters:
                                 btn_add: false
                                 attr:
                                     width: 30
+                                _options:
+                                    admin_code: librinfo_ecommerce.admin.order
                             method:
                                 label: librinfo.label.payment_method
                                 type: sonata_type_model
-                                multiple: false
-                                expanded: false
                                 property: code
                                 btn_add: false
                                 attr:
@@ -1022,3 +1013,56 @@ parameters:
                     updatedAt:
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
+                        
+                        
+        Librinfo\EcommerceBundle\Admin\SalesJournalAdmin:
+#            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+                    updatedAt: ~
+                    notes: ~
+                   
+#            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                remove:
+                    updatedAt: ~
+                    createdAt: ~
+                    notes: ~
+                    itemsTotal: ~
+                    adjustmentsTotal: ~
+                    checkoutCompletedAt: ~
+                    customerIp: ~
+                    states: ~
+                add:
+                    state:
+                        label: librinfo.label.order_state
+                        type: doctrine_orm_string
+                    paymentState:
+                        label: librinfo.label.payment_state
+                        type: doctrine_orm_string
+                        field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
+                        field_options:
+                            no_cart: true
+#                            flip_choices: true
+                    createdAt:
+                        type: doctrine_orm_date_range
+                        field_type: sonata_type_datetime_range_picker
+                        
+        Librinfo\EcommerceBundle\Admin\PaymentMethodAdmin:
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    code: ~
+                    enabled: ~
+                    _options:
+                        fieldsOrder:
+                            - code
+                            - enabled
+                            - _action
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    '':
+                        '':
+                            code: ~
+                            enabled: ~
+                            position: ~
+                            

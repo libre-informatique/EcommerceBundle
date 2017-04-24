@@ -49,6 +49,8 @@ librinfo:
         productoptionvalue_list: Liste des contenus options d'article
         productvariant_list: Liste des déclinaisons d'article
         payment_list: Liste des paiements
+        salesjournal_list: Journal des ventes
+        payment_method_list: Liste des méthodes de paiement
     label:
         adjustments_total: Total ajustements
         amount: Montant
@@ -85,6 +87,7 @@ librinfo:
         payment_admin: Paiement
         payment_amount: Montant
         payment_method: Méthode de paiement
+        payment_method_admin: Méthode de paiement
         payment_state: Statut paiement
         payments_list: Liste des paiements
         position: Position
@@ -97,6 +100,7 @@ librinfo:
         product_variant_code: Code déclinaison
         product_variant_name: Nom déclinaison
         purchased_from: Achété sur
+        sales_journal: Journal des vents
         set_default_customer_address: Adresse principale
         shipping_address: Adresse de livraison
         shipping_state: Statut livraison
@@ -122,6 +126,7 @@ librinfo:
         cancelled: Annulé
         cart: Panier
         paid: Payé
+        completed: Payé
         partially_paid: Partiellement payé
         partially_refunded: Partiellement remboursé
         refunded: Remboursé
