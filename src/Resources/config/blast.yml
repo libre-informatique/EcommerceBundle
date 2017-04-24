@@ -998,8 +998,10 @@ parameters:
                 add:
                     order.number:
                         label: librinfo.label.order_number
-                    order.customer.name: ~
-                    order.customer.customerCode: ~
+                    order.customer.name: 
+                        label: librinfo.label.customer_name
+                    order.customer.customerCode: 
+                        label: librinfo.label.customer_customer_code
                     state:
                         label: librinfo.label.order_state
                         type: doctrine_orm_string
@@ -1008,6 +1010,7 @@ parameters:
                             no_cart: true
                     amount: ~
                     createdAt:
+                        label: librinfo.label.payment_date
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
                     updatedAt:
@@ -1043,8 +1046,8 @@ parameters:
                         field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                         field_options:
                             no_cart: true
-#                            flip_choices: true
                     createdAt:
+                        label: librinfo.label.sale_date
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
                         

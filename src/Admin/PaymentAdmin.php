@@ -4,6 +4,7 @@ namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class PaymentAdmin extends CoreAdmin
 {
@@ -15,15 +16,6 @@ class PaymentAdmin extends CoreAdmin
     {
         $query = parent::createQuery($context);
         $alias = $query->getRootAliases()[0];
-//        $query
-//            ->leftJoin("$alias.order", 'order')
-//            ->addSelect('order.channel')
-//            ->leftJoin("order.channel", 'channel')
-//            ->addSelect('order.customer')
-//            ->leftJoin("order.customer", 'customer')
-//            ->andWhere("$alias.state != :state")
-//            ->setParameter('state', OrderInterface::STATE_CART)
-//        ;
         return $query;
     }
 
@@ -44,6 +36,13 @@ class PaymentAdmin extends CoreAdmin
     public function toString($object)
     {
         return $object->getOrder()->getNumber() ?: $object->getId();
+    }
+    
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        parent::configureRoutes($collection);
+        $collection->remove('delete');
+        $collection->remove('duplicate');
     }
 
 }

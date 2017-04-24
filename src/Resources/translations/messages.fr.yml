@@ -50,6 +50,7 @@ librinfo:
         productvariant_list: Liste des déclinaisons d'article
         payment_list: Liste des paiements
         salesjournal_list: Journal des ventes
+        sales_journal_list: Journal des ventes
         payment_method_list: Liste des méthodes de paiement
     label:
         adjustments_total: Total ajustements
@@ -86,6 +87,7 @@ librinfo:
         payment_id: Identifiant de paiement
         payment_admin: Paiement
         payment_amount: Montant
+        payment_date: Date de paiement
         payment_method: Méthode de paiement
         payment_method_admin: Méthode de paiement
         payment_state: Statut paiement
@@ -100,6 +102,7 @@ librinfo:
         product_variant_code: Code déclinaison
         product_variant_name: Nom déclinaison
         purchased_from: Achété sur
+        sale_date: Date de vente
         sales_journal: Journal des vents
         set_default_customer_address: Adresse principale
         shipping_address: Adresse de livraison
