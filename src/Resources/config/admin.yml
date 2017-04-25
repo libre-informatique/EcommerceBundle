@@ -113,3 +113,13 @@ services:
               group: admin
               label: librinfo.label.sales_journal
               label_translator_strategy: blast_core.label.strategy.librinfo
+              
+    librinfo_ecommerce.admin.customer_group:
+        class: Librinfo\EcommerceBundle\Admin\CustomerGroupAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\CustomerGroup, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: Customers Relationship Management
+              label: librinfo.label.customer_group_admin
+              label_translator_strategy: blast_core.label.strategy.librinfo

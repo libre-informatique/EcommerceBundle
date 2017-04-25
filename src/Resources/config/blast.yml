@@ -1062,6 +1062,8 @@ parameters:
                         
         Librinfo\EcommerceBundle\Admin\PaymentMethodAdmin:
             Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+                    _actions: [duplicate]
                 add:
                     code: ~
                     enabled: ~
@@ -1074,7 +1076,77 @@ parameters:
                 add:
                     '':
                         '':
-                            code: ~
+                            code:
+                                required: false
+                                attr:
+                                    readonly: readonly
                             enabled: ~
                             position: ~
                             
+############
+# CUSTOMER
+############
+
+        # SHOW
+        Librinfo\CRMBundle\Admin\CustomerAdmin:
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    form_tab_general:
+                        form_group_individual:
+                            group.name:
+                                label: librinfo.label.customer_group
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_tab_general:
+                        form_group_individual:
+                            group:
+                                label: librinfo.label.customer_group
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    group: 
+                        label: librinfo.label.customer_group
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    group: 
+                        label: librinfo.label.customer_group
+                        
+#################
+# CUSTOMER GROUP
+#################
+
+        # SHOW
+        Librinfo\EcommerceBundle\Entity\CustomerGroup:
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    form_tab_general:
+                        '':
+                            name:
+                                label: librinfo.label.customer_group_name
+                            code:
+                                label: librinfo.label.customer_group_code
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_tab_general:
+                        '':
+                            name:
+                                label: librinfo.label.customer_group_name
+                            code:
+                                label: librinfo.label.customer_group_code
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    name:
+                        label: librinfo.label.customer_group_name
+                    code:
+                        label: librinfo.label.customer_group_code
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    name:
+                        label: librinfo.label.customer_group_name
+                    code:
+                        label: librinfo.label.customer_group_code

@@ -2,6 +2,7 @@ Action: Action
 form_group_availability: Disponibilité
 form_group_properties: Dimensions & poids
 form_group_stock: Stock
+form_group_customer: Client
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
@@ -63,6 +64,10 @@ librinfo:
         checkout_state: Statut validation
         currency_code: Devise
         customer: Client
+        customer_group: Groupe de client
+        customer_group_name: Nom du groupe
+        customer_group_code: Code du groupe
+        customer_group_admin: Groupes de client
         customer_customer_code: Code client
         customer_created_at: Client depuis
         customer_ip: Adresse IP client
