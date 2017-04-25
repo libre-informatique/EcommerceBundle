@@ -25,4 +25,12 @@ class CustomerGroup extends BaseCustomerGroup
         return (string) sprintf("%s (%s)", $this->getName(), $this->getCode());
     }
 
+    /**
+     * __clone()
+     */
+    public function __clone()
+    {
+        $this->id = null;
+    }
+
 }
