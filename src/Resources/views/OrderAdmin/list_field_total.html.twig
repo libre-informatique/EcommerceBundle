@@ -3,5 +3,5 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% block field %}
-    {{ money.convertAndFormat(object.shippingTotal) }}
+    {{ money.convertAndFormat(object.total) }}
 {% endblock %}

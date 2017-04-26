@@ -21,17 +21,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PaymentStateType extends AbstractType
 {
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $choices = function(Options $options) {
             $choices = [
-                 'librinfo.payment_state.cart' => OrderPaymentStates::STATE_CART,
-                 'librinfo.payment_state.awaiting_payment' => OrderPaymentStates::STATE_AWAITING_PAYMENT,
-                 'librinfo.payment_state.partially_paid' => OrderPaymentStates::STATE_PARTIALLY_PAID,
-                 'librinfo.payment_state.cancelled' => OrderPaymentStates::STATE_CANCELLED,
-                 'librinfo.payment_state.paid' => OrderPaymentStates::STATE_PAID,
-                 'librinfo.payment_state.partially_refunded' => OrderPaymentStates::STATE_PARTIALLY_REFUNDED,
-                 'librinfo.payment_state.refunded' => OrderPaymentStates::STATE_REFUNDED,
+                'librinfo.payment_state.new'                => 'new',
+                'librinfo.payment_state.cart'               => OrderPaymentStates::STATE_CART,
+                'librinfo.payment_state.awaiting_payment'   => OrderPaymentStates::STATE_AWAITING_PAYMENT,
+                'librinfo.payment_state.partially_paid'     => OrderPaymentStates::STATE_PARTIALLY_PAID,
+                'librinfo.payment_state.cancelled'          => OrderPaymentStates::STATE_CANCELLED,
+                'librinfo.payment_state.paid'               => OrderPaymentStates::STATE_PAID,
+                'librinfo.payment_state.partially_refunded' => OrderPaymentStates::STATE_PARTIALLY_REFUNDED,
+                'librinfo.payment_state.refunded'           => OrderPaymentStates::STATE_REFUNDED,
             ];
             if ($options['no_cart'])
                 unset($choices['librinfo.payment_state.cart']);
@@ -60,4 +62,5 @@ class PaymentStateType extends AbstractType
     {
         return 'librinfo_type_payment_state';
     }
+
 }

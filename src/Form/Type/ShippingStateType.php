@@ -21,14 +21,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ShippingStateType extends AbstractType
 {
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $choices = function(Options $options) {
             $choices = [
-                ShipmentInterface::STATE_CART => 'librinfo.shipping_state.cart',
-                ShipmentInterface::STATE_READY => 'librinfo.shipping_state.ready',
-                ShipmentInterface::STATE_SHIPPED => 'librinfo.shipping_state.shipped',
-                ShipmentInterface::STATE_CANCELLED => 'librinfo.shipping_state.cancelled',
+                'librinfo.shipping_state.cart'      => ShipmentInterface::STATE_CART,
+                'librinfo.shipping_state.ready'     => ShipmentInterface::STATE_READY,
+                'librinfo.shipping_state.shipped'   => ShipmentInterface::STATE_SHIPPED,
+                'librinfo.shipping_state.cancelled' => ShipmentInterface::STATE_CANCELLED,
             ];
             if ($options['no_cart'])
                 unset($choices[ShipmentInterface::STATE_CART]);
@@ -57,4 +58,5 @@ class ShippingStateType extends AbstractType
     {
         return 'librinfo_type_shipping_state';
     }
+
 }

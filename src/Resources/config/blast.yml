@@ -1003,9 +1003,9 @@ parameters:
                     order.customer.customerCode: 
                         label: librinfo.label.customer_customer_code
                     state:
-                        label: librinfo.label.order_state
+                        label: librinfo.label.payment_state
                         type: doctrine_orm_string
-                        field_type: Librinfo\EcommerceBundle\Form\Type\OrderStateType
+                        field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                         field_options:
                             no_cart: true
                     amount: ~
@@ -1028,6 +1028,7 @@ parameters:
                 remove:
                     updatedAt: ~
                     notes: ~
+                    
                    
 #            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
@@ -1041,9 +1042,13 @@ parameters:
                     customerIp: ~
                     states: ~
                 add:
+                    customer.group: ~
                     state:
                         label: librinfo.label.order_state
                         type: doctrine_orm_string
+                        field_type: Librinfo\EcommerceBundle\Form\Type\OrderStateType
+                        field_options:
+                            no_cart: true
                     paymentState:
                         label: librinfo.label.payment_state
                         type: doctrine_orm_string
@@ -1092,16 +1097,37 @@ parameters:
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
                     form_tab_general:
-                        form_group_individual:
+                        form_group_organism:
                             group.name:
                                 label: librinfo.label.customer_group
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_tab_general:
-                        form_group_individual:
+                        form_group_organism:
                             group:
                                 label: librinfo.label.customer_group
+                            _options:
+                                fieldsOrder:
+                                    - active
+                                    - title
+                                    - firstname
+                                    - lastname
+                                    - name
+                                    - isCustomer
+                                    - customerCode
+                                    - isSupplier
+                                    - supplierCode
+                                    - group
+                                    - circles
+                                    - category
+                                    - alert
+                                    - description
+                                    - administrativeNumber
+                                    - email
+                                    - emailNpai
+                                    - emailNoNewsletter
+                                    - url
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:

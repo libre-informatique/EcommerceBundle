@@ -21,14 +21,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class OrderStateType extends AbstractType
 {
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $choices = function(Options $options) {
             $choices = [
-                OrderInterface::STATE_CART => 'librinfo.order_state.cart',
-                OrderInterface::STATE_NEW => 'librinfo.order_state.new',
-                OrderInterface::STATE_FULFILLED => 'librinfo.order_state.fulfilled',
-                OrderInterface::STATE_CANCELLED => 'librinfo.order_state.cancelled',
+                'librinfo.order_state.cart'      => OrderInterface::STATE_CART,
+                'librinfo.order_state.new'       => OrderInterface::STATE_NEW,
+                'librinfo.order_state.fulfilled' => OrderInterface::STATE_FULFILLED,
+                'librinfo.order_state.cancelled' => OrderInterface::STATE_CANCELLED,
             ];
             if ($options['no_cart'])
                 unset($choices[OrderInterface::STATE_CART]);
@@ -57,4 +58,5 @@ class OrderStateType extends AbstractType
     {
         return 'librinfo_type_order_state';
     }
+
 }

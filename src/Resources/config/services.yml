@@ -75,6 +75,14 @@ services:
             - '@librinfo_ecommerce.sylius.fixture.example_factory.channel'
         tags:
             - { name: sylius_fixtures.fixture }
+    
+    librinfo_ecommerce.sylius.fixture.customer:
+        class: Librinfo\EcommerceBundle\Fixture\CustomerFixture
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@librinfo_crm.code_generator.customer'
+        tags:
+            - { name: sylius_fixtures.fixture }
 
     librinfo_ecommerce.sylius.fixture.example_factory.channel:
         class: Librinfo\EcommerceBundle\Fixture\Factory\ChannelExampleFactory

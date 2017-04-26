@@ -64,7 +64,7 @@ librinfo:
         checkout_state: Statut validation
         currency_code: Devise
         customer: Client
-        customer_group: Groupe de client
+        customer_group: Groupe de tarification
         customer_group_name: Nom du groupe
         customer_group_code: Code du groupe
         customer_group_admin: Groupes de client
