@@ -24,7 +24,7 @@ class ProductVariantCodeGenerator implements CodeGeneratorInterface
     /**
      * @var EntityManager
      */
-    private static $em;
+    protected static $em;
 
     public static function setEntityManager(EntityManager $em)
     {
