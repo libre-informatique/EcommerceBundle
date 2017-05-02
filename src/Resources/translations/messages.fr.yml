@@ -60,6 +60,7 @@ librinfo:
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
         billing_address: Adresse de facturation
+        channel_code: Code boutique
         checkout_completed_at: Panier validé le
         checkout_state: Statut validation
         currency_code: Devise
@@ -89,6 +90,7 @@ librinfo:
         order_number: N° commande
         order_state: Statut commande
         order_total: Total commande
+        original_price: Prix original
         payment_id: Identifiant de paiement
         payment_admin: Paiement
         payment_amount: Montant
@@ -98,6 +100,7 @@ librinfo:
         payment_state: Statut paiement
         payments_list: Liste des paiements
         position: Position
+        price: Prix
         product: Article
         product_code: Code article
         product_name: Nom article
@@ -106,6 +109,7 @@ librinfo:
         product_shop_url: URL boutique
         product_variant_code: Code déclinaison
         product_variant_name: Nom déclinaison
+        product_variant_prices: Prix
         purchased_from: Achété sur
         sale_date: Date de vente
         sales_journal: Journal des vents

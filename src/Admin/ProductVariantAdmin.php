@@ -69,16 +69,8 @@ class ProductVariantAdmin extends CoreAdmin
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product'
             ]);
             
-            if ($mapper->has('product')) {
+            if (!$this->isChild() && $mapper->has('product')) {
                 $mapper->remove('product');
-                $mapper->add('product', null, [
-                    'attr'     => [
-                        'readonly' => true
-                    ],
-                    'disabled' => 'disabled'
-                    ], [
-                    'admin_code' => 'librinfo_ecommerce.admin.product'
-                ]);
             }
         }
     }

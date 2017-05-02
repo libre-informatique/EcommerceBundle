@@ -210,6 +210,7 @@ parameters:
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
                             channelPricings:
+                                label: librinfo.label.product_variant_prices
                                 type: sonata_type_collection
                                 type_options:
                                     btn_add: false
@@ -450,12 +451,15 @@ parameters:
                     form_group_general:
                         '':
                             channelCode: 
+                                label: librinfo.label.channel_code
                                 type: text
                                 attr:
                                     readonly: true
                             price:
+                                label: librinfo.label.price
                                 type: text
                             original_price:
+                                label: librinfo.label.original_price
                                 type: text
 
 #######################
