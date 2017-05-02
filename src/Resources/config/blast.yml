@@ -191,7 +191,8 @@ parameters:
                             product:
                                 type: sonata_type_model_autocomplete
                                 property: [translations.name, code]
-                                disabled: true
+                                attr:
+                                    readonly: ~
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
                             name:
@@ -199,6 +200,13 @@ parameters:
                                 type: text
                             code:
                                 label: librinfo.label.product_variant_code
+                            product:
+                                type: hidden
+                                attr:
+                                    readonly: ~
+                                disabled: true
+                                _options:
+                                    admin_code: librinfo_ecommerce.admin.product
 #                            price:
 #                                type: text
                             optionValues:

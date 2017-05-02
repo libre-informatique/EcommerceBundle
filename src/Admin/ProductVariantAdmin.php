@@ -21,6 +21,7 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
  */
 class ProductVariantAdmin extends CoreAdmin
 {
+
     /**
      * @var ProductInterface
      */
@@ -37,7 +38,7 @@ class ProductVariantAdmin extends CoreAdmin
         $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && !$request->get($this->getIdParameter()) && !$product) {
             // First step creation form with just the Product field
-            $options = ['property' => ['code', 'translations.name'],  'required' => true];
+            $options = ['property' => ['code', 'translations.name'], 'required' => true];
             $productAdmin = $this->getConfigurationPool()->getInstance($this->productAdminCode);
             if (is_callable([$productAdmin, 'SonataTypeModelAutocompleteCallback']))
                 $options['callback'] = function($admin, $property, $value) {
@@ -45,7 +46,7 @@ class ProductVariantAdmin extends CoreAdmin
                 };
             $mapper
                 ->with('form_tab_new_product_variant')
-                    ->add('product', 'sonata_type_model_autocomplete', $options, ['admin_code' => $this->productAdminCode])
+                ->add('product', 'sonata_type_model_autocomplete', $options, ['admin_code' => $this->productAdminCode])
             ;
             return;
         }
@@ -57,16 +58,26 @@ class ProductVariantAdmin extends CoreAdmin
         if ($product) {
             $mapper->add('optionValues', 'entity', [
                 'query_builder' => $this->optionValuesQueryBuilder(),
-                'class' => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
-                'multiple' => true,
-                'required' => false,
-                'choice_label' => 'fullName',
-            ], [
+                'class'         => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
+                'multiple'      => true,
+                'required'      => false,
+                'choice_label'  => 'fullName',
+                ], [
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product'
             ]);
+//            if ($mapper->has('product')) {
+//                $mapper->remove('product');
+//                $mapper->add('product', null, [
+//                    'attr'     => [
+//                        'readonly' => true
+//                    ],
+//                    'disabled' => 'disabled'
+//                    ], [
+//                    'admin_code' => 'librinfo_ecommerce.admin.product'
+//                ]);
+//            }
         }
     }
-
 
     /**
      * @return ProductVariantInterface
@@ -83,9 +94,9 @@ class ProductVariantAdmin extends CoreAdmin
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
+        dump($object);
         return $object;
     }
-
 
     /**
      * @return ProductInterface|null
@@ -124,6 +135,5 @@ class ProductVariantAdmin extends CoreAdmin
         ;
         return $queryBuilder;
     }
-
 
 }
