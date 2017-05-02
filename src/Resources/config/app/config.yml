@@ -33,6 +33,14 @@ sylius_order:
         order:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\Order
+                
+                
+sylius_channel:
+    driver: doctrine/orm
+    resources:
+        channel:
+            classes:
+                repository: Librinfo\EcommerceBundle\Repository\ChannelRepository
 
 sylius_attribute:
     resources:

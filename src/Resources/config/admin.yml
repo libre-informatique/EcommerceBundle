@@ -123,3 +123,13 @@ services:
               group: Customers Relationship Management
               label: librinfo.label.customer_group_admin
               label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.channel_pricing:
+        class: Librinfo\EcommerceBundle\Admin\ChannelPricingAdmin
+        arguments: [~, Sylius\Component\Core\Model\ChannelPricing, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Channel
+

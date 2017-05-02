@@ -1,3 +1,5 @@
+
+
 # Copyright (C) 2015-2016 Libre Informatique
 #
 # This file is licenced under the GNU GPL v3.
@@ -207,6 +209,15 @@ parameters:
                                 disabled: true
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
+                            channelPricings:
+                                type: sonata_type_collection
+                                type_options:
+                                    btn_add: false
+                                    delete: false
+                                _options:
+                                    admin_code: librinfo_ecommerce.admin.channel_pricing
+                                    edit: inline
+                                    inline: table
 #                            price:
 #                                type: text
                             optionValues:
@@ -426,6 +437,26 @@ parameters:
                     translations.value:
                         label: librinfo.label.value
 
+
+
+##########################
+# PRODUCT CHANNEL PRICING
+##########################
+
+        Sylius\Component\Core\Model\ChannelPricing:
+             # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    form_group_general:
+                        '':
+                            channelCode: 
+                                type: text
+                                attr:
+                                    readonly: true
+                            price:
+                                type: text
+                            original_price:
+                                type: text
 
 #######################
 # CRM bundle overrides
@@ -1184,3 +1215,86 @@ parameters:
                         label: librinfo.label.customer_group_name
                     code:
                         label: librinfo.label.customer_group_code
+        ### Channel  ###
+        Sylius\Component\Core\Model\Channel:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            code: ~
+                            name: ~
+                            color: ~
+                            description: ~
+                            enabled: ~
+                            hostname: ~
+                            createdAt: ~
+                            updatedAt: ~
+                            id: ~
+                            themeName: ~
+                            taxCalculationStrategy: ~
+                            contactEmail: ~
+                            skippingShippingStepAllowed: ~
+                            skippingPaymentStepAllowed: ~
+                            accountVerificationRequired: ~
+    
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            code: ~
+                            name: ~
+                            color: ~
+                            description: ~
+                            enabled: ~
+                            hostname: ~
+                            createdAt: ~
+                            updatedAt: ~
+                            id: ~
+                            themeName: ~
+                            taxCalculationStrategy: ~
+                            contactEmail: ~
+                            skippingShippingStepAllowed: ~
+                            skippingPaymentStepAllowed: ~
+                            accountVerificationRequired: ~
+    
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    code: ~
+                    name: ~
+                    color: ~
+                    description: ~
+                    enabled: ~
+                    hostname: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    id: ~
+                    themeName: ~
+                    taxCalculationStrategy: ~
+                    contactEmail: ~
+                    skippingShippingStepAllowed: ~
+                    skippingPaymentStepAllowed: ~
+                    accountVerificationRequired: ~
+    
+                    
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    code: ~
+                    name: ~
+                    color: ~
+                    description: ~
+                    enabled: ~
+                    hostname: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    id: ~
+                    themeName: ~
+                    taxCalculationStrategy: ~
+                    contactEmail: ~
+                    skippingShippingStepAllowed: ~
+                    skippingPaymentStepAllowed: ~
+                    accountVerificationRequired: ~
+    

@@ -15,6 +15,9 @@ use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Resource\Factory\Factory;
+use Librinfo\EcommerceBundle\Repository\ChannelRepository;
+use Librinfo\EcommerceBundle\Entity\ProductVariant;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -65,17 +68,18 @@ class ProductVariantAdmin extends CoreAdmin
                 ], [
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product'
             ]);
-//            if ($mapper->has('product')) {
-//                $mapper->remove('product');
-//                $mapper->add('product', null, [
-//                    'attr'     => [
-//                        'readonly' => true
-//                    ],
-//                    'disabled' => 'disabled'
-//                    ], [
-//                    'admin_code' => 'librinfo_ecommerce.admin.product'
-//                ]);
-//            }
+            
+            if ($mapper->has('product')) {
+                $mapper->remove('product');
+                $mapper->add('product', null, [
+                    'attr'     => [
+                        'readonly' => true
+                    ],
+                    'disabled' => 'disabled'
+                    ], [
+                    'admin_code' => 'librinfo_ecommerce.admin.product'
+                ]);
+            }
         }
     }
 
@@ -86,15 +90,28 @@ class ProductVariantAdmin extends CoreAdmin
     {
         $productVariantFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_variant');
 
+        /* @var $object ProductVariant */
         $object = $productVariantFactory->createNew();
         if ($this->getProduct()) {
             $object->setProduct($this->getProduct());
+        }
+        
+        /* @var $channelPricingFactory Factory */
+        $channelPricingFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel_pricing');
+        
+        /* @var $channelRepository ChannelRepository */
+        $channelRepository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.channel');
+        
+        foreach ($channelRepository->getAvailableAndActiveChannels() as $channel) {
+            dump($channel);
+            $channelPricing = $channelPricingFactory->createNew();
+            $channelPricing->setChannelCode($channel->getCode());
+            $object->addChannelPricing($channelPricing);
         }
 
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
-        dump($object);
         return $object;
     }
 
