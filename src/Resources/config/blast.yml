@@ -235,6 +235,7 @@ parameters:
                                 property: fullName
                                 _options:
                                     admin_code: librinfo_ecommerce_option_value.admin.product
+                            taxCategory: ~
                             _options:
                                 fieldsOrder: [product, name, code, optionValues]
                         form_group_stock:

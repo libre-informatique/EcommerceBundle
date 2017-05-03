@@ -126,6 +126,7 @@ librinfo:
         slug: Slug
         state: État
         storage_type: Type d'enregistrement
+        tax_category: Catégorie de TVA
         token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks
