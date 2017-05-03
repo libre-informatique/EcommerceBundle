@@ -1,5 +1,15 @@
 
 
+
+
+
+
+
+
+
+
+
+
 # Copyright (C) 2015-2016 Libre Informatique
 #
 # This file is licenced under the GNU GPL v3.
@@ -737,8 +747,8 @@ parameters:
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    main_tab:
-                        main_group:
+                    form_tab_general:
+                        form_group_general:
                             shipping_address: ~
                             notes: ~
             # LIST
@@ -823,8 +833,8 @@ parameters:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
-                    main_tab:
-                        main_group:
+                    form_tab_general:
+                        form_group_general:
                             username: ~
                             usernameCanonical: ~
                             enabled: ~
@@ -851,8 +861,8 @@ parameters:
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    main_tab:
-                        main_group:
+                    form_tab_general:
+                        form_group_general:
                             username: ~
                             usernameCanonical: ~
                             enabled: ~
@@ -1224,8 +1234,8 @@ parameters:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
-                    main_tab:
-                        main_group:
+                    form_tab_general:
+                        form_group_general:
                             code: ~
                             name: ~
                             color: ~
@@ -1245,8 +1255,8 @@ parameters:
             # FORM    
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    main_tab:
-                        main_group:
+                    form_tab_general:
+                        form_group_general:
                             code: ~
                             name: ~
                             color: ~
@@ -1301,4 +1311,108 @@ parameters:
                     skippingShippingStepAllowed: ~
                     skippingPaymentStepAllowed: ~
                     accountVerificationRequired: ~
+        ### TaxRate  ###
+        Librinfo\EcommerceBundle\Entity\TaxRate:
+            baseRoute: 
+                name: admin_librinfo_ecommerce_taxrate
+                pattern: librinfo/ecommerce/taxrate
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    form_tab_general:
+                        form_group_general:
+                            code: ~
+                            name: ~
+                            amount: ~
+                            includedInPrice: ~
+                            calculator: ~
+                            createdAt: ~
+                            updatedAt: ~
+
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    '':
+                        form_group_general:
+                            code: ~
+                            name: ~
+                            amount: ~
+                            includedInPrice: ~
+                            calculator: ~
+                            createdAt: 
+                                type: sonata_type_date_picker
+                                required: false
+                            updatedAt: 
+                                type: sonata_type_date_picker
+                                required: false
+    
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    code: ~
+                    name: ~
+                    amount: ~
+                    includedInPrice: ~
+                    calculator: ~
+                    createdAt: ~
+                    updatedAt: ~
+    
+                    
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    code: ~
+                    name: ~
+                    amount: ~
+                    includedInPrice: ~
+                    calculator: ~
+                    createdAt: ~
+                    updatedAt: ~
+        ### TaxCategory  ###
+        Sylius\Component\Taxation\Model\TaxCategory:
+            baseRoute: 
+                name: admin_librinfo_ecommerce_taxcategory
+                pattern: librinfo/ecommerce/taxcategory
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    code: ~
+                    name: ~
+                    description: ~
+                    createdAt: ~
+                    updatedAt: ~
+    
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    '':
+                        form_group_general:
+                            code: ~
+                            name: ~
+                            description: ~
+                            createdAt: 
+                                type: sonata_type_date_picker
+                                required: false
+                            updatedAt: 
+                                type: sonata_type_date_picker
+                                required: false
+                            rates: ~
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    code: ~
+                    name: ~
+                    description: ~
+                    createdAt: ~
+                    updatedAt: ~
+    
+                    
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    code: ~
+                    name: ~
+                    description: ~
+                    createdAt: ~
+                    updatedAt: ~
     

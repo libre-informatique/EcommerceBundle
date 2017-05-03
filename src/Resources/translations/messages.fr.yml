@@ -52,6 +52,9 @@ librinfo:
         payment_list: Liste des paiements
         salesjournal_list: Journal des ventes
         sales_journal_list: Journal des ventes
+        tax_category_list: Liste des catégories de TVA
+        taxrate_list: Liste des taux de TVA
+        tax_rate_list: Liste des taux de TVA
         payment_method_list: Liste des méthodes de paiement
     label:
         adjustments_total: Total ajustements
@@ -60,6 +63,7 @@ librinfo:
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
         billing_address: Adresse de facturation
+        calculator: Règle de calcul
         channel_code: Code boutique
         checkout_completed_at: Panier validé le
         checkout_state: Statut validation
@@ -76,6 +80,7 @@ librinfo:
         depth: profondeur
         exchange_rate: Taux de change
         height: hauteur
+        included_in_price: Compris dans le prix
         items_total: Total articles
         locale_code: Langue
         meta_description: Meta description
@@ -111,6 +116,7 @@ librinfo:
         product_variant_name: Nom déclinaison
         product_variant_prices: Prix
         purchased_from: Achété sur
+        rates: Taux de TVA
         sale_date: Date de vente
         sales_journal: Journal des vents
         set_default_customer_address: Adresse principale

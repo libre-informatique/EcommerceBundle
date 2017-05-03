@@ -34,6 +34,12 @@ sylius_order:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\Order
                 
+sylius_taxation:
+    resources:
+        tax_rate:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\TaxRate
+                
                 
 sylius_channel:
     driver: doctrine/orm
