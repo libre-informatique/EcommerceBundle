@@ -18,6 +18,7 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Librinfo\EcommerceBundle\Repository\ChannelRepository;
 use Librinfo\EcommerceBundle\Entity\ProductVariant;
+use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -25,6 +26,8 @@ use Librinfo\EcommerceBundle\Entity\ProductVariant;
 class ProductVariantAdmin extends CoreAdmin
 {
 
+    use EmbeddedAdmin;
+    
     /**
      * @var ProductInterface
      */
