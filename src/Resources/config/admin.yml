@@ -76,7 +76,7 @@ services:
 
     librinfo_ecommerce.admin.order:
         class: Librinfo\EcommerceBundle\Admin\OrderAdmin
-        arguments: [~, Sylius\Component\Core\Model\Order, LibrinfoEcommerceBundle:OrderCRUD]
+        arguments: [~, Librinfo\EcommerceBundle\Entity\Order, LibrinfoEcommerceBundle:OrderCRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
@@ -152,5 +152,15 @@ services:
               manager_type: orm
               group: admin
               label: TaxCategory
+              label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.zone:
+        class: Blast\CoreBundle\Admin\GenericAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\Zone, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Zone
               label_translator_strategy: blast_core.label.strategy.librinfo
 

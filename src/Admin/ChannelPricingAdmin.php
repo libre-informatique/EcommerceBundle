@@ -3,9 +3,12 @@
 namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
+use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
 
 class ChannelPricingAdmin extends CoreAdmin
 {
+    
+    use EmbeddedAdmin;
 
     protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection)
     {

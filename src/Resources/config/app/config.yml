@@ -71,6 +71,9 @@ sylius_addressing:
         address:
             classes:
                 model: Librinfo\CRMBundle\Entity\Address
+        zone:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\Zone
 
 sylius_user:
     resources:

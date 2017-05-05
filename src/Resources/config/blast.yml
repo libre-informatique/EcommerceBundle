@@ -677,7 +677,7 @@ parameters:
 # ORDER
 ########
 
-        Sylius\Component\Core\Model\Order:
+        Librinfo\EcommerceBundle\Entity\Order:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 titleTemplate: LibrinfoEcommerceBundle:OrderAdmin/Show:show_title.html.twig
@@ -1340,6 +1340,7 @@ parameters:
                             amount: ~
                             includedInPrice: ~
                             calculator: ~
+                            zone: ~
                             createdAt: 
                                 type: sonata_type_date_picker
                                 required: false
@@ -1416,4 +1417,35 @@ parameters:
                     description: ~
                     createdAt: ~
                     updatedAt: ~
+                    
+        Librinfo\EcommerceBundle\Entity\Zone:
+            baseRoute: 
+                name: admin_librinfo_ecommerce_zone
+                pattern: librinfo/ecommerce/zone
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    name: ~
+                    code: ~
+                    type: ~
+                    scope: ~
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    '':
+                        form_group_general:
+                            name: ~
+                            code: ~
+                            type: ~
+                            scope: ~
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    name: ~
+                    code: ~
+                    type: ~
+                    scope: ~
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    name: ~
+                    code: ~
+                    type: ~
+                    scope: ~
     

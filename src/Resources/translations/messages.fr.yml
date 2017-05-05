@@ -56,6 +56,8 @@ librinfo:
         taxrate_list: Liste des taux de TVA
         tax_rate_list: Liste des taux de TVA
         payment_method_list: Liste des méthodes de paiement
+        zone_create: Nouvelle zone
+        zone_list: Liste des zones
     label:
         adjustments_total: Total ajustements
         amount: Montant
@@ -119,6 +121,7 @@ librinfo:
         rates: Taux de TVA
         sale_date: Date de vente
         sales_journal: Journal des vents
+        scope: Scope
         set_default_customer_address: Adresse principale
         shipping_address: Adresse de livraison
         shipping_state: Statut livraison
@@ -130,11 +133,12 @@ librinfo:
         token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks
-        type: Type
+        type: Type  
         values: Valeurs
         variants: Déclinaisons
         weight: Poids
         width: largeur
+        zone: Zone
     order_state:
         cancelled: Annulée
         cart: Panier
