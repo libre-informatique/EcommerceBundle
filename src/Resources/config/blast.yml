@@ -102,6 +102,9 @@ parameters:
                                     edit: inline
                                     inline: table
                                     admin_code: librinfo_ecommerce.admin.product_variant
+                    form_tab_images:
+                        '':
+                            images: ~
                     _options:
                         tabsOrder: [form_group_general, form_tab_history]
 
@@ -1230,7 +1233,11 @@ parameters:
                         label: librinfo.label.customer_group_name
                     code:
                         label: librinfo.label.customer_group_code
-        ### Channel  ###
+
+##########
+# CHANNEL
+##########
+
         Sylius\Component\Core\Model\Channel:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
@@ -1312,7 +1319,11 @@ parameters:
                     skippingShippingStepAllowed: ~
                     skippingPaymentStepAllowed: ~
                     accountVerificationRequired: ~
-        ### TaxRate  ###
+                    
+##########
+# TAXRATE
+##########
+
         Librinfo\EcommerceBundle\Entity\TaxRate:
             baseRoute: 
                 name: admin_librinfo_ecommerce_taxrate
@@ -1370,7 +1381,11 @@ parameters:
                     calculator: ~
                     createdAt: ~
                     updatedAt: ~
-        ### TaxCategory  ###
+
+##############
+# TAXCATEGORY
+##############
+
         Sylius\Component\Taxation\Model\TaxCategory:
             baseRoute: 
                 name: admin_librinfo_ecommerce_taxcategory
@@ -1417,6 +1432,10 @@ parameters:
                     description: ~
                     createdAt: ~
                     updatedAt: ~
+                    
+#######
+# ZONE
+#######
                     
         Librinfo\EcommerceBundle\Entity\Zone:
             baseRoute: 

@@ -116,3 +116,8 @@ services:
 #            - [setTokenStorage, ['@security.token_storage']]
 #            - [setUserClass, [Librinfo\EcommerceBundle\Entity\AdminUser]]
 #            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+
+    imagine.data.loader.resolver.default:
+        class: Librinfo\EcommerceBundle\Imagine\PathResolver\ProductPathResolver
+        calls:
+            - [setEm, ['@doctrine.orm.entity_manager'] ]
