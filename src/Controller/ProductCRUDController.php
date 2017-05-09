@@ -10,23 +10,25 @@
 
 namespace Librinfo\EcommerceBundle\Controller;
 
-use Blast\CoreBundle\Controller\CRUDController;
-use Sylius\Component\Product\Model\Product;
+use Librinfo\MediaBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Librinfo\EcommerceBundle\Entity\Product;
+use Librinfo\EcommerceBundle\Entity\ProductImage;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
 class ProductCRUDController extends CRUDController
 {
+
     /**
      * Generate product variant, based on product options
      * @todo !!
      */
     public function generateVariantsAction(Request $request)
     {
+        
     }
 
     public function generateProductSlugAction(Request $request)
@@ -36,6 +38,66 @@ class ProductCRUDController extends CRUDController
         return new JsonResponse([
             'slug' => $this->get('sylius.generator.slug')->generate($name),
         ]);
+    }
+
+    protected function handleFiles($object)
+    {
+        $request = $this->getRequest();
+        /* @var $product Product */
+        $product = $object;
+
+        $rc = new \ReflectionClass($object);
+        $className = $rc->getShortName();
+
+        $repo = $this->manager->getRepository('LibrinfoMediaBundle:File');
+
+        if (null !== $remove = $request->get('remove_files')) {
+            foreach ($remove as $key => $id) {
+                $file = $repo->find($id);
+
+                if ($file) {
+                    if (method_exists($product, 'removeLibrinfoFile')) {
+                        $product->removeLibrinfoFile($this->getProductImageEntity($file,$product));
+                        $this->manager->remove($file);
+                    } else if (method_exists($product, 'setLibrinfoFile')) {
+                        $product->setLibrinfoFile($this->getProductImageEntity($file,$product));
+                        $this->manager->remove($file);
+                    } else {
+                        throw new \Exception('You must define ' . $className . '::removeLibrinfoFile() method or ' . $className . '::setFile() in case of a one to one');
+                    }
+                }
+            }
+        }
+
+        if (null !== $ids = $request->get('add_files')) {
+            foreach ($ids as $key => $id) {
+                $file = $repo->find($id);
+
+                if ($file) {
+                    if (method_exists($product, 'addLibrinfoFile')) {
+                        
+                        $product->addLibrinfoFile($this->getProductImageEntity($file,$product));
+                        $file->setOwned(true);
+                    } else if (method_exists($product, 'setLibrinfoFile')) {
+                        $product->setLibrinfoFile($this->getProductImageEntity($file,$product));
+                        $file->setOwned(true);
+                    } else {
+                        throw new \Exception('You must define ' . $className . '::addLibrinfoFile() method or ' . $className . '::setLibrinfoFile() in case of a one to one');
+                    }
+                }
+            }
+        }
+    }
+
+    protected function getProductImageEntity($file, $product)
+    {
+        $productImage = new ProductImage();
+        $productImage
+            ->setRealFile($file)
+            ->setOwner($product)
+            ->setType('main')
+            ->setPath($product->getSlug());
+        return $productImage;
     }
 
 }

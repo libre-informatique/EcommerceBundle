@@ -82,6 +82,12 @@ sylius_user:
                 classes:
                     model: Librinfo\SonataSyliusUserBundle\Entity\SonataUser
 
+sylius_core:
+    resources:
+        product_image:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\ProductImage
+
 fos_rest:
     exception: ~
     view:

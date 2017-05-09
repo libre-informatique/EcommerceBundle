@@ -54,6 +54,10 @@ parameters:
                         form_group_history:
                             createdAt: ~
                             updatedAt: ~
+                    form_tab_images:
+                        '':
+                            images:
+                                template: LibrinfoMediaBundle:CRUD:show_images.html.twig
                     _options:
                         tabsOrder: [form_group_general, show_tab_variants, form_tab_history]
 
@@ -104,7 +108,10 @@ parameters:
                                     admin_code: librinfo_ecommerce.admin.product_variant
                     form_tab_images:
                         '':
-                            images: ~
+                            images:
+                                type: Librinfo\MediaBundle\Form\Type\DropzoneType
+                                required: false
+                                mediaContext: ecommerce_productimage
                     _options:
                         tabsOrder: [form_group_general, form_tab_history]
 
