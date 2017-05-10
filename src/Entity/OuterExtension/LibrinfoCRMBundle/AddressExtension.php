@@ -6,6 +6,7 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 trait AddressExtension
 {
+
     /**
      * @var string
      */
@@ -36,7 +37,6 @@ trait AddressExtension
     {
         $this->customer = $customer;
     }
-
 
     /**
      * {@inheritdoc}
@@ -76,9 +76,8 @@ trait AddressExtension
     public function getFullName()
     {
         return sprintf(
-            '%s %s',
-            $this->firstName,
-            $this->lastName
+            '%s %s', $this->firstName, $this->lastName
         );
     }
+
 }
