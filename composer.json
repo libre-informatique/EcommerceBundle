@@ -6,13 +6,13 @@
     "require": {
         "php": ">=5.6",
         "symfony/symfony": ">=3.2",
-        "blast-project/core-bundle": "dev-wip-lisem",
-        "blast-project/base-entities-bundle": "dev-wip-lisem",
+        "blast-project/core-bundle": ">=0.4",
+        "blast-project/base-entities-bundle": ">=0.4",
         "sylius/sylius": "1.0.x-dev",
         "sylius/locale-bundle": "1.0.x-dev",
         "sylius/product-bundle": "1.0.x-dev",
-        "libre-informatique/sonata-sylius-user-bundle": "dev-wip-lisem",
-        "libre-informatique/crm-bundle": "dev-wip-lisem"
+        "libre-informatique/sonata-sylius-user-bundle": ">=0.4",
+        "libre-informatique/crm-bundle": ">=0.4"
     },
     "require-dev": {
 	"symfony/phpunit-bridge": ">=3.2"
