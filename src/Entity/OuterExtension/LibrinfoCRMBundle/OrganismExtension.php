@@ -813,6 +813,7 @@ trait OrganismExtension
         if (!$this->hasAddress($address))
         {
             $this->addresses->add($address);
+            $address->setCustomer($this);
 
             if(!$this->getDefaultAddress())
                 $this->setDefaultAddress($address);
