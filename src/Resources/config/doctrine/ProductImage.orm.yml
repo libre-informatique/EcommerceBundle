@@ -3,11 +3,16 @@ Librinfo\EcommerceBundle\Entity\ProductImage:
     manyToOne:
         realFile:
             targetEntity: Librinfo\MediaBundle\Entity\File
+            joinColumn:
+                name: real_file_id
+                referencedColumnName: id
+                onDelete: CASCADE
     manyToMany:
         productVariants:
             targetEntity: Librinfo\EcommerceBundle\Entity\ProductVariant
             orphanRemoval: true
-            joinTable: 
+            inversedBy: images
+            joinTable:
                 name: librinfo_ecommerce_productimage__productvariants
                 joinColumns:
                     joinColumn:
