@@ -51,8 +51,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Librinfo\\EcommerceBundle\\": "src/",
-            "Librinfo\\EcommerceBundle\\Tests\\": "tests/"
+            "Librinfo\\EcommerceBundle\\": "src/"
         }
     }
 }
