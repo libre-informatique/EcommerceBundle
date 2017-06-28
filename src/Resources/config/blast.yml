@@ -471,7 +471,7 @@ parameters:
                 add:
                     form_group_general:
                         '':
-                            channelCode: 
+                            channelCode:
                                 label: librinfo.label.channel_code
                                 type: text
                                 attr:
@@ -1006,8 +1006,8 @@ parameters:
                 add:
                     '':
                         '':
-                            
-                            state: 
+
+                            state:
                                 type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                             amount:
                                 type: \Librinfo\EcommerceBundle\Form\Type\PriceCentsType
@@ -1062,9 +1062,9 @@ parameters:
                 add:
                     order.number:
                         label: librinfo.label.order_number
-                    order.customer.name: 
+                    order.customer.name:
                         label: librinfo.label.customer_name
-                    order.customer.customerCode: 
+                    order.customer.customerCode:
                         label: librinfo.label.customer_customer_code
                     state:
                         label: librinfo.label.payment_state
@@ -1080,20 +1080,20 @@ parameters:
                     updatedAt:
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
-               
+
 
 ################
 # SALES JOURNAL
 ################
-                        
+
         Librinfo\EcommerceBundle\Admin\SalesJournalAdmin:
 #            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
                     updatedAt: ~
                     notes: ~
-                    
-                   
+
+
 #            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove:
@@ -1123,12 +1123,12 @@ parameters:
                         label: librinfo.label.sale_date
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
-                        
-                        
+
+
 #################
 # PAYMENT METHOD
 #################
-                        
+
         Librinfo\EcommerceBundle\Admin\PaymentMethodAdmin:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
@@ -1151,7 +1151,7 @@ parameters:
                                     readonly: readonly
                             enabled: ~
                             position: ~
-                            
+
 ############
 # CUSTOMER
 ############
@@ -1195,14 +1195,14 @@ parameters:
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
-                    group: 
+                    group:
                         label: librinfo.label.customer_group
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    group: 
+                    group:
                         label: librinfo.label.customer_group
-                        
+
 #################
 # CUSTOMER GROUP
 #################
@@ -1266,8 +1266,8 @@ parameters:
                             skippingShippingStepAllowed: ~
                             skippingPaymentStepAllowed: ~
                             accountVerificationRequired: ~
-    
-            # FORM    
+
+            # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_tab_general:
@@ -1287,8 +1287,8 @@ parameters:
                             skippingShippingStepAllowed: ~
                             skippingPaymentStepAllowed: ~
                             accountVerificationRequired: ~
-    
-            # LIST    
+
+            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     code: ~
@@ -1306,9 +1306,9 @@ parameters:
                     skippingShippingStepAllowed: ~
                     skippingPaymentStepAllowed: ~
                     accountVerificationRequired: ~
-    
-                    
-            # FILTERS 
+
+
+            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
@@ -1326,13 +1326,13 @@ parameters:
                     skippingShippingStepAllowed: ~
                     skippingPaymentStepAllowed: ~
                     accountVerificationRequired: ~
-                    
+
 ##########
 # TAXRATE
 ##########
 
         Librinfo\EcommerceBundle\Entity\TaxRate:
-            baseRoute: 
+            baseRoute:
                 name: admin_librinfo_ecommerce_taxrate
                 pattern: librinfo/ecommerce/taxrate
             # SHOW
@@ -1348,7 +1348,7 @@ parameters:
                             createdAt: ~
                             updatedAt: ~
 
-            # FORM    
+            # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     '':
@@ -1359,14 +1359,14 @@ parameters:
                             includedInPrice: ~
                             calculator: ~
                             zone: ~
-                            createdAt: 
+                            createdAt:
                                 type: sonata_type_date_picker
                                 required: false
-                            updatedAt: 
+                            updatedAt:
                                 type: sonata_type_date_picker
                                 required: false
-    
-            # LIST    
+
+            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     code: ~
@@ -1376,9 +1376,9 @@ parameters:
                     calculator: ~
                     createdAt: ~
                     updatedAt: ~
-    
-                    
-            # FILTERS 
+
+
+            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
@@ -1394,7 +1394,7 @@ parameters:
 ##############
 
         Sylius\Component\Taxation\Model\TaxCategory:
-            baseRoute: 
+            baseRoute:
                 name: admin_librinfo_ecommerce_taxcategory
                 pattern: librinfo/ecommerce/taxcategory
             # SHOW
@@ -1405,8 +1405,8 @@ parameters:
                     description: ~
                     createdAt: ~
                     updatedAt: ~
-    
-            # FORM    
+
+            # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     '':
@@ -1414,14 +1414,14 @@ parameters:
                             code: ~
                             name: ~
                             description: ~
-                            createdAt: 
+                            createdAt:
                                 type: sonata_type_date_picker
                                 required: false
-                            updatedAt: 
+                            updatedAt:
                                 type: sonata_type_date_picker
                                 required: false
                             rates: ~
-            # LIST    
+            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     code: ~
@@ -1429,9 +1429,9 @@ parameters:
                     description: ~
                     createdAt: ~
                     updatedAt: ~
-    
-                    
-            # FILTERS 
+
+
+            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
@@ -1439,13 +1439,13 @@ parameters:
                     description: ~
                     createdAt: ~
                     updatedAt: ~
-                    
+
 #######
 # ZONE
 #######
-                    
+
         Librinfo\EcommerceBundle\Entity\Zone:
-            baseRoute: 
+            baseRoute:
                 name: admin_librinfo_ecommerce_zone
                 pattern: librinfo/ecommerce/zone
             Sonata\AdminBundle\Show\ShowMapper:
@@ -1474,4 +1474,3 @@ parameters:
                     code: ~
                     type: ~
                     scope: ~
-    
