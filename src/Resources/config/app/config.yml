@@ -33,6 +33,20 @@ sylius_order:
         order:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\Order
+                
+sylius_taxation:
+    resources:
+        tax_rate:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\TaxRate
+                
+                
+sylius_channel:
+    driver: doctrine/orm
+    resources:
+        channel:
+            classes:
+                repository: Librinfo\EcommerceBundle\Repository\ChannelRepository
 
 sylius_attribute:
     resources:
@@ -57,6 +71,9 @@ sylius_addressing:
         address:
             classes:
                 model: Librinfo\CRMBundle\Entity\Address
+        zone:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\Zone
 
 sylius_user:
     resources:
@@ -64,6 +81,12 @@ sylius_user:
             user:
                 classes:
                     model: Librinfo\SonataSyliusUserBundle\Entity\SonataUser
+
+sylius_core:
+    resources:
+        product_image:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\ProductImage
 
 fos_rest:
     exception: ~

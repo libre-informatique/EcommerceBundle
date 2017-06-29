@@ -52,7 +52,12 @@ librinfo:
         payment_list: Liste des paiements
         salesjournal_list: Journal des ventes
         sales_journal_list: Journal des ventes
+        tax_category_list: Liste des catégories de TVA
+        taxrate_list: Liste des taux de TVA
+        tax_rate_list: Liste des taux de TVA
         payment_method_list: Liste des méthodes de paiement
+        zone_create: Nouvelle zone
+        zone_list: Liste des zones
     label:
         adjustments_total: Total ajustements
         amount: Montant
@@ -60,6 +65,8 @@ librinfo:
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
         billing_address: Adresse de facturation
+        calculator: Règle de calcul
+        channel_code: Code boutique
         checkout_completed_at: Panier validé le
         checkout_state: Statut validation
         currency_code: Devise
@@ -75,6 +82,7 @@ librinfo:
         depth: profondeur
         exchange_rate: Taux de change
         height: hauteur
+        included_in_price: Compris dans le prix
         items_total: Total articles
         locale_code: Langue
         meta_description: Meta description
@@ -89,6 +97,7 @@ librinfo:
         order_number: N° commande
         order_state: Statut commande
         order_total: Total commande
+        original_price: Prix original
         payment_id: Identifiant de paiement
         payment_admin: Paiement
         payment_amount: Montant
@@ -98,6 +107,7 @@ librinfo:
         payment_state: Statut paiement
         payments_list: Liste des paiements
         position: Position
+        price: Prix
         product: Article
         product_code: Code article
         product_name: Nom article
@@ -106,9 +116,12 @@ librinfo:
         product_shop_url: URL boutique
         product_variant_code: Code déclinaison
         product_variant_name: Nom déclinaison
+        product_variant_prices: Prix
         purchased_from: Achété sur
+        rates: Taux de TVA
         sale_date: Date de vente
         sales_journal: Journal des vents
+        scope: Scope
         set_default_customer_address: Adresse principale
         shipping_address: Adresse de livraison
         shipping_state: Statut livraison
@@ -116,14 +129,16 @@ librinfo:
         slug: Slug
         state: État
         storage_type: Type d'enregistrement
+        tax_category: Catégorie de TVA
         token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks
-        type: Type
+        type: Type  
         values: Valeurs
         variants: Déclinaisons
         weight: Poids
         width: largeur
+        zone: Zone
     order_state:
         cancelled: Annulée
         cart: Panier

@@ -13,12 +13,68 @@ namespace Librinfo\EcommerceBundle\Entity;
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ProductExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\Product as BaseProduct;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Core\Model\ImageInterface;
+use Librinfo\EcommerceBundle\Entity\ProductImage;
 
 class Product extends BaseProduct
 {
 
     use OuterExtensible,
         ProductExtension;
+
+    /**
+     * @var Collection|ImageInterface[]
+     */
+    protected $images;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->initOuterExtendedClasses();
+        $this->images = new ArrayCollection();
+    }
+
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    public function setImages(ArrayCollection $images)
+    {
+        $this->images = $images;
+        return $this;
+    }
+
+    /**
+     * alias for LibrinfoMediaBundle/CRUDController::handleFiles()
+     *
+     * @param File $file
+     * @return Variety
+     */
+    public function addLibrinfoFile(ProductImage $file = null)
+    {
+
+        if (!$this->images->contains($file)) {
+            $this->images->add($file);
+        }
+        return $this;
+    }
+
+    /**
+     * alias for LibrinfoMediaBundle/CRUDController::handleFiles()
+     *
+     * @param File $file
+     * @return Variety
+     */
+    public function removeLibrinfoFile(ProductImage $file)
+    {
+        if ($this->images->contains($file)) {
+            $this->images->removeElement($file);
+        }
+        return $this;
+    }
 
     public function __toString()
     {
