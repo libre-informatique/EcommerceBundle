@@ -25,7 +25,7 @@ class LibrinfoEcommerceExtension extends BlastCoreExtension
      */
     public function loadCodeGenerators(ContainerBuilder $container, array $config)
     {
-        foreach(['product', 'product_variant'] as $cg)
+        foreach(['product', 'product_variant', 'product_variant_embedded'] as $cg)
             $container->setParameter("librinfo_ecommerce.code_generator.$cg", $config['code_generator'][$cg]);
         return $this;
     }

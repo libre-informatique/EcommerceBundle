@@ -1,0 +1,5 @@
+{% extends 'SonataAdminBundle:Form:form_admin_fields.html.twig' %}
+
+{% block sonata_admin_orm_one_to_many_widget %}
+    {% include 'LibrinfoEcommerceBundle:Form/Type:product_variant_collection.html.twig' %}
+{% endblock %}

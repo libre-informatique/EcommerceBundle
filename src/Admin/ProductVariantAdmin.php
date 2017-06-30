@@ -18,7 +18,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Librinfo\EcommerceBundle\Repository\ChannelRepository;
 use Librinfo\EcommerceBundle\Entity\ProductVariant;
-use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -26,8 +25,6 @@ use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
 class ProductVariantAdmin extends CoreAdmin
 {
 
-    use EmbeddedAdmin;
-    
     /**
      * @var ProductInterface
      */
@@ -38,7 +35,7 @@ class ProductVariantAdmin extends CoreAdmin
      */
     protected $productAdminCode = 'librinfo_ecommerce.admin.product';
 
-    public function configureFormFields(FormMapper $mapper)
+    protected function configureFormFields(FormMapper $mapper)
     {
         $product = $this->getProduct();
         $request = $this->getRequest();
@@ -71,7 +68,7 @@ class ProductVariantAdmin extends CoreAdmin
                 ], [
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product'
             ]);
-            
+
             if (!$this->isChild() && $mapper->has('product')) {
                 $mapper->remove('product');
             }
@@ -90,15 +87,14 @@ class ProductVariantAdmin extends CoreAdmin
         if ($this->getProduct()) {
             $object->setProduct($this->getProduct());
         }
-        
+
         /* @var $channelPricingFactory Factory */
         $channelPricingFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel_pricing');
-        
+
         /* @var $channelRepository ChannelRepository */
         $channelRepository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.channel');
-        
+
         foreach ($channelRepository->getAvailableAndActiveChannels() as $channel) {
-            dump($channel);
             $channelPricing = $channelPricingFactory->createNew();
             $channelPricing->setChannelCode($channel->getCode());
             $object->addChannelPricing($channelPricing);

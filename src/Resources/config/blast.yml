@@ -24,6 +24,8 @@ parameters:
 ##########
 
         Librinfo\EcommerceBundle\Entity\Product:
+            form_theme:
+                - LibrinfoEcommerceBundle:Form:fields.html.twig
             Sonata\AdminBundle\Show\ShowMapper:
                 forceTabs: true
                 add:
@@ -74,10 +76,10 @@ parameters:
                                 label: librinfo.label.product_code
                             enabled: boolean
                             description:
-                                type: textarea
+                                type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
                             shortDescription:
-                                type: textarea
+                                type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
                             metaKeywords:
                                 type: text
@@ -105,7 +107,8 @@ parameters:
                                 _options:
                                     edit: inline
                                     inline: table
-                                    admin_code: librinfo_ecommerce.admin.product_variant
+                                    admin_code: librinfo_ecommerce.admin.product_variant_embedded
+
                     form_tab_images:
                         '':
                             images:
@@ -161,10 +164,10 @@ parameters:
                             - code
                             - translations.name
 
-
-##################
+############################
 # PRODUCT VARIANT
-##################
+############################
+
 
         Librinfo\EcommerceBundle\Entity\ProductVariant:
             # SHOW
@@ -221,6 +224,7 @@ parameters:
                                 label: librinfo.label.product_variant_name
                                 type: text
                             code:
+                                type: Blast\CoreBundle\Form\Type\EntityCodeType
                                 label: librinfo.label.product_variant_code
                             product:
                                 type: hidden
@@ -242,7 +246,6 @@ parameters:
 #                            price:
 #                                type: text
                             optionValues:
-                                property: fullName
                                 _options:
                                     admin_code: librinfo_ecommerce_option_value.admin.product
                             taxCategory: ~
@@ -315,7 +318,70 @@ parameters:
                             - code
                             - product.code
 
+############################
+# PRODUCT VARIANT(EMBEDDED)
+############################
 
+        Librinfo\EcommerceBundle\Admin\ProductVariantEmbeddedAdmin:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                forceTabs: true
+                add: ~
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                remove:
+                    onHand: ~
+                    onHold: ~
+                    tracked: ~
+                    channelPricings: ~
+                    optionValues: ~
+                    width: ~
+                    height: ~
+                    depth: ~
+                    weight: ~
+                    taxCategory: ~
+                    variety: ~
+                add:
+                    form_group_general:
+                        '':
+                            product:
+                                type: sonata_type_model_autocomplete
+                                property: [translations.name, code]
+                                attr:
+                                    readonly: ~
+                                _options:
+                                    admin_code: librinfo_ecommerce.admin.product
+                            name:
+                                label: librinfo.label.product_variant_name
+                                type: text
+                            code:
+                                type: Blast\CoreBundle\Form\Type\EntityCodeType
+                                label: librinfo.label.product_variant_code
+                            # channelPricings:
+                            #     label: librinfo.label.product_variant_prices
+                            #     type: sonata_type_collection
+                            #     type_options:
+                            #         btn_add: false
+                            #         delete: false
+                            #     _options:
+                            #         admin_code: librinfo_ecommerce.admin.channel_pricing
+                            #         edit: inline
+                            #         inline: table
+#                            price:
+#                                type: text
+                            # optionValues:
+                            #     _options:
+                            #         admin_code: librinfo_ecommerce_option_value.admin.product
+                            _options:
+                                fieldsOrder: [product, name, code]
+                    _options:
+                        tabsOrder: [form_group_general, form_tab_history]
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add: ~
+            # FILTER
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add: ~
 
 ####################
 # PRODUCT ATTRIBUTE
