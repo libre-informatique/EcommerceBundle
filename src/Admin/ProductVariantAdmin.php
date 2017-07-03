@@ -18,7 +18,8 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Librinfo\EcommerceBundle\Repository\ChannelRepository;
 use Librinfo\EcommerceBundle\Entity\ProductVariant;
-use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
+
+//use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -26,7 +27,7 @@ use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
 class ProductVariantAdmin extends CoreAdmin
 {
 
-    use EmbeddedAdmin;
+    //use EmbeddedAdmin;
     
     /**
      * @var ProductInterface
@@ -46,10 +47,11 @@ class ProductVariantAdmin extends CoreAdmin
             // First step creation form with just the Product field
             $options = ['property' => ['code', 'translations.name'], 'required' => true];
             $productAdmin = $this->getConfigurationPool()->getInstance($this->productAdminCode);
-            if (is_callable([$productAdmin, 'SonataTypeModelAutocompleteCallback']))
-                $options['callback'] = function($admin, $property, $value) {
+            if (is_callable([$productAdmin, 'SonataTypeModelAutocompleteCallback'])) {
+                $options['callback'] = function ($admin, $property, $value) {
                     $admin->SonataTypeModelAutocompleteCallback($admin, $property, $value);
                 };
+            }
             $mapper
                 ->with('form_tab_new_product_variant')
                 ->add('product', 'sonata_type_model_autocomplete', $options, ['admin_code' => $this->productAdminCode])
@@ -70,7 +72,7 @@ class ProductVariantAdmin extends CoreAdmin
                 'choice_label'  => 'fullName',
                 ], [
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product'
-            ]);
+                ]);
             
             if (!$this->isChild() && $mapper->has('product')) {
                 $mapper->remove('product');
@@ -117,8 +119,9 @@ class ProductVariantAdmin extends CoreAdmin
      */
     public function getProduct()
     {
-        if ($this->product)
+        if ($this->product) {
             return $this->product;
+        }
 
         if ($this->subject && $product = $this->subject->getProduct()) {
             $this->product = $product;
@@ -127,8 +130,9 @@ class ProductVariantAdmin extends CoreAdmin
 
         if ($product_id = $this->getRequest()->get('product_id')) {
             $product = $this->getConfigurationPool()->getContainer()->get('sylius.repository.product')->find($product_id);
-            if (!$product)
+            if (!$product) {
                 throw new \Exception(sprintf('Unable to find Product with id : %s', $product_id));
+            }
             $this->product = $product;
             return $product;
         }
@@ -148,5 +152,4 @@ class ProductVariantAdmin extends CoreAdmin
         ;
         return $queryBuilder;
     }
-
 }
