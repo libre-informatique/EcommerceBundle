@@ -96,6 +96,8 @@ parameters:
                                 type: sonata_type_collection
                                 label: false
                                 by_reference: false
+                                attr:
+                                    data-showFields: 'name,code'
                                 type_options:
                                     btn_add: false
                                     delete_options:
@@ -105,8 +107,8 @@ parameters:
                                             required: false
                                 required: true    # if not true, child form fields cannot be required (why ??)
                                 _options:
-                                    edit: inline
-                                    inline: table
+                                    edit: modal
+                                    inline: table-list
                                     admin_code: librinfo_ecommerce.admin.product_variant_embedded
 
                     form_tab_images:
