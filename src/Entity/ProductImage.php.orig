@@ -20,17 +20,29 @@ class ProductImage extends BaseProductImage
 
     use OuterExtensible,
         ProductImageExtension;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> master
     /**
      * @var File
      */
     protected $realFile;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> master
     public function __construct()
     {
         parent::__construct();
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> master
     public function getRealFile()
     {
         return $this->realFile;
@@ -41,10 +53,17 @@ class ProductImage extends BaseProductImage
         $this->realFile = $file;
         return $this;
     }
+<<<<<<< HEAD
 
     public function getFile()
     {
 
+=======
+    
+    public function getFile()
+    {
+        
+>>>>>>> master
         return parent::getFile();
     }
 
@@ -54,7 +73,11 @@ class ProductImage extends BaseProductImage
         parent::setFile($file);
         return $this;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> master
     public function setOwner($owner)
     {
         parent::setOwner($owner);
@@ -64,11 +87,14 @@ class ProductImage extends BaseProductImage
     public function setPath($path)
     {
         parent::setPath($path);
+<<<<<<< HEAD
 
         if($this->realFile !== null) {
             $this->path = md5($this->realFile->getId());
         }
 
+=======
+>>>>>>> master
         return $this;
     }
 
@@ -83,4 +109,8 @@ class ProductImage extends BaseProductImage
         return (string) $this->getPath();
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master

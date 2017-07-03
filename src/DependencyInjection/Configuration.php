@@ -38,6 +38,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('product')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductCodeGenerator')->end()
                         ->scalarNode('product_variant')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
+                        ->scalarNode('product_variant_embedded')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
                     ->end()
                 ->end()
             ->end()
