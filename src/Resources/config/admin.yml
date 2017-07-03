@@ -76,7 +76,7 @@ services:
 
     librinfo_ecommerce.admin.order:
         class: Librinfo\EcommerceBundle\Admin\OrderAdmin
-        arguments: [~, Sylius\Component\Core\Model\Order, LibrinfoEcommerceBundle:OrderCRUD]
+        arguments: [~, Librinfo\EcommerceBundle\Entity\Order, LibrinfoEcommerceBundle:OrderCRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
@@ -123,3 +123,44 @@ services:
               group: Customers Relationship Management
               label: librinfo.label.customer_group_admin
               label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.channel_pricing:
+        class: Librinfo\EcommerceBundle\Admin\ChannelPricingAdmin
+        arguments: [~, Sylius\Component\Core\Model\ChannelPricing, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Channel
+              label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.tax_rate:
+        class: Librinfo\EcommerceBundle\Admin\TaxRateAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\TaxRate, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: TaxRate
+              label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.tax_category:
+        class: Librinfo\EcommerceBundle\Admin\TaxCategoryAdmin
+        arguments: [~, Sylius\Component\Taxation\Model\TaxCategory, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: TaxCategory
+              label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.zone:
+        class: Blast\CoreBundle\Admin\GenericAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\Zone, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Zone
+              label_translator_strategy: blast_core.label.strategy.librinfo
+

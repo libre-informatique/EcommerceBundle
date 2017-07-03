@@ -13,10 +13,19 @@ namespace Librinfo\EcommerceBundle\Entity;
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ProductVariantExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ProductVariant extends BaseProductVariant
 {
-    use OuterExtensible, ProductVariantExtension;
+
+    use OuterExtensible,
+        ProductVariantExtension;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->translations = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -29,16 +38,31 @@ class ProductVariant extends BaseProductVariant
             $string .= ' (';
 
             foreach ($this->getOptionValues() as $option) {
-                $string .= $option->getOption()->getName().': '.$option->getValue().', ';
+                $string .= $option->getOption()->getName() . ': ' . $option->getValue() . ', ';
             }
 
-            $string = substr($string, 0, -2).')';
-        }
-        elseif ($this->getName())
+            $string = substr($string, 0, -2) . ')';
+        } elseif ($this->getName())
             $string .= ' (' . $this->getName() . ')';
         elseif ($this->getCode())
             $string .= ' (CODE: ' . $this->getCode() . ')';
 
         return $string;
     }
+
+    public function getCurrentLocale()
+    {
+        return $this->currentLocale;
+    }
+
+    public function getName()
+    {
+        // Dirty hack to handle sonata sub form management
+        if ($this->currentLocale === null) {
+            $this->setCurrentLocale("fr_FR");
+        }
+
+        return $this->getTranslation()->getName();
+    }
+
 }

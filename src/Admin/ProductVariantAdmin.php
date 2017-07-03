@@ -15,12 +15,19 @@ use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Resource\Factory\Factory;
+use Librinfo\EcommerceBundle\Repository\ChannelRepository;
+use Librinfo\EcommerceBundle\Entity\ProductVariant;
+use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
 class ProductVariantAdmin extends CoreAdmin
 {
+
+    use EmbeddedAdmin;
+    
     /**
      * @var ProductInterface
      */
@@ -37,7 +44,7 @@ class ProductVariantAdmin extends CoreAdmin
         $request = $this->getRequest();
         if ($request->getMethod() == 'GET' && !$request->get($this->getIdParameter()) && !$product) {
             // First step creation form with just the Product field
-            $options = ['property' => ['code', 'translations.name'],  'required' => true];
+            $options = ['property' => ['code', 'translations.name'], 'required' => true];
             $productAdmin = $this->getConfigurationPool()->getInstance($this->productAdminCode);
             if (is_callable([$productAdmin, 'SonataTypeModelAutocompleteCallback']))
                 $options['callback'] = function($admin, $property, $value) {
@@ -45,7 +52,7 @@ class ProductVariantAdmin extends CoreAdmin
                 };
             $mapper
                 ->with('form_tab_new_product_variant')
-                    ->add('product', 'sonata_type_model_autocomplete', $options, ['admin_code' => $this->productAdminCode])
+                ->add('product', 'sonata_type_model_autocomplete', $options, ['admin_code' => $this->productAdminCode])
             ;
             return;
         }
@@ -57,16 +64,19 @@ class ProductVariantAdmin extends CoreAdmin
         if ($product) {
             $mapper->add('optionValues', 'entity', [
                 'query_builder' => $this->optionValuesQueryBuilder(),
-                'class' => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
-                'multiple' => true,
-                'required' => false,
-                'choice_label' => 'fullName',
-            ], [
+                'class'         => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
+                'multiple'      => true,
+                'required'      => false,
+                'choice_label'  => 'fullName',
+                ], [
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product'
             ]);
+            
+            if (!$this->isChild() && $mapper->has('product')) {
+                $mapper->remove('product');
+            }
         }
     }
-
 
     /**
      * @return ProductVariantInterface
@@ -75,9 +85,23 @@ class ProductVariantAdmin extends CoreAdmin
     {
         $productVariantFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_variant');
 
+        /* @var $object ProductVariant */
         $object = $productVariantFactory->createNew();
         if ($this->getProduct()) {
             $object->setProduct($this->getProduct());
+        }
+        
+        /* @var $channelPricingFactory Factory */
+        $channelPricingFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel_pricing');
+        
+        /* @var $channelRepository ChannelRepository */
+        $channelRepository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.channel');
+        
+        foreach ($channelRepository->getAvailableAndActiveChannels() as $channel) {
+            dump($channel);
+            $channelPricing = $channelPricingFactory->createNew();
+            $channelPricing->setChannelCode($channel->getCode());
+            $object->addChannelPricing($channelPricing);
         }
 
         foreach ($this->getExtensions() as $extension) {
@@ -85,7 +109,6 @@ class ProductVariantAdmin extends CoreAdmin
         }
         return $object;
     }
-
 
     /**
      * @return ProductInterface|null
@@ -124,6 +147,5 @@ class ProductVariantAdmin extends CoreAdmin
         ;
         return $queryBuilder;
     }
-
 
 }
