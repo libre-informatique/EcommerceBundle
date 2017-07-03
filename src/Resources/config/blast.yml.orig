@@ -1,3 +1,15 @@
+
+
+
+
+
+
+
+
+
+
+
+
 # Copyright (C) 2015-2016 Libre Informatique
 #
 # This file is licenced under the GNU GPL v3.
@@ -12,6 +24,8 @@ parameters:
 ##########
 
         Librinfo\EcommerceBundle\Entity\Product:
+            form_theme:
+                - LibrinfoEcommerceBundle:Form:fields.html.twig
             Sonata\AdminBundle\Show\ShowMapper:
                 forceTabs: true
                 add:
@@ -62,10 +76,10 @@ parameters:
                                 label: librinfo.label.product_code
                             enabled: boolean
                             description:
-                                type: textarea
+                                type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
                             shortDescription:
-                                type: textarea
+                                type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
                             metaKeywords:
                                 type: text
@@ -93,10 +107,16 @@ parameters:
                                             required: false
                                 required: true    # if not true, child form fields cannot be required (why ??)
                                 _options:
+<<<<<<< HEAD
                                     edit: modal
                                     inline: table-list
                                     admin_code: librinfo_ecommerce.admin.product_variant_embedded
 
+=======
+                                    edit: inline
+                                    inline: table
+                                    admin_code: librinfo_ecommerce.admin.product_variant
+>>>>>>> master
                     form_tab_images:
                         '':
                             images:
@@ -154,7 +174,8 @@ parameters:
 
 ############################
 # PRODUCT VARIANT
-##################
+############################
+
 
         Librinfo\EcommerceBundle\Entity\ProductVariant:
             # SHOW
@@ -203,7 +224,8 @@ parameters:
                             product:
                                 type: sonata_type_model_autocomplete
                                 property: [translations.name, code]
-                                disabled: true
+                                attr:
+                                    readonly: ~
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
                             name:
@@ -232,7 +254,6 @@ parameters:
 #                            price:
 #                                type: text
                             optionValues:
-                                property: fullName
                                 _options:
                                     admin_code: librinfo_ecommerce_option_value.admin.product
                             taxCategory: ~
@@ -524,7 +545,11 @@ parameters:
                 add:
                     form_group_general:
                         '':
+<<<<<<< HEAD
                             channelCode:
+=======
+                            channelCode: 
+>>>>>>> master
                                 label: librinfo.label.channel_code
                                 type: text
                                 attr:
@@ -740,7 +765,7 @@ parameters:
 # ORDER
 ########
 
-        Sylius\Component\Core\Model\Order:
+        Librinfo\EcommerceBundle\Entity\Order:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 titleTemplate: LibrinfoEcommerceBundle:OrderAdmin/Show:show_title.html.twig
@@ -1319,8 +1344,13 @@ parameters:
                             skippingShippingStepAllowed: ~
                             skippingPaymentStepAllowed: ~
                             accountVerificationRequired: ~
+<<<<<<< HEAD
 
             # FORM
+=======
+    
+            # FORM    
+>>>>>>> master
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_tab_general:
@@ -1340,8 +1370,13 @@ parameters:
                             skippingShippingStepAllowed: ~
                             skippingPaymentStepAllowed: ~
                             accountVerificationRequired: ~
+<<<<<<< HEAD
 
             # LIST
+=======
+    
+            # LIST    
+>>>>>>> master
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     code: ~
@@ -1359,9 +1394,15 @@ parameters:
                     skippingShippingStepAllowed: ~
                     skippingPaymentStepAllowed: ~
                     accountVerificationRequired: ~
+<<<<<<< HEAD
 
 
             # FILTERS
+=======
+    
+                    
+            # FILTERS 
+>>>>>>> master
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
@@ -1379,13 +1420,21 @@ parameters:
                     skippingShippingStepAllowed: ~
                     skippingPaymentStepAllowed: ~
                     accountVerificationRequired: ~
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> master
 ##########
 # TAXRATE
 ##########
 
         Librinfo\EcommerceBundle\Entity\TaxRate:
+<<<<<<< HEAD
             baseRoute:
+=======
+            baseRoute: 
+>>>>>>> master
                 name: admin_librinfo_ecommerce_taxrate
                 pattern: librinfo/ecommerce/taxrate
             # SHOW
@@ -1401,7 +1450,11 @@ parameters:
                             createdAt: ~
                             updatedAt: ~
 
+<<<<<<< HEAD
             # FORM
+=======
+            # FORM    
+>>>>>>> master
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     '':
@@ -1412,6 +1465,7 @@ parameters:
                             includedInPrice: ~
                             calculator: ~
                             zone: ~
+<<<<<<< HEAD
                             createdAt:
                                 type: sonata_type_date_picker
                                 required: false
@@ -1420,6 +1474,16 @@ parameters:
                                 required: false
 
             # LIST
+=======
+                            createdAt: 
+                                type: sonata_type_date_picker
+                                required: false
+                            updatedAt: 
+                                type: sonata_type_date_picker
+                                required: false
+    
+            # LIST    
+>>>>>>> master
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     code: ~
@@ -1429,9 +1493,15 @@ parameters:
                     calculator: ~
                     createdAt: ~
                     updatedAt: ~
+<<<<<<< HEAD
 
 
             # FILTERS
+=======
+    
+                    
+            # FILTERS 
+>>>>>>> master
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
@@ -1447,7 +1517,11 @@ parameters:
 ##############
 
         Sylius\Component\Taxation\Model\TaxCategory:
+<<<<<<< HEAD
             baseRoute:
+=======
+            baseRoute: 
+>>>>>>> master
                 name: admin_librinfo_ecommerce_taxcategory
                 pattern: librinfo/ecommerce/taxcategory
             # SHOW
@@ -1458,8 +1532,13 @@ parameters:
                     description: ~
                     createdAt: ~
                     updatedAt: ~
+<<<<<<< HEAD
 
             # FORM
+=======
+    
+            # FORM    
+>>>>>>> master
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     '':
@@ -1467,6 +1546,7 @@ parameters:
                             code: ~
                             name: ~
                             description: ~
+<<<<<<< HEAD
                             createdAt:
                                 type: sonata_type_date_picker
                                 required: false
@@ -1475,6 +1555,16 @@ parameters:
                                 required: false
                             rates: ~
             # LIST
+=======
+                            createdAt: 
+                                type: sonata_type_date_picker
+                                required: false
+                            updatedAt: 
+                                type: sonata_type_date_picker
+                                required: false
+                            rates: ~
+            # LIST    
+>>>>>>> master
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     code: ~
@@ -1482,9 +1572,15 @@ parameters:
                     description: ~
                     createdAt: ~
                     updatedAt: ~
+<<<<<<< HEAD
 
 
             # FILTERS
+=======
+    
+                    
+            # FILTERS 
+>>>>>>> master
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
@@ -1492,6 +1588,7 @@ parameters:
                     description: ~
                     createdAt: ~
                     updatedAt: ~
+<<<<<<< HEAD
 
 #######
 # ZONE
@@ -1499,6 +1596,15 @@ parameters:
 
         Librinfo\EcommerceBundle\Entity\Zone:
             baseRoute:
+=======
+                    
+#######
+# ZONE
+#######
+                    
+        Librinfo\EcommerceBundle\Entity\Zone:
+            baseRoute: 
+>>>>>>> master
                 name: admin_librinfo_ecommerce_zone
                 pattern: librinfo/ecommerce/zone
             Sonata\AdminBundle\Show\ShowMapper:
@@ -1527,3 +1633,7 @@ parameters:
                     code: ~
                     type: ~
                     scope: ~
+<<<<<<< HEAD
+=======
+    
+>>>>>>> master
