@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -35,7 +37,7 @@ class ProductAdmin extends CoreAdmin
     }
 
     /**
-     * Configure create/edit form fields
+     * Configure create/edit form fields.
      *
      * @param FormMapper
      */
@@ -45,9 +47,8 @@ class ProductAdmin extends CoreAdmin
         $this->configFormHandlesRelations($mapper);
     }
 
-
     /**
-     * Configure Show view fields
+     * Configure Show view fields.
      *
      * @param ShowMapper $mapper
      */
@@ -62,7 +63,7 @@ class ProductAdmin extends CoreAdmin
      */
     public function getNewInstance()
     {
-        /** @var ProductFactoryInterface $productFactory **/
+        /** @var ProductFactoryInterface $productFactory * */
         $productFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product');
 
         /** @var ProductInterface $product */
@@ -71,9 +72,9 @@ class ProductAdmin extends CoreAdmin
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
+
         return $object;
     }
-
 
     public function prePersist($product)
     {
@@ -82,6 +83,4 @@ class ProductAdmin extends CoreAdmin
         $slugGenerator = $this->getConfigurationPool()->getContainer()->get('sylius.generator.slug');
         $product->setSlug($slugGenerator->generate($product->getName()));
     }
-
-
 }

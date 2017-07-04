@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -14,7 +16,7 @@ use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
@@ -25,8 +27,10 @@ class LibrinfoEcommerceExtension extends BlastCoreExtension
      */
     public function loadCodeGenerators(ContainerBuilder $container, array $config)
     {
-        foreach(['product', 'product_variant', 'product_variant_embedded'] as $cg)
+        foreach (['product', 'product_variant', 'product_variant_embedded'] as $cg) {
             $container->setParameter("librinfo_ecommerce.code_generator.$cg", $config['code_generator'][$cg]);
+        }
+
         return $this;
     }
 }

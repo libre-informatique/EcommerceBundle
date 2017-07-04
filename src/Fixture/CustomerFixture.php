@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Librinfo\EcommerceBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
@@ -13,9 +23,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class CustomerFixture extends AbstractFixture implements FixtureInterface
 {
-
     /**
-     *
      * @var EntityManager
      */
     private $customerManager;
@@ -46,7 +54,7 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
         $faker = \Faker\Factory::create();
         $groups = [];
 
-        for ($g = 0; $g < $options['customer_group_number']; $g++) {
+        for ($g = 0; $g < $options['customer_group_number']; ++$g) {
             $code = sprintf('GRP%s', $faker->randomNumber(3));
             $group = new CustomerGroup();
             $group->setCode($code);
@@ -56,7 +64,7 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
         }
         $this->customerManager->flush();
 
-        for ($i = 0; $i < $options['customer_number']; $i++) {
+        for ($i = 0; $i < $options['customer_number']; ++$i) {
             $group = $groups[rand(0, $options['customer_group_number'] - 1)];
 
             $customer = new Organism();
@@ -91,5 +99,4 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
             ->scalarNode('email_domain')->defaultValue('libre-informatique.fr')->end()
         ;
     }
-
 }

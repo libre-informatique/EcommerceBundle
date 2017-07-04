@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -51,13 +53,13 @@ class OrderCRUDController extends CRUDController
      */
     protected function preDelete(Request $request, $object)
     {
-        
-        if ($object->getState() != PaymentInterface::STATE_NEW)
+        if ($object->getState() != PaymentInterface::STATE_NEW) {
             throw new AccessDeniedException('An order cannot be deleted after the checkout is completed. You should cancel it instead.');
+        }
     }
 
     /**
-     * @param mixed   $object
+     * @param mixed $object
      *
      * @return Response|null
      */
@@ -65,7 +67,4 @@ class OrderCRUDController extends CRUDController
     {
         throw new AccessDeniedException();
     }
-
-
-
 }

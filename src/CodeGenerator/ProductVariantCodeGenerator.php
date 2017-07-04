@@ -1,9 +1,12 @@
 <?php
+
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -32,25 +35,30 @@ class ProductVariantCodeGenerator implements CodeGeneratorInterface
     }
 
     /**
-     * @param  ProductVariant $productVariant
+     * @param ProductVariant $productVariant
+     *
      * @return string
+     *
      * @throws InvalidEntityCodeException
      */
     public static function generate($productVariant)
     {
-        if (!$product = $productVariant->getProduct())
+        if (!$product = $productVariant->getProduct()) {
             throw new InvalidEntityCodeException('librinfo.error.missing_product');
-        if (!$productCode = $product->getCode())
+        }
+        if (!$productCode = $product->getCode()) {
             throw new InvalidEntityCodeException('librinfo.error.missing_product_code');
-
+        }
         // TODO: improve this (use productVariant name or optionValues...) and handle code unicity
         return sprintf('%s-%s', $productCode, strtoupper($productVariant->getName()));
     }
 
     /**
-     * @param  string         $code
-     * @param  ProductVariant $productVariant
-     * @return boolean
+     * @param string         $code
+     * @param ProductVariant $productVariant
+     *
+     * @return bool
+     *
      * @todo   ...
      */
     public static function validate($code, $productVariant = null)
@@ -60,10 +68,11 @@ class ProductVariantCodeGenerator implements CodeGeneratorInterface
 
     /**
      * @return string
+     *
      * @todo   ...
      */
     public static function getHelp()
     {
-        return "";
+        return '';
     }
 }

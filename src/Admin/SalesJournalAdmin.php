@@ -1,8 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
@@ -17,12 +26,13 @@ class SalesJournalAdmin extends OrderAdmin
         $query = parent::createQuery($context);
         $alias = $query->getRootAliases()[0];
         $query
-            ->leftJoin("$alias.payments",'payments')
+            ->leftJoin("$alias.payments", 'payments')
             ->andWhere("$alias.state = :state")
-            ->orWhere("payments.state = :statePayments")
+            ->orWhere('payments.state = :statePayments')
             ->setParameter('state', OrderInterface::STATE_FULFILLED)
             ->setParameter('statePayments', PaymentInterface::STATE_COMPLETED)
         ;
+
         return $query;
     }
 
@@ -33,8 +43,9 @@ class SalesJournalAdmin extends OrderAdmin
     {
         $list = parent::configureActionButtons($action, $object);
 
-        if (isset($list['create']))
+        if (isset($list['create'])) {
             unset($list['create']);
+        }
 
         return $list;
     }
@@ -43,5 +54,4 @@ class SalesJournalAdmin extends OrderAdmin
     {
         return $object->getNumber() ?: $object->getId();
     }
-
 }

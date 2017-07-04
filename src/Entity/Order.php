@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -16,7 +18,6 @@ use Sylius\Component\Core\Model\Order as BaseOrder;
 
 class Order extends BaseOrder
 {
-
     use OuterExtensible,
         OrderExtension;
 
@@ -30,7 +31,7 @@ class Order extends BaseOrder
      */
     public function setCurrencyCode($currencyCode)
     {
-//        Assert::string($currencyCode);
+        //        Assert::string($currencyCode);
 
         $this->currencyCode = $currencyCode;
     }
@@ -39,5 +40,4 @@ class Order extends BaseOrder
     {
         return (string) parent::__toString();
     }
-
 }

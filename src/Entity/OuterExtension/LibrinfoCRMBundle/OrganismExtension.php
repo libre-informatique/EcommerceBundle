@@ -1,10 +1,12 @@
 <?php
 
 /*
+ * This file is part of the Blast Project package.
+ *
  * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -62,14 +64,14 @@ trait OrganismExtension
     protected $lastLogin;
 
     /**
-     * Random string sent to the user email address in order to verify it
+     * Random string sent to the user email address in order to verify it.
      *
      * @var string
      */
     protected $emailVerificationToken;
 
     /**
-     * Random string sent to the user email address in order to verify the password resetting request
+     * Random string sent to the user email address in order to verify the password resetting request.
      *
      * @var string
      */
@@ -101,7 +103,7 @@ trait OrganismExtension
     protected $credentialsExpireAt;
 
     /**
-     * We need at least one role to be able to authenticate
+     * We need at least one role to be able to authenticate.
      *
      * @var array
      */
@@ -167,7 +169,7 @@ trait OrganismExtension
      */
     protected $user;
 
-   /**
+    /**
      * @var AddressInterface
      */
     protected $defaultAddress;
@@ -769,7 +771,6 @@ trait OrganismExtension
         $this->subscribedToNewsletter = $subscribedToNewsletter;
     }
 
-
     public function updateName()
     {
         $firstname = mb_convert_case($this->getFirstName(), MB_CASE_TITLE);
@@ -792,59 +793,63 @@ trait OrganismExtension
 
     /**
      * @param AddressInterface $defaultAddress
+     *
      * @return self
      */
     public function setDefaultAddress(AddressInterface $defaultAddress = null)
     {
         $this->defaultAddress = $defaultAddress;
 
-        if (null !== $defaultAddress)
+        if (null !== $defaultAddress) {
             $this->addAddress($defaultAddress);
+        }
 
         return $this;
     }
 
     /**
      * @param AddressInterface $address
+     *
      * @return self
      */
     public function addAddress(AddressInterface $address)
     {
-        if (!$this->hasAddress($address))
-        {
+        if (!$this->hasAddress($address)) {
             $this->addresses->add($address);
             $address->setCustomer($this);
 
-            if(!$this->getDefaultAddress())
+            if (!$this->getDefaultAddress()) {
                 $this->setDefaultAddress($address);
+            }
         }
+
         return $this;
     }
 
     /**
      * @param AddressInterface $address
+     *
      * @return self
      */
     public function removeAddress(AddressInterface $address)
     {
         $this->addresses->removeElement($address);
 
-        if( $address->getId() == $this->defaultAddress->getId())
-        {
-            if( $this->addresses->count() > 0 )
+        if ($address->getId() == $this->defaultAddress->getId()) {
+            if ($this->addresses->count() > 0) {
                 $this->defaultAddress = $this->addresses[0];
-            else
+            } else {
                 $this->defaultAddress = null;
+            }
         }
 
         return $this;
-
     }
 
     /**
-     *
      * @param AddressInterface $address
-     * @return boolean
+     *
+     * @return bool
      */
     public function hasAddress(AddressInterface $address)
     {

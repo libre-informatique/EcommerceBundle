@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -21,18 +23,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class OrderStateType extends AbstractType
 {
-
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = function(Options $options) {
+        $choices = function (Options $options) {
             $choices = [
-                'librinfo.order_state.cart'      => OrderInterface::STATE_CART,
-                'librinfo.order_state.new'       => OrderInterface::STATE_NEW,
+                'librinfo.order_state.cart' => OrderInterface::STATE_CART,
+                'librinfo.order_state.new' => OrderInterface::STATE_NEW,
                 'librinfo.order_state.fulfilled' => OrderInterface::STATE_FULFILLED,
                 'librinfo.order_state.cancelled' => OrderInterface::STATE_CANCELLED,
             ];
-            if ($options['no_cart'])
+            if ($options['no_cart']) {
                 unset($choices[OrderInterface::STATE_CART]);
+            }
+
             return $choices;
         };
 
@@ -58,5 +61,4 @@ class OrderStateType extends AbstractType
     {
         return 'librinfo_type_order_state';
     }
-
 }

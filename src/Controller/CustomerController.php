@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -42,7 +44,7 @@ class CustomerController extends ResourceController
 
             $event = $this->eventDispatcher->dispatchPreEvent(
                 ResourceActions::CREATE,
-                $configuration, 
+                $configuration,
                 $newResource
             );
 
@@ -88,7 +90,7 @@ class CustomerController extends ResourceController
                 $this->metadata->getName() => $newResource,
                 'form' => $form->createView(),
             ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::CREATE . '.html'))
+            ->setTemplate($configuration->getTemplate(ResourceActions::CREATE.'.html'))
         ;
 
         return $this->viewHandler->handle($configuration, $view);
@@ -149,7 +151,7 @@ class CustomerController extends ResourceController
                 $this->metadata->getName() => $resource,
                 'form' => $form->createView(),
             ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
+            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE.'.html'))
         ;
 
         return $this->viewHandler->handle($configuration, $view);

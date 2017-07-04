@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -19,7 +21,7 @@ use Librinfo\SonataSyliusUserBundle\EventListener\TraceableListener as BaseTrace
 class TraceableListener extends BaseTraceableListener
 {
     /**
-     * sets Traceable dateTime and user information when persisting entity
+     * sets Traceable dateTime and user information when persisting entity.
      *
      * @param LifecycleEventArgs $eventArgs
      */
@@ -27,11 +29,12 @@ class TraceableListener extends BaseTraceableListener
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->hasTrait($entity, 'Librinfo\SonataSyliusUserBundle\Entity\Traits\Traceable'))
+        if (!$this->hasTrait($entity, 'Librinfo\SonataSyliusUserBundle\Entity\Traits\Traceable')) {
             return;
+        }
 
-        $this->logger->debug("[TraceableListener] Entering TraceableListener for « prePersist » event");
-        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : NULL;
+        $this->logger->debug('[TraceableListener] Entering TraceableListener for « prePersist » event');
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
         $now = new DateTime('NOW');
 
         if ($user instanceof UserInterface && !$user instanceof ShopUserInterface) {
@@ -43,7 +46,7 @@ class TraceableListener extends BaseTraceableListener
     }
 
     /**
-     * sets Traceable dateTime and user information when updating entity
+     * sets Traceable dateTime and user information when updating entity.
      *
      * @param LifecycleEventArgs $eventArgs
      */
@@ -51,16 +54,18 @@ class TraceableListener extends BaseTraceableListener
     {
         $entity = $eventArgs->getObject();
 
-        if ( !$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable') )
+        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable')) {
             return;
+        }
 
-        $this->logger->debug("[TraceableListener] Entering TraceableListener for « preUpdate » event");
+        $this->logger->debug('[TraceableListener] Entering TraceableListener for « preUpdate » event');
 
-        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : NULL;
+        $user = $this->tokenStorage->getToken() ? $this->tokenStorage->getToken()->getUser() : null;
         $now = new DateTime('NOW');
 
-        if ( $user instanceof UserInterface && !$user instanceof ShopUserInterface )
+        if ($user instanceof UserInterface && !$user instanceof ShopUserInterface) {
             $entity->setUpdatedBy($user);
+        }
 
         $entity->setUpdatedAt($now);
     }

@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -16,11 +18,9 @@ use Sylius\Component\Core\Model\Product as BaseProduct;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\ImageInterface;
-use Librinfo\EcommerceBundle\Entity\ProductImage;
 
 class Product extends BaseProduct
 {
-
     use OuterExtensible,
         ProductExtension;
 
@@ -44,28 +44,31 @@ class Product extends BaseProduct
     public function setImages(ArrayCollection $images)
     {
         $this->images = $images;
+
         return $this;
     }
 
     /**
-     * alias for LibrinfoMediaBundle/CRUDController::handleFiles()
+     * alias for LibrinfoMediaBundle/CRUDController::handleFiles().
      *
      * @param File $file
+     *
      * @return Variety
      */
     public function addLibrinfoFile(ProductImage $file = null)
     {
-
         if (!$this->images->contains($file)) {
             $this->images->add($file);
         }
+
         return $this;
     }
 
     /**
-     * alias for LibrinfoMediaBundle/CRUDController::handleFiles()
+     * alias for LibrinfoMediaBundle/CRUDController::handleFiles().
      *
      * @param File $file
+     *
      * @return Variety
      */
     public function removeLibrinfoFile(ProductImage $file)
@@ -73,6 +76,7 @@ class Product extends BaseProduct
         if ($this->images->contains($file)) {
             $this->images->removeElement($file);
         }
+
         return $this;
     }
 
@@ -80,5 +84,4 @@ class Product extends BaseProduct
     {
         return (string) parent::__toString();
     }
-
 }

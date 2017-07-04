@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -17,7 +19,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class ProductVariant extends BaseProductVariant
 {
-
     use OuterExtensible,
         ProductVariantExtension;
 
@@ -38,14 +39,15 @@ class ProductVariant extends BaseProductVariant
             $string .= ' (';
 
             foreach ($this->getOptionValues() as $option) {
-                $string .= $option->getOption()->getName() . ': ' . $option->getValue() . ', ';
+                $string .= $option->getOption()->getName().': '.$option->getValue().', ';
             }
 
-            $string = substr($string, 0, -2) . ')';
-        } elseif ($this->getName())
-            $string .= ' (' . $this->getName() . ')';
-        elseif ($this->getCode())
-            $string .= ' (CODE: ' . $this->getCode() . ')';
+            $string = substr($string, 0, -2).')';
+        } elseif ($this->getName()) {
+            $string .= ' ('.$this->getName().')';
+        } elseif ($this->getCode()) {
+            $string .= ' (CODE: '.$this->getCode().')';
+        }
 
         return $string;
     }
@@ -59,10 +61,9 @@ class ProductVariant extends BaseProductVariant
     {
         // Dirty hack to handle sonata sub form management
         if ($this->currentLocale === null) {
-            $this->setCurrentLocale("fr_FR");
+            $this->setCurrentLocale('fr_FR');
         }
 
         return $this->getTranslation()->getName();
     }
-
 }
