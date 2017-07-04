@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -17,7 +19,6 @@ use Librinfo\MediaBundle\Entity\File;
 
 class ProductImage extends BaseProductImage
 {
-
     use OuterExtensible,
         ProductImageExtension;
 
@@ -39,12 +40,12 @@ class ProductImage extends BaseProductImage
     public function setRealFile(File $file)
     {
         $this->realFile = $file;
+
         return $this;
     }
 
     public function getFile()
     {
-
         return parent::getFile();
     }
 
@@ -52,12 +53,14 @@ class ProductImage extends BaseProductImage
     {
         // Shouldn't be used
         parent::setFile($file);
+
         return $this;
     }
 
     public function setOwner($owner)
     {
         parent::setOwner($owner);
+
         return $this;
     }
 
@@ -65,7 +68,7 @@ class ProductImage extends BaseProductImage
     {
         parent::setPath($path);
 
-        if($this->realFile !== null) {
+        if ($this->realFile !== null) {
             $this->path = md5($this->realFile->getId());
         }
 
@@ -75,6 +78,7 @@ class ProductImage extends BaseProductImage
     public function setType($type)
     {
         parent::setType($type);
+
         return $this;
     }
 
@@ -82,5 +86,4 @@ class ProductImage extends BaseProductImage
     {
         return (string) $this->getPath();
     }
-
 }

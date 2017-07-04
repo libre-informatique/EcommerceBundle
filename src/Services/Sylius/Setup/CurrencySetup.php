@@ -1,11 +1,12 @@
 <?php
 
 /*
- * Copyright (C) Paweł Jędrzejewski
+ * This file is part of the Blast Project package.
+ *
  * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -22,7 +23,7 @@ use Symfony\Component\Intl\Intl;
 
 /**
  * Initial code taken from: Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetup
- * This one uses the "sylius_currency.currency" app parameter instead of asking currency code to the user
+ * This one uses the "sylius_currency.currency" app parameter instead of asking currency code to the user.
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -46,8 +47,8 @@ final class CurrencySetup implements CurrencySetupInterface
 
     /**
      * @param RepositoryInterface $currencyRepository
-     * @param FactoryInterface $currencyFactory
-     * @param string $currencyCode    3 letters currency code (USD, EUR...)
+     * @param FactoryInterface    $currencyFactory
+     * @param string              $currencyCode       3 letters currency code (USD, EUR...)
      */
     public function __construct(RepositoryInterface $currencyRepository, FactoryInterface $currencyFactory, $currencyCode)
     {
@@ -65,19 +66,21 @@ final class CurrencySetup implements CurrencySetupInterface
         if (null !== $existingCurrency) {
             $name = $this->getCurrencyName($existingCurrency->getCode());
             $output->writeln(sprintf('Currency <info>%s (%s)</info> exists already. Skipped.', $this->currencyCode, $name));
+
             return $existingCurrency;
         }
 
         $name = $this->getCurrencyName($this->currencyCode);
-        if (null === $name)
+        if (null === $name) {
             throw new \Exception(sprintf('Currency with code <info>%s</info> could not be resolved. Please check your "sylius_currency.currency" parameter', $this->currencyCode));
-
+        }
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyFactory->createNew();
         $currency->setCode($this->currencyCode);
         $this->currencyRepository->add($currency);
 
         $output->writeln(sprintf('Added <info>%s %s)</info> currency.', $this->currencyCode, $name));
+
         return $currency;
     }
 

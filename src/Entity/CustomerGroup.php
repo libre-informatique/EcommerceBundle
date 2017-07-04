@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -17,7 +19,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class CustomerGroup extends BaseCustomerGroup
 {
-
     use OuterExtensible,
         CustomerGroupExtension;
 
@@ -31,15 +32,14 @@ class CustomerGroup extends BaseCustomerGroup
 
     public function __toString()
     {
-        return (string) sprintf("%s (%s)", $this->getName(), $this->getCode());
+        return (string) sprintf('%s (%s)', $this->getName(), $this->getCode());
     }
 
     /**
-     * __clone()
+     * __clone().
      */
     public function __clone()
     {
         $this->id = null;
     }
-
 }

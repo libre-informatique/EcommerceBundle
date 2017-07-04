@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -21,14 +23,13 @@ use Librinfo\EcommerceBundle\Entity\ProductImage;
  */
 class ProductCRUDController extends CRUDController
 {
-
     /**
-     * Generate product variant, based on product options
+     * Generate product variant, based on product options.
+     *
      * @todo !!
      */
     public function generateVariantsAction(Request $request)
     {
-        
     }
 
     public function generateProductSlugAction(Request $request)
@@ -57,13 +58,13 @@ class ProductCRUDController extends CRUDController
 
                 if ($file) {
                     if (method_exists($product, 'removeLibrinfoFile')) {
-                        $product->removeLibrinfoFile($this->getProductImageEntity($file,$product));
+                        $product->removeLibrinfoFile($this->getProductImageEntity($file, $product));
                         $this->manager->remove($file);
-                    } else if (method_exists($product, 'setLibrinfoFile')) {
-                        $product->setLibrinfoFile($this->getProductImageEntity($file,$product));
+                    } elseif (method_exists($product, 'setLibrinfoFile')) {
+                        $product->setLibrinfoFile($this->getProductImageEntity($file, $product));
                         $this->manager->remove($file);
                     } else {
-                        throw new \Exception('You must define ' . $className . '::removeLibrinfoFile() method or ' . $className . '::setFile() in case of a one to one');
+                        throw new \Exception('You must define '.$className.'::removeLibrinfoFile() method or '.$className.'::setFile() in case of a one to one');
                     }
                 }
             }
@@ -75,14 +76,13 @@ class ProductCRUDController extends CRUDController
 
                 if ($file) {
                     if (method_exists($product, 'addLibrinfoFile')) {
-                        
-                        $product->addLibrinfoFile($this->getProductImageEntity($file,$product));
+                        $product->addLibrinfoFile($this->getProductImageEntity($file, $product));
                         $file->setOwned(true);
-                    } else if (method_exists($product, 'setLibrinfoFile')) {
-                        $product->setLibrinfoFile($this->getProductImageEntity($file,$product));
+                    } elseif (method_exists($product, 'setLibrinfoFile')) {
+                        $product->setLibrinfoFile($this->getProductImageEntity($file, $product));
                         $file->setOwned(true);
                     } else {
-                        throw new \Exception('You must define ' . $className . '::addLibrinfoFile() method or ' . $className . '::setLibrinfoFile() in case of a one to one');
+                        throw new \Exception('You must define '.$className.'::addLibrinfoFile() method or '.$className.'::setLibrinfoFile() in case of a one to one');
                     }
                 }
             }
@@ -97,7 +97,7 @@ class ProductCRUDController extends CRUDController
             ->setOwner($product)
             ->setType('main')
             ->setPath($product->getSlug());
+
         return $productImage;
     }
-
 }

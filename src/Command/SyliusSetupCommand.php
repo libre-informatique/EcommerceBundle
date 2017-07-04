@@ -1,11 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2017 Libre Informatique
- * Copyright (C) Paweł Jędrzejewski
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -24,7 +25,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * This was initially taken from Sylius\Bundle\CoreBundle\Command\SetupCommand
+ * This was initially taken from Sylius\Bundle\CoreBundle\Command\SetupCommand.
  *
  * main changes:
  * Sylius\Component\Core\Model\AdminUserInterface was replaced by
@@ -69,7 +70,7 @@ EOT
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      * @param $localeCode
      *
@@ -99,8 +100,8 @@ EOT
 
     /**
      * @param SonataUserInterface $user
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * @param InputInterface      $input
+     * @param OutputInterface     $output
      *
      * @return SonataUserInterface
      */
@@ -157,7 +158,7 @@ EOT
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @return mixed
@@ -202,7 +203,7 @@ EOT
     }
 
     /**
-     * @param string $message
+     * @param string   $message
      * @param \Closure $validator
      *
      * @return Question

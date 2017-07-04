@@ -1,35 +1,41 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Addressing\Model\Zone as BaseZone;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ZoneExtension;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 
 class Zone extends BaseZone
 {
-
     use OuterExtensible,
        ZoneExtension;
-    
 
     public function initZone()
     {
         $this->initOuterExtendedClasses();
     }
-    
+
     public function __toString()
     {
         return (string) $this->getName();
     }
 
     /**
-     * __clone()
+     * __clone().
      */
     public function __clone()
     {
         $this->id = null;
     }
-
 }

@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
@@ -9,10 +19,9 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 
 class TaxRate extends BaseTaxRate
 {
-
     use OuterExtensible,
         TaxRateExtension;
-    
+
     /**
      * @var ZoneInterface
      */
@@ -22,7 +31,7 @@ class TaxRate extends BaseTaxRate
     {
         $this->initOuterExtendedClasses();
     }
-    
+
     /**
      * @return ZoneInterface
      */
@@ -34,23 +43,21 @@ class TaxRate extends BaseTaxRate
     /**
      * @param ZoneInterface $zone
      */
-    function setZone(ZoneInterface $zone)
+    public function setZone(ZoneInterface $zone)
     {
         $this->zone = $zone;
     }
 
-    
     public function __toString()
     {
-        return (string) sprintf("%s (%s)", $this->getName(), $this->getCode());
+        return (string) sprintf('%s (%s)', $this->getName(), $this->getCode());
     }
 
     /**
-     * __clone()
+     * __clone().
      */
     public function __clone()
     {
         $this->id = null;
     }
-
 }

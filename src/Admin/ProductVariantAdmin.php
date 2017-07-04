@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -26,9 +28,8 @@ use Librinfo\EcommerceBundle\Entity\ProductVariant;
  */
 class ProductVariantAdmin extends CoreAdmin
 {
-
     //use EmbeddedAdmin;
-    
+
     /**
      * @var ProductInterface
      */
@@ -56,6 +57,7 @@ class ProductVariantAdmin extends CoreAdmin
                 ->with('form_tab_new_product_variant')
                 ->add('product', 'sonata_type_model_autocomplete', $options, ['admin_code' => $this->productAdminCode])
             ;
+
             return;
         }
 
@@ -66,20 +68,19 @@ class ProductVariantAdmin extends CoreAdmin
         if ($product) {
             $mapper->add('optionValues', 'entity', [
                 'query_builder' => $this->optionValuesQueryBuilder(),
-                'class'         => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
-                'multiple'      => true,
-                'required'      => false,
-                'choice_label'  => 'fullName',
+                'class' => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
+                'multiple' => true,
+                'required' => false,
+                'choice_label' => 'fullName',
                 ], [
-                'admin_code' => 'librinfo_ecommerce_option_value.admin.product'
+                'admin_code' => 'librinfo_ecommerce_option_value.admin.product',
                 ]);
-            
+
             if (!$this->isChild() && $mapper->has('product')) {
                 $mapper->remove('product');
             }
         }
     }
-
 
     /**
      * @return ProductVariantInterface
@@ -93,13 +94,13 @@ class ProductVariantAdmin extends CoreAdmin
         if ($this->getProduct()) {
             $object->setProduct($this->getProduct());
         }
-        
+
         /* @var $channelPricingFactory Factory */
         $channelPricingFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel_pricing');
-        
+
         /* @var $channelRepository ChannelRepository */
         $channelRepository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.channel');
-        
+
         foreach ($channelRepository->getAvailableAndActiveChannels() as $channel) {
             $channelPricing = $channelPricingFactory->createNew();
             $channelPricing->setChannelCode($channel->getCode());
@@ -109,12 +110,13 @@ class ProductVariantAdmin extends CoreAdmin
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
+
         return $object;
     }
 
-
     /**
      * @return ProductInterface|null
+     *
      * @throws \Exception
      */
     public function getProduct()
@@ -125,6 +127,7 @@ class ProductVariantAdmin extends CoreAdmin
 
         if ($this->subject && $product = $this->subject->getProduct()) {
             $this->product = $product;
+
             return $product;
         }
 
@@ -134,6 +137,7 @@ class ProductVariantAdmin extends CoreAdmin
                 throw new \Exception(sprintf('Unable to find Product with id : %s', $product_id));
             }
             $this->product = $product;
+
             return $product;
         }
 
@@ -150,6 +154,7 @@ class ProductVariantAdmin extends CoreAdmin
             ->andWhere('o.option IN (SELECT o2 FROM LibrinfoEcommerceBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
             ->setParameter('product', $this->product)
         ;
+
         return $queryBuilder;
     }
 }

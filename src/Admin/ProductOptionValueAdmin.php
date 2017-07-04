@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -23,6 +25,7 @@ class ProductOptionValueAdmin extends CoreAdmin
 {
     /**
      * @param FormMapper $mapper
+     *
      * @todo  handle multiple locales
      */
     public function configureFormFields(FormMapper $mapper)
@@ -30,15 +33,16 @@ class ProductOptionValueAdmin extends CoreAdmin
         parent::configureFormFields($mapper);
 
         // If form is embedded
-        if ( $this->getParentFieldDescription() )
+        if ($this->getParentFieldDescription()) {
             $mapper->remove($this->getParentFieldDescription()->getAssociationMapping()['mappedBy']);
+        }
 
         // This is a hack to prevent having the "No locale has been set and current locale is undefined" error
         // during the creation of a new ProductOptionValue in the ProductOption form.
         // TODO: build the ProductOption form differently to handle multiple locales...
         $builder = $mapper->getFormBuilder();
         $admin = $this;
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use ($admin) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($admin) {
             if (!$event->getData()) {
                 $entity = $admin->getNewInstance();  // This will set the locale
                 $event->setData($entity);
@@ -58,8 +62,7 @@ class ProductOptionValueAdmin extends CoreAdmin
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
+
         return $object;
     }
-
-
 }

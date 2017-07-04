@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -29,7 +31,8 @@ class ProductVariantCRUDController extends CRUDController
             $form = $this->admin->getForm();
             $form->handleRequest($request);
             $product_id = $form->getData()->getProduct()->getId();
-            $url =  $this->admin->generateUrl('create', ['product_id' => $product_id]);
+            $url = $this->admin->generateUrl('create', ['product_id' => $product_id]);
+
             return new RedirectResponse($url);
         }
 
@@ -39,14 +42,14 @@ class ProductVariantCRUDController extends CRUDController
     /**
      * This method is called from createAction.
      *
-     * @param Request          $request
-     * @param ProductVariant   $object
+     * @param Request        $request
+     * @param ProductVariant $object
      *
      * @return Response|null
      */
     protected function preCreate(Request $request, $object)
     {
-//        if ($product_id = $request->get('product_id')) {
+        //        if ($product_id = $request->get('product_id')) {
 //            $product = $this->get('sylius.repository.product')->find($product_id);
 //            if (!$product)
 //                throw $this->createNotFoundException(sprintf('unable to find Product with id : %s', $product_id));

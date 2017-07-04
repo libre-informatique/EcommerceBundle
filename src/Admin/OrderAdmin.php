@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
@@ -23,6 +33,7 @@ class OrderAdmin extends CoreAdmin
             ->andWhere("$alias.state != :state")
             ->setParameter('state', OrderInterface::STATE_CART)
         ;
+
         return $query;
     }
 
@@ -33,8 +44,9 @@ class OrderAdmin extends CoreAdmin
     {
         $list = parent::configureActionButtons($action, $object);
 
-        if (isset($list['create']))
+        if (isset($list['create'])) {
             unset($list['create']);
+        }
 
         return $list;
     }
@@ -43,5 +55,4 @@ class OrderAdmin extends CoreAdmin
     {
         return $object->getNumber() ?: $object->getId();
     }
-
 }

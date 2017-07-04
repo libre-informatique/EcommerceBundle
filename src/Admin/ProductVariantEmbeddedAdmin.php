@@ -13,7 +13,6 @@
 namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
-use Librinfo\EcommerceBundle\Admin\ProductVariantAdmin;
 
 class ProductVariantEmbeddedAdmin extends ProductVariantAdmin
 {

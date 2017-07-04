@@ -1,10 +1,12 @@
 <?php
 
 /*
- * Copyright (C) 2015-2016 Libre Informatique
+ * This file is part of the Blast Project package.
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -27,7 +29,7 @@ class ProductAttributeAdmin extends CoreAdmin
      */
     public function getNewInstance()
     {
-        /** @var AttributeFactoryInterface $attributeFactory **/
+        /** @var AttributeFactoryInterface $attributeFactory * */
         $attributeFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_attribute');
 
         /** @var ProductAttributeInterface $object */
@@ -36,18 +38,19 @@ class ProductAttributeAdmin extends CoreAdmin
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
+
         return $object;
     }
 
     /**
      * @param ProductAttributeInterface $object
-     * @param string $method
+     * @param string                    $method
      */
     public function prePersistOrUpdate($object, $method)
     {
         parent::prePersistOrUpdate($object, $method);
 
-        switch($object->getType()) {
+        switch ($object->getType()) {
             case IntegerAttributeType::TYPE:
                 $object->setStorageType(AttributeValueInterface::STORAGE_INTEGER);
                 break;
@@ -66,6 +69,5 @@ class ProductAttributeAdmin extends CoreAdmin
             default:
                 $object->setStorageType(AttributeValueInterface::STORAGE_TEXT);
         }
-
     }
 }
