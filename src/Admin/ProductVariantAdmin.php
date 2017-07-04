@@ -95,6 +95,15 @@ class ProductVariantAdmin extends CoreAdmin
             $object->setProduct($this->getProduct());
         }
 
+        $this->buildDefaultPricings($object);
+
+        foreach ($this->getExtensions() as $extension) {
+            $extension->alterNewInstance($this, $object);
+        }
+        return $object;
+    }
+
+    public function buildDefaultPricings($object) {
         /* @var $channelPricingFactory Factory */
         $channelPricingFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel_pricing');
 

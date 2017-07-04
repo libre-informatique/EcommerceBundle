@@ -97,7 +97,7 @@ parameters:
                                 _options:
                                     edit: modal
                                     inline: table-list
-                                    admin_code: librinfo_ecommerce.admin.product_variant_embedded
+                                    admin_code: librinfo_ecommerce.admin.product_variant
 
                     form_tab_images:
                         '':
@@ -226,8 +226,6 @@ parameters:
                                     admin_code: librinfo_ecommerce.admin.channel_pricing
                                     edit: inline
                                     inline: table
-#                            price:
-#                                type: text
                             optionValues:
                                 _options:
                                     admin_code: librinfo_ecommerce_option_value.admin.product
