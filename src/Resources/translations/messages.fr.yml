@@ -2,6 +2,7 @@ Action: Action
 form_group_availability: Disponibilité
 form_group_properties: Dimensions & poids
 form_group_stock: Stock
+form_group_variants: Variantes
 form_group_customer: Client
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
@@ -133,7 +134,7 @@ librinfo:
         token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks
-        type: Type  
+        type: Type
         values: Valeurs
         variants: Déclinaisons
         weight: Poids
@@ -170,5 +171,3 @@ librinfo:
             label: Contenu d'option d'article
         product_variant_admin:
             label: Déclinaison d'article
-
-
