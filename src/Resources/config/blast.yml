@@ -12,6 +12,8 @@ parameters:
 ##########
 
         Librinfo\EcommerceBundle\Entity\Product:
+            form_theme:
+                - LibrinfoEcommerceBundle:Form:fields.html.twig
             Sonata\AdminBundle\Show\ShowMapper:
                 forceTabs: true
                 add:
@@ -51,8 +53,8 @@ parameters:
 
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    form_group_general:
-                        '':
+                    form_tab_general:
+                        form_group_general:
                             name:
                                 type: text
                                 label: librinfo.label.product_name
@@ -62,10 +64,10 @@ parameters:
                                 label: librinfo.label.product_code
                             enabled: boolean
                             description:
-                                type: textarea
+                                type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
                             shortDescription:
-                                type: textarea
+                                type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
                             metaKeywords:
                                 type: text
@@ -77,7 +79,7 @@ parameters:
                                 label: librinfo.label.product_options
                                 required: false
                     form_tab_variants:
-                        '':
+                        form_group_variants:
                             variants:
                                 type: sonata_type_collection
                                 label: false
@@ -154,7 +156,8 @@ parameters:
 
 ############################
 # PRODUCT VARIANT
-##################
+############################
+
 
         Librinfo\EcommerceBundle\Entity\ProductVariant:
             # SHOW
@@ -198,14 +201,8 @@ parameters:
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    form_group_general:
-                        '':
-                            product:
-                                type: sonata_type_model_autocomplete
-                                property: [translations.name, code]
-                                disabled: true
-                                _options:
-                                    admin_code: librinfo_ecommerce.admin.product
+                    form_tab_general:
+                        form_group_general:
                             name:
                                 label: librinfo.label.product_variant_name
                                 type: text
@@ -232,7 +229,6 @@ parameters:
 #                            price:
 #                                type: text
                             optionValues:
-                                property: fullName
                                 _options:
                                     admin_code: librinfo_ecommerce_option_value.admin.product
                             taxCategory: ~
@@ -250,8 +246,6 @@ parameters:
                             height: ~
                             depth: ~
                             weight: ~
-                    _options:
-                        tabsOrder: [form_group_general, form_tab_history]
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
@@ -329,8 +323,8 @@ parameters:
                     taxCategory: ~
                     variety: ~
                 add:
-                    form_group_general:
-                        '':
+                    form_tab_general:
+                        form_group_general:
                             product:
                                 type: sonata_type_model_autocomplete
                                 property: [translations.name, code]
@@ -362,7 +356,7 @@ parameters:
                             _options:
                                 fieldsOrder: [product, name, code]
                     _options:
-                        tabsOrder: [form_group_general, form_tab_history]
+                        tabsOrder: [form_group_general]
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add: ~

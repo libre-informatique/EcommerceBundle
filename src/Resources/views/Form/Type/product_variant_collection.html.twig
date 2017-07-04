@@ -99,13 +99,14 @@
                 {% if sonata_admin.inline == 'table-list' %}
                     {% if form.children | length > 0 %}
                         {% if name == 'variants' and sonata_admin.admin.classnameLabel == 'SeedsProduct' %}
+
+                            {% set showFields = attr['data-showFields']|split(',') %}
+
                             <table class="table table-bordered table-responsive">
                                 <thead>
                                     <tr>
                                         {% for field_name, nested_field in form.children | first.children %}
-                                            {% if field_name == '_delete' %}
-                                                <!-- <th>{{ 'action_delete'|trans({}, 'SonataAdminBundle') }}</th> -->
-                                            {% else %}
+                                            {% if field_name in showFields %}
                                                 <th {% if nested_field.vars['required'] %} class="required" {% endif %} {% if (nested_field.vars['attr']['hidden'] is defined) and (nested_field.vars['attr']['hidden']) %} style="display:none;" {% endif %}>
                                                     {{ nested_field.vars.label|trans({}, nested_field.vars['sonata_admin'].admin.translationDomain |default(nested_field.vars.translation_domain) ) }}
                                                 </th>
@@ -118,7 +119,7 @@
                                 </thead>
                                 <tbody class="sonata-ba-tbody">
 
-                                    {% set showFields = attr['data-showFields']|split(',') %}
+
 
                                     {% for nested_group_field_name, nested_group_field in form.children %}
 
@@ -143,7 +144,10 @@
                                             <td class="col-md-3">
                                                 <div class="btn-group">
 
-                                                    <a href="{{path('admin_librinfo_ecommerce_productvariant_edit',{'id': nested_group_field.vars.value.id})}}" class="btn btn-success openInModal">
+                                                    <a href="{{sonata_admin.field_description.associationadmin.generateUrl(
+                                                    'edit',
+                                                    {'id': nested_group_field.vars.value.id}
+                                                )}}" class="btn btn-success openInModal">
                                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                                         <!-- {{'action_edit'|trans({},'SonataAdminBundle')}} -->
                                                     </a>
