@@ -21,14 +21,11 @@ use Sylius\Component\Resource\Factory\Factory;
 use Librinfo\EcommerceBundle\Repository\ChannelRepository;
 use Librinfo\EcommerceBundle\Entity\ProductVariant;
 
-//use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
-
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
 class ProductVariantAdmin extends CoreAdmin
 {
-    //use EmbeddedAdmin;
 
     /**
      * @var ProductInterface
@@ -44,28 +41,13 @@ class ProductVariantAdmin extends CoreAdmin
     {
         $product = $this->getProduct();
         $request = $this->getRequest();
-        if ($request->getMethod() == 'GET' && !$request->get($this->getIdParameter()) && !$product) {
-            // First step creation form with just the Product field
-            $options = ['property' => ['code', 'translations.name'], 'required' => true];
-            $productAdmin = $this->getConfigurationPool()->getInstance($this->productAdminCode);
-            if (is_callable([$productAdmin, 'SonataTypeModelAutocompleteCallback'])) {
-                $options['callback'] = function ($admin, $property, $value) {
-                    $admin->SonataTypeModelAutocompleteCallback($admin, $property, $value);
-                };
-            }
-            $mapper
-                ->with('form_tab_new_product_variant')
-                ->add('product', 'sonata_type_model_autocomplete', $options, ['admin_code' => $this->productAdminCode])
-            ;
-
-            return;
-        }
 
         // Regular edit/create form
         parent::configureFormFields($mapper);
 
         // Limit the variant option values to the product options
         if ($product) {
+
             $mapper->add('optionValues', 'entity', [
                 'query_builder' => $this->optionValuesQueryBuilder(),
                 'class' => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
@@ -75,10 +57,6 @@ class ProductVariantAdmin extends CoreAdmin
                 ], [
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product',
                 ]);
-
-            if (!$this->isChild() && $mapper->has('product')) {
-                $mapper->remove('product');
-            }
         }
     }
 

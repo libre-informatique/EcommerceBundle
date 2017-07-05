@@ -106,7 +106,7 @@
                                 <thead>
                                     <tr>
                                         {% for field_name, nested_field in form.children | first.children %}
-                                            {% if field_name in showFields %}
+                                            {% if field_name in showFields and field_name != 'id' %}
                                                 <th {% if nested_field.vars['required'] %} class="required" {% endif %} {% if (nested_field.vars['attr']['hidden'] is defined) and (nested_field.vars['attr']['hidden']) %} style="display:none;" {% endif %}>
                                                     {{ nested_field.vars.label|trans({}, nested_field.vars['sonata_admin'].admin.translationDomain |default(nested_field.vars.translation_domain) ) }}
                                                 </th>
@@ -125,7 +125,7 @@
 
                                         <tr>
                                             {% for field_name, nested_field in nested_group_field.children %}
-                                                {% if field_name != '_delete' and field_name in showFields %}
+                                                {% if field_name != '_delete' and  field_name != 'id' and field_name in showFields %}
                                                     <td
                                                         class="
                                                     sonata-ba-td-{{ id }}-{{ field_name  }}
@@ -136,12 +136,16 @@
                                                         style="display:none;"
                                                         {% endif %}>
 
-                                                        {{ form_widget(nested_field,{'attr':{'readonly':'true','disabled':'disabled'},'disabled':'disabled'}) }}
-
+                                                        {% if field_name != 'id' %}
+                                                            {{ form_widget(nested_field,{'attr':{'readonly':'true','disabled':'disabled'},'disabled':'disabled'}) }}
+                                                        {% endif %}
                                                     </td>
                                                 {% endif %}
                                             {% endfor %}
                                             <td class="col-md-3">
+
+                                                {{ form_widget(nested_group_field.children['id']) }}
+
                                                 <div class="btn-group">
 
                                                     <a href="{{sonata_admin.field_description.associationadmin.generateUrl(
@@ -210,15 +214,17 @@
             {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_orm_one_association_script.html.twig' %}
 
         {% else %}
+            {% set product = form.parent.vars.value %}
+
             <span id="field_actions_{{ id }}">
                 {% if display_create_button %}
                     <a
                         href="{{ sonata_admin.field_description.associationadmin.generateUrl(
                             'create',
-                            sonata_admin.field_description.getOption('link_parameters', {})
+                            sonata_admin.field_description.getOption('link_parameters', {})|merge({'productId':product.id})
                         ) }}"
-                        onclick="return start_field_dialog_form_add_{{ id }}(this);"
-                        class="btn btn-success btn-sm sonata-ba-action"
+                        {# onclick="return start_field_dialog_form_add_{{ id }}(this);" #}
+                        class="btn btn-success btn-sm sonata-ba-action openInModal"
                         title="{{ btn_add|trans({}, btn_catalogue) }}">
                         <i class="fa fa-plus-circle"></i>
                         {{ btn_add|trans({}, btn_catalogue) }}
@@ -226,9 +232,37 @@
                 {% endif %}
             </span>
 
-            {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_modal.html.twig' %}
+            <script>
+                $(document).on('li-modal.success',function() {
+                    // reload the form element
+                    $.ajax({
+                        url: '{{ path('sonata_admin_retrieve_form_element', {
+                            'elementId': id,
+                            'subclass':  sonata_admin.admin.getActiveSubclassCode(),
+                            'objectId':  sonata_admin.admin.root.id(sonata_admin.admin.root.subject),
+                            'uniqid':    sonata_admin.admin.root.uniqid,
+                            'code':      sonata_admin.admin.root.code
+                        })|raw }}',
+                        data: {_xml_http_request: true },
+                        dataType: 'html',
+                        type: 'POST',
+                        success: function(html) {
+                            jQuery('#field_container_{{ id }}').replaceWith(html);
 
-            {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_orm_many_association_script.html.twig' %}
+                            Admin.shared_setup();
+
+                            var newElement = jQuery('#{{ id }} [value="' + data.objectId + '"]');
+                            if (newElement.is("input")) {
+                                newElement.attr('checked', 'checked');
+                            } else {
+                                newElement.attr('selected', 'selected');
+                            }
+
+                            jQuery('#field_container_{{ id }}').trigger('sonata-admin-append-form-element');
+                        }
+                    });
+                });
+            </script>
         {% endif %}
     </div>
 {% endif %}
