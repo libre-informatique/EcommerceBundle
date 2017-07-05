@@ -93,9 +93,8 @@ parameters:
                                     edit: modal
                                     inline: table-list
                                     admin_code: librinfo_ecommerce.admin.product_variant
-
                     form_tab_images:
-                        '':
+                        form_group_images:
                             images:
                                 type: Librinfo\MediaBundle\Form\Type\DropzoneType
                                 required: false
@@ -210,6 +209,10 @@ parameters:
                                 type: sonata_type_model_hidden
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
+                            _options:
+                                fieldsOrder: [product, name, code]
+                        form_group_pricing:
+                            taxCategory: ~
                             channelPricings:
                                 label: librinfo.label.product_variant_prices
                                 type: sonata_type_collection
@@ -220,12 +223,10 @@ parameters:
                                     admin_code: librinfo_ecommerce.admin.channel_pricing
                                     edit: inline
                                     inline: table
+                        form_group_options:
                             optionValues:
                                 _options:
                                     admin_code: librinfo_ecommerce_option_value.admin.product
-                            taxCategory: ~
-                            _options:
-                                fieldsOrder: [product, name, code, optionValues]
                         form_group_stock:
                             onHand:
                                 required: false
@@ -238,6 +239,8 @@ parameters:
                             height: ~
                             depth: ~
                             weight: ~
+                        _options:
+                            groupsOrder: [form_group_general,form_group_pricing,form_group_options,form_group_properties,form_group_stock]
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:

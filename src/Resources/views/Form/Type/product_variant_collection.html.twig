@@ -144,8 +144,6 @@
                                             {% endfor %}
                                             <td class="col-md-3">
 
-                                                {{ form_widget(nested_group_field.children['id']) }}
-
                                                 <div class="btn-group">
 
                                                     <a href="{{sonata_admin.field_description.associationadmin.generateUrl(
@@ -153,7 +151,6 @@
                                                     {'id': nested_group_field.vars.value.id}
                                                 )}}" class="btn btn-success openInModal">
                                                         <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                        <!-- {{'action_edit'|trans({},'SonataAdminBundle')}} -->
                                                     </a>
 
                                                     <a
@@ -163,7 +160,6 @@
                                                     )}}"
                                                         class="btn btn-danger openInModal">
                                                         <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                                                        <!-- {{'action_delete'|trans({},'SonataAdminBundle')}} -->
                                                     </a>
 
                                                 </div>
@@ -223,7 +219,6 @@
                             'create',
                             sonata_admin.field_description.getOption('link_parameters', {})|merge({'productId':product.id})
                         ) }}"
-                        {# onclick="return start_field_dialog_form_add_{{ id }}(this);" #}
                         class="btn btn-success btn-sm sonata-ba-action openInModal"
                         title="{{ btn_add|trans({}, btn_catalogue) }}">
                         <i class="fa fa-plus-circle"></i>

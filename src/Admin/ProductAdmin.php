@@ -19,6 +19,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -45,6 +47,17 @@ class ProductAdmin extends CoreAdmin
     {
         //calls to methods of traits
         $this->configFormHandlesRelations($mapper);
+        $admin = $this;
+        $mapper->getFormBuilder()->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event) use ($admin) {
+                $form = $event->getForm();
+                $subject = $admin->getSubject($event->getData());
+                if ($form->has('variants')) {
+                    $form->remove('variants');
+                }
+            }
+        );
     }
 
     /**

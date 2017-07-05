@@ -26,7 +26,6 @@ use Librinfo\EcommerceBundle\Entity\ProductVariant;
  */
 class ProductVariantAdmin extends CoreAdmin
 {
-
     /**
      * @var ProductInterface
      */
@@ -47,7 +46,6 @@ class ProductVariantAdmin extends CoreAdmin
 
         // Limit the variant option values to the product options
         if ($product) {
-
             $mapper->add('optionValues', 'entity', [
                 'query_builder' => $this->optionValuesQueryBuilder(),
                 'class' => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
@@ -78,10 +76,12 @@ class ProductVariantAdmin extends CoreAdmin
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
+
         return $object;
     }
 
-    public function buildDefaultPricings($object) {
+    public function buildDefaultPricings($object)
+    {
         /* @var $channelPricingFactory Factory */
         $channelPricingFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel_pricing');
 
