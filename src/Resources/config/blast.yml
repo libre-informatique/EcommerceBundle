@@ -170,11 +170,13 @@ parameters:
                                 label: librinfo.label.product_variant_name
                             code:
                                 label: librinfo.label.product_variant_code
-                            price:
-                                template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_price.html.twig
                             optionValues:
                                 template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_optionvalues.html.twig
                                 admin_code: librinfo_ecommerce_option_value.admin.product
+                        show_group_pricing:
+                            taxCategory: ~
+                            price:
+                                template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_price.html.twig
                         show_group_stock:
                             onHand: ~
                             onHold: ~
