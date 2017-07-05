@@ -33,9 +33,9 @@ class ProductVariant extends BaseProductVariant
      */
     public function __toString()
     {
-        if($this->getProduct())
+        if ($this->getProduct()) {
             $string = $this->getProduct()->getName();
-        else {
+        } else {
             $string = '';
         }
 
@@ -53,7 +53,7 @@ class ProductVariant extends BaseProductVariant
             $string .= ' (CODE: '.$this->getCode().')';
         }
 
-        return (string)$string;
+        return (string) $string;
     }
 
     public function getCurrentLocale()
