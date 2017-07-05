@@ -49,9 +49,12 @@ parameters:
                             images:
                                 template: LibrinfoMediaBundle:CRUD:show_images.html.twig
                     _options:
-                        tabsOrder: [form_group_general, show_tab_variants, form_tab_history]
+                        tabsOrder: [form_group_general, show_tab_variants, form_tab_images, form_tab_history]
 
             Sonata\AdminBundle\Form\FormMapper:
+                remove:
+                    variants: ~
+                    images: ~
                 add:
                     form_tab_general:
                         form_group_general:
@@ -158,8 +161,8 @@ parameters:
             Sonata\AdminBundle\Show\ShowMapper:
                 forceTabs: true
                 add:
-                    form_group_general:
-                        '':
+                    form_tab_general:
+                        form_group_general:
                             product:
                                 admin_code: librinfo_ecommerce.admin.product
                             name:
@@ -191,7 +194,7 @@ parameters:
                             createdAt: ~
                             updatedAt: ~
                     _options:
-                        tabsOrder: [form_group_general, form_tab_history]
+                        tabsOrder: [form_tab_general, form_tab_history]
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:

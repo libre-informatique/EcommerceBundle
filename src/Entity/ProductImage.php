@@ -32,6 +32,18 @@ class ProductImage extends BaseProductImage
         parent::__construct();
     }
 
+    public function getName() {
+        return $this->realFile->getName();
+    }
+
+    public function getBase64File() {
+        return $this->realFile->getBase64File();
+    }
+
+    public function getMimeType() {
+        return $this->realFile->getMimeType();
+    }
+
     public function getRealFile()
     {
         return $this->realFile;
