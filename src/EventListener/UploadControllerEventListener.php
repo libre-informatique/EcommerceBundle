@@ -31,7 +31,7 @@ class UploadControllerEventListener extends BaseUploadControllerEventListener
         /* @var $productImage ProductImage */
         $productImage = $repo->find($event->getSubject()['context']['id']);
 
-        if($productImage) {
+        if ($productImage) {
             $file = $productImage->getRealFile();
 
             $event->setArgument('file', $file);
