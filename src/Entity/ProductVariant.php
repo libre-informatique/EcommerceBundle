@@ -39,14 +39,14 @@ class ProductVariant extends BaseProductVariant
             $string .= ' (';
 
             foreach ($this->getOptionValues() as $option) {
-                $string .= $option->getOption()->getName().': '.$option->getValue().', ';
+                $string .= $option->getOption()->getName() . ': ' . $option->getValue() . ', ';
             }
 
-            $string = substr($string, 0, -2).')';
+            $string = substr($string, 0, -2) . ')';
         } elseif ($this->getName()) {
-            $string .= ' ('.$this->getName().')';
+            $string .= ' (' . $this->getName() . ')';
         } elseif ($this->getCode()) {
-            $string .= ' (CODE: '.$this->getCode().')';
+            $string .= ' (CODE: ' . $this->getCode() . ')';
         }
 
         return $string;

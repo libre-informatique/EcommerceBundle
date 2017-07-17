@@ -64,7 +64,7 @@ class ProductCRUDController extends CRUDController
                         $product->setLibrinfoFile($this->getProductImageEntity($file, $product));
                         $this->manager->remove($file);
                     } else {
-                        throw new \Exception('You must define '.$className.'::removeLibrinfoFile() method or '.$className.'::setFile() in case of a one to one');
+                        throw new \Exception('You must define ' . $className . '::removeLibrinfoFile() method or ' . $className . '::setFile() in case of a one to one');
                     }
                 }
             }
@@ -82,7 +82,7 @@ class ProductCRUDController extends CRUDController
                         $product->setLibrinfoFile($this->getProductImageEntity($file, $product));
                         $file->setOwned(true);
                     } else {
-                        throw new \Exception('You must define '.$className.'::addLibrinfoFile() method or '.$className.'::setLibrinfoFile() in case of a one to one');
+                        throw new \Exception('You must define ' . $className . '::addLibrinfoFile() method or ' . $className . '::setLibrinfoFile() in case of a one to one');
                     }
                 }
             }
