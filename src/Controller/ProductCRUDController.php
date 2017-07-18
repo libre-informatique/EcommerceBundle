@@ -118,7 +118,7 @@ class ProductCRUDController extends CRUDController
                 ->getRepository('LibrinfoEcommerceBundle:Product')
                 ->findOneBy(['id' => $image->getOwner()]);
 
-            foreach($product->getImages() as $img) {
+            foreach ($product->getImages() as $img) {
                 $img->setType(ProductImage::TYPE_THUMBNAIL);
             }
 
