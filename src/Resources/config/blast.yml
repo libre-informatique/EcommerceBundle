@@ -82,6 +82,9 @@ parameters:
                                 label: librinfo.label.product_options
                                 required: false
                     form_tab_variants:
+                        _options:
+                            countChildItems:
+                                - variants
                         form_group_variants:
                             variants:
                                 type: sonata_type_collection
@@ -523,10 +526,10 @@ parameters:
                                     readonly: true
                             price:
                                 label: librinfo.label.price
-                                type: text
+                                type: Librinfo\EcommerceBundle\Form\Type\PriceCentsType
                             original_price:
                                 label: librinfo.label.original_price
-                                type: text
+                                type: Librinfo\EcommerceBundle\Form\Type\PriceCentsType
 
 #######################
 # CRM bundle overrides
