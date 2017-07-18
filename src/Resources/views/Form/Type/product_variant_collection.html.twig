@@ -225,6 +225,18 @@
                         {{ btn_add|trans({}, btn_catalogue) }}
                     </a>
                 {% endif %}
+
+                <a
+                    href="{{ sonata_admin.field_description.associationadmin.generateUrl(
+                        'list',
+                        sonata_admin.field_description.getOption('link_parameters', {})|merge({'productId':product.id})
+                    ) }}"
+                    target="_blank" 
+                    class="btn btn-default btn-sm sonata-ba-action"
+                    title="{{ 'librinfo.button.go_to_list'|trans({}, 'messages') }}">
+                    <i class="fa fa-list"></i>
+                    {{ 'librinfo.button.go_to_list'|trans({}, 'messages') }}
+                </a>
             </span>
 
             <script>

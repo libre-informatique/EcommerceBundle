@@ -33,6 +33,7 @@ class UploadControllerEventListener extends BaseUploadControllerEventListener
 
         if ($productImage) {
             $file = $productImage->getRealFile();
+            $file->isCover = $productImage->getType() === ProductImage::TYPE_COVER;
 
             $event->setArgument('file', $file);
         }

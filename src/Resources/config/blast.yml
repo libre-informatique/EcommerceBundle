@@ -123,8 +123,8 @@ parameters:
                     _actions:
                         shop_link:
                             template: 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'
-                        variants:
-                            template: 'LibrinfoEcommerceBundle:CRUD:list__action_variants.html.twig'
+                        # variants:
+                        #     template: 'LibrinfoEcommerceBundle:CRUD:list__action_variants.html.twig'
                     _export_formats:
                         csv: [code, name, available]
                         xls: csv
@@ -183,9 +183,6 @@ parameters:
                             tracked:
                                 type: boolean
                                 label: librinfo.label.tracked_stock
-                        show_group_availability:
-                            available:
-                                type: boolean
                         show_group_properties:
                             width: ~
                             height: ~
@@ -288,6 +285,7 @@ parameters:
             # FILTER
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
+                    # product.id: ~
                     translations.name:
                         label: librinfo.label.product_variant_name
                     code:

@@ -32,10 +32,19 @@ class ProductAdmin extends CoreAdmin
         configureShowFields as configShowHandlesRelations;
     }
 
+    public function configureActionButtons($action, $object = null)
+    {
+        $list = parent::configureActionButtons($action, $object);
+        return array_merge($list, [
+            ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig']
+        ]);
+    }
+
     protected function configureRoutes(RouteCollection $collection)
     {
         parent::configureRoutes($collection);
         $collection->add('generateProductSlug', 'generate_product_slug');
+        $collection->add('setAsCoverImage', 'setAsCoverImage');
     }
 
     /**

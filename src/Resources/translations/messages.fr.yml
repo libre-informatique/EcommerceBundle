@@ -37,6 +37,8 @@ librinfo:
         product_shop_link: Voir sur la boutique
     button:
         continue: Continuer
+        go_to_list: Voir la liste
+        setAsCover: Définir comme image de couverture
     link:
         order_list: Liste des commandes
         product_attribute_create: Nouvel attribut d'article

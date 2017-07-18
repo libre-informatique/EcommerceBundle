@@ -8,6 +8,7 @@
         "symfony/symfony": ">=3.2",
         "blast-project/core-bundle": "dev-wip-lisem",
         "blast-project/base-entities-bundle": "dev-wip-lisem",
+        "blast-project/utils-bundle": "dev-wip-lisem",
         "sylius/sylius": "1.0.x-dev",
         "sylius/locale-bundle": "1.0.x-dev",
         "sylius/product-bundle": "1.0.x-dev",

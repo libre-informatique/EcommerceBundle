@@ -1,11 +1,11 @@
 <?php
 
 /*
- * This file is part of the Blast Project package.
+ * This file is part of the Lisem Project.
  *
  * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU LGPL v3.
+ * This file is licenced under the GNU GPL v3.
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
@@ -99,5 +99,39 @@ class ProductCRUDController extends CRUDController
             ->setPath($product->getSlug());
 
         return $productImage;
+    }
+
+    public function setAsCoverImageAction(Request $request)
+    {
+        $imageId = $request->request->get('imageId', null);
+
+        $image = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LibrinfoEcommerceBundle:ProductImage')
+            ->findOneBy(['realFile' => $imageId]);
+
+        if ($image) {
+            $product = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('LibrinfoEcommerceBundle:Product')
+                ->findOneBy(['id' => $image->getOwner()]);
+
+            foreach($product->getImages() as $img) {
+                $img->setType(ProductImage::TYPE_THUMBNAIL);
+            }
+
+            $image->setType(ProductImage::TYPE_COVER);
+
+            $this
+                ->getDoctrine()
+                ->getManager()
+                ->flush();
+
+            return new JsonResponse(['success' => $product]);
+        } else {
+            return new JsonResponse(['error' => 'Image not found']);
+        }
     }
 }
