@@ -34,6 +34,22 @@ class ProductVariantCRUDController extends CRUDController
             $url = $this->admin->generateUrl('create', ['product_id' => $product_id]);
 
             return new RedirectResponse($url);
+        } elseif ($productId = $request->get('productId', null)) {
+            $form = $this->admin->getForm();
+            $form->handleRequest($request);
+
+            $productAdmin = $this->get($request->get('pcode', null));
+
+            $product = $productAdmin->getModelManager()->findOneBy($productAdmin->getClass(), ['id' => $productId]);
+
+            $subject = $this->admin->getSubject();
+            if (!$subject) {
+                $subject = $this->admin->getNewInstance();
+            }
+
+            $this->admin->setSubject($subject);
+
+            $subject->setProduct($product);
         }
 
         return parent::createAction($object);

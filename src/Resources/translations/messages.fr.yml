@@ -3,7 +3,9 @@ form_group_availability: Disponibilité
 form_group_properties: Dimensions & poids
 form_group_stock: Stock
 form_group_variants: Variantes
+form_group_pricing: Tarifs
 form_group_customer: Client
+form_group_images: Images
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
@@ -17,6 +19,7 @@ show_group_properties: Dimensions & poids
 show_group_shipments: Expéditions
 show_group_stock: Stock
 show_group_totals: Totaux
+show_group_pricing: Prix
 show_tab_order_details: Commande
 show_tab_order_summary: Récapitulatif
 show_tab_payment_delivery: Paiement / Livraison
@@ -60,6 +63,7 @@ librinfo:
         zone_create: Nouvelle zone
         zone_list: Liste des zones
     label:
+        id: Identifiant
         adjustments_total: Total ajustements
         amount: Montant
         available: Disponible
@@ -68,6 +72,7 @@ librinfo:
         billing_address: Adresse de facturation
         calculator: Règle de calcul
         channel_code: Code boutique
+        channel_pricings: Prix
         checkout_completed_at: Panier validé le
         checkout_state: Statut validation
         currency_code: Devise

@@ -815,6 +815,17 @@ trait OrganismExtension
     public function addAddress(AddressInterface $address)
     {
         if (!$this->hasAddress($address)) {
+            if ($this->isIndividual()) {
+                if ($address->getFirstName() === null || $address->getLastName() === null) {
+                    $address->setFirstName($this->getFirstName());
+                    $address->setLastName($this->getLastName());
+                }
+            } else {
+                if ($address->getLastName() === null) {
+                    $address->setLastName($this->getName());
+                }
+            }
+
             $this->addresses->add($address);
             $address->setCustomer($this);
 
