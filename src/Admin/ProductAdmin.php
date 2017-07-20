@@ -35,9 +35,18 @@ class ProductAdmin extends CoreAdmin
     public function configureActionButtons($action, $object = null)
     {
         $list = parent::configureActionButtons($action, $object);
-        return array_merge($list, [
-            ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig']
-        ]);
+
+        if ($action === 'list') {
+            $list = array_merge($list, [
+                ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig']
+            ]);
+        } elseif ($action === 'edit') {
+            $list = array_merge($list, [
+                ['template' => 'LibrinfoEcommerceBundle:CRUD:global__action_shop_link.html.twig']
+            ]);
+        }
+
+        return $list;
     }
 
     protected function configureRoutes(RouteCollection $collection)

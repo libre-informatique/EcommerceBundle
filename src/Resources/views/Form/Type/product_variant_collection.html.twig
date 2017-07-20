@@ -98,9 +98,9 @@
                 #}
                 {% if sonata_admin.inline == 'table-list' %}
                     {% if form.children | length > 0 %}
-                        {% if name == 'variants' and sonata_admin.admin.classnameLabel == 'SeedsProduct' %}
+                        {% if name == 'variants' and (sonata_admin.admin.classnameLabel == 'SeedsProduct' or sonata_admin.admin.classnameLabel == 'OtherProduct') %}
 
-                            {% set showFields = attr['data-showFields']|split(',') %}
+                            {% set showFields = attr['data-showFields']|split(',')|trimArray %}
 
                             <table class="table table-bordered table-responsive">
                                 <thead>
@@ -231,7 +231,7 @@
                         'list',
                         sonata_admin.field_description.getOption('link_parameters', {})|merge({'productId':product.id})
                     ) }}"
-                    target="_blank" 
+                    target="_blank"
                     class="btn btn-default btn-sm sonata-ba-action"
                     title="{{ 'librinfo.button.go_to_list'|trans({}, 'messages') }}">
                     <i class="fa fa-list"></i>
