@@ -38,11 +38,11 @@ class ProductAdmin extends CoreAdmin
 
         if ($action === 'list') {
             $list = array_merge($list, [
-                ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig']
+                ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'],
             ]);
         } elseif ($action === 'edit') {
             $list = array_merge($list, [
-                ['template' => 'LibrinfoEcommerceBundle:CRUD:global__action_shop_link.html.twig']
+                ['template' => 'LibrinfoEcommerceBundle:CRUD:global__action_shop_link.html.twig'],
             ]);
         }
 
