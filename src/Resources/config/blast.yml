@@ -66,10 +66,10 @@ parameters:
                             code:
                                 label: librinfo.label.product_code
                             enabled: boolean
-                            description:
+                            shortDescription:
                                 type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
-                            shortDescription:
+                            description:
                                 type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
                             metaKeywords:
