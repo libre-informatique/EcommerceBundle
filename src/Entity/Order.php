@@ -38,6 +38,6 @@ class Order extends BaseOrder
 
     public function __toString()
     {
-        return (string) parent::__toString();
+        return (string) $this->getId();
     }
 }

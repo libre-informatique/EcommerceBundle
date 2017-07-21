@@ -15,6 +15,7 @@ namespace Librinfo\EcommerceBundle\Entity;
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ProductImageExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\ProductImage as BaseProductImage;
+use Sylius\Component\Core\Model\ImageAwareInterface;
 use Librinfo\MediaBundle\Entity\File;
 
 class ProductImage extends BaseProductImage
@@ -80,7 +81,7 @@ class ProductImage extends BaseProductImage
         return $this;
     }
 
-    public function setOwner($owner)
+    public function setOwner(ImageAwareInterface $owner = null)
     {
         parent::setOwner($owner);
 
