@@ -76,6 +76,15 @@ class ProductAdmin extends CoreAdmin
                 }
             }
         );
+
+        if ($this->getSubject()) {
+            if ($this->getSubject()->getId() === null) {
+                $tabs = $mapper->getadmin()->getFormTabs();
+                unset($tabs['form_tab_variants']);
+                $mapper->getAdmin()->setFormTabs($tabs);
+                $mapper->remove('variants');
+            }
+        }
     }
 
     /**
