@@ -17,6 +17,7 @@ use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Form\FormEvent;
@@ -81,8 +82,10 @@ class ProductAdmin extends CoreAdmin
             if ($this->getSubject()->getId() === null) {
                 $tabs = $mapper->getadmin()->getFormTabs();
                 unset($tabs['form_tab_variants']);
+                unset($tabs['form_tab_images']);
                 $mapper->getAdmin()->setFormTabs($tabs);
                 $mapper->remove('variants');
+                $mapper->remove('images');
             }
         }
     }
@@ -122,5 +125,15 @@ class ProductAdmin extends CoreAdmin
 
         $slugGenerator = $this->getConfigurationPool()->getContainer()->get('sylius.generator.slug');
         $product->setSlug($slugGenerator->generate($product->getName()));
+    }
+
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        if ($object) {
+            $errorElement
+                ->with('code')
+                    ->assertUniqueEntity()
+                ->end();
+        }
     }
 }

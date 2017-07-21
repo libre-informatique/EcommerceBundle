@@ -26,6 +26,11 @@ class ProductImage extends BaseProductImage
         ProductImageExtension;
 
     /**
+     * @var string
+     */
+    protected $type = self::TYPE_THUMBNAIL;
+
+    /**
      * @var File
      */
     protected $realFile;

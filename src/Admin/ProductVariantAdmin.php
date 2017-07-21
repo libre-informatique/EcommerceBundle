@@ -15,6 +15,7 @@ namespace Librinfo\EcommerceBundle\Admin;
 use Blast\CoreBundle\Admin\CoreAdmin;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\Factory;
@@ -143,5 +144,15 @@ class ProductVariantAdmin extends CoreAdmin
         ;
 
         return $queryBuilder;
+    }
+
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        if ($object) {
+            $errorElement
+                ->with('code')
+                    ->assertUniqueEntity()
+                ->end();
+        }
     }
 }

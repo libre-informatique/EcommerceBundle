@@ -95,7 +95,6 @@ class ProductCRUDController extends CRUDController
         $productImage
             ->setRealFile($file)
             ->setOwner($product)
-            ->setType('main')
             ->setPath($product->getSlug());
 
         return $productImage;
