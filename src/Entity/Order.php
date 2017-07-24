@@ -31,8 +31,6 @@ class Order extends BaseOrder
      */
     public function setCurrencyCode($currencyCode)
     {
-        //        Assert::string($currencyCode);
-
         $this->currencyCode = $currencyCode;
     }
 
