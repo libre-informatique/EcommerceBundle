@@ -84,6 +84,7 @@ librinfo:
         customer_group_code: Code du groupe
         customer_group_admin: Groupes de client
         customer_customer_code: Code client
+        customer_customer_circle: Groupe(s) du client
         customer_created_at: Client depuis
         customer_ip: Adresse IP client
         customer_name: Nom client

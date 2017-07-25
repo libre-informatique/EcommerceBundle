@@ -1114,12 +1114,18 @@ parameters:
                         label: librinfo.label.customer_name
                     order.customer.customerCode:
                         label: librinfo.label.customer_customer_code
+                    # order.customer.circle:
+                    #     label: librinfo.label.customer_customer_circle
                     state:
                         label: librinfo.label.payment_state
                         type: doctrine_orm_string
                         field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                         field_options:
                             no_cart: true
+                    method:
+                        label: librinfo.label.payment_method
+                        field_options:
+                            multiple: true
                     amount: ~
                     createdAt:
                         label: librinfo.label.payment_date
