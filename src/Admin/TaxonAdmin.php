@@ -20,8 +20,8 @@ class TaxonAdmin extends CoreAdmin
     {
         $query = parent::createQuery($context);
 
-        $query->orderBy('o.root','ASC');
-        $query->orderBy('o.left','ASC');
+        $query->orderBy('o.root', 'ASC');
+        $query->orderBy('o.left', 'ASC');
 
         return $query;
     }

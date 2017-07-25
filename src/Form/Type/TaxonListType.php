@@ -46,7 +46,7 @@ class TaxonListType extends AbstractType
 
         $taxons = $qb->getQuery()->getResult();
 
-        array_walk($taxons, function(&$item) {
+        array_walk($taxons, function (&$item) {
             $item->displayName = str_repeat('- - ', $item->getLevel()) . $item->getName();
         });
 

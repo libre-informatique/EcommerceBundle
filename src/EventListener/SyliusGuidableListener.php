@@ -93,7 +93,7 @@ class SyliusGuidableListener implements LoggerAwareInterface, EventSubscriber
         $metadata->setIdGenerator(new UuidGenerator());
 
         $this->logger->debug(
-            '[SyliusGuidableListener] Added Guid mapping metadata to Entity '.$metadata->getName(),
+            '[SyliusGuidableListener] Added Guid mapping metadata to Entity ' . $metadata->getName(),
             ['class' => $metadata->getName()]
         );
     }

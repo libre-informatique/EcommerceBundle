@@ -131,11 +131,10 @@ class ProductAdmin extends CoreAdmin
     public function validate(ErrorElement $errorElement, $object)
     {
         if ($object) {
-
             $id = $object->getId();
             $code = $object->getCode();
 
-            $qb = $this->getModelManager()->createQuery(get_class($object),'p');
+            $qb = $this->getModelManager()->createQuery(get_class($object), 'p');
 
             $qb
                 ->where('p.id <> :currentId')
@@ -146,7 +145,7 @@ class ProductAdmin extends CoreAdmin
                 ])
                 ;
 
-            if(count($qb->getQuery()->getResult()) != 0) {
+            if (count($qb->getQuery()->getResult()) != 0) {
                 $errorElement
                     ->with('code')
                         ->addViolation('lisem.product_code.not_unique')
