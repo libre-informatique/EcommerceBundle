@@ -131,10 +131,27 @@ class ProductAdmin extends CoreAdmin
     public function validate(ErrorElement $errorElement, $object)
     {
         if ($object) {
-            $errorElement
-                ->with('code')
-                    ->assertUniqueEntity()
-                ->end();
+
+            $id = $object->getId();
+            $code = $object->getCode();
+
+            $qb = $this->getModelManager()->createQuery(get_class($object),'p');
+
+            $qb
+                ->where('p.id <> :currentId')
+                ->andWhere('p.code = :currentCode')
+                ->setParameters([
+                    'currentId'=>$id,
+                    'currentCode'=>$code,
+                ])
+                ;
+
+            if(count($qb->getQuery()->getResult()) != 0) {
+                $errorElement
+                    ->with('code')
+                        ->addViolation('lisem.product_code.not_unique')
+                    ->end();
+            }
         }
     }
 }
