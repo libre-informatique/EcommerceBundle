@@ -31,18 +31,26 @@ services:
         class: Librinfo\EcommerceBundle\Form\Type\ShippingStateType
         tags:
             - { name: form.type, alias: librinfo_type_shipping_state }
-    
+
     librinfo_ecommerce.form.type.price_cents:
         class: Librinfo\EcommerceBundle\Form\Type\PriceCentsType
         tags:
             - { name: form.type, alias: librinfo_type_price_cents }
+
+    librinfo_ecommerce.form.type.taxon_list:
+        class: Librinfo\EcommerceBundle\Form\Type\TaxonListType
+        tags:
+            - { name: form.type, alias: librinfo_type_taxon_list }
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '%sylius.model.taxon.class%'
 
 # EVENT LISTENERS
 
     librinfo_ecommerce.listener.sylius_guidable:
         class: Librinfo\EcommerceBundle\EventListener\SyliusGuidableListener
         tags:
-            - { name: doctrine.event_subscriber }
+            - { name: doctrine.event_subscriber, priority: -10 }
         calls:
             - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
@@ -75,7 +83,7 @@ services:
             - '@librinfo_ecommerce.sylius.fixture.example_factory.channel'
         tags:
             - { name: sylius_fixtures.fixture }
-    
+
     librinfo_ecommerce.sylius.fixture.customer:
         class: Librinfo\EcommerceBundle\Fixture\CustomerFixture
         arguments:
@@ -121,7 +129,7 @@ services:
         class: Librinfo\EcommerceBundle\Imagine\PathResolver\ProductPathResolver
         calls:
             - [setEm, ['@doctrine.orm.entity_manager'] ]
-            
+
     librinfo_ecommerce.media.events.listener:
         class: Librinfo\EcommerceBundle\EventListener\UploadControllerEventListener
         calls:

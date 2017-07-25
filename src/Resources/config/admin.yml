@@ -175,3 +175,13 @@ services:
               group: admin
               label: Zone
               label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.taxon:
+        class: Librinfo\EcommerceBundle\Admin\TaxonAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\Taxon, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Taxon
+              label_translator_strategy: blast_core.label.strategy.librinfo
