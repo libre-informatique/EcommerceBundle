@@ -23,7 +23,7 @@ class AjaxController extends Controller
 {
     /**
      * Edit order field
-     * 
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -46,7 +46,7 @@ class AjaxController extends Controller
     
     /**
      * Increase order item quantity
-     * 
+     *
      * @param Request $request
      * @return JsonResponse
      */
@@ -57,7 +57,7 @@ class AjaxController extends Controller
     
     /**
      * Decrease order item quantity
-     * 
+     *
      * @param Request $request
      * @return JsonResponse
      */

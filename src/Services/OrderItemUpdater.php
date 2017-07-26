@@ -1,5 +1,5 @@
 <?php
-namespace Librinfo\EcommerceBundle\Services; 
+namespace Librinfo\EcommerceBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
@@ -7,7 +7,7 @@ use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 
 /**
  * Manage order item quantity
- * 
+ *
  * @author Romain SANCHEZ <romain.sanchez@libre-informatique.fr>
  */
 class OrderItemUpdater
@@ -17,11 +17,11 @@ class OrderItemUpdater
      */
     private $em;
     /**
-     * @var OrderItemQuantityModifierInterface 
+     * @var OrderItemQuantityModifierInterface
      */
     private $orderItemQuantityModifier;
     /**
-     * @var MoneyFormatterInterface 
+     * @var MoneyFormatterInterface
      */
     private $moneyFormatter;
     /**
@@ -30,7 +30,7 @@ class OrderItemUpdater
     private $orderItemClass;
     
     /**
-     * 
+     *
      * @param EntityManager $em
      * @param OrderItemQuantityModifierInterface $quantityModifier
      * @param MoneyFormatterInterface $moneyFormatter
@@ -45,7 +45,7 @@ class OrderItemUpdater
     }
     
     /**
-     * 
+     *
      * @param String $orderId
      * @param String $itemId
      * @param Bool $isAddition
@@ -59,7 +59,7 @@ class OrderItemUpdater
         $order = $orderRepo->find($orderId);
         $item = $itemRepo->find($itemId);
  
-        if($isAddition){
+        if ($isAddition) {
             $quantity = $item->getQuantity() + 1;
         } else {
             $quantity = $item->getQuantity() - 1;
@@ -76,7 +76,7 @@ class OrderItemUpdater
     }
     
     /**
-     * 
+     *
      * @param String $order
      * @param String $item
      * @return Array
@@ -87,8 +87,8 @@ class OrderItemUpdater
             'item' => [
                 'quantity' => $item->getQuantity(),
                 'total' => $this->moneyFormatter->format(
-                    $item->getTotal(), 
-                    $order->getCurrencyCode(), 
+                    $item->getTotal(),
+                    $order->getCurrencyCode(),
                     $order->getLocaleCode()
                 ),
                 'subtotal' => $this->moneyFormatter->format(
@@ -99,13 +99,13 @@ class OrderItemUpdater
             ],
             'order' => [
                 'total' => $this->moneyFormatter->format(
-                    $order->getTotal(), 
-                    $order->getCurrencyCode(), 
+                    $order->getTotal(),
+                    $order->getCurrencyCode(),
                     $order->getLocaleCode()
                 ),
                 'items-total' => $this->moneyFormatter->format(
-                    $order->getItemsTotal(), 
-                    $order->getCurrencyCode(), 
+                    $order->getItemsTotal(),
+                    $order->getCurrencyCode(),
                     $order->getLocaleCode()
                 )
             ]
