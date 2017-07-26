@@ -79,7 +79,6 @@ class ProductAdmin extends CoreAdmin
                 if ($form->has('variants')) {
                     $form->remove('variants');
                 }
-
             }
         );
 
