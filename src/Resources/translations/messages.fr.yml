@@ -22,6 +22,7 @@ show_group_shipments: Expéditions
 show_group_stock: Stock
 show_group_totals: Totaux
 show_group_pricing: Prix
+form_group_taxonomy: Catégories
 show_tab_order_details: Commande
 show_tab_order_summary: Récapitulatif
 show_tab_payment_delivery: Paiement / Livraison
@@ -145,6 +146,7 @@ librinfo:
         state: État
         storage_type: Type d'enregistrement
         tax_category: Catégorie de TVA
+        taxons: Catégories
         token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks

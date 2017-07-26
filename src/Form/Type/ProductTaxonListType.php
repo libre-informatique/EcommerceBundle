@@ -57,6 +57,7 @@ class ProductTaxonListType extends AbstractType
         $resolver->setDefaults([
             'choices' => $taxons,
             'class' => $this->productTaxonClass,
+            'choice_value' => 'id'
         ]);
     }
 

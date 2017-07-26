@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\Product as BaseProduct;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 
 class Product extends BaseProduct
 {
@@ -30,12 +29,15 @@ class Product extends BaseProduct
      */
     protected $images;
 
+    protected $taxons = null;
+
     public function __construct()
     {
         parent::__construct();
         $this->initOuterExtendedClasses();
         $this->images = new ArrayCollection();
         $this->productTaxons = new ArrayCollection();
+        $this->taxons = new ArrayCollection();
     }
 
     public function getImages()
@@ -82,25 +84,23 @@ class Product extends BaseProduct
         return $this;
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     */
-    public function addTaxon(TaxonInterface $taxon)
+    public function getTaxons()
     {
-        if (!$this->productTaxons->contains($taxon)) {
-            $this->productTaxons->add($taxon);
+        // $this->initTaxons();
+
+        if($this->taxons === null) {
+            return $this->getTaxonsFromProductTaxons();
         }
 
-        return $this;
+        return $this->taxons;
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     */
-    public function removeTaxon(TaxonInterface $taxon)
+    public function setTaxons($taxons)
     {
-        if ($this->productTaxons->contains($taxon)) {
-            $this->productTaxons->removeElement($taxon);
+        $this->initTaxons();
+
+        foreach($taxons as $taxon) {
+            $this->taxons->add($taxon);
         }
 
         return $this;
@@ -109,5 +109,25 @@ class Product extends BaseProduct
     public function __toString()
     {
         return (string) parent::__toString();
+    }
+
+    private function initTaxons()
+    {
+        if ($this->taxons === null) {
+            $this->taxons = new ArrayCollection();
+        }
+    }
+
+    public function getTaxonsFromProductTaxons() {
+        $this->initTaxons();
+
+        $taxons = new ArrayCollection();
+
+        $pTaxons = $this->getProductTaxons();
+        foreach($pTaxons as $pt) {
+            $taxons->add($pt->getTaxon());
+        }
+
+        return $taxons;
     }
 }
