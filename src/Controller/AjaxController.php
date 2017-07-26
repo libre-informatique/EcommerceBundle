@@ -21,6 +21,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class AjaxController extends Controller
 {
+    /**
+     * Edit order field
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function orderInlineEditAction(Request $request)
     {
         $value = $request->get('value');
@@ -36,5 +42,27 @@ class AjaxController extends Controller
         $manager->flush();
         
         return new JsonResponse($value);
+    }
+    
+    /**
+     * Increase order item quantity
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addToOrderAction(Request $request)
+    {
+        return new JsonResponse($this->container->get('librinfo_ecommerce.order.item_updater')->updateItemCount($request->get('order'), $request->get('item'), true));
+    }
+    
+    /**
+     * Decrease order item quantity
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function removeFromOrderAction(Request $request)
+    {
+        return new JsonResponse($this->container->get('librinfo_ecommerce.order.item_updater')->updateItemCount($request->get('order'), $request->get('item'), false));
     }
 }

@@ -5,3 +5,11 @@ payum:
 librinfo_ecommerce.order.inline_edit:
     path: /librinfo/ecommerce/order/inline_edit
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:orderInlineEdit }
+    
+librinfo_ecommerce.order.add_item:
+    path: /librinfo/ecommerce/order/item/add
+    defaults: { _controller: LibrinfoEcommerceBundle:Ajax:addToOrder }
+    
+librinfo_ecommerce.order.remove_item:
+    path: /librinfo/ecommerce/order/item/remove
+    defaults: { _controller: LibrinfoEcommerceBundle:Ajax:removeFromOrder }
