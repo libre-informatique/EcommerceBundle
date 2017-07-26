@@ -88,7 +88,7 @@ class Product extends BaseProduct
     {
         // $this->initTaxons();
 
-        if($this->taxons === null) {
+        if ($this->taxons === null) {
             return $this->getTaxonsFromProductTaxons();
         }
 
@@ -99,7 +99,7 @@ class Product extends BaseProduct
     {
         $this->initTaxons();
 
-        foreach($taxons as $taxon) {
+        foreach ($taxons as $taxon) {
             $this->taxons->add($taxon);
         }
 
@@ -118,7 +118,8 @@ class Product extends BaseProduct
         }
     }
 
-    public function getTaxonsFromProductTaxons() {
+    public function getTaxonsFromProductTaxons()
+    {
         $this->initTaxons();
 
         $taxons = new ArrayCollection();
