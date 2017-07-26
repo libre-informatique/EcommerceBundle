@@ -15,7 +15,7 @@ namespace Librinfo\EcommerceBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
-class ProductTaxonTransformer implements DataTransformerInterface
+class ArrayCollectionTransformer implements DataTransformerInterface
 {
     /**
      * reverseTransform : from array to ArrayCollection

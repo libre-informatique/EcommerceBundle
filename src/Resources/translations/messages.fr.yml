@@ -22,7 +22,8 @@ show_group_shipments: Expéditions
 show_group_stock: Stock
 show_group_totals: Totaux
 show_group_pricing: Prix
-form_group_taxonomy: Catégories
+form_group_channels_and_taxonomy: Canaux de vente & Catégories
+form_group_product_channels: Canaux de vente
 show_tab_order_details: Commande
 show_tab_order_summary: Récapitulatif
 show_tab_payment_delivery: Paiement / Livraison
@@ -78,6 +79,7 @@ librinfo:
         available_until: Disponible jusqu'à
         billing_address: Adresse de facturation
         calculator: Règle de calcul
+        channels: Canal de vente
         channel_code: Code boutique
         channel_pricings: Prix
         checkout_completed_at: Panier validé le

@@ -55,6 +55,7 @@ parameters:
                 remove:
                     variants: ~
                     images: ~
+                    channels: ~
                 add:
                     form_tab_general:
                         form_group_general:
@@ -90,7 +91,11 @@ parameters:
                             metaDescription:
                                 type: textarea
                                 required: false
-                        form_group_taxonomy:
+                        form_group_channels_and_taxonomy:
+                            channels:
+                                type: Librinfo\EcommerceBundle\Form\Type\ProductChannelsType
+                                multiple: true
+                                expanded: true
                             mainTaxon:
                                 type: Librinfo\EcommerceBundle\Form\Type\TaxonListType
                                 choice_label: displayName
