@@ -72,6 +72,7 @@ class ProductAdmin extends CoreAdmin
             function (FormEvent $event) use ($admin) {
                 $form = $event->getForm();
                 $subject = $admin->getSubject($event->getData());
+
                 // Avoid variants submit (because it is already managed in ajax)
                 if ($form->has('variants')) {
                     $form->remove('variants');
