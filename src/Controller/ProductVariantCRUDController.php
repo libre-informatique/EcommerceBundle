@@ -23,6 +23,19 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ProductVariantCRUDController extends CRUDController
 {
+    protected function preList(Request $request)
+    {
+        $datagrid = $this->admin->getDatagrid();
+        $query = $datagrid->getQuery();
+
+        if ($productId = $request->get('productId', null)) {
+            $query->andWhere(
+                $query->expr()->eq($query->getRootAliases()[0] . '.product', ':productId')
+            );
+            $query->setParameter('productId', $productId);
+        }
+    }
+
     public function createAction($object = null)
     {
         $request = $this->getRequest();

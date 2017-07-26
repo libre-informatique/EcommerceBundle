@@ -19,8 +19,16 @@ use Librinfo\MediaBundle\Entity\File;
 
 class ProductImage extends BaseProductImage
 {
+    const TYPE_COVER = 'main';
+    const TYPE_THUMBNAIL = 'thumbnail';
+
     use OuterExtensible,
         ProductImageExtension;
+
+    /**
+     * @var string
+     */
+    protected $type = self::TYPE_THUMBNAIL;
 
     /**
      * @var File

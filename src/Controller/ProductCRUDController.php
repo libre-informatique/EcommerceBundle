@@ -95,9 +95,42 @@ class ProductCRUDController extends CRUDController
         $productImage
             ->setRealFile($file)
             ->setOwner($product)
-            ->setType('main')
             ->setPath($product->getSlug());
 
         return $productImage;
+    }
+
+    public function setAsCoverImageAction(Request $request)
+    {
+        $imageId = $request->request->get('imageId', null);
+
+        $image = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('LibrinfoEcommerceBundle:ProductImage')
+            ->findOneBy(['realFile' => $imageId]);
+
+        if ($image) {
+            $product = $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('LibrinfoEcommerceBundle:Product')
+                ->findOneBy(['id' => $image->getOwner()]);
+
+            foreach ($product->getImages() as $img) {
+                $img->setType(ProductImage::TYPE_THUMBNAIL);
+            }
+
+            $image->setType(ProductImage::TYPE_COVER);
+
+            $this
+                ->getDoctrine()
+                ->getManager()
+                ->flush();
+
+            return new JsonResponse(['success' => $product]);
+        } else {
+            return new JsonResponse(['error' => 'Image not found']);
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace Librinfo\EcommerceBundle\Admin;
 use Blast\CoreBundle\Admin\CoreAdmin;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\Factory;
@@ -143,5 +144,31 @@ class ProductVariantAdmin extends CoreAdmin
         ;
 
         return $queryBuilder;
+    }
+
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        if ($object) {
+            $id = $object->getId();
+            $code = $object->getCode();
+
+            $qb = $this->getModelManager()->createQuery(get_class($object), 'p');
+
+            $qb
+                ->where('p.id <> :currentId')
+                ->andWhere('p.code = :currentCode')
+                ->setParameters([
+                    'currentId' => $id,
+                    'currentCode' => $code,
+                ])
+                ;
+
+            if (count($qb->getQuery()->getResult()) != 0) {
+                $errorElement
+                    ->with('code')
+                        ->addViolation('lisem.product_variant_code.not_unique')
+                    ->end();
+            }
+        }
     }
 }

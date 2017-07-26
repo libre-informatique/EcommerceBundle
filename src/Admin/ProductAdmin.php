@@ -17,6 +17,7 @@ use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Form\FormEvent;
@@ -32,10 +33,28 @@ class ProductAdmin extends CoreAdmin
         configureShowFields as configShowHandlesRelations;
     }
 
+    public function configureActionButtons($action, $object = null)
+    {
+        $list = parent::configureActionButtons($action, $object);
+
+        if ($action === 'list') {
+            $list = array_merge($list, [
+                ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'],
+            ]);
+        } elseif ($action === 'edit') {
+            $list = array_merge($list, [
+                ['template' => 'LibrinfoEcommerceBundle:CRUD:global__action_shop_link.html.twig'],
+            ]);
+        }
+
+        return $list;
+    }
+
     protected function configureRoutes(RouteCollection $collection)
     {
         parent::configureRoutes($collection);
         $collection->add('generateProductSlug', 'generate_product_slug');
+        $collection->add('setAsCoverImage', 'setAsCoverImage');
     }
 
     /**
@@ -53,11 +72,24 @@ class ProductAdmin extends CoreAdmin
             function (FormEvent $event) use ($admin) {
                 $form = $event->getForm();
                 $subject = $admin->getSubject($event->getData());
+
+                // Avoid variants submit (because it is already managed in ajax)
                 if ($form->has('variants')) {
                     $form->remove('variants');
                 }
             }
         );
+
+        if ($this->getSubject()) {
+            if ($this->getSubject()->getId() === null) {
+                $tabs = $mapper->getadmin()->getFormTabs();
+                unset($tabs['form_tab_variants']);
+                unset($tabs['form_tab_images']);
+                $mapper->getAdmin()->setFormTabs($tabs);
+                $mapper->remove('variants');
+                $mapper->remove('images');
+            }
+        }
     }
 
     /**
@@ -93,7 +125,36 @@ class ProductAdmin extends CoreAdmin
     {
         parent::prePersist($product);
 
+        dump($product);
+        die;
+
         $slugGenerator = $this->getConfigurationPool()->getContainer()->get('sylius.generator.slug');
         $product->setSlug($slugGenerator->generate($product->getName()));
+    }
+
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        if ($object) {
+            $id = $object->getId();
+            $code = $object->getCode();
+
+            $qb = $this->getModelManager()->createQuery(get_class($object), 'p');
+
+            $qb
+                ->where('p.id <> :currentId')
+                ->andWhere('p.code = :currentCode')
+                ->setParameters([
+                    'currentId' => $id,
+                    'currentCode' => $code,
+                ])
+                ;
+
+            if (count($qb->getQuery()->getResult()) != 0) {
+                $errorElement
+                    ->with('code')
+                        ->addViolation('lisem.product_code.not_unique')
+                    ->end();
+            }
+        }
     }
 }

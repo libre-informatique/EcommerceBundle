@@ -66,10 +66,10 @@ parameters:
                             code:
                                 label: librinfo.label.product_code
                             enabled: boolean
-                            description:
+                            shortDescription:
                                 type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
-                            shortDescription:
+                            description:
                                 type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
                             metaKeywords:
@@ -81,7 +81,23 @@ parameters:
                             options:
                                 label: librinfo.label.product_options
                                 required: false
+                            productTaxons:
+                                # type: Librinfo\EcommerceBundle\Form\Type\ProductTaxonListType
+                                type: Librinfo\EcommerceBundle\Form\Type\ProductTaxonListType
+                                # choice_label: taxon.name
+                                # property: taxon.name
+                                choice_label: displayName
+                                # expanded: true
+                                multiple: true
+                            mainTaxon:
+                                type: Librinfo\EcommerceBundle\Form\Type\TaxonListType
+                                choice_label: displayName
+                                # class: Sylius\Component\Core\Model\Taxon
+                                # required: false
                     form_tab_variants:
+                        _options:
+                            countChildItems:
+                                - variants
                         form_group_variants:
                             variants:
                                 type: sonata_type_collection
@@ -123,8 +139,8 @@ parameters:
                     _actions:
                         shop_link:
                             template: 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'
-                        variants:
-                            template: 'LibrinfoEcommerceBundle:CRUD:list__action_variants.html.twig'
+                        # variants:
+                        #     template: 'LibrinfoEcommerceBundle:CRUD:list__action_variants.html.twig'
                     _export_formats:
                         csv: [code, name, available]
                         xls: csv
@@ -183,9 +199,6 @@ parameters:
                             tracked:
                                 type: boolean
                                 label: librinfo.label.tracked_stock
-                        show_group_availability:
-                            available:
-                                type: boolean
                         show_group_properties:
                             width: ~
                             height: ~
@@ -288,6 +301,7 @@ parameters:
             # FILTER
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
+                    # product.id: ~
                     translations.name:
                         label: librinfo.label.product_variant_name
                     code:
@@ -525,10 +539,10 @@ parameters:
                                     readonly: true
                             price:
                                 label: librinfo.label.price
-                                type: text
+                                type: Librinfo\EcommerceBundle\Form\Type\PriceCentsType
                             original_price:
                                 label: librinfo.label.original_price
-                                type: text
+                                type: Librinfo\EcommerceBundle\Form\Type\PriceCentsType
 
 #######################
 # CRM bundle overrides
@@ -1113,12 +1127,18 @@ parameters:
                         label: librinfo.label.customer_name
                     order.customer.customerCode:
                         label: librinfo.label.customer_customer_code
+                    # order.customer.circle:
+                    #     label: librinfo.label.customer_customer_circle
                     state:
                         label: librinfo.label.payment_state
                         type: doctrine_orm_string
                         field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                         field_options:
                             no_cart: true
+                    method:
+                        label: librinfo.label.payment_method
+                        field_options:
+                            multiple: true
                     amount: ~
                     createdAt:
                         label: librinfo.label.payment_date
@@ -1521,3 +1541,36 @@ parameters:
                     code: ~
                     type: ~
                     scope: ~
+
+#######
+# TAXON
+#######
+
+        Librinfo\EcommerceBundle\Entity\Taxon:
+            baseRoute:
+                name: admin_librinfo_ecommerce_taxon
+                pattern: librinfo/ecommerce/taxon
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    translation.name: ~
+                    code: ~
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    '':
+                        form_group_general:
+                            name: ~
+                            code: ~
+                            parent: ~
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    translation.name:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_treeable.html.twig
+                        identifier: true
+                        label: librinfo.label.name
+                    code:
+                        sortable: false
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                remove: ~
+                add: ~
+                    # translation.name: ~
+                    # code: ~
