@@ -10,8 +10,22 @@ $(document).ready(function() {
               item: data.itemId
             },
             function(response) {
+                if(response.lastItem) {
+                    Admin.flashMessage.show('error', response.message);
+                    
+                    return;
+                }
+                
+                if(response.remove) {
+                    elem.parents('tr').remove();
+                    
+                    return;
+                }
+                    
+                var parent = elem.parent();
+                    
                 $.each(response.item, function(key, value) {
-                    elem.parent().siblings('.' + key).html(value);
+                    parent.siblings('.' + key).html(value);
                 });
 
                 $.each(response.order, function(key, value) {

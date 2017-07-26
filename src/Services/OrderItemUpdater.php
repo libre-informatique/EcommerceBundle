@@ -63,6 +63,8 @@ class OrderItemUpdater
      */
     public function updateItemCount($orderId, $itemId, $isAddition)
     {
+        $remove = false;
+        $lastItem = false;
         $orderRepo = $this->em->getRepository('LibrinfoEcommerceBundle:Order');
         $itemRepo = $this->em->getRepository($this->orderItemClass);
 
@@ -75,14 +77,26 @@ class OrderItemUpdater
             $quantity = $item->getQuantity() - 1;
         }
 
-        $this->orderItemQuantityModifier->modify($item, $quantity);
-        $item->recalculateUnitsTotal();
+        if ($quantity < 1) {
+            dump($order->countItems());
+            if ($order->countItems() < 2) {
+                dump('srqfdhg');
+                $lastItem = true;
+            } else {
+                $order->removeItem($item);
+                $remove = true;
+            }
+        } else {
+            $this->orderItemQuantityModifier->modify($item, $quantity);
+            $item->recalculateUnitsTotal();
+        }
+
         $order->recalculateItemsTotal();
 
         $this->em->persist($order);
         $this->em->flush();
 
-        return $this->formatArray($order, $item);
+        return $this->formatArray($order, $item, $remove, $lastItem);
     }
 
     /**
@@ -91,9 +105,11 @@ class OrderItemUpdater
      *
      * @return array
      */
-    private function formatArray($order, $item)
+    private function formatArray($order, $item, $remove = false, $lastItem = true)
     {
         return [
+            'remove' => $remove,
+            'lastItem' => $lastItem,
             'item' => [
                 'quantity' => $item->getQuantity(),
                 'total' => $this->moneyFormatter->format(
