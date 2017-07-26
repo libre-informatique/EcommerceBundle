@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\Product as BaseProduct;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 
 class Product extends BaseProduct
 {
@@ -34,6 +35,7 @@ class Product extends BaseProduct
         parent::__construct();
         $this->initOuterExtendedClasses();
         $this->images = new ArrayCollection();
+        $this->productTaxons = new ArrayCollection();
     }
 
     public function getImages()
@@ -75,6 +77,32 @@ class Product extends BaseProduct
     {
         if ($this->images->contains($file)) {
             $this->images->removeElement($file);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param TaxonInterface $taxon
+     */
+    public function addTaxon(TaxonInterface $taxon)
+    {
+
+        if (!$this->productTaxons->contains($taxon)) {
+            $this->productTaxons->add($taxon);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @param TaxonInterface $taxon
+     */
+    public function removeTaxon(TaxonInterface $taxon)
+    {
+        if ($this->productTaxons->contains($taxon)) {
+            $this->productTaxons->removeElement($taxon);
         }
 
         return $this;

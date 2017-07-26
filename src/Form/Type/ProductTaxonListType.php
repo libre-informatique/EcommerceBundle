@@ -12,27 +12,34 @@
 
 namespace Librinfo\EcommerceBundle\Form\Type;
 
-use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\FormBuilderInterface;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Librinfo\EcommerceBundle\Form\DataTransformer\ProductTaxonTransformer;
 
-class TaxonListType extends AbstractType
+class ProductTaxonListType extends AbstractType
 {
     private $em;
 
     private $taxonClass;
+    private $productTaxonClass;
 
-    public function __construct(EntityManagerInterface $em, $taxonClass)
+    public function __construct(EntityManagerInterface $em, $productTaxonClass, $taxonClass)
     {
+        // parent::__construct($propertyAccessor);
         $this->em = $em;
+        $this->productTaxonClass = $productTaxonClass;
         $this->taxonClass = $taxonClass;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        // parent::configureOptions($resolver);
         $repo = $this->em->getRepository($this->taxonClass);
         $qb = null;
         if (method_exists($repo, 'createListQueryBuilder')) {
@@ -52,7 +59,7 @@ class TaxonListType extends AbstractType
 
         $resolver->setDefaults([
             'choices' => $taxons,
-            'no_cart' => false,
+            'class' => $this->productTaxonClass
         ]);
     }
 
@@ -68,6 +75,15 @@ class TaxonListType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'librinfo_type_taxon_list';
+        return 'librinfo_type_product_taxon_list';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $transformer = new ProductTaxonTransformer();
+        $builder->addModelTransformer($transformer);
     }
 }

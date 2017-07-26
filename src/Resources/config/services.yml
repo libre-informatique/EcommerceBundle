@@ -45,6 +45,16 @@ services:
             - '@doctrine.orm.entity_manager'
             - '%sylius.model.taxon.class%'
 
+    librinfo_ecommerce.form.type.product_taxon_list:
+        class: Librinfo\EcommerceBundle\Form\Type\ProductTaxonListType
+        tags:
+            - { name: form.type, alias: librinfo_type_product_taxon_list }
+        arguments:
+            # - '@property_accessor'
+            - '@doctrine.orm.entity_manager'
+            - '%sylius.model.product_taxon.class%'
+            - '%sylius.model.taxon.class%'
+
 # EVENT LISTENERS
 
     librinfo_ecommerce.listener.sylius_guidable:

@@ -82,10 +82,11 @@ parameters:
                                 label: librinfo.label.product_options
                                 required: false
                             productTaxons:
-                                # type: Librinfo\EcommerceBundle\Form\Type\TaxonListType
-                                choice_label: taxon.name
-                                # type: Librinfo\EcommerceBundle\Form\Type\TaxonListType
-                                # choice_label: displayName
+                                # type: Librinfo\EcommerceBundle\Form\Type\ProductTaxonListType
+                                type: Librinfo\EcommerceBundle\Form\Type\ProductTaxonListType
+                                # choice_label: taxon.name
+                                # property: taxon.name
+                                choice_label: displayName
                                 # expanded: true
                                 multiple: true
                             mainTaxon:
