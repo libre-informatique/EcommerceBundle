@@ -14,11 +14,8 @@ namespace Librinfo\EcommerceBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sonata\AdminBundle\Form\Type\ModelType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Librinfo\EcommerceBundle\Form\DataTransformer\ProductTaxonTransformer;
 
@@ -59,7 +56,7 @@ class ProductTaxonListType extends AbstractType
 
         $resolver->setDefaults([
             'choices' => $taxons,
-            'class' => $this->productTaxonClass
+            'class' => $this->productTaxonClass,
         ]);
     }
 

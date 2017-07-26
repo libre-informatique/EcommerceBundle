@@ -13,7 +13,6 @@
 namespace Librinfo\EcommerceBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Sylius\Component\Core\Model\ProductTaxon;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class ProductTaxonTransformer implements DataTransformerInterface
@@ -31,7 +30,7 @@ class ProductTaxonTransformer implements DataTransformerInterface
             $value = [];
         }
         $productTaxonList = new ArrayCollection();
-        foreach($value as $taxon) {
+        foreach ($value as $taxon) {
             $productTaxonList->add($taxon);
         }
 
@@ -47,7 +46,7 @@ class ProductTaxonTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        if($value === null) {
+        if ($value === null) {
             $value = new ArrayCollection();
         }
 

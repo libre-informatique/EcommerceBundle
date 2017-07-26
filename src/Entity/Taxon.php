@@ -70,14 +70,16 @@ class Taxon extends BaseTaxon implements TaxonInterface
      *
      * @return Collection|ImageInterface[]
      */
-    public function getImagesByType($type) {
+    public function getImagesByType($type)
+    {
         return new ArrayCollection();
     }
 
     /**
      * @return bool
      */
-    public function hasImages() {
+    public function hasImages()
+    {
         return false;
     }
 
@@ -86,21 +88,22 @@ class Taxon extends BaseTaxon implements TaxonInterface
      *
      * @return bool
      */
-    public function hasImage(ImageInterface $image) {
+    public function hasImage(ImageInterface $image)
+    {
         return false;
     }
 
     /**
      * @param ImageInterface $image
      */
-    public function addImage(ImageInterface $image) {
-
+    public function addImage(ImageInterface $image)
+    {
     }
 
     /**
      * @param ImageInterface $image
      */
-    public function removeImage(ImageInterface $image) {
-
+    public function removeImage(ImageInterface $image)
+    {
     }
 }

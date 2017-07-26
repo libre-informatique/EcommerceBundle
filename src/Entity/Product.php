@@ -87,14 +87,12 @@ class Product extends BaseProduct
      */
     public function addTaxon(TaxonInterface $taxon)
     {
-
         if (!$this->productTaxons->contains($taxon)) {
             $this->productTaxons->add($taxon);
         }
 
         return $this;
     }
-
 
     /**
      * @param TaxonInterface $taxon

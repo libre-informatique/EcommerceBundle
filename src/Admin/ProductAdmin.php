@@ -124,6 +124,9 @@ class ProductAdmin extends CoreAdmin
     {
         parent::prePersist($product);
 
+        dump($product);
+        die;
+
         $slugGenerator = $this->getConfigurationPool()->getContainer()->get('sylius.generator.slug');
         $product->setSlug($slugGenerator->generate($product->getName()));
     }
@@ -140,8 +143,8 @@ class ProductAdmin extends CoreAdmin
                 ->where('p.id <> :currentId')
                 ->andWhere('p.code = :currentCode')
                 ->setParameters([
-                    'currentId'=>$id,
-                    'currentCode'=>$code,
+                    'currentId' => $id,
+                    'currentCode' => $code,
                 ])
                 ;
 

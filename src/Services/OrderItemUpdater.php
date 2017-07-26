@@ -1,4 +1,15 @@
 <?php
+
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Librinfo\EcommerceBundle\Services;
 
 use Doctrine\ORM\EntityManager;
@@ -6,7 +17,7 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 
 /**
- * Manage order item quantity
+ * Manage order item quantity.
  *
  * @author Romain SANCHEZ <romain.sanchez@libre-informatique.fr>
  */
@@ -25,16 +36,15 @@ class OrderItemUpdater
      */
     private $moneyFormatter;
     /**
-     * @var String
+     * @var string
      */
     private $orderItemClass;
-    
+
     /**
-     *
-     * @param EntityManager $em
+     * @param EntityManager                      $em
      * @param OrderItemQuantityModifierInterface $quantityModifier
-     * @param MoneyFormatterInterface $moneyFormatter
-     * @param String $orderItemClass
+     * @param MoneyFormatterInterface            $moneyFormatter
+     * @param string                             $orderItemClass
      */
     public function __construct(EntityManager $em, OrderItemQuantityModifierInterface $quantityModifier, MoneyFormatterInterface $moneyFormatter, $orderItemClass)
     {
@@ -43,43 +53,43 @@ class OrderItemUpdater
         $this->moneyFormatter = $moneyFormatter;
         $this->orderItemClass = $orderItemClass;
     }
-    
+
     /**
+     * @param string $orderId
+     * @param string $itemId
+     * @param bool   $isAddition
      *
-     * @param String $orderId
-     * @param String $itemId
-     * @param Bool $isAddition
-     * @return Array
+     * @return array
      */
     public function updateItemCount($orderId, $itemId, $isAddition)
     {
         $orderRepo = $this->em->getRepository('LibrinfoEcommerceBundle:Order');
         $itemRepo = $this->em->getRepository($this->orderItemClass);
-        
+
         $order = $orderRepo->find($orderId);
         $item = $itemRepo->find($itemId);
- 
+
         if ($isAddition) {
             $quantity = $item->getQuantity() + 1;
         } else {
             $quantity = $item->getQuantity() - 1;
         }
-        
+
         $this->orderItemQuantityModifier->modify($item, $quantity);
         $item->recalculateUnitsTotal();
         $order->recalculateItemsTotal();
-        
+
         $this->em->persist($order);
         $this->em->flush();
 
         return $this->formatArray($order, $item);
     }
-    
+
     /**
+     * @param string $order
+     * @param string $item
      *
-     * @param String $order
-     * @param String $item
-     * @return Array
+     * @return array
      */
     private function formatArray($order, $item)
     {
@@ -95,7 +105,7 @@ class OrderItemUpdater
                     $item->getSubTotal(),
                     $order->getCurrencyCode(),
                     $order->getLocaleCode()
-                )
+                ),
             ],
             'order' => [
                 'total' => $this->moneyFormatter->format(
@@ -107,8 +117,8 @@ class OrderItemUpdater
                     $order->getItemsTotal(),
                     $order->getCurrencyCode(),
                     $order->getLocaleCode()
-                )
-            ]
+                ),
+            ],
         ];
     }
 }
