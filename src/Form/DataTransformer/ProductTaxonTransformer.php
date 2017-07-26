@@ -18,31 +18,33 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ProductTaxonTransformer implements DataTransformerInterface
 {
     /**
-     * reverseTransform : from currency format to cents.
+     * reverseTransform : from array to ArrayCollection
      *
-     * @param type $value
+     * @param array $value
      *
-     * @return type
+     * @return ArrayCollection
      */
     public function reverseTransform($value)
     {
-        if (!$value instanceof \Traversable) {
+        if ($value === null) {
             $value = [];
         }
-        $productTaxonList = new ArrayCollection();
-        foreach ($value as $taxon) {
-            $productTaxonList->add($taxon);
+
+        $arrayCollection = new ArrayCollection();
+
+        foreach ($value as $v) {
+            $arrayCollection->add($v);
         }
 
-        return $productTaxonList;
+        return $arrayCollection;
     }
 
     /**
-     * transform : from cents to currency format.
+     * transform : from ArrayCollection to array
      *
-     * @param type $value
+     * @param ArrayCollection $value
      *
-     * @return type
+     * @return array
      */
     public function transform($value)
     {
