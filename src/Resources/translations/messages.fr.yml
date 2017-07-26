@@ -61,8 +61,10 @@ librinfo:
         salesjournal_list: Journal des ventes
         sales_journal_list: Journal des ventes
         tax_category_list: Liste des catégories de TVA
+        taxcategory_list: Liste des catégories de TVA
         taxrate_list: Liste des taux de TVA
         tax_rate_list: Liste des taux de TVA
+        taxon_list: Liste des catégories
         payment_method_list: Liste des méthodes de paiement
         zone_create: Nouvelle zone
         zone_list: Liste des zones
@@ -86,6 +88,7 @@ librinfo:
         customer_group_code: Code du groupe
         customer_group_admin: Groupes de client
         customer_customer_code: Code client
+        customer_customer_circle: Groupe(s) du client
         customer_created_at: Client depuis
         customer_ip: Adresse IP client
         customer_name: Nom client
@@ -95,6 +98,7 @@ librinfo:
         included_in_price: Compris dans le prix
         items_total: Total articles
         locale_code: Langue
+        main_taxon: Catégorie principale
         meta_description: Meta description
         meta_keywords: Meta keywords
         notes: Notes
@@ -124,6 +128,7 @@ librinfo:
         product_option: Option d'article
         product_options: Options d'article
         product_shop_url: URL boutique
+        product_taxons: Catégories de produit
         product_variant_code: Code déclinaison
         product_variant_name: Nom déclinaison
         product_variant_prices: Prix

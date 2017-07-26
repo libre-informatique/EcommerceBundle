@@ -27,20 +27,20 @@ sylius_product:
         product_option_value:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\ProductOptionValue
-                
+
 sylius_order:
     resources:
         order:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\Order
-                
+
 sylius_taxation:
     resources:
         tax_rate:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\TaxRate
-                
-                
+
+
 sylius_channel:
     driver: doctrine/orm
     resources:
@@ -59,9 +59,9 @@ sylius_attribute:
 sylius_customer:
     driver: doctrine/orm
     resources:
-        customer:
-            classes:
-                model: Librinfo\CRMBundle\Entity\Organism
+        # customer:
+        #     classes:
+        #         model: Librinfo\CRMBundle\Entity\Organism
         customer_group:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\CustomerGroup
@@ -88,6 +88,12 @@ sylius_core:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\ProductImage
 
+sylius_taxonomy:
+    resources:
+        taxon:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\Taxon
+
 fos_rest:
     exception: ~
     view:
@@ -95,7 +101,7 @@ fos_rest:
             json: true
             xml:  true
         empty_content: 204
-        
+
 #    # « format_listener » Conflicts with Sylius configuration
 #
 #    format_listener:

@@ -95,7 +95,7 @@ services:
               group: admin
               label: librinfo.label.order_admin
               label_translator_strategy: blast_core.label.strategy.librinfo
-              
+
     librinfo_ecommerce.admin.payment:
         class: Librinfo\EcommerceBundle\Admin\PaymentAdmin
         arguments: [~, Sylius\Component\Core\Model\Payment, LibrinfoEcommerceBundle:PaymentCRUD]
@@ -105,7 +105,7 @@ services:
               group: admin
               label: librinfo.label.payment_admin
               label_translator_strategy: blast_core.label.strategy.librinfo
-              
+
     librinfo_ecommerce.admin.payment_method:
         class: Librinfo\EcommerceBundle\Admin\PaymentMethodAdmin
         arguments: [~, Sylius\Component\Core\Model\PaymentMethod, LibrinfoEcommerceBundle:PaymentCRUD]
@@ -115,17 +115,17 @@ services:
               group: admin
               label: librinfo.label.payment_method_admin
               label_translator_strategy: blast_core.label.strategy.librinfo
-              
+
     librinfo_ecommerce.admin.sales_journal:
         class: Librinfo\EcommerceBundle\Admin\SalesJournalAdmin
-        arguments: [~, Sylius\Component\Core\Model\Order, LibrinfoEcommerceBundle:OrderCRUD]
+        arguments: [~, Librinfo\EcommerceBundle\Entity\Order, LibrinfoEcommerceBundle:OrderCRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
               group: admin
               label: librinfo.label.sales_journal
               label_translator_strategy: blast_core.label.strategy.librinfo
-              
+
     librinfo_ecommerce.admin.customer_group:
         class: Librinfo\EcommerceBundle\Admin\CustomerGroupAdmin
         arguments: [~, Librinfo\EcommerceBundle\Entity\CustomerGroup, BlastCoreBundle:CRUD]
@@ -176,3 +176,12 @@ services:
               label: Zone
               label_translator_strategy: blast_core.label.strategy.librinfo
 
+    librinfo_ecommerce.admin.taxon:
+        class: Librinfo\EcommerceBundle\Admin\TaxonAdmin
+        arguments: [~, Librinfo\EcommerceBundle\Entity\Taxon, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Taxon
+              label_translator_strategy: blast_core.label.strategy.librinfo

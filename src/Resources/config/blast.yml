@@ -81,6 +81,18 @@ parameters:
                             options:
                                 label: librinfo.label.product_options
                                 required: false
+                            productTaxons:
+                                # type: Librinfo\EcommerceBundle\Form\Type\TaxonListType
+                                choice_label: taxon.name
+                                # type: Librinfo\EcommerceBundle\Form\Type\TaxonListType
+                                # choice_label: displayName
+                                # expanded: true
+                                multiple: true
+                            mainTaxon:
+                                type: Librinfo\EcommerceBundle\Form\Type\TaxonListType
+                                choice_label: displayName
+                                # class: Sylius\Component\Core\Model\Taxon
+                                # required: false
                     form_tab_variants:
                         _options:
                             countChildItems:
@@ -1114,12 +1126,18 @@ parameters:
                         label: librinfo.label.customer_name
                     order.customer.customerCode:
                         label: librinfo.label.customer_customer_code
+                    # order.customer.circle:
+                    #     label: librinfo.label.customer_customer_circle
                     state:
                         label: librinfo.label.payment_state
                         type: doctrine_orm_string
                         field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                         field_options:
                             no_cart: true
+                    method:
+                        label: librinfo.label.payment_method
+                        field_options:
+                            multiple: true
                     amount: ~
                     createdAt:
                         label: librinfo.label.payment_date
@@ -1522,3 +1540,36 @@ parameters:
                     code: ~
                     type: ~
                     scope: ~
+
+#######
+# TAXON
+#######
+
+        Librinfo\EcommerceBundle\Entity\Taxon:
+            baseRoute:
+                name: admin_librinfo_ecommerce_taxon
+                pattern: librinfo/ecommerce/taxon
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    translation.name: ~
+                    code: ~
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    '':
+                        form_group_general:
+                            name: ~
+                            code: ~
+                            parent: ~
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    translation.name:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_treeable.html.twig
+                        identifier: true
+                        label: librinfo.label.name
+                    code:
+                        sortable: false
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                remove: ~
+                add: ~
+                    # translation.name: ~
+                    # code: ~
