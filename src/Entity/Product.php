@@ -124,7 +124,7 @@ class Product extends BaseProduct
         $taxons = new ArrayCollection();
 
         $pTaxons = $this->getProductTaxons();
-        foreach($pTaxons as $pt) {
+        foreach ($pTaxons as $pt) {
             $taxons->add($pt->getTaxon());
         }
 
