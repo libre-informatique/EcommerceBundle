@@ -66,6 +66,14 @@ class AjaxController extends Controller
      */
     public function removeFromOrderAction(Request $request)
     {
-        return new JsonResponse($this->container->get('librinfo_ecommerce.order.item_updater')->updateItemCount($request->get('order'), $request->get('item'), false));
+        $updater = $this->container->get('librinfo_ecommerce.order.item_updater');
+
+        $result = $updater->updateItemCount($request->get('order'), $request->get('item'), false);
+
+        if ($result['lastItem'] != null) {
+            $result['message'] = $this->container->get('translator')->trans('There must be at least one item left in the order');
+        }
+
+        return new JsonResponse($result);
     }
 }
