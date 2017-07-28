@@ -102,22 +102,18 @@ fos_rest:
             xml:  true
         empty_content: 204
 
-#    # « format_listener » Conflicts with Sylius configuration
-#
-#    format_listener:
-#        rules:
-#            -   path: '^/api'
-#                priorities: [json, xml]
-#                fallback_format: json
-#                prefer_extension: true
-#            -   path: '^/'
-#                stop: true
-
-#sylius_product_association:
-#    resources:
-#        product:
-#            subject: Librinfo\EcommerceBundle\Entity\Product
-#            association:
-#                classes:
-#                    model: Sylius\Component\Product\Model\ProductAssociation
-#                    interface: Sylius\Component\Product\Model\ProductAssociationInterface
+liip_imagine:
+    filter_sets:
+        sylius_shop_product_original: ~
+        sylius_shop_product_tiny_thumbnail:
+            filters:
+                thumbnail: { size: [64, 64], mode: outbound, allow_upscale: true }
+        sylius_shop_product_small_thumbnail:
+            filters:
+                thumbnail: { size: [150, 112], mode: outbound, allow_upscale: true }
+        sylius_shop_product_thumbnail:
+            filters:
+                thumbnail: { size: [260, 260], mode: outbound, allow_upscale: true }
+        sylius_shop_product_large_thumbnail:
+            filters:
+                thumbnail: { size: [550, 412], mode: outbound, allow_upscale: true }

@@ -148,6 +148,7 @@ services:
         class: Librinfo\EcommerceBundle\Imagine\PathResolver\ProductPathResolver
         calls:
             - [setEm, ['@doctrine.orm.entity_manager'] ]
+            - [setWebDir, ['%assetic.read_from%'] ]
 
     librinfo_ecommerce.media.events.listener:
         class: Librinfo\EcommerceBundle\EventListener\UploadControllerEventListener
