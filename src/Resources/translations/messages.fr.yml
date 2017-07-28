@@ -1,5 +1,6 @@
 Action: Action
 Edit: Modifier
+There must be at least one item left in the order: Il doit y avoir au moins un élément dans la commande
 Add product: Ajouter un produit
 form_group_availability: Disponibilité
 form_group_properties: Dimensions & poids
@@ -22,6 +23,8 @@ show_group_shipments: Expéditions
 show_group_stock: Stock
 show_group_totals: Totaux
 show_group_pricing: Prix
+form_group_channels_and_taxonomy: Canaux de vente & Catégories
+form_group_product_channels: Canaux de vente
 show_tab_order_details: Commande
 show_tab_order_summary: Récapitulatif
 show_tab_payment_delivery: Paiement / Livraison
@@ -77,6 +80,7 @@ librinfo:
         available_until: Disponible jusqu'à
         billing_address: Adresse de facturation
         calculator: Règle de calcul
+        channels: Canal de vente
         channel_code: Code boutique
         channel_pricings: Prix
         checkout_completed_at: Panier validé le
@@ -145,6 +149,7 @@ librinfo:
         state: État
         storage_type: Type d'enregistrement
         tax_category: Catégorie de TVA
+        taxons: Catégories
         token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks

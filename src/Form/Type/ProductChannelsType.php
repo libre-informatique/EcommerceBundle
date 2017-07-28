@@ -19,45 +19,33 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Librinfo\EcommerceBundle\Form\DataTransformer\ArrayCollectionTransformer;
 
-class ProductTaxonListType extends AbstractType
+class ProductChannelsType extends AbstractType
 {
     private $em;
 
-    private $taxonClass;
-    private $productTaxonClass;
+    private $channelClass;
 
-    public function __construct(EntityManagerInterface $em, $productTaxonClass, $taxonClass)
+    public function __construct(EntityManagerInterface $em, $channelClass, $productClass)
     {
-        // parent::__construct($propertyAccessor);
         $this->em = $em;
-        $this->productTaxonClass = $productTaxonClass;
-        $this->taxonClass = $taxonClass;
+        $this->channelClass = $channelClass;
+        $this->producClass = $productClass;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         // parent::configureOptions($resolver);
-        $repo = $this->em->getRepository($this->taxonClass);
-        $qb = null;
-        if (method_exists($repo, 'createListQueryBuilder')) {
-            $qb = $repo->createListQueryBuilder('o');
-        } else {
-            $qb = $repo->createQueryBuilder('o');
-        }
+        $repo = $this->em->getRepository($this->channelClass);
+        $qb = $repo->createQueryBuilder('o');
 
-        $qb->orderBy('o.root', 'ASC');
-        $qb->orderBy('o.left', 'ASC');
-
-        $taxons = $qb->getQuery()->getResult();
-
-        array_walk($taxons, function (&$item) {
-            $item->displayName = str_repeat('  ', $item->getLevel()) . $item->getName(); // double white space utf-8 char
-        });
+        $channels = $qb->getQuery()->getResult();
 
         $resolver->setDefaults([
-            'choices' => $taxons,
-            'class' => $this->productTaxonClass,
+            'choices' => $channels,
+            'class' => $this->producClass,
             'choice_value' => 'id',
+            'choice_label' => 'code',
+            'label' => false,
         ]);
     }
 
@@ -73,7 +61,7 @@ class ProductTaxonListType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'librinfo_type_product_taxon_list';
+        return 'librinfo_type_product_channels';
     }
 
     /**

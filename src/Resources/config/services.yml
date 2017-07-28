@@ -55,6 +55,15 @@ services:
             - '%sylius.model.product_taxon.class%'
             - '%sylius.model.taxon.class%'
 
+    librinfo_ecommerce.form.type.product_channels:
+        class: Librinfo\EcommerceBundle\Form\Type\ProductChannelsType
+        tags:
+            - { name: form.type, alias: librinfo_type_product_channels }
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '%sylius.model.channel.class%'
+            - '%sylius.model.product.class%'
+
 # EVENT LISTENERS
 
     librinfo_ecommerce.listener.sylius_guidable:
@@ -139,6 +148,7 @@ services:
         class: Librinfo\EcommerceBundle\Imagine\PathResolver\ProductPathResolver
         calls:
             - [setEm, ['@doctrine.orm.entity_manager'] ]
+            - [setWebDir, ['%assetic.read_from%'] ]
 
     librinfo_ecommerce.media.events.listener:
         class: Librinfo\EcommerceBundle\EventListener\UploadControllerEventListener

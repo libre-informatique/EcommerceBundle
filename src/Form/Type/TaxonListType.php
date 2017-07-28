@@ -45,12 +45,13 @@ class TaxonListType extends AbstractType
         $taxons = $qb->getQuery()->getResult();
 
         array_walk($taxons, function (&$item) {
-            $item->displayName = str_repeat('- - ', $item->getLevel()) . $item->getName();
+            $item->displayName = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $item->getLevel()) . $item->getName();
         });
 
         $resolver->setDefaults([
             'choices' => $taxons,
             'no_cart' => false,
+            'choice_value' => 'id',
         ]);
     }
 

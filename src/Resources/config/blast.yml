@@ -55,17 +55,30 @@ parameters:
                 remove:
                     variants: ~
                     images: ~
+                    channels: ~
                 add:
                     form_tab_general:
                         form_group_general:
+                            _options:
+                                class: col-md-12
                             name:
                                 type: text
                                 label: librinfo.label.product_name
                             slug:
                                 type: text
+                                attr:
+                                    class: inline-block
+                                    width: 50
                             code:
                                 label: librinfo.label.product_code
+                                attr:
+                                    class: inline-block
+                                    width: 50
                             enabled: boolean
+                            options:
+                                label: librinfo.label.product_options
+                                required: false
+                        form_group_description:
                             shortDescription:
                                 type: Blast\UtilsBundle\Form\Type\TinyMceType
                                 required: false
@@ -78,22 +91,21 @@ parameters:
                             metaDescription:
                                 type: textarea
                                 required: false
-                            options:
-                                label: librinfo.label.product_options
-                                required: false
-                            productTaxons:
-                                # type: Librinfo\EcommerceBundle\Form\Type\ProductTaxonListType
-                                type: Librinfo\EcommerceBundle\Form\Type\ProductTaxonListType
-                                # choice_label: taxon.name
-                                # property: taxon.name
-                                choice_label: displayName
-                                # expanded: true
+                        form_group_channels_and_taxonomy:
+                            channels:
+                                type: Librinfo\EcommerceBundle\Form\Type\ProductChannelsType
                                 multiple: true
+                                expanded: true
                             mainTaxon:
                                 type: Librinfo\EcommerceBundle\Form\Type\TaxonListType
                                 choice_label: displayName
-                                # class: Sylius\Component\Core\Model\Taxon
-                                # required: false
+                                required: true
+                            taxons:
+                                type: Librinfo\EcommerceBundle\Form\Type\ProductTaxonListType
+                                choice_label: displayName
+                                multiple: true
+                                expanded: true
+                                required: false
                     form_tab_variants:
                         _options:
                             countChildItems:

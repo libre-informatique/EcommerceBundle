@@ -64,6 +64,7 @@ class ProductAdmin extends CoreAdmin
      */
     protected function configureFormFields(FormMapper $mapper)
     {
+        parent::configureFormFields($mapper);
         //calls to methods of traits
         $this->configFormHandlesRelations($mapper);
         $admin = $this;
@@ -71,7 +72,8 @@ class ProductAdmin extends CoreAdmin
             FormEvents::PRE_SUBMIT,
             function (FormEvent $event) use ($admin) {
                 $form = $event->getForm();
-                $subject = $admin->getSubject($event->getData());
+                $formData = $event->getData();
+                $subject = $admin->getSubject($formData);
 
                 // Avoid variants submit (because it is already managed in ajax)
                 if ($form->has('variants')) {
@@ -80,8 +82,10 @@ class ProductAdmin extends CoreAdmin
             }
         );
 
-        if ($this->getSubject()) {
-            if ($this->getSubject()->getId() === null) {
+        $subject = $this->getSubject();
+
+        if ($subject) {
+            if ($subject->getId() === null) {
                 $tabs = $mapper->getadmin()->getFormTabs();
                 unset($tabs['form_tab_variants']);
                 unset($tabs['form_tab_images']);
@@ -124,12 +128,16 @@ class ProductAdmin extends CoreAdmin
     public function prePersist($product)
     {
         parent::prePersist($product);
-
-        dump($product);
-        die;
+        $this->handleProductTaxonCollection($product);
 
         $slugGenerator = $this->getConfigurationPool()->getContainer()->get('sylius.generator.slug');
         $product->setSlug($slugGenerator->generate($product->getName()));
+    }
+
+    public function preUpdate($product)
+    {
+        parent::preUpdate($product);
+        $this->handleProductTaxonCollection($product);
     }
 
     public function validate(ErrorElement $errorElement, $object)
@@ -155,6 +163,31 @@ class ProductAdmin extends CoreAdmin
                         ->addViolation('lisem.product_code.not_unique')
                     ->end();
             }
+        }
+    }
+
+    private function handleProductTaxonCollection($product)
+    {
+        $taxons = $product->getTaxons();
+
+        $exisingProductTaxons = $product->getProductTaxons();
+
+        $productTaxonClass = $this->getConfigurationPool()->getContainer()->getParameter('sylius.model.product_taxon.class');
+
+        foreach ($exisingProductTaxons as $exisingPTaxon) {
+            if (!$taxons->contains($exisingPTaxon->getTaxon())) {
+                $exisingProductTaxons->removeElement($exisingPTaxon);
+            } else {
+                $taxons->removeElement($exisingPTaxon->getTaxon());
+            }
+        }
+
+        foreach ($taxons as $taxon) {
+            $pTaxon = new $productTaxonClass();
+            $pTaxon->setProduct($product);
+            $pTaxon->setTaxon($taxon);
+
+            $product->addProductTaxon($pTaxon);
         }
     }
 }
