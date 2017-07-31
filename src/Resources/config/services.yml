@@ -15,6 +15,13 @@ services:
         tags:
             - { name: blast.entity_code_generator }
 
+    librinfo_ecommerce.code_generator.invoice:
+        class: Librinfo\EcommerceBundle\CodeGenerator\InvoiceCodeGenerator
+        factory:   ['@blast_core.code_generator_factory', create]
+        arguments: ['%librinfo_ecommerce.code_generator.invoice%', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: blast.entity_code_generator }
+
 # FORM TYPES
 
     librinfo_ecommerce.form.type.order_state:
