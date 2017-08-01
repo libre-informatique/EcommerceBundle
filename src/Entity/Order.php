@@ -26,7 +26,7 @@ class Order extends BaseOrder
     /**
      * @var Collection
      */
-    private $invoices;    
+    private $invoices;
 
     public function __construct()
     {
@@ -48,7 +48,7 @@ class Order extends BaseOrder
     }
 
     /**
-     * Add invoice
+     * Add invoice.
      *
      * @param Invoice $invoice
      *
@@ -62,7 +62,7 @@ class Order extends BaseOrder
     }
 
     /**
-     * Remove invoice
+     * Remove invoice.
      *
      * @param Invoice $invoice
      */
@@ -72,7 +72,7 @@ class Order extends BaseOrder
     }
 
     /**
-     * Get invoices
+     * Get invoices.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

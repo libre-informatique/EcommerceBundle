@@ -1,10 +1,12 @@
 <?php
 
 /*
+ * This file is part of the Blast Project package.
+ *
  * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -14,7 +16,7 @@ use Blast\BaseEntitiesBundle\Entity\Traits\BaseEntity;
 use Blast\BaseEntitiesBundle\Entity\Traits\Timestampable;
 
 /**
- * Invoice Entity
+ * Invoice Entity.
  *
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
@@ -35,7 +37,7 @@ class Invoice
     private $mimeType;
 
     /**
-     * @var integer
+     * @var int
      */
     private $size;
 
@@ -49,10 +51,9 @@ class Invoice
      */
     private $order;
 
-
     /**
-     * Called by __toString()
-     * 
+     * Called by __toString().
+     *
      * @return string
      */
     public function getName()
@@ -60,9 +61,8 @@ class Invoice
         return $this->number;
     }
 
-
     /**
-     * Set number
+     * Set number.
      *
      * @param string $number
      *
@@ -76,7 +76,7 @@ class Invoice
     }
 
     /**
-     * Get number
+     * Get number.
      *
      * @return string
      */
@@ -86,7 +86,7 @@ class Invoice
     }
 
     /**
-     * Set mimeType
+     * Set mimeType.
      *
      * @param string $mimeType
      *
@@ -100,7 +100,7 @@ class Invoice
     }
 
     /**
-     * Get mimeType
+     * Get mimeType.
      *
      * @return string
      */
@@ -110,9 +110,9 @@ class Invoice
     }
 
     /**
-     * Set size
+     * Set size.
      *
-     * @param integer $size
+     * @param int $size
      *
      * @return Invoice
      */
@@ -124,9 +124,9 @@ class Invoice
     }
 
     /**
-     * Get size
+     * Get size.
      *
-     * @return integer
+     * @return int
      */
     public function getSize()
     {
@@ -134,7 +134,7 @@ class Invoice
     }
 
     /**
-     * Set file
+     * Set file.
      *
      * @param string $file
      *
@@ -148,7 +148,7 @@ class Invoice
     }
 
     /**
-     * Get file
+     * Get file.
      *
      * @return string
      */
@@ -158,7 +158,7 @@ class Invoice
     }
 
     /**
-     * Set order
+     * Set order.
      *
      * @param Order $order
      *
@@ -172,7 +172,7 @@ class Invoice
     }
 
     /**
-     * Get order
+     * Get order.
      *
      * @return Order
      */
