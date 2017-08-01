@@ -71,6 +71,13 @@ services:
             - '%sylius.model.channel.class%'
             - '%sylius.model.product.class%'
 
+# EMAIL MANAGERS
+
+    librinfo_ecommerce.email_manager.order:
+        class: Librinfo\EcommerceBundle\EmailManager\OrderEmailManager
+        arguments:
+            - '@sylius.email_sender'
+            
 # EVENT LISTENERS
 
     librinfo_ecommerce.listener.sylius_guidable:
@@ -80,6 +87,16 @@ services:
         calls:
             - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+
+    # service override
+    sylius.listener.order_complete:
+        class: Librinfo\EcommerceBundle\EventListener\OrderCompleteListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.order.post_complete, method: sendConfirmationEmail }
+        arguments:
+            - '@librinfo_ecommerce.email_manager.order'
+
+
 
 # SYLIUS INSTALLER
 
