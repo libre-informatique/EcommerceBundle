@@ -50,7 +50,7 @@ trait AddressExtension
     /**
      * {@inheritdoc}
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
@@ -58,7 +58,7 @@ trait AddressExtension
     /**
      * {@inheritdoc}
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(?string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
@@ -66,7 +66,7 @@ trait AddressExtension
     /**
      * {@inheritdoc}
      */
-    public function getCompany()
+    public function getCompany(): ?string
     {
         return $this->company;
     }
@@ -74,7 +74,7 @@ trait AddressExtension
     /**
      * {@inheritdoc}
      */
-    public function setCompany($company)
+    public function setCompany(?string $company): void
     {
         $this->company = $company;
     }
@@ -82,7 +82,7 @@ trait AddressExtension
     /**
      * @return string
      */
-    public function getFullName()
+    public function getFullName(): ?string
     {
         return sprintf(
             '%s %s', $this->firstName, $this->lastName

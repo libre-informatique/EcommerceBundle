@@ -686,7 +686,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setBirthday(\DateTime $birthday = null)
+    public function setBirthday(?\DateTimeInterface $birthday = null)
     {
         $this->birthday = $birthday;
     }
