@@ -142,7 +142,7 @@ class Invoice
      */
     public function setFile($file)
     {
-        $this->file = $file;
+        $this->file = base64_encode($file);
 
         return $this;
     }
@@ -154,7 +154,7 @@ class Invoice
      */
     public function getFile()
     {
-        return $this->file;
+        return base64_decode($this->file);
     }
 
     /**

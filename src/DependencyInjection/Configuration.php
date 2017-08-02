@@ -44,6 +44,12 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('invoice')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\InvoiceCodeGenerator')->end()
                     ->end()
                 ->end()
+                ->arrayNode('invoice')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('template')->defaultValue('LibrinfoEcommerceBundle:Invoice:default.html.twig')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

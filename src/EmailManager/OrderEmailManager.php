@@ -12,6 +12,8 @@
 
 namespace Librinfo\EcommerceBundle\EmailManager;
 
+use Doctrine\ORM\EntityManager;
+use Librinfo\EcommerceBundle\Factory\InvoiceFactoryInterface;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -30,11 +32,24 @@ class OrderEmailManager implements OrderEmailManagerInterface
     private $emailSender;
 
     /**
-     * @param SenderInterface $emailSender
+     * @var InvoiceFactoryInterface
      */
-    public function __construct(SenderInterface $emailSender)
+    private $invoiceFactory;
+
+    /**
+     * @var EntityManager
+     */
+    private $em;
+
+    /**
+     * @param SenderInterface         $emailSender
+     * @param InvoiceFactoryInterface $invoiceFactory
+     */
+    public function __construct(SenderInterface $emailSender, InvoiceFactoryInterface $invoiceFactory, EntityManager $em)
     {
         $this->emailSender = $emailSender;
+        $this->invoiceFactory = $invoiceFactory;
+        $this->em = $em;
     }
 
     /**
@@ -42,10 +57,30 @@ class OrderEmailManager implements OrderEmailManagerInterface
      */
     public function sendConfirmationEmail(OrderInterface $order)
     {
-        //$attachments = "/tmp/test-invoice.pdf";
-        $attachments = [];
-        // TODO: $attachments = order invoice
+        $attachment = $this->generateInvoice($order);
+        $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order], [$attachment]);
+        @unlink($attachment);
+    }
 
-        $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order], $attachments);
+    /**
+     * @param OrderInterface $order
+     *
+     * @return string invoice temporary file path
+     */
+    private function generateInvoice($order)
+    {
+        // create and persist the invoice entity
+        $invoice = $this->invoiceFactory->createForOrder($order);
+        $this->em->persist($invoice);
+        $this->em->flush();
+
+        // write invoice contents (pdf) in a temporary file
+        $temp_file = sys_get_temp_dir() . '/lisem_invoice_' . $invoice->getNumber() . '.pdf';
+        if (file_exists($temp_file)) {
+            unlink($temp_file);
+        }
+        file_put_contents($temp_file, $invoice->getFile());
+
+        return $temp_file;
     }
 }

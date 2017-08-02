@@ -77,7 +77,9 @@ services:
         class: Librinfo\EcommerceBundle\EmailManager\OrderEmailManager
         arguments:
             - '@sylius.email_sender'
-            
+            - '@librinfo_ecommerce.factory.invoice'
+            - '@doctrine.orm.entity_manager'
+
 # EVENT LISTENERS
 
     librinfo_ecommerce.listener.sylius_guidable:
@@ -116,6 +118,15 @@ services:
         arguments:
             - '@librinfo_ecommerce.sylius.factory.customer.inner'
             - '@librinfo_crm.code_generator.customer'
+
+    librinfo_ecommerce.factory.invoice:
+        class: Librinfo\EcommerceBundle\Factory\InvoiceFactory
+        arguments:
+            - '@librinfo_ecommerce.code_generator.invoice'
+            - '@knp_snappy.pdf'
+            - '@templating'
+            - '%librinfo_ecommerce.invoice.template%'
+            - '%kernel.root_dir%'
 
 # SYLIUS FIXTURES & FIXTURE FACTORIES
 

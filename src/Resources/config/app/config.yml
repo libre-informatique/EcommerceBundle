@@ -119,6 +119,7 @@ liip_imagine:
                 thumbnail: { size: [550, 412], mode: outbound, allow_upscale: true }
 
 knp_snappy:
+    #process_timeout: 20 # In seconds
     pdf:
         enabled:    true
         binary:     /usr/bin/wkhtmltopdf

@@ -30,6 +30,7 @@ class LibrinfoEcommerceExtension extends BlastCoreExtension
         foreach (['product', 'product_variant', 'product_variant_embedded', 'invoice'] as $cg) {
             $container->setParameter("librinfo_ecommerce.code_generator.$cg", $config['code_generator'][$cg]);
         }
+        $container->setParameter('librinfo_ecommerce.invoice.template', $config['invoice']['template']);
 
         return $this;
     }
