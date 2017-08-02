@@ -15,6 +15,13 @@ services:
         tags:
             - { name: blast.entity_code_generator }
 
+    librinfo_ecommerce.code_generator.invoice:
+        class: Librinfo\EcommerceBundle\CodeGenerator\InvoiceCodeGenerator
+        factory:   ['@blast_core.code_generator_factory', create]
+        arguments: ['%librinfo_ecommerce.code_generator.invoice%', '@doctrine.orm.entity_manager']
+        tags:
+            - { name: blast.entity_code_generator }
+
 # FORM TYPES
 
     librinfo_ecommerce.form.type.order_state:
@@ -64,6 +71,15 @@ services:
             - '%sylius.model.channel.class%'
             - '%sylius.model.product.class%'
 
+# EMAIL MANAGERS
+
+    librinfo_ecommerce.email_manager.order:
+        class: Librinfo\EcommerceBundle\EmailManager\OrderEmailManager
+        arguments:
+            - '@sylius.email_sender'
+            - '@librinfo_ecommerce.factory.invoice'
+            - '@doctrine.orm.entity_manager'
+
 # EVENT LISTENERS
 
     librinfo_ecommerce.listener.sylius_guidable:
@@ -73,6 +89,16 @@ services:
         calls:
             - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+
+    # service override
+    sylius.listener.order_complete:
+        class: Librinfo\EcommerceBundle\EventListener\OrderCompleteListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.order.post_complete, method: sendConfirmationEmail }
+        arguments:
+            - '@librinfo_ecommerce.email_manager.order'
+
+
 
 # SYLIUS INSTALLER
 
@@ -92,6 +118,15 @@ services:
         arguments:
             - '@librinfo_ecommerce.sylius.factory.customer.inner'
             - '@librinfo_crm.code_generator.customer'
+
+    librinfo_ecommerce.factory.invoice:
+        class: Librinfo\EcommerceBundle\Factory\InvoiceFactory
+        arguments:
+            - '@librinfo_ecommerce.code_generator.invoice'
+            - '@knp_snappy.pdf'
+            - '@templating'
+            - '%librinfo_ecommerce.invoice.template%'
+            - '%kernel.root_dir%'
 
 # SYLIUS FIXTURES & FIXTURE FACTORIES
 
