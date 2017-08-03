@@ -68,7 +68,7 @@ class InvoiceCRUDController extends CRUDController
     /**
      * show file action.
      *
-     * @return response
+     * @return Response
      */
     public function showFileAction()
     {
@@ -78,6 +78,8 @@ class InvoiceCRUDController extends CRUDController
         if (!$invoice) {
             throw $this->createNotFoundException(sprintf('unable to find the invoice with id : %s', $id));
         }
+
+        $this->admin->checkAccess('show', $invoice);
 
         return new Response(
             $invoice->getFile(),
