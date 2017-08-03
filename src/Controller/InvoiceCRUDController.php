@@ -13,6 +13,7 @@
 namespace Librinfo\EcommerceBundle\Controller;
 
 use Blast\CoreBundle\Controller\CRUDController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -76,7 +77,7 @@ class InvoiceCRUDController extends CRUDController
         $invoice = $this->admin->getObject($id);
 
         if (!$invoice) {
-            throw $this->createNotFoundException(sprintf('unable to find the invoice with id : %s', $id));
+            throw $this->createNotFoundException(sprintf('Unable to find the invoice with id : %s', $id));
         }
 
         $this->admin->checkAccess('show', $invoice);
@@ -86,5 +87,45 @@ class InvoiceCRUDController extends CRUDController
             200,
             ['Content-Type' => 'application/pdf']
         );
+    }
+
+    /**
+     * Generate invoice.
+     *
+     * @param Request $request
+     * @param string  $order_id
+     *
+     * @return JsonResponse
+     */
+    public function generateAction(Request $request, $order_id)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        $repo = $manager->getRepository('LibrinfoEcommerceBundle:Order');
+
+        $order = $repo->find($order_id);
+        if (!$order) {
+            throw $this->createNotFoundException(sprintf('Unable to find the order with id : %s', $order_id));
+        }
+
+        $this->admin->checkAccess('create');
+
+        if ($order->getCheckoutState() != 'completed') {
+            throw new \Exception('Checkout is not completed');
+        }
+
+        if (count($order->getInvoices()) > 0) {
+            throw new \Exception('Invoice has already been generated');
+        }
+
+        $invoiceFactory = $this->container->get('librinfo_ecommerce.factory.invoice');
+        $invoice = $invoiceFactory->createForOrder($order);
+        $manager->persist($invoice);
+        $manager->flush();
+
+        $order->addInvoice($invoice);
+
+        $html = $this->renderView('LibrinfoEcommerceBundle:OrderAdmin/Show:_invoices_inner.html.twig', ['object' => $order]);
+
+        return new JsonResponse(['html' => $html]);
     }
 }

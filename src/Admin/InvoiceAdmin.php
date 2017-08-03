@@ -21,6 +21,7 @@ class InvoiceAdmin extends CoreAdmin
     {
         parent::configureRoutes($collection);
         $collection->add('showFile', $this->getRouterIdParameter() . '/show_file');
+        $collection->add('generate', '{order_id}/generate');
     }
 
     public function createQuery($context = 'list')

@@ -36,6 +36,7 @@ librinfo:
     action:
         add_variant: Ajouter une déclinaison
         edit: Modifier
+        generate_invoice: Générer la facture
         generate_variants: Générer les déclinaisons
         list_variants: Liste des déclinaisons
         manage_variants: Gérer les déclinaisons
@@ -71,6 +72,7 @@ librinfo:
         depth: profondeur
         exchange_rate: Taux de change
         height: hauteur
+        generating_invoice: Génération de la facture en cours...
         id: Identifiant
         included_in_price: Compris dans le prix
         invoice_list: Factures
