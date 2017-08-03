@@ -1,0 +1,8 @@
+<tr class="sonata-ba-view-container">
+    <th>
+        <a href="{{ path('admin_librinfo_ecommerce_invoice_showFile', {id: invoice.id}) }}" target="_blank">{{ invoice.number}}</a>
+    </th>
+    <td>
+        {{ invoice.createdAt|format_date }}
+    </td>
+</tr>

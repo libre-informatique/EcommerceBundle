@@ -1,0 +1,18 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field_value %}
+    <table class="table" id="invoices">
+        <tbody>
+            {% for invoice in object.invoices %}
+                {% include 'LibrinfoEcommerceBundle:OrderAdmin/Show:_invoice.html.twig' %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+
+
+
+
+
+

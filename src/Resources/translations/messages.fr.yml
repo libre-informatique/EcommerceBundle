@@ -1,36 +1,36 @@
 Action: Action
+Add product: Ajouter un produit
 Edit: Modifier
 There must be at least one item left in the order: Il doit y avoir au moins un élément dans la commande
-Add product: Ajouter un produit
 form_group_availability: Disponibilité
+form_group_channels_and_taxonomy: Canaux de vente & Catégories
+form_group_customer: Client
+form_group_images: Images
+form_group_pricing: Tarifs
+form_group_product_channels: Canaux de vente
 form_group_properties: Dimensions & poids
 form_group_stock: Stock
 form_group_variants: Variantes
-form_group_pricing: Tarifs
-form_group_customer: Client
-form_group_images: Images
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
-show_group_availability: Disponibilité
 show_group_addresses: Adresses
+show_group_availability: Disponibilité
 show_group_customer: Client
 show_group_history: Historique
 show_group_order: Commande
 show_group_payments: Paiements
+show_group_pricing: Prix
 show_group_properties: Dimensions & poids
 show_group_shipments: Expéditions
 show_group_stock: Stock
 show_group_totals: Totaux
-show_group_pricing: Prix
-form_group_channels_and_taxonomy: Canaux de vente & Catégories
-form_group_product_channels: Canaux de vente
+show_tab_history: Historique
 show_tab_order_details: Commande
 show_tab_order_summary: Récapitulatif
 show_tab_payment_delivery: Paiement / Livraison
-show_tab_history: Historique
-show_tab_variants: Déclinaisons
 show_tab_payment_details: Détails du paiement
+show_tab_variants: Déclinaisons
 
 librinfo:
     action:
@@ -44,35 +44,7 @@ librinfo:
         continue: Continuer
         go_to_list: Voir la liste
         setAsCover: Définir comme image de couverture
-    link:
-        order_list: Liste des commandes
-        product_attribute_create: Nouvel attribut d'article
-        product_attribute_list: Liste des attributs d'article
-        product_create: Nouvel Article
-        product_list: Liste des articles
-        product_option_create: Nouvelle option d'article
-        product_option_list: Liste des options d'article
-        product_option_value_create: Nouveau contenu d'option d'article
-        product_option_value_list: Liste des contenus options d'article
-        product_variant_create: Nouvelle déclinaison d'article
-        product_variant_list: Liste des déclinaisons d'article
-        productattribute_list: Liste des attributs d'article
-        productoption_list: Liste des options d'article
-        productoptionvalue_list: Liste des contenus options d'article
-        productvariant_list: Liste des déclinaisons d'article
-        payment_list: Liste des paiements
-        salesjournal_list: Journal des ventes
-        sales_journal_list: Journal des ventes
-        tax_category_list: Liste des catégories de TVA
-        taxcategory_list: Liste des catégories de TVA
-        taxrate_list: Liste des taux de TVA
-        tax_rate_list: Liste des taux de TVA
-        taxon_list: Liste des catégories
-        payment_method_list: Liste des méthodes de paiement
-        zone_create: Nouvelle zone
-        zone_list: Liste des zones
     label:
-        id: Identifiant
         adjustments_total: Total ajustements
         amount: Montant
         available: Disponible
@@ -80,26 +52,28 @@ librinfo:
         available_until: Disponible jusqu'à
         billing_address: Adresse de facturation
         calculator: Règle de calcul
-        channels: Canal de vente
         channel_code: Code boutique
         channel_pricings: Prix
+        channels: Canal de vente
         checkout_completed_at: Panier validé le
         checkout_state: Statut validation
         currency_code: Devise
         customer: Client
-        customer_group: Groupe de tarification
-        customer_group_name: Nom du groupe
-        customer_group_code: Code du groupe
-        customer_group_admin: Groupes de client
-        customer_customer_code: Code client
-        customer_customer_circle: Groupe(s) du client
         customer_created_at: Client depuis
+        customer_customer_circle: Groupe(s) du client
+        customer_customer_code: Code client
+        customer_group: Groupe de tarification
+        customer_group_admin: Groupes de client
+        customer_group_code: Code du groupe
+        customer_group_name: Nom du groupe
         customer_ip: Adresse IP client
         customer_name: Nom client
         depth: profondeur
         exchange_rate: Taux de change
         height: hauteur
+        id: Identifiant
         included_in_price: Compris dans le prix
+        invoice_list: Factures
         items_total: Total articles
         locale_code: Langue
         main_taxon: Catégorie principale
@@ -109,17 +83,17 @@ librinfo:
         on_hand: Stock disponible
         on_hold: Stock réservé
         option_values: Options
-        order_channel: Canal
         order: Commande
         order_admin: Commande
+        order_channel: Canal
         order_number: N° commande
         order_state: Statut commande
         order_total: Total commande
         original_price: Prix original
-        payment_id: Identifiant de paiement
         payment_admin: Paiement
         payment_amount: Montant
         payment_date: Date de paiement
+        payment_id: Identifiant de paiement
         payment_method: Méthode de paiement
         payment_method_admin: Méthode de paiement
         payment_state: Statut paiement
@@ -159,6 +133,33 @@ librinfo:
         weight: Poids
         width: largeur
         zone: Zone
+    link:
+        order_list: Liste des commandes
+        payment_list: Liste des paiements
+        payment_method_list: Liste des méthodes de paiement
+        product_attribute_create: Nouvel attribut d'article
+        product_attribute_list: Liste des attributs d'article
+        product_create: Nouvel Article
+        product_list: Liste des articles
+        product_option_create: Nouvelle option d'article
+        product_option_list: Liste des options d'article
+        product_option_value_create: Nouveau contenu d'option d'article
+        product_option_value_list: Liste des contenus options d'article
+        product_variant_create: Nouvelle déclinaison d'article
+        product_variant_list: Liste des déclinaisons d'article
+        productattribute_list: Liste des attributs d'article
+        productoption_list: Liste des options d'article
+        productoptionvalue_list: Liste des contenus options d'article
+        productvariant_list: Liste des déclinaisons d'article
+        sales_journal_list: Journal des ventes
+        salesjournal_list: Journal des ventes
+        tax_category_list: Liste des catégories de TVA
+        tax_rate_list: Liste des taux de TVA
+        taxcategory_list: Liste des catégories de TVA
+        taxon_list: Liste des catégories
+        taxrate_list: Liste des taux de TVA
+        zone_create: Nouvelle zone
+        zone_list: Liste des zones
     order_state:
         cancelled: Annulée
         cart: Panier
@@ -168,17 +169,12 @@ librinfo:
         awaiting_payment: En attente
         cancelled: Annulé
         cart: Panier
-        paid: Payé
         completed: Payé
+        new: Nouveau
+        paid: Payé
         partially_paid: Partiellement payé
         partially_refunded: Partiellement remboursé
         refunded: Remboursé
-        new: Nouveau
-    shipping_state:
-        cart: Panier
-        cancelled: Annulé
-        ready: Prêt
-        shipped: Expédié
     product:
         product_admin:
             label: Article
@@ -190,3 +186,8 @@ librinfo:
             label: Contenu d'option d'article
         product_variant_admin:
             label: Déclinaison d'article
+    shipping_state:
+        cart: Panier
+        cancelled: Annulé
+        ready: Prêt
+        shipped: Expédié
