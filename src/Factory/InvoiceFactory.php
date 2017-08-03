@@ -100,6 +100,7 @@ class InvoiceFactory implements InvoiceFactoryInterface
         $invoice->setNumber($number);
         $invoice->setMimeType('application/pdf');
         $invoice->setFile($pdf);
+        $invoice->setTotal($order->getTotal());
 
         return $invoice;
     }

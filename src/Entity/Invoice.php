@@ -52,6 +52,11 @@ class Invoice
     private $order;
 
     /**
+     * @var int
+     */
+    private $total;
+
+    /**
      * Called by __toString().
      *
      * @return string
@@ -155,6 +160,30 @@ class Invoice
     public function getFile()
     {
         return base64_decode($this->file);
+    }
+
+    /**
+     * Set total.
+     *
+     * @param int $total
+     *
+     * @return Invoice
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * Get total.
+     *
+     * @return int
+     */
+    public function getTotal()
+    {
+        return $this->total;
     }
 
     /**
