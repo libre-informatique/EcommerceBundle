@@ -20,6 +20,11 @@ class OrderAdmin extends CoreAdmin
     protected $baseRouteName = 'admin_librinfo_ecommerce_order';
     protected $baseRoutePattern = 'librinfo/ecommerce/order';
     protected $classnameLabel = 'Order';
+    protected $datagridValues = [
+        '_page' => 1,
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'createdAt',
+    ];
 
     public function createQuery($context = 'list')
     {
