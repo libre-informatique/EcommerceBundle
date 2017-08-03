@@ -1,6 +1,8 @@
 <?php
 
 /*
+ * This file is part of the Blast Project package.
+ *
  * Copyright (C) 2015-2017 Libre Informatique
  *
  * This file is licenced under the GNU LGPL v3.
@@ -15,7 +17,7 @@ use Blast\CoreBundle\CodeGenerator\CodeGeneratorInterface;
 use Librinfo\EcommerceBundle\Entity\Invoice;
 
 /**
- * Sequencial invoice number generator (6 digits)
+ * Sequencial invoice number generator (9 digits).
  *
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
@@ -26,7 +28,7 @@ class InvoiceCodeGenerator implements CodeGeneratorInterface
 
     // TODO: this should be in app configuration:
     public static $codePrefix = '';
-    public static $codeLength = 6;
+    public static $codeLength = 9;
 
     /**
      * @var EntityManager
@@ -60,6 +62,7 @@ class InvoiceCodeGenerator implements CodeGeneratorInterface
             ->getScalarResult()
         ;
         $max = $res ? (int) $res[0]['number'] : 0;
+
         return sprintf('%s%0' . self::$codeLength . 'd', self::$codePrefix, $max + 1);
     }
 
