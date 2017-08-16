@@ -27,7 +27,10 @@ $(document).ready(function() {
                 }
 
                 $.each(response.order, function(key, value) {
-                    $('#' + key).html(value);
+                    var th = $('#' + key);
+                    var label = th.find('strong');
+
+                    th.html(label).append(': ' + value);
                 });
             }
         );
