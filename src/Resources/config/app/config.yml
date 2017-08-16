@@ -122,7 +122,7 @@ knp_snappy:
     #process_timeout: 20 # In seconds
     pdf:
         enabled:    true
-        binary:     /usr/bin/wkhtmltopdf
+        binary:     /usr/bin/xvfb-run /usr/bin/wkhtmltopdf
         options:    []
     image:
         enabled:    false
