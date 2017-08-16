@@ -50,6 +50,14 @@ class SalesJournalAdmin extends OrderAdmin
         return $list;
     }
 
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+        unset($actions['delete']);
+
+        return $actions;
+    }
+
     public function toString($object)
     {
         return $object->getNumber() ?: $object->getId();
