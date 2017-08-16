@@ -78,9 +78,7 @@ class OrderItemUpdater
         }
 
         if ($quantity < 1) {
-            dump($order->countItems());
             if ($order->countItems() < 2) {
-                dump('srqfdhg');
                 $lastItem = true;
             } else {
                 $order->removeItem($item);

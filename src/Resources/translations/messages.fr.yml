@@ -2,6 +2,9 @@ Action: Action
 Add product: Ajouter un produit
 Edit: Modifier
 There must be at least one item left in the order: Il doit y avoir au moins un élément dans la commande
+Add product: Ajouter un produit
+Add: Ajouter
+Products: Produits
 form_group_availability: Disponibilité
 form_group_channels_and_taxonomy: Canaux de vente & Catégories
 form_group_customer: Client

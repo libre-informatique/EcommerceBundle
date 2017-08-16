@@ -41,11 +41,11 @@ class ProductChannelsType extends AbstractType
         $channels = $qb->getQuery()->getResult();
 
         $resolver->setDefaults([
-            'choices' => $channels,
-            'class' => $this->producClass,
+            'choices'      => $channels,
+            'class'        => $this->producClass,
             'choice_value' => 'id',
             'choice_label' => 'code',
-            'label' => false,
+            'label'        => false,
         ]);
     }
 
