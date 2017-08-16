@@ -14,12 +14,23 @@ namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class OrderAdmin extends CoreAdmin
 {
     protected $baseRouteName = 'admin_librinfo_ecommerce_order';
     protected $baseRoutePattern = 'librinfo/ecommerce/order';
     protected $classnameLabel = 'Order';
+    protected $datagridValues = [
+        '_page'       => 1,
+        '_sort_order' => 'DESC',
+        '_sort_by'    => 'createdAt',
+    ];
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(array('list', 'show'));
+    }
 
     public function createQuery($context = 'list')
     {

@@ -15,6 +15,7 @@ namespace Librinfo\EcommerceBundle\Imagine\PathResolver;
 use Librinfo\MediaBundle\Imagine\PathResolver\PathResolverInterface;
 use Librinfo\MediaBundle\Imagine\PathResolver\DefaultResolver;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Librinfo\MediaBundle\Entity\File;
 
 class ProductPathResolver extends DefaultResolver implements PathResolverInterface
 {
@@ -24,6 +25,18 @@ class ProductPathResolver extends DefaultResolver implements PathResolverInterfa
             if (null === $this->cacheFile) {
                 /* @var $this->cacheFile File */
                 $this->cacheFile = $this->findFile($path);
+            }
+
+            $webFilePath = $this->webDir . '/' . $path;
+
+            if (is_file($webFilePath)) {
+                $fakeFile = new File();
+                $fakeFile->setFile(base64_encode(file_get_contents($webFilePath)));
+                $fakeFile->setMimeType(mime_content_type($webFilePath));
+
+                $this->cacheFile = $fakeFile;
+
+                return $fakeFile->getFile();
             }
 
             if (null === $this->cacheFile) {

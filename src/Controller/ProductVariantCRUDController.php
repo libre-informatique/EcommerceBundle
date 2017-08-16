@@ -79,11 +79,11 @@ class ProductVariantCRUDController extends CRUDController
     protected function preCreate(Request $request, $object)
     {
         //        if ($product_id = $request->get('product_id')) {
-//            $product = $this->get('sylius.repository.product')->find($product_id);
-//            if (!$product)
-//                throw $this->createNotFoundException(sprintf('unable to find Product with id : %s', $product_id));
-//            $object->setProduct($product);
-//        }
+        //            $product = $this->get('sylius.repository.product')->find($product_id);
+        //            if (!$product)
+        //                throw $this->createNotFoundException(sprintf('unable to find Product with id : %s', $product_id));
+        //            $object->setProduct($product);
+        //        }
         return null;
     }
 }

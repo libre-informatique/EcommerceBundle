@@ -12,6 +12,8 @@
 
 namespace Librinfo\EcommerceBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\OrderExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\Order as BaseOrder;
@@ -21,9 +23,15 @@ class Order extends BaseOrder
     use OuterExtensible,
         OrderExtension;
 
+    /**
+     * @var Collection
+     */
+    private $invoices;
+
     public function __construct()
     {
         parent::__construct();
+        $this->invoices = new ArrayCollection();
     }
 
     /**
@@ -37,5 +45,39 @@ class Order extends BaseOrder
     public function __toString()
     {
         return (string) $this->getId();
+    }
+
+    /**
+     * Add invoice.
+     *
+     * @param Invoice $invoice
+     *
+     * @return Order
+     */
+    public function addInvoice(Invoice $invoice)
+    {
+        $this->invoices[] = $invoice;
+
+        return $this;
+    }
+
+    /**
+     * Remove invoice.
+     *
+     * @param Invoice $invoice
+     */
+    public function removeInvoice(Invoice $invoice)
+    {
+        $this->invoices->removeElement($invoice);
+    }
+
+    /**
+     * Get invoices.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
     }
 }

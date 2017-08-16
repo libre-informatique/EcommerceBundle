@@ -26,7 +26,7 @@ class Zone extends BaseZone
         $this->initOuterExtendedClasses();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getName();
     }
