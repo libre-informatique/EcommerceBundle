@@ -152,7 +152,7 @@ class ProductAdmin extends CoreAdmin
                 ->where('p.id <> :currentId')
                 ->andWhere('p.code = :currentCode')
                 ->setParameters([
-                    'currentId' => $id,
+                    'currentId'   => $id,
                     'currentCode' => $code,
                 ])
                 ;

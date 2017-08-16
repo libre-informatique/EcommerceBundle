@@ -27,9 +27,9 @@ class ShippingStateType extends AbstractType
     {
         $choices = function (Options $options) {
             $choices = [
-                'librinfo.shipping_state.cart' => ShipmentInterface::STATE_CART,
-                'librinfo.shipping_state.ready' => ShipmentInterface::STATE_READY,
-                'librinfo.shipping_state.shipped' => ShipmentInterface::STATE_SHIPPED,
+                'librinfo.shipping_state.cart'      => ShipmentInterface::STATE_CART,
+                'librinfo.shipping_state.ready'     => ShipmentInterface::STATE_READY,
+                'librinfo.shipping_state.shipped'   => ShipmentInterface::STATE_SHIPPED,
                 'librinfo.shipping_state.cancelled' => ShipmentInterface::STATE_CANCELLED,
             ];
             if ($options['no_cart']) {

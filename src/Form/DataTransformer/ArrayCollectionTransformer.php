@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ArrayCollectionTransformer implements DataTransformerInterface
 {
     /**
-     * reverseTransform : from array to ArrayCollection
+     * reverseTransform : from array to ArrayCollection.
      *
      * @param array $value
      *
@@ -40,7 +40,7 @@ class ArrayCollectionTransformer implements DataTransformerInterface
     }
 
     /**
-     * transform : from ArrayCollection to array
+     * transform : from ArrayCollection to array.
      *
      * @param ArrayCollection $value
      *

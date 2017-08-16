@@ -99,7 +99,7 @@ class OrderUpdater
         $this->em->flush();
 
         return [
-            'item' => $item,
+            'item'   => $item,
             'object' => $order,
         ];
     }
