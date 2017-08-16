@@ -76,4 +76,14 @@ class AjaxController extends Controller
 
         return new JsonResponse($result);
     }
+
+    public function addnewProductAction(Request $request)
+    {
+        $this->container
+            ->get('librinfo_ecommerce.order.updater')
+            ->addProduct($request->get('orderId'), $request->get('variantId')
+        );
+
+        return new JsonResponse('ok');
+    }
 }

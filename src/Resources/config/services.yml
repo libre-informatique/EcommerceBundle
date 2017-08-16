@@ -148,6 +148,15 @@ services:
             - { name: kernel.event_listener, event: librinfo.events.media.load.preGetEntity, method: preGetEntity, priority: -10 }
             - { name: kernel.event_listener, event: librinfo.events.media.load.postGetEntity, method: postGetEntity, priority: -10 }
 
+    librinfo_ecommerce.order.updater:
+        class: Librinfo\EcommerceBundle\Services\OrderUpdater
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@sylius.context.channel'
+#            - '@sylius.money_formatter'
+            - '@sylius.factory.order_item'
+            - '@sylius.factory.order_item_unit'
+
     librinfo_ecommerce.order.item_updater:
         class: Librinfo\EcommerceBundle\Services\OrderItemUpdater
         arguments:

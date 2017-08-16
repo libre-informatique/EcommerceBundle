@@ -2,6 +2,8 @@ Action: Action
 Edit: Modifier
 There must be at least one item left in the order: Il doit y avoir au moins un élément dans la commande
 Add product: Ajouter un produit
+Add: Ajouter
+Products: Produits
 form_group_availability: Disponibilité
 form_group_properties: Dimensions & poids
 form_group_stock: Stock
