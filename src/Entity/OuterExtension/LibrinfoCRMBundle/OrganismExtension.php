@@ -582,6 +582,11 @@ trait OrganismExtension
         return $this->orders;
     }
 
+    public function addOrder($order)
+    {
+        return $this->orders->add($order);
+    }
+
     /**
      * {@inheritdoc}
      */
