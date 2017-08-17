@@ -84,11 +84,11 @@ class CustomerController extends ResourceController
 
         $view = View::create()
             ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $newResource,
+                'configuration'            => $configuration,
+                'metadata'                 => $this->metadata,
+                'resource'                 => $newResource,
                 $this->metadata->getName() => $newResource,
-                'form' => $form->createView(),
+                'form'                     => $form->createView(),
             ])
             ->setTemplate($configuration->getTemplate(ResourceActions::CREATE . '.html'))
         ;
@@ -145,11 +145,11 @@ class CustomerController extends ResourceController
 
         $view = View::create()
             ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $resource,
+                'configuration'            => $configuration,
+                'metadata'                 => $this->metadata,
+                'resource'                 => $resource,
                 $this->metadata->getName() => $resource,
-                'form' => $form->createView(),
+                'form'                     => $form->createView(),
             ])
             ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
         ;

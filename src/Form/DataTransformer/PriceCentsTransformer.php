@@ -23,7 +23,7 @@ class PriceCentsTransformer implements \Symfony\Component\Form\DataTransformerIn
      */
     public function reverseTransform($value)
     {
-        return (int) ($value * 100);
+        return (int) (str_replace(',', '.', $value) * 100);
     }
 
     /**

@@ -49,10 +49,10 @@ class ProductVariantAdmin extends CoreAdmin
         if ($product) {
             $mapper->add('optionValues', 'entity', [
                 'query_builder' => $this->optionValuesQueryBuilder(),
-                'class' => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
-                'multiple' => true,
-                'required' => false,
-                'choice_label' => 'fullName',
+                'class'         => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
+                'multiple'      => true,
+                'required'      => false,
+                'choice_label'  => 'fullName',
                 ], [
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product',
                 ]);
@@ -158,7 +158,7 @@ class ProductVariantAdmin extends CoreAdmin
                 ->where('p.id <> :currentId')
                 ->andWhere('p.code = :currentCode')
                 ->setParameters([
-                    'currentId' => $id,
+                    'currentId'   => $id,
                     'currentCode' => $code,
                 ])
                 ;

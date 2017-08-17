@@ -27,8 +27,8 @@ class OrderStateType extends AbstractType
     {
         $choices = function (Options $options) {
             $choices = [
-                'librinfo.order_state.cart' => OrderInterface::STATE_CART,
-                'librinfo.order_state.new' => OrderInterface::STATE_NEW,
+                'librinfo.order_state.cart'      => OrderInterface::STATE_CART,
+                'librinfo.order_state.new'       => OrderInterface::STATE_NEW,
                 'librinfo.order_state.fulfilled' => OrderInterface::STATE_FULFILLED,
                 'librinfo.order_state.cancelled' => OrderInterface::STATE_CANCELLED,
             ];
