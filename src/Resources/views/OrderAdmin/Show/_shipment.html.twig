@@ -1,18 +1,18 @@
 <td>
     <strong>{{ shipment.method }}</strong><br>
-    <i class="globe icon"></i>{{ shipment.method.zone }}
+    <i class="fa fa-globe"></i>{{ shipment.method.zone }}
 </td>
 <td>
-    <div>{{ ('sylius.ui.'~shipment.state)|trans }}</div>
+    <div class="label bg-green"><i class="fa fa-truck"></i>{{ ('sylius.ui.'~shipment.state)|trans }}</div>
     {% if sm_can(shipment, 'ship', 'sylius_shipment') %}
         {{ render(path('sylius_admin_partial_shipment_ship', {'orderId': object.id, 'id': shipment.id})) }}
     {% endif %}
     {% if shipment.tracking is not empty %}
         <div class="ui segment">
-            <span class="ui top attached icon label"><i class="plane icon"></i> {{ 'sylius.ui.tracking_code'|trans|upper }}</span>
-            <p>{{ shipment.tracking }}</p>
+            <strong>{{ 'sylius.ui.tracking_code'|trans|upper }} : </strong>
+            {{ shipment.tracking }}
         </div>
     {% endif %}
 </td>
 
-
+<script src="{{asset('bundles/librinfoecommerce/js/shipment.js')}}"></script>
