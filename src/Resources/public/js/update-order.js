@@ -1,15 +1,5 @@
 $(document).ready(function() {
     $('#add-to-order').click(getProducts);
-    
-    //Navigate back to summary tab after page reload
-    if(document.cookie) {
-        $('.nav-tabs li[data-tab-name="' + document.cookie + '"]')
-            .find('a')
-            .trigger('click')
-        ;
-        
-        document.cookie= '';
-    }
 });
 
 var getProducts = function() {
