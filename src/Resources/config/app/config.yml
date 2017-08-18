@@ -4,6 +4,9 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
+parameters:
+    sonata.core.flashmessage.manager.class: Librinfo\EcommerceBundle\Services\FlashManager
+
 imports:
      - { resource: "state_machine.yml" }
 
