@@ -12,6 +12,7 @@
 
 namespace Librinfo\EcommerceBundle\Services;
 
+use Doctrine\ORM\EntityManager;
 use Sylius\Component\Order\Model\OrderInterface;
 
 class OrderCustomerManager
