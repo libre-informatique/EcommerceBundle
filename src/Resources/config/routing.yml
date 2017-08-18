@@ -1,7 +1,3 @@
-# payum:
-#     resource: "@PayumBundle/Resources/config/routing/capture.xml"
-#     prefix: /
-
 librinfo_ecommerce.order.inline_edit:
     path: /librinfo/ecommerce/order/inline_edit
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:orderInlineEdit }

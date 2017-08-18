@@ -3,13 +3,26 @@
     <i class="fa fa-globe"></i>{{ shipment.method.zone }}
 </td>
 <td>
-    <div class="label bg-green"><i class="fa fa-truck"></i>{{ ('sylius.ui.'~shipment.state)|trans }}</div>
+    <div class="label bg-green">
+        <i class="fa fa-truck"></i>&nbsp;{{ ('sylius.ui.'~shipment.state)|trans }}
+    </div>
+
     {% if sm_can(shipment, 'ship', 'sylius_shipment') %}
-        {{ render(path('sylius_admin_partial_shipment_ship', {'orderId': object.id, 'id': shipment.id})) }}
+        <form action="{{ path('admin_librinfo_ecommerce_order_updateShipping',{id: object.id}) }}" method="POST">
+            <input type="hidden" name="_action" value="ship"/>
+            <input type="hidden" name="_shipmentId" value="{{ shipment.id }}"/>
+            <input type="text" name="_tracking" placeholder="Code de suivi..." />
+            <input type="submit" value="{{'librinfo.label.ship'|trans}}"/>
+        </form>
+        {# {{ render(path('sylius_admin_partial_shipment_ship', {'orderId': object.id, 'id': shipment.id})) }} #}
     {% endif %}
+
     {% if shipment.tracking is not empty %}
         <div class="ui segment">
-            <strong>{{ 'sylius.ui.tracking_code'|trans|upper }} : </strong>
+            <strong>
+                {{ 'sylius.ui.tracking_code'|trans|upper }}
+                :
+            </strong>
             {{ shipment.tracking }}
         </div>
     {% endif %}

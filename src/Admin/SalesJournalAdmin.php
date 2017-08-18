@@ -14,12 +14,18 @@ namespace Librinfo\EcommerceBundle\Admin;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class SalesJournalAdmin extends OrderAdmin
 {
     protected $baseRouteName = 'admin_librinfo_ecommerce_sales_journal';
     protected $baseRoutePattern = 'librinfo/ecommerce/sales_journal';
     protected $classnameLabel = 'SalesJournal';
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(array('list', 'show'));
+    }
 
     public function createQuery($context = 'list')
     {

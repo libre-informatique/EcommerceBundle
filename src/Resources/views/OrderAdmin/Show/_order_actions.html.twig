@@ -1,0 +1,26 @@
+
+
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field_value %}
+    <div>
+        {% if object.state == 'new' %}
+            <a href="" class="btn btn-success">
+                {{ 'librinfo.label.validate_order'|trans }}
+            </a>
+            <a href="" class="btn btn-danger">
+                {{ 'librinfo.label.cancel_order'|trans }}
+            </a>
+        {% endif %}
+
+        {% if object.state == 'cancelled' %}
+            {# <a href="" class="btn btn-warning">
+                {{ 'librinfo.label.restaure_order'|trans }}
+            </a> #}
+        {% endif %}
+
+        {% if object.state == 'fulfilled' %}
+
+        {% endif %}
+    </div>
+{% endblock %}

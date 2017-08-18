@@ -54,8 +54,8 @@ librinfo:
         available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
-        batch_cancel_order: Annuler
-        batch_validate_order: Valider
+        cancel_order: Annuler
+        validate_order: Valider
         billing_address: Adresse de facturation
         calculator: Règle de calcul
         channel_code: Code boutique
@@ -91,6 +91,7 @@ librinfo:
         on_hold: Stock réservé
         option_values: Options
         order: Commande
+        order_actions: Actions
         order_admin: Commande
         order_channel: Canal
         order_number: N° commande
@@ -123,6 +124,7 @@ librinfo:
         sales_journal: Journal des vents
         scope: Scope
         set_default_customer_address: Adresse principale
+        ship: Expédier
         shipping_address: Adresse de livraison
         shipping_state: Statut livraison
         short_description: Brève description

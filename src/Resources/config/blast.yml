@@ -784,6 +784,9 @@ parameters:
                             invoice_list:
                                 mapped: false
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_invoices.html.twig
+                            orderActions:
+                                mapped: false
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_order_actions.html.twig
                         show_group_customer:
                             customer:
                                 admin_code: librinfo_ecommerce.admin.customer
