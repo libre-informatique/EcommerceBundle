@@ -54,6 +54,8 @@ librinfo:
         available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
+        batch_cancel_order: Annuler
+        batch_validate_order: Valider
         billing_address: Adresse de facturation
         calculator: Règle de calcul
         channel_code: Code boutique
@@ -168,7 +170,7 @@ librinfo:
     order_state:
         cancelled: Annulée
         cart: Panier
-        fulfilled: Exécutée
+        fulfilled: Validée
         new: Nouvelle
     payment_state:
         awaiting_payment: En attente

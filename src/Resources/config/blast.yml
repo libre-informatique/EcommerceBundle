@@ -842,9 +842,10 @@ parameters:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
                     _actions: [edit, duplicate]
-                    _batch_actions: [delete]
+                    # _batch_actions: [delete]
                     _list_actions: [create]
                 add:
+                    _batch_actions: [cancel]
                     number:
                         label: librinfo.label.order_number
                         identifier: true
