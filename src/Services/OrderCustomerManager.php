@@ -14,6 +14,7 @@ namespace Librinfo\EcommerceBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Order\Model\OrderInterface;
+use Blast\CoreBundle\CodeGenerator\CodeGeneratorInterface;
 
 class OrderCustomerManager
 {
@@ -21,6 +22,11 @@ class OrderCustomerManager
      * @var EntityManager
      */
     private $em;
+
+    /**
+     * @var CodeGeneratorInterface
+     */
+    private $codeGenerator;
 
     /**
      * @param EntityManager $em
@@ -47,6 +53,20 @@ class OrderCustomerManager
 
         $customer->addOrder($object);
 
+        if ($this->codeGenerator !== null) {
+            $customer->setCustomerCode($this->codeGenerator->generate($customer));
+        }
+
         $this->em->flush($customer);
+    }
+
+    /**
+     * setCodeGenerator.
+     *
+     * @param CodeGeneratorInterface $codeGenerator
+     */
+    public function setCodeGenerator(CodeGeneratorInterface $codeGenerator)
+    {
+        $this->codeGenerator = $codeGenerator;
     }
 }
