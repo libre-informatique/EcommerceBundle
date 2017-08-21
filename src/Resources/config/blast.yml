@@ -1601,3 +1601,70 @@ parameters:
                 add: ~
                     # translation.name: ~
                     # code: ~
+
+################################################################################
+# Channel
+################################################################################
+
+        Sylius\Component\Channel\Model\Channel:
+            baseRoute:
+                name: admin_librinfo_ecommerce_channel
+                pattern: librinfo/ecommerce/channel
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            code: ~
+                            name: ~
+                            color: ~
+                            description: ~
+                            enabled: ~
+                            hostname: ~
+                            createdAt: ~
+                            updatedAt: ~
+                            #id: ~
+
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            code: ~
+                            name: ~
+                            color: ~
+                            description: ~
+                            enabled: ~
+                            hostname: ~
+                            createdAt: ~
+                            updatedAt: ~
+                            #id: ~
+
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    code: ~
+                    name: ~
+                    color: ~
+                    description: ~
+                    enabled: ~
+                    hostname: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    #id: ~
+
+
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                remove:
+                    id: ~
+            #     add:
+            #         code: ~
+            #         name: ~
+            #         color: ~
+            #         description: ~
+            #         enabled: ~
+            #         hostname: ~
+            #         createdAt: ~
+            #         updatedAt: ~
+                    #id: ~

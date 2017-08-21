@@ -195,3 +195,13 @@ services:
               group: admin
               label: Invoice
               label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.channel:
+        class: Librinfo\EcommerceBundle\Admin\ChannelAdmin
+        arguments: [~, Sylius\Component\Channel\Model\Channel, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: Channel
+
