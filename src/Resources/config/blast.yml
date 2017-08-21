@@ -1606,7 +1606,7 @@ parameters:
 # Channel
 ################################################################################
 
-        Sylius\Component\Channel\Model\Channel:
+        Librinfo\EcommerceBundle\Entity\Channel:
             baseRoute:
                 name: admin_librinfo_ecommerce_channel
                 pattern: librinfo/ecommerce/channel

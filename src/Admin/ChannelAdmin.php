@@ -19,19 +19,11 @@ class ChannelAdmin extends CoreAdmin
     protected $baseRouteName = 'admin_librinfo_ecommerce_channel';
     protected $baseRoutePattern = 'librinfo/ecommerce/channel';
     protected $classnameLabel = 'Channel';
-    // protected $datagridValues = [
-    //     '_page'       => 1,
-    //     '_sort_order' => 'DESC',
-    //     '_sort_by'    => 'createdAt',
-    // ];
-
-    public function createQuery($context = 'list')
-    {
-        $query = parent::createQuery($context);
-        $alias = $query->getRootAliases()[0];
-
-        return $query;
-    }
+    protected $datagridValues = [
+        '_page'       => 1,
+        '_sort_order' => 'ASC',
+        '_sort_by'    => 'code',
+    ];
 
     public function toString($object)
     {
