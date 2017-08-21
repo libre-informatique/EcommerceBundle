@@ -16,6 +16,7 @@ use Blast\CoreBundle\Controller\CRUDController;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -98,21 +99,52 @@ class OrderCRUDController extends CRUDController
         );
     }
 
+    public function updatePaymentAction(Request $request)
+    {
+        $modelManager = $this->admin->getModelManager();
+
+        $orderId = $request->get('id');
+        $paymentId = $request->get('_paymentId');
+        $action = $request->get('_action');
+
+        $payment = $modelManager->find($this->container->getParameter('sylius.model.payment.class'), $paymentId);
+        $order = $modelManager->find($this->admin->getClass(), $orderId);
+
+        $stateMachineFactory = $this->container->get('sm.factory');
+
+        $stateMachinePayment = $stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
+        $stateMachinePayment->apply($action);
+
+        $this->container->get('sylius.manager.payment')->flush();
+
+        return new RedirectResponse(
+            $this->admin->generateUrl('show', ['id' => $orderId])
+        );
+    }
+
+    public function cancelOrderAction($id, Request $request = null)
+    {
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CANCEL, [$id]);
+    }
+
+    public function validateOrderAction($id, Request $request = null)
+    {
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, [$id]);
+    }
+
     public function batchActionCancel(ProxyQueryInterface $selectedModelQuery, Request $request = null)
     {
-        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CANCEL, $request->request->get('idx'), $selectedModelQuery);
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CANCEL, $request->request->get('idx'));
     }
 
     public function batchActionValidate(ProxyQueryInterface $selectedModelQuery, Request $request = null)
     {
-        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, $request->request->get('idx'), $selectedModelQuery);
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, $request->request->get('idx'));
     }
 
-    protected function validateOrCancelOrders($action, $targets, $selectedModelQuery)
+    protected function validateOrCancelOrders($action, $targets)
     {
         $modelManager = $this->admin->getModelManager();
-
-        $selectedModels = $selectedModelQuery->execute();
 
         $stateMachineFactory = $this->container->get('sm.factory');
 
@@ -128,6 +160,7 @@ class OrderCRUDController extends CRUDController
                     $this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
                 );
             }
+
             try {
                 $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
                 $stateMachine->apply($action);

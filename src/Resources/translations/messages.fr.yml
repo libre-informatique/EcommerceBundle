@@ -17,6 +17,7 @@ form_group_variants: Variantes
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
+show_group_actions: Actions
 show_group_addresses: Adresses
 show_group_availability: Disponibilité
 show_group_customer: Client
@@ -55,7 +56,9 @@ librinfo:
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
         cancel_order: Annuler
-        validate_order: Valider
+        cancel_this_order: Annuler cette commande
+        fulfill_order: Terminer
+        fulfill_this_order: Terminer cette commande
         billing_address: Adresse de facturation
         calculator: Règle de calcul
         channel_code: Code boutique
@@ -172,7 +175,7 @@ librinfo:
     order_state:
         cancelled: Annulée
         cart: Panier
-        fulfilled: Validée
+        fulfilled: Terminée
         new: Nouvelle
     payment_state:
         awaiting_payment: En attente
@@ -200,3 +203,5 @@ librinfo:
         cancelled: Annulé
         ready: Prêt
         shipped: Expédié
+    help:
+        order_is_fulfilled: Cette commande est terminée, vous ne pouvez plus la modifier

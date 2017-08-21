@@ -31,6 +31,9 @@ class OrderAdmin extends CoreAdmin
     {
         $collection->clearExcept(array('list', 'show', 'batch'));
         $collection->add('updateShipping', $this->getRouterIdParameter() . '/updateShipping');
+        $collection->add('updatePayment', $this->getRouterIdParameter() . '/updatePayment');
+        $collection->add('cancelOrder', $this->getRouterIdParameter() . '/cancelOrder');
+        $collection->add('validateOrder', $this->getRouterIdParameter() . '/validateOrder');
     }
 
     public function configureBatchActions($actions)
@@ -44,7 +47,7 @@ class OrderAdmin extends CoreAdmin
 
         $actions['validate'] = [
             'ask_confirmation' => true,
-            'label'            => 'librinfo.label.validate_order',
+            'label'            => 'librinfo.label.fulfill_order',
         ];
 
         return $actions;

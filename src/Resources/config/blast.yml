@@ -784,9 +784,6 @@ parameters:
                             invoice_list:
                                 mapped: false
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_invoices.html.twig
-                            orderActions:
-                                mapped: false
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_order_actions.html.twig
                         show_group_customer:
                             customer:
                                 admin_code: librinfo_ecommerce.admin.customer
@@ -804,7 +801,18 @@ parameters:
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
                             currencyCode: ~
                             exchangeRate: ~
-                            #checkoutState: ~
+                        show_group_actions:
+                            _options:
+                                class: col-md-12
+                            orderActions:
+                                mapped: false
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_order_actions.html.twig
+                        _options:
+                            groupsOrder:
+                                - show_group_actions
+                                - show_group_order
+                                - show_group_customer
+                                - show_group_totals
                     show_tab_order_summary:
                         '':
                             summary:

@@ -1,20 +1,22 @@
-<td>
+<td width="50%">
     <strong>{{ shipment.method }}</strong><br>
-    <i class="fa fa-globe"></i>{{ shipment.method.zone }}
+    <i class="fa fa-globe"></i>&nbsp;{{ shipment.method.zone }}
 </td>
-<td>
+<td width="50%">
     <div class="label bg-green">
         <i class="fa fa-truck"></i>&nbsp;{{ ('sylius.ui.'~shipment.state)|trans }}
     </div>
 
     {% if sm_can(shipment, 'ship', 'sylius_shipment') %}
-        <form action="{{ path('admin_librinfo_ecommerce_order_updateShipping',{id: object.id}) }}" method="POST">
+        <form action="{{ path('admin_librinfo_ecommerce_order_updateShipping',{id: object.id}) }}" method="POST" novalidate>
             <input type="hidden" name="_action" value="ship"/>
             <input type="hidden" name="_shipmentId" value="{{ shipment.id }}"/>
             <input type="text" name="_tracking" placeholder="Code de suivi..." />
-            <input type="submit" value="{{'librinfo.label.ship'|trans}}"/>
+            <a href="#" onclick="$(this).closest('form').submit()" class="btn btn-success pull-right">
+                {{'librinfo.label.ship'|trans}}&nbsp;
+                <i class="fa fa-paper-plane"></i>
+            </a>
         </form>
-        {# {{ render(path('sylius_admin_partial_shipment_ship', {'orderId': object.id, 'id': shipment.id})) }} #}
     {% endif %}
 
     {% if shipment.tracking is not empty %}
@@ -27,5 +29,3 @@
         </div>
     {% endif %}
 </td>
-
-<script src="{{asset('bundles/librinfoecommerce/js/shipment.js')}}"></script>
