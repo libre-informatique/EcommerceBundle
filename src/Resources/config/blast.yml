@@ -801,7 +801,18 @@ parameters:
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
                             currencyCode: ~
                             exchangeRate: ~
-                            #checkoutState: ~
+                        show_group_actions:
+                            _options:
+                                class: col-md-12
+                            orderActions:
+                                mapped: false
+                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_order_actions.html.twig
+                        _options:
+                            groupsOrder:
+                                - show_group_actions
+                                - show_group_order
+                                - show_group_customer
+                                - show_group_totals
                     show_tab_order_summary:
                         '':
                             summary:
@@ -842,9 +853,10 @@ parameters:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
                     _actions: [edit, duplicate]
-                    _batch_actions: [delete]
+                    # _batch_actions: [delete]
                     _list_actions: [create]
                 add:
+                    _batch_actions: [cancel]
                     number:
                         label: librinfo.label.order_number
                         identifier: true

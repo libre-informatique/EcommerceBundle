@@ -80,6 +80,13 @@ services:
             - '@librinfo_ecommerce.factory.invoice'
             - '@doctrine.orm.entity_manager'
 
+# ORDER CUSTOMER MANAGER
+
+    librinfo_ecommerce.order_customer_manager:
+        class: Librinfo\EcommerceBundle\Services\OrderCustomerManager
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
 # EVENT LISTENERS
 
     librinfo_ecommerce.listener.sylius_guidable:
@@ -192,6 +199,15 @@ services:
         tags:
             - { name: kernel.event_listener, event: librinfo.events.media.load.preGetEntity, method: preGetEntity, priority: -10 }
             - { name: kernel.event_listener, event: librinfo.events.media.load.postGetEntity, method: postGetEntity, priority: -10 }
+
+    librinfo_ecommerce.order.updater:
+        class: Librinfo\EcommerceBundle\Services\OrderUpdater
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@sylius.context.channel'
+#            - '@sylius.money_formatter'
+            - '@sylius.factory.order_item'
+            - '@sylius.factory.order_item_unit'
 
     librinfo_ecommerce.order.item_updater:
         class: Librinfo\EcommerceBundle\Services\OrderItemUpdater

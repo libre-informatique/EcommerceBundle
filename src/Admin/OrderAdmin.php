@@ -29,7 +29,28 @@ class OrderAdmin extends CoreAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list', 'show'));
+        $collection->clearExcept(array('list', 'show', 'batch'));
+        $collection->add('updateShipping', $this->getRouterIdParameter() . '/updateShipping');
+        $collection->add('updatePayment', $this->getRouterIdParameter() . '/updatePayment');
+        $collection->add('cancelOrder', $this->getRouterIdParameter() . '/cancelOrder');
+        $collection->add('validateOrder', $this->getRouterIdParameter() . '/validateOrder');
+    }
+
+    public function configureBatchActions($actions)
+    {
+        $actions = parent::configureBatchActions($actions);
+
+        $actions['cancel'] = [
+            'ask_confirmation' => true,
+            'label'            => 'librinfo.label.cancel_order',
+        ];
+
+        $actions['validate'] = [
+            'ask_confirmation' => true,
+            'label'            => 'librinfo.label.fulfill_order',
+        ];
+
+        return $actions;
     }
 
     public function createQuery($context = 'list')

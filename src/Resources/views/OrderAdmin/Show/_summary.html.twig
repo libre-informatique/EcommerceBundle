@@ -1,6 +1,6 @@
 {% set order = object %}
 
-<table class="table table-bordered table-condensed">
+<table id="order-summary" class="table table-bordered table-condensed">
     <thead>
         <tr>
             <th class="sylius-table-column-item">{{ 'librinfo.label.product'|trans }}</th>
@@ -23,5 +23,19 @@
     {% include 'LibrinfoEcommerceBundle:OrderAdmin/Show/Summary:_totals.html.twig' %}
     </tfoot>
 </table>
+    
+<a 
+    id="add-to-order" 
+    class="btn btn-primary" 
+    href="#" 
+    data-url="{{ path('admin_librinfo_ecommerce_product_list') }}"
+    data-variants-url="{{ path('admin_librinfo_ecommerce_productvariant_list') }}"
+    data-add-product-url="{{ path('librinfo_ecommerce.order.add_product') }}"
+    data-btn-text="{{ 'Add'|trans }}"
+    data-title=" {{ 'Products'|trans }}"
+    data-order-id="{{ order.id }}"
+><i class="fa fa-plus-circle"></i>{{ 'Add product'|trans }}</a>
 
+<link rel="stylesheet" href="{{ asset('bundles/librinfoecommerce/css/update-order.css') }}" />
+<script type="text/javascript" src="{{ asset('bundles/librinfoecommerce/js/update-order.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/librinfoecommerce/js/update-cart-item.js') }}"></script>

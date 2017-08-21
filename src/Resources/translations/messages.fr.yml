@@ -2,6 +2,9 @@ Action: Action
 Add product: Ajouter un produit
 Edit: Modifier
 There must be at least one item left in the order: Il doit y avoir au moins un élément dans la commande
+Add product: Ajouter un produit
+Add: Ajouter
+Products: Produits
 form_group_availability: Disponibilité
 form_group_channels_and_taxonomy: Canaux de vente & Catégories
 form_group_customer: Client
@@ -14,6 +17,7 @@ form_group_variants: Variantes
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
+show_group_actions: Actions
 show_group_addresses: Adresses
 show_group_availability: Disponibilité
 show_group_customer: Client
@@ -51,6 +55,10 @@ librinfo:
         available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
+        cancel_order: Annuler
+        cancel_this_order: Annuler cette commande
+        fulfill_order: Terminer
+        fulfill_this_order: Terminer cette commande
         billing_address: Adresse de facturation
         calculator: Règle de calcul
         channel_code: Code boutique
@@ -86,6 +94,7 @@ librinfo:
         on_hold: Stock réservé
         option_values: Options
         order: Commande
+        order_actions: Actions
         order_admin: Commande
         order_channel: Canal
         order_number: N° commande
@@ -118,6 +127,7 @@ librinfo:
         sales_journal: Journal des vents
         scope: Scope
         set_default_customer_address: Adresse principale
+        ship: Expédier
         shipping_address: Adresse de livraison
         shipping_state: Statut livraison
         short_description: Brève description
@@ -165,7 +175,7 @@ librinfo:
     order_state:
         cancelled: Annulée
         cart: Panier
-        fulfilled: Exécutée
+        fulfilled: Terminée
         new: Nouvelle
     payment_state:
         awaiting_payment: En attente
@@ -193,3 +203,5 @@ librinfo:
         cancelled: Annulé
         ready: Prêt
         shipped: Expédié
+    help:
+        order_is_fulfilled: Cette commande est terminée, vous ne pouvez plus la modifier

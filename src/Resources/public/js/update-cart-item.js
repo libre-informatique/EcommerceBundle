@@ -12,24 +12,25 @@ $(document).ready(function() {
             function(response) {
                 if(response.lastItem) {
                     Admin.flashMessage.show('error', response.message);
-                    
-                    return;
                 }
                 
                 if(response.remove) {
                     elem.parents('tr').remove();
-                    
-                    return;
                 }
                     
                 var parent = elem.parent();
-                    
-                $.each(response.item, function(key, value) {
-                    parent.siblings('.' + key).html(value);
-                });
+                
+                if(!response.remove && !response.lastItem) {
+                    $.each(response.item, function(key, value) {
+                        parent.siblings('.' + key).html(value);
+                    });
+                }
 
                 $.each(response.order, function(key, value) {
-                    $('#' + key).html(value);
+                    var th = $('#' + key);
+                    var label = th.find('strong');
+
+                    th.html(label).append(': ' + value);
                 });
             }
         );

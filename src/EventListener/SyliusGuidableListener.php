@@ -84,9 +84,9 @@ class SyliusGuidableListener implements LoggerAwareInterface, EventSubscriber
         unset($metadata->fieldNames['id']);
         unset($metadata->columnNames['id']);
         $metadata->mapField([
-            'id' => true,
-            'fieldName' => 'id',
-            'type' => 'guid',
+            'id'         => true,
+            'fieldName'  => 'id',
+            'type'       => 'guid',
             'columnName' => 'id',
         ]);
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadataInfo::GENERATOR_TYPE_UUID);

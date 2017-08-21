@@ -78,9 +78,7 @@ class OrderItemUpdater
         }
 
         if ($quantity < 1) {
-            dump($order->countItems());
             if ($order->countItems() < 2) {
-                dump('srqfdhg');
                 $lastItem = true;
             } else {
                 $order->removeItem($item);
@@ -108,11 +106,11 @@ class OrderItemUpdater
     private function formatArray($order, $item, $remove = false, $lastItem = true)
     {
         return [
-            'remove' => $remove,
+            'remove'   => $remove,
             'lastItem' => $lastItem,
-            'item' => [
+            'item'     => [
                 'quantity' => $item->getQuantity(),
-                'total' => $this->moneyFormatter->format(
+                'total'    => $this->moneyFormatter->format(
                     $item->getTotal(),
                     $order->getCurrencyCode(),
                     $order->getLocaleCode()

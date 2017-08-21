@@ -14,9 +14,14 @@ namespace Librinfo\EcommerceBundle\Controller;
 
 use Blast\CoreBundle\Controller\CRUDController;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\Payment\PaymentTransitions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -66,5 +71,112 @@ class OrderCRUDController extends CRUDController
     protected function preDuplicate($object)
     {
         throw new AccessDeniedException();
+    }
+
+    public function updateShippingAction(Request $request)
+    {
+        $modelManager = $this->admin->getModelManager();
+
+        $orderId = $request->get('id');
+        $shipmentId = $request->get('_shipmentId');
+        $action = $request->get('_action');
+        $tracking = $request->get('_tracking');
+
+        $shipment = $modelManager->find($this->container->getParameter('sylius.model.shipment.class'), $shipmentId);
+        $order = $modelManager->find($this->admin->getClass(), $orderId);
+
+        $stateMachineFactory = $this->container->get('sm.factory');
+
+        $stateMachineShipment = $stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH);
+        $stateMachineShipment->apply($action);
+
+        $shipment->setTracking($tracking);
+
+        $this->container->get('sylius.manager.shipment')->flush();
+
+        return new RedirectResponse(
+            $this->admin->generateUrl('show', ['id' => $orderId])
+        );
+    }
+
+    public function updatePaymentAction(Request $request)
+    {
+        $modelManager = $this->admin->getModelManager();
+
+        $orderId = $request->get('id');
+        $paymentId = $request->get('_paymentId');
+        $action = $request->get('_action');
+
+        $payment = $modelManager->find($this->container->getParameter('sylius.model.payment.class'), $paymentId);
+        $order = $modelManager->find($this->admin->getClass(), $orderId);
+
+        $stateMachineFactory = $this->container->get('sm.factory');
+
+        $stateMachinePayment = $stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
+        $stateMachinePayment->apply($action);
+
+        $this->container->get('sylius.manager.payment')->flush();
+
+        return new RedirectResponse(
+            $this->admin->generateUrl('show', ['id' => $orderId])
+        );
+    }
+
+    public function cancelOrderAction($id, Request $request = null)
+    {
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CANCEL, [$id]);
+    }
+
+    public function validateOrderAction($id, Request $request = null)
+    {
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, [$id]);
+    }
+
+    public function batchActionCancel(ProxyQueryInterface $selectedModelQuery, Request $request = null)
+    {
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CANCEL, $request->request->get('idx'));
+    }
+
+    public function batchActionValidate(ProxyQueryInterface $selectedModelQuery, Request $request = null)
+    {
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, $request->request->get('idx'));
+    }
+
+    protected function validateOrCancelOrders($action, $targets)
+    {
+        $modelManager = $this->admin->getModelManager();
+
+        $stateMachineFactory = $this->container->get('sm.factory');
+
+        $successes = 0;
+
+        foreach ($targets as $target) {
+            $selectedModel = $modelManager->find($this->admin->getClass(), $target);
+
+            if ($selectedModel === null) {
+                $this->addFlash('sonata_flash_info', 'flash_batch_cancel_or_validate_no_target');
+
+                return new RedirectResponse(
+                    $this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
+                );
+            }
+
+            try {
+                $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
+                $stateMachine->apply($action);
+                $this->container->get('sylius.manager.order')->flush();
+                ++$successes;
+            } catch (\Exception $e) {
+                $this->addFlash('sonata_flash_error', $e->getMessage());
+            }
+        }
+
+        if ($successes > 0) {
+            $this->addFlash('sonata_flash_success', 'flash_batch_cancel_or_validate_success');
+        }
+
+        return new RedirectResponse(
+            $this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
+        );
     }
 }

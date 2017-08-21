@@ -1,26 +1,40 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-<th>
-    {{ payment.method }}<br>
-    {{ money.convertAndFormat(payment.amount) }}
-</th>
-<td>
-    {{ ('sylius.ui.'~payment.state)|trans }}
+<td width="50%">
+    <strong>
+        {{ payment.method }}<br>
+        {{ money.convertAndFormat(payment.amount) }}
+    </strong>
+</td>
+<td width="50%">
 
     {% if sm_can(payment, 'complete', 'sylius_payment') %}
-    <div class="ui segment">
-        <form action="{{ path('sylius_admin_order_payment_complete', {'orderId': payment.order.id, 'id': payment.id}) }}" method="post" novalidate>
-            <input type="hidden" name="_method" value="PUT">
-            <button type="submit" class="ui icon labeled tiny blue fluid loadable button"><i class="check icon"></i> {{ 'sylius.ui.complete'|trans }}</button>
-        </form>
-    </div>
-    {% endif %}
-    {% if sm_can(payment, 'refund', 'sylius_payment') %}
-        <div class="ui segment">
-            <form action="{{ path('sylius_admin_order_payment_refund', {'orderId': payment.order.id, 'id': payment.id}) }}" method="post" novalidate>
-                <input type="hidden" name="_method" value="PUT">
-                <button type="submit" class="ui icon labeled tiny yellow fluid loadable button"><i class="reply all icon"></i> {{ 'sylius.ui.refund'|trans }}</button>
+        <div>
+            <form action="{{ path('admin_librinfo_ecommerce_order_updatePayment',{id: object.id}) }}" method="post" novalidate>
+                <input type="hidden" name="_action" value="complete"/>
+                <input type="hidden" name="_paymentId" value="{{ payment.id }}"/>
+                <a href="#" onclick="$(this).closest('form').submit()" class="btn btn-success pull-right">
+                    {{ 'sylius.ui.complete'|trans }}&nbsp;
+                    <i class="fa fa-check"></i>
+                </a>
             </form>
         </div>
     {% endif %}
+
+    {% if sm_can(payment, 'refund', 'sylius_payment') %}
+        <div>
+            <form action="{{ path('admin_librinfo_ecommerce_order_updatePayment',{id: object.id}) }}" method="post" novalidate>
+                <input type="hidden" name="_action" value="refund"/>
+                <input type="hidden" name="_paymentId" value="{{ payment.id }}"/>
+                <a href="#" onclick="$(this).closest('form').submit()" class="btn btn-warning pull-right">
+                    {{ 'sylius.ui.refund'|trans }}&nbsp;
+                    <i class="fa fa-undo"></i>
+                </a>
+            </form>
+        </div>
+    {% endif %}
+
+    <div class="label bg-blue">
+        {{ ('sylius.ui.'~payment.state)|trans }}
+    </div>
 </td>
