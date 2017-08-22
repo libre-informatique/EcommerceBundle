@@ -197,7 +197,7 @@ services:
         calls:
             - [setEm, ["@doctrine.orm.entity_manager"]]
         tags:
-            - { name: kernel.event_listener, event: librinfo.events.media.load.preGetEntity, method: preGetEntity, priority: -10 }
+            - { name: kernel.event_listener, event: librinfo.events.media   .load.preGetEntity, method: preGetEntity, priority: -10 }
             - { name: kernel.event_listener, event: librinfo.events.media.load.postGetEntity, method: postGetEntity, priority: -10 }
 
     librinfo_ecommerce.order.updater:
@@ -216,3 +216,11 @@ services:
             - '@sylius.order_item_quantity_modifier'
             - '@sylius.money_formatter'
             - '%sylius.model.order_item.class%'
+
+    librinfo_ecommerce.dashboard.main_block:
+        class: Librinfo\EcommerceBundle\Dashboard\EcommerceDashboardBlock
+        arguments:
+            - librinfo_ecommerce.dashboard.main_block
+            - "@templating"
+        tags:
+            - { name: sonata.block }

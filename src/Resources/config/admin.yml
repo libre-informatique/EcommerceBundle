@@ -198,10 +198,9 @@ services:
 
     librinfo_ecommerce.admin.channel:
         class: Librinfo\EcommerceBundle\Admin\ChannelAdmin
-        arguments: [~, Sylius\Component\Channel\Model\Channel, BlastCoreBundle:CRUD]
+        arguments: [~, Sylius\Component\Core\Model\Channel, BlastCoreBundle:CRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
               group: admin
               label: Channel
-

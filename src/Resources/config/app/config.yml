@@ -127,10 +127,22 @@ liip_imagine:
 knp_snappy:
     #process_timeout: 20 # In seconds
     pdf:
-        enabled:    true
-        binary:     /usr/bin/xvfb-run /usr/bin/wkhtmltopdf
-        options:    []
+        enabled: true
+        binary:  /usr/bin/xvfb-run /usr/bin/wkhtmltopdf
+        options: []
     image:
-        enabled:    false
-        binary:     /usr/bin/wkhtmltoimage
-        options:    []
+        enabled: false
+        binary:  /usr/bin/wkhtmltoimage
+        options: []
+
+sonata_block:
+    blocks:
+        librinfo_ecommerce.dashboard.main_block: ~
+
+sonata_admin:
+    dashboard:
+        blocks:
+            -
+                class:    col-xs-12
+                position: top
+                type:     librinfo_ecommerce.dashboard.main_block

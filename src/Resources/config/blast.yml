@@ -1627,6 +1627,10 @@ parameters:
 
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
+                remove:
+                    id: ~
+                    name: ~
+                    code: ~
                 add:
                     main_tab:
                         main_group:
@@ -1642,10 +1646,11 @@ parameters:
 
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+                    color: ~
                 add:
                     code: ~
                     name: ~
-                    color: ~
                     description: ~
                     enabled: ~
                     hostname: ~
@@ -1658,13 +1663,12 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove:
                     id: ~
-            #     add:
-            #         code: ~
-            #         name: ~
-            #         color: ~
-            #         description: ~
-            #         enabled: ~
-            #         hostname: ~
-            #         createdAt: ~
-            #         updatedAt: ~
-                    #id: ~
+                add:
+                    code: ~
+                    name: ~
+                    color: ~
+                    description: ~
+                    enabled: ~
+                    hostname: ~
+                    createdAt: ~
+                    updatedAt: ~
