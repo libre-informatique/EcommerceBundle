@@ -1,3 +1,6 @@
+imports:
+     - { resource: "dashboard.yml" }
+
 services:
 # ENTITY CODE GENERATORS
 
@@ -216,11 +219,3 @@ services:
             - '@sylius.order_item_quantity_modifier'
             - '@sylius.money_formatter'
             - '%sylius.model.order_item.class%'
-
-    librinfo_ecommerce.dashboard.main_block:
-        class: Librinfo\EcommerceBundle\Dashboard\EcommerceDashboardBlock
-        arguments:
-            - librinfo_ecommerce.dashboard.main_block
-            - "@templating"
-        tags:
-            - { name: sonata.block }

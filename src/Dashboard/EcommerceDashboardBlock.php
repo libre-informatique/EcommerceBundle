@@ -12,17 +12,14 @@
 
 namespace Librinfo\EcommerceBundle\Dashboard;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Sonata\BlockBundle\Block\Service\AbstractBlockService;
+use Blast\CoreBundle\Dashboard\AbstractDashboardBlock;
 
-class EcommerceDashboardBlock extends AbstractBlockService
+class EcommerceDashboardBlock extends AbstractDashboardBlock
 {
-    public function configureSettings(OptionsResolver $resolver)
+    public function handleParameters()
     {
-        $resolver->setDefaults(array(
-            'url'      => false,
-            'title'    => 'librinfo.label.dashboard_block_title',
-            'template' => 'LibrinfoEcommerceBundle:Dashboard:mainDashboard.html.twig',
-        ));
+        $this->templateParameters = [
+            'test'=> true,
+        ];
     }
 }

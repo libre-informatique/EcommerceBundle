@@ -134,15 +134,3 @@ knp_snappy:
         enabled: false
         binary:  /usr/bin/wkhtmltoimage
         options: []
-
-sonata_block:
-    blocks:
-        librinfo_ecommerce.dashboard.main_block: ~
-
-sonata_admin:
-    dashboard:
-        blocks:
-            -
-                class:    col-xs-12
-                position: top
-                type:     librinfo_ecommerce.dashboard.main_block
