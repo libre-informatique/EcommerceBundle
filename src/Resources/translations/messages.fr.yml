@@ -77,6 +77,7 @@ librinfo:
         customer_group_name: Nom du groupe
         customer_ip: Adresse IP client
         customer_name: Nom client
+        dashboard_title: Statistiques de vente
         depth: profondeur
         exchange_rate: Taux de change
         height: hauteur
@@ -124,7 +125,8 @@ librinfo:
         purchased_from: Achété sur
         rates: Taux de TVA
         sale_date: Date de vente
-        sales_journal: Journal des vents
+        sales_amount: Chiffre d'affaire
+        sales_journal: Journal des ventes
         scope: Scope
         set_default_customer_address: Adresse principale
         ship: Expédier
