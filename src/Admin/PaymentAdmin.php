@@ -59,8 +59,6 @@ class PaymentAdmin extends CoreAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        parent::configureRoutes($collection);
-        $collection->remove('delete');
-        $collection->remove('duplicate');
+        $collection->clearExcept(array('list', 'show'));
     }
 }
