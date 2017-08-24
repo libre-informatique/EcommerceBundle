@@ -8,9 +8,7 @@
     <div class="row">
         <div class="col-lg-4 col-md-6">
             <h4>{{ 'librinfo.label.sales_amount'|trans }}</h4>
-            <!-- <div class="chart-container" style="position: relative; height:40vh; width:80vw"> -->
             <canvas id="dashboard-ecommerce-sales-amount"></canvas>
-            <!-- </div> -->
         </div>
         <div class="col-lg-4 col-md-6"></div>
         <div class="col-lg-4 col-md-6"></div>
@@ -27,7 +25,8 @@
                     "label": "{{ 'librinfo.label.sales_amount'|trans|raw }}",
                     "data": {{ salesAmountData|json_encode|raw }},
                     "fill": true,
-                    "borderColor": "#3C8DBC",
+                    "backgroundColor": "rgba(60, 141, 188, 0.2)",
+                    "borderColor": "rgba(60, 141, 188, 1)",
                     "lineTension": 0.2
                 }
             ]

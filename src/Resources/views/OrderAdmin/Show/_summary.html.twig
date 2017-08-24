@@ -23,18 +23,18 @@
     {% include 'LibrinfoEcommerceBundle:OrderAdmin/Show/Summary:_totals.html.twig' %}
     </tfoot>
 </table>
-    
-<a 
-    id="add-to-order" 
-    class="btn btn-primary" 
-    href="#" 
+
+<a
+    id="add-to-order"
+    class="btn btn-primary pull-right"
+    href="#"
     data-url="{{ path('admin_librinfo_ecommerce_product_list') }}"
     data-variants-url="{{ path('admin_librinfo_ecommerce_productvariant_list') }}"
     data-add-product-url="{{ path('librinfo_ecommerce.order.add_product') }}"
     data-btn-text="{{ 'Add'|trans }}"
     data-title=" {{ 'Products'|trans }}"
     data-order-id="{{ order.id }}"
-><i class="fa fa-plus-circle"></i>{{ 'Add product'|trans }}</a>
+><i class="fa fa-plus-circle"></i>&nbsp;{{ 'Add product'|trans }}</a>
 
 <link rel="stylesheet" href="{{ asset('bundles/librinfoecommerce/css/update-order.css') }}" />
 <script type="text/javascript" src="{{ asset('bundles/librinfoecommerce/js/update-order.js') }}"></script>
