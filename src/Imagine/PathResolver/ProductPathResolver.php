@@ -29,15 +29,17 @@ class ProductPathResolver extends DefaultResolver implements PathResolverInterfa
 
             $webFilePath = $this->webDir . '/' . $path;
 
-            if (is_file($webFilePath)) {
-                $fakeFile = new File();
-                $fakeFile->setFile(base64_encode(file_get_contents($webFilePath)));
-                $fakeFile->setMimeType(mime_content_type($webFilePath));
-
-                $this->cacheFile = $fakeFile;
-
-                return $fakeFile->getFile();
+            if (!is_file($webFilePath)) {
+                $webFilePath = $this->webDir . '/bundles/librinfoecommerce/img/default-product-picture.png';
             }
+
+            $fakeFile = new File();
+            $fakeFile->setFile(base64_encode(file_get_contents($webFilePath)));
+            $fakeFile->setMimeType(mime_content_type($webFilePath));
+
+            $this->cacheFile = $fakeFile;
+
+            return $fakeFile->getFile();
 
             if (null === $this->cacheFile) {
                 throw new NotFoundHttpException(sprintf('File « %s » was not found', $path));
