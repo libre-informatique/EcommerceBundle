@@ -1652,38 +1652,38 @@ parameters:
                     createdAt: ~
                 add:
                     form_tab_general:
-                        '':
+                        form_group_parameters:
                             locales:
                                 attr:
-                                    class: new-line
+                                    class: inline-block
                                     width: 50
                             defaultLocale:
                                 required: true
                                 attr:
-                                    class: new-line
+                                    class: inline-block
                                     width: 50
                             currencies:
                                 attr:
-                                    class: new-line
+                                    class: inline-block
                                     width: 50
                             baseCurrency:
                                 required: true
                                 attr:
-                                    class: new-line
+                                    class: inline-block
                                     width: 50
                             defaultTaxZone:
                                 attr:
-                                    class: new-line
+                                    class: inline-block
                                     width: 50
                             taxCalculationStrategy:
                                 required: true
                                 attr:
-                                    class: new-line
+                                    class: inline-block
                                     width: 50
                             skippingShippingStepAllowed: ~
                             skippingPaymentStepAllowed: ~
                             accountVerificationRequired: ~
-                        form_group_general:
+                        form_group_channel:
                             code:
                                 required: true
                                 type: Blast\UtilsBundle\Form\Type\UniqueFieldType
@@ -1727,7 +1727,10 @@ parameters:
                                 attr:
                                     class: inline-block
                                     width: 50
-                    form_group_history:
+                        _options:
+                            groupsOrder: [form_group_channel,form_group_locales]
+
+                    form_tab_history:
                         '':
                             createdAt:
                                 type: sonata_type_datetime_picker
