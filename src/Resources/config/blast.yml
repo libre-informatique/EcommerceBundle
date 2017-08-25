@@ -1728,7 +1728,7 @@ parameters:
                                     class: inline-block
                                     width: 50
                         _options:
-                            groupsOrder: [form_group_channel,form_group_locales]
+                            groupsOrder: [form_group_channel,form_group_parameters]
 
                     form_tab_history:
                         '':
