@@ -6,9 +6,11 @@ Add product: Ajouter un produit
 Add: Ajouter
 Products: Produits
 form_group_availability: Disponibilité
+form_group_channel : Canal de vente
 form_group_channels_and_taxonomy: Canaux de vente & Catégories
 form_group_customer: Client
 form_group_images: Images
+form_group_parameters : Paramètres
 form_group_pricing: Tarifs
 form_group_product_channels: Canaux de vente
 form_group_properties: Dimensions & poids
@@ -50,13 +52,17 @@ librinfo:
         go_to_list: Voir la liste
         setAsCover: Définir comme image de couverture
     label:
+        account_verification_required: La vérification des comptes est-elle requise ?
         adjustments_total: Total ajustements
         amount: Montant
         available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
+        base_currency: Devise de référence
         cancel_order: Annuler
         cancel_this_order: Annuler cette commande
+        currencies: Devises
+        default_tax_zone: Zone de taxe par défaut
         fulfill_order: Terminer
         fulfill_this_order: Terminer cette commande
         billing_address: Adresse de facturation
@@ -66,6 +72,7 @@ librinfo:
         channels: Canal de vente
         checkout_completed_at: Panier validé le
         checkout_state: Statut validation
+        contact_email: Email de contact
         currency_code: Devise
         customer: Client
         customer_created_at: Client depuis
@@ -77,16 +84,19 @@ librinfo:
         customer_group_name: Nom du groupe
         customer_ip: Adresse IP client
         customer_name: Nom client
+        default_locale: Paramètres régionaux par défaut
         dashboard_title: Statistiques de vente
         depth: profondeur
         exchange_rate: Taux de change
         height: hauteur
+        hostname: Nom d'hôte
         generating_invoice: Génération de la facture en cours...
         id: Identifiant
         included_in_price: Compris dans le prix
         invoice_list: Factures
         items_total: Total articles
         locale_code: Langue
+        locales: Langues
         main_taxon: Catégorie principale
         meta_description: Meta description
         meta_keywords: Meta keywords
@@ -133,11 +143,15 @@ librinfo:
         shipping_address: Adresse de livraison
         shipping_state: Statut livraison
         short_description: Brève description
+        skipping_payment_step_allowed: Ignorez l'étape de paiement si un seul mode de paiement est disponible ?
+        skipping_shipping_step_allowed: Ignorez l'étape d'expédition si un seul mode de livraison est disponible ?
         slug: Slug
         state: État
         storage_type: Type d'enregistrement
+        tax_calculation_strategy: Stratégie de calcul de la TVA
         tax_category: Catégorie de TVA
         taxons: Catégories
+        theme_name: Thème
         token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks
@@ -148,6 +162,8 @@ librinfo:
         width: largeur
         zone: Zone
     link:
+        channel_create: Nouveau Canal
+        channel_list: Liste des canaux
         order_list: Liste des commandes
         payment_list: Liste des paiements
         payment_method_list: Liste des méthodes de paiement

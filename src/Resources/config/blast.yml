@@ -1612,42 +1612,157 @@ parameters:
                 pattern: librinfo/ecommerce/channel
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
+                remove:
+                    id: ~
+                    color: ~
+                    baseCurrency: ~
+                    defaultLocale: ~
+                    defaultTaxZone: ~
+                    taxCalculationStrategy: ~
+                    currencies: ~
+                    locales: ~
+                    themeName: ~
+                    contactEmail: ~
+                    skippingShippingStepAllowed: ~
+                    skippingPaymentStepAllowed: ~
+                    accountVerificationRequired: ~
+                    updatedAt: ~
+                    code: ~
+                    name: ~
+                    description: ~
+                    enabled: ~
+                    hostname: ~
+                    createdAt: ~
+                    updatedAt: ~
                 add:
                     main_tab:
                         main_group:
                             code: ~
                             name: ~
-                            color: ~
                             description: ~
                             enabled: ~
                             hostname: ~
                             createdAt: ~
                             updatedAt: ~
-                            #id: ~
-
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 remove:
                     id: ~
-                    name: ~
                     code: ~
+                    createdAt: ~
                 add:
-                    main_tab:
-                        main_group:
-                            code: ~
-                            name: ~
-                            color: ~
+                    form_tab_general:
+                        form_group_parameters:
+                            locales:
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            defaultLocale:
+                                required: true
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            currencies:
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            baseCurrency:
+                                required: true
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            defaultTaxZone:
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            taxCalculationStrategy:
+                                required: true
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            skippingShippingStepAllowed: ~
+                            skippingPaymentStepAllowed: ~
+                            accountVerificationRequired: ~
+                        form_group_channel:
+                            code:
+                                required: true
+                                type: Blast\UtilsBundle\Form\Type\UniqueFieldType
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            name:
+                                required: true
+                                type: Blast\UtilsBundle\Form\Type\UniqueFieldType
+                                return_link: true
+                                attr:
+                                    class: inline-block
+                                    width: 50
                             description: ~
                             enabled: ~
-                            hostname: ~
-                            createdAt: ~
-                            updatedAt: ~
-                            #id: ~
+                            hostname:
+                                required: true
+                                type: Blast\UtilsBundle\Form\Type\UniqueFieldType
+                                return_link: true
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            contactEmail:
+                                required: true
+                                type: Blast\UtilsBundle\Form\Type\UniqueFieldType
+                                return_link: true
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            color:
+                                required: true
+                                type: Blast\UtilsBundle\Form\Type\UniqueFieldType
+                                return_link: true
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            themeName:
+                                required: true
+                                type: Blast\UtilsBundle\Form\Type\CustomChoiceType
+                                choices_field : ~
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                        _options:
+                            groupsOrder: [form_group_channel,form_group_parameters]
 
+                    form_tab_history:
+                        '':
+                            createdAt:
+                                type: sonata_type_datetime_picker
+                                attr:
+                                    readonly: true
+                                disabled: true
+                                required: false
+                                dp_side_by_side: true
+                            updatedAt:
+                                type: sonata_type_datetime_picker
+                                attr:
+                                    readonly: true
+                                disabled: true
+                                required: false
+                                dp_side_by_side: true
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
+                    id: ~
                     color: ~
+                    baseCurrency: ~
+                    defaultLocale: ~
+                    defaultTaxZone: ~
+                    taxCalculationStrategy: ~
+                    currencies: ~
+                    locales: ~
+                    themeName: ~
+                    contactEmail: ~
+                    skippingShippingStepAllowed: ~
+                    skippingPaymentStepAllowed: ~
+                    accountVerificationRequired: ~
+                    updatedAt: ~
                 add:
                     code: ~
                     name: ~
@@ -1656,17 +1771,26 @@ parameters:
                     hostname: ~
                     createdAt: ~
                     updatedAt: ~
-                    #id: ~
-
 
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove:
                     id: ~
+                    color: ~
+                    baseCurrency: ~
+                    defaultLocale: ~
+                    defaultTaxZone: ~
+                    taxCalculationStrategy: ~
+                    currencies: ~
+                    locales: ~
+                    themeName: ~
+                    contactEmail: ~
+                    skippingShippingStepAllowed: ~
+                    skippingPaymentStepAllowed: ~
+                    accountVerificationRequired: ~
                 add:
                     code: ~
                     name: ~
-                    color: ~
                     description: ~
                     enabled: ~
                     hostname: ~

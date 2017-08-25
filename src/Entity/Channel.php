@@ -22,4 +22,9 @@ class Channel extends BaseChannel
 {
     use OuterExtensible;
     use \AppBundle\Entity\OuterExtension\ChannelExtension;
+
+    public function __toString()
+    {
+        return (string) $this->getName();
+    }
 }
