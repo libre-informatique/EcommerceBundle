@@ -34,10 +34,10 @@ class ChannelFixture extends BaseFixture
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
     {
         //        parent::configureResourceNode($resourceNode);
-//        $resourceNode
-//            ->children()
-//                ->scalarNode('account_verified_required')->end()
-//        ;
+        //        $resourceNode
+        //            ->children()
+        //                ->scalarNode('account_verified_required')->end()
+        //        ;
 
         $resourceNode
             ->children()
