@@ -14,14 +14,15 @@ namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Core\Model\Channel as BaseChannel;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
+/* @todo reference to AppBundle should be removed */
+use AppBundle\Entity\OuterExtension\ChannelExtension;
 
 /**
  * @author Romain SANCHEZ <romain.sanchez@libre-informatique.fr>
  */
 class Channel extends BaseChannel
 {
-    use OuterExtensible;
-    use \AppBundle\Entity\OuterExtension\ChannelExtension;
+    use OuterExtensible, ChannelExtension;
 
     public function __toString()
     {
