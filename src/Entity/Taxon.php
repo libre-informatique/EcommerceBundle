@@ -15,6 +15,7 @@ namespace Librinfo\EcommerceBundle\Entity;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
+/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\TaxonExtension;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\ImageInterface;

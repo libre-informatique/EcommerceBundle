@@ -14,6 +14,7 @@ namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Addressing\Model\Zone as BaseZone;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
+/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ZoneExtension;
 
 class Zone extends BaseZone

@@ -14,6 +14,7 @@ namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
+/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\TaxRateExtension;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
