@@ -1654,76 +1654,89 @@ parameters:
                     form_tab_general:
                         form_group_parameters:
                             locales:
+                                label: librinfo.label.locales
                                 attr:
                                     class: inline-block
                                     width: 50
                             defaultLocale:
+                                label: librinfo.label.defaultLocale
                                 required: true
                                 attr:
                                     class: inline-block
                                     width: 50
                             currencies:
+                                label: librinfo.label.currencies
                                 attr:
                                     class: inline-block
                                     width: 50
                             baseCurrency:
+                                label: librinfo.label.baseCurrency
                                 required: true
                                 attr:
                                     class: inline-block
                                     width: 50
                             defaultTaxZone:
+                                label: librinfo.label.defaultTaxZone
                                 attr:
                                     class: inline-block
                                     width: 50
                             taxCalculationStrategy:
+                                label: librinfo.label.taxCalculationStrategy
+                                type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
                                 required: true
                                 attr:
                                     class: inline-block
                                     width: 50
-                            skippingShippingStepAllowed: ~
-                            skippingPaymentStepAllowed: ~
-                            accountVerificationRequired: ~
+                            skippingShippingStepAllowed:
+                                label: librinfo.label.skippingShippingStepAllowed
+                            skippingPaymentStepAllowed:
+                                label: librinfo.label.skippingPaymentStepAllowed
+                            accountVerificationRequired:
+                                label: librinfo.label.accountVerificationRequired
                         form_group_channel:
                             code:
+                                label: librinfo.label.code
                                 required: true
                                 type: Blast\UtilsBundle\Form\Type\UniqueFieldType
                                 attr:
                                     class: inline-block
                                     width: 50
                             name:
+                                label: librinfo.label.name
                                 required: true
                                 type: Blast\UtilsBundle\Form\Type\UniqueFieldType
-                                return_link: true
                                 attr:
                                     class: inline-block
                                     width: 50
-                            description: ~
-                            enabled: ~
+                            description:
+                                label: librinfo.label.description
+                            enabled:
+                                label: librinfo.label.enabled
                             hostname:
+                                label: librinfo.label.hostname
                                 required: true
                                 type: Blast\UtilsBundle\Form\Type\UniqueFieldType
-                                return_link: true
                                 attr:
                                     class: inline-block
                                     width: 50
                             contactEmail:
+                                label: librinfo.label.contactEmail
                                 required: true
                                 type: Blast\UtilsBundle\Form\Type\UniqueFieldType
-                                return_link: true
                                 attr:
                                     class: inline-block
                                     width: 50
                             color:
-                                required: true
+                                label: librinfo.label.color
+                                required: false
                                 type: Blast\UtilsBundle\Form\Type\UniqueFieldType
-                                return_link: true
                                 attr:
                                     class: inline-block
                                     width: 50
                             themeName:
+                                label: librinfo.label.themeName
                                 required: true
-                                type: Blast\UtilsBundle\Form\Type\CustomChoiceType
-                                choices_field : ~
+                                type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
                                 attr:
                                     class: inline-block
                                     width: 50

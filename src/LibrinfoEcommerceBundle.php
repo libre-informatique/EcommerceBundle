@@ -13,7 +13,15 @@
 namespace Librinfo\EcommerceBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Librinfo\EcommerceBundle\DependencyInjection\SyliusTaxCalculationStrategiesCompilerPass;
 
 class LibrinfoEcommerceBundle extends Bundle
 {
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new SyliusTaxCalculationStrategiesCompilerPass());
+    }
 }

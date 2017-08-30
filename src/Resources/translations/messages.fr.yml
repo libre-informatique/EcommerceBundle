@@ -5,6 +5,9 @@ There must be at least one item left in the order: Il doit y avoir au moins un �
 Add product: Ajouter un produit
 Add: Ajouter
 Products: Produits
+Channel List: Liste des canaux
+Order items based: Basé sur les produits des commandes
+Order item units based: Basé sur les variantes de produit des commandes
 form_group_availability: Disponibilité
 form_group_channel : Canal de vente
 form_group_channels_and_taxonomy: Canaux de vente & Catégories
@@ -161,6 +164,20 @@ librinfo:
         weight: Poids
         width: largeur
         zone: Zone
+        accountVerificationRequired: Vérification de compte nécessaire
+        baseCurrency: Devise de base
+        contactEmail: Email de contact
+        defaultLocale: Langue par défaut
+        defaultTaxZone: Zone de taxe par défaut
+        order_actions: Actions
+        plant_type: Type de plante
+        sales: Ventes
+        skippingPaymentStepAllowed: Ignorer l'étape de paiement
+        skippingShippingStepAllowed: Ignorer l'étape de livraison
+        validate_order: Valider la commande
+        variety_list: Liste des variétés
+        taxCalculationStrategy: Stratégie de calcul des taxes
+        themeName: Nom du thème
     link:
         channel_create: Nouveau Canal
         channel_list: Liste des canaux

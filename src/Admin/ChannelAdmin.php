@@ -13,6 +13,8 @@
 namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
+use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ChannelAdmin extends CoreAdmin
 {
@@ -28,5 +30,51 @@ class ChannelAdmin extends CoreAdmin
     public function toString($object)
     {
         return $object->getCode() ?: $object->getId();
+    }
+
+    /**
+     * @param FormMapper $mapper
+     */
+    protected function configureFormFields(FormMapper $mapper)
+    {
+        parent::configureFormFields($mapper);
+
+        $syliusThemeConfig = $this->getConfigurationPool()->getContainer()->get('sylius.theme.configuration.provider')->getConfigurations();
+        $listOfThemes = [
+            'default' => 'Default Sylius theme',
+        ];
+        foreach ($syliusThemeConfig as $k => $conf) {
+            $listOfThemes[$conf['name']] = $conf['title'];
+        }
+
+        $groups = $this->getFormGroups();
+
+        $mapper->remove('taxCalculationStrategy');
+        $mapper->add('taxCalculationStrategy', ChoiceType::class, [
+            'label'    => 'librinfo.label.taxCalculationStrategy',
+            'choices'  => array_flip($this->getConfigurationPool()->getContainer()->getParameter('sylius.taxation.calculation_strategy.list_values')),
+            'required' => true,
+            'attr'     => [
+                'class'=> 'inline-block',
+                'width'=> 50,
+            ],
+        ]);
+
+        $mapper->remove('themeName');
+        $mapper->add('themeName', ChoiceType::class, [
+            'label'    => 'librinfo.label.themeName',
+            'choices'  => array_flip($listOfThemes),
+            'required' => true,
+            'attr'     => [
+                'class'=> 'inline-block',
+                'width'=> 50,
+            ],
+        ]);
+
+        $tabs = $this->getFormTabs();
+        unset($tabs['default']);
+        $this->setFormTabs($tabs);
+
+        $this->setFormGroups($groups);
     }
 }
