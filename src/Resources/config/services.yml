@@ -211,6 +211,7 @@ services:
 #            - '@sylius.money_formatter'
             - '@sylius.factory.order_item'
             - '@sylius.factory.order_item_unit'
+            - '@sm.factory'
 
     librinfo_ecommerce.order.item_updater:
         class: Librinfo\EcommerceBundle\Services\OrderItemUpdater
@@ -219,3 +220,5 @@ services:
             - '@sylius.order_item_quantity_modifier'
             - '@sylius.money_formatter'
             - '%sylius.model.order_item.class%'
+            - '@sm.factory'
+            - '@translator'
