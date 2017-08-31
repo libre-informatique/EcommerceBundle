@@ -1796,3 +1796,98 @@ parameters:
                     hostname: ~
                     createdAt: ~
                     updatedAt: ~
+
+################################################################################
+# ShippingMethod  
+################################################################################
+
+        Librinfo\EcommerceBundle\Entity\ShippingMethod:
+            baseRoute:
+                name: admin_librinfo_ecommerce_shipping_method
+                pattern: librinfo/ecommerce/shipping_method
+
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                remove:
+                  id: 
+                  configuration: ~
+                add:
+                    show_tab_general:
+                        main_group:
+                            code: ~
+                            categoryRequirement: ~
+                            calculator: ~
+                            enabled: ~
+                            position: ~
+                    show_tab_history:
+                        '':
+                            archivedAt: ~
+                            createdAt: ~
+                            updatedAt: ~
+    
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                remove:
+                  id: 
+                  configuration: ~
+                add:
+                    form_tab_general:
+                        main_group:
+                            code: ~
+                            categoryRequirement: ~
+                            calculator: ~
+                            enabled: ~
+                            position: ~
+                    form_tab_history:
+                        '':
+                            archivedAt:
+                                type: sonata_type_datetime_picker
+                                attr:
+                                    readonly: true
+                                disabled: true
+                                required: false
+                                dp_side_by_side: true
+                            createdAt: 
+                                type: sonata_type_datetime_picker
+                                attr:
+                                    readonly: true
+                                disabled: true
+                                required: false
+                                dp_side_by_side: true
+                            updatedAt: 
+                                type: sonata_type_datetime_picker
+                                attr:
+                                    readonly: true
+                                disabled: true
+                                required: false
+                                dp_side_by_side: true
+    
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+                  id: 
+                  configuration: ~
+                add:
+                    code: ~
+                    categoryRequirement: ~
+                    calculator: ~
+                    enabled: ~
+                    position: ~
+                    archivedAt: ~
+                    createdAt: ~
+                    updatedAt: ~
+
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                remove:
+                  id: 
+                  configuration: ~
+                add:
+                    code: ~
+                    categoryRequirement: ~
+                    calculator: ~
+                    enabled: ~
+                    position: ~
+                    archivedAt: ~
+                    createdAt: ~
+                    updatedAt: ~

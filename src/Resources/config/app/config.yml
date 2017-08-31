@@ -100,6 +100,21 @@ sylius_taxonomy:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\Taxon
 
+sylius_taxonomy:
+    resources:
+        taxon:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\Taxon
+
+sylius_shipping:
+    driver: doctrine/orm
+    resources:
+        shipping_method:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\ShippingMethod
+
+
+                
 fos_rest:
     exception: ~
     view:
