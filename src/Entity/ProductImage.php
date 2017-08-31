@@ -43,17 +43,17 @@ class ProductImage extends BaseProductImage
 
     public function getName()
     {
-        return $this->realFile->getName();
+        return $this->realFile === null ? null : $this->realFile->getName();
     }
 
     public function getBase64File()
     {
-        return $this->realFile->getBase64File();
+        return $this->realFile === null ? null : $this->realFile->getBase64File();
     }
 
     public function getMimeType()
     {
-        return $this->realFile->getMimeType();
+        return $this->realFile === null ? null : $this->realFile->getMimeType();
     }
 
     public function getRealFile()
