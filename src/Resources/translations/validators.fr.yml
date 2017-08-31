@@ -5,3 +5,7 @@ lisem:
         not_unique: Ce code produit est déjà utilisé par un autre produit
     product_variant_code:
         not_unique: Ce code de variante de produit est déjà utilisé par une autre variante
+    channel_code:
+        not_unique: Le code du canal doit être unique, le code « %code% » est déjà utilisé
+    channel_name:
+        not_unique: Le nom du canal doit être unique, le nom « %name% » est déjà utilisé

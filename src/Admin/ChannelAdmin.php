@@ -14,6 +14,7 @@ namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ChannelAdmin extends CoreAdmin
@@ -76,5 +77,55 @@ class ChannelAdmin extends CoreAdmin
         $this->setFormTabs($tabs);
 
         $this->setFormGroups($groups);
+    }
+
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        if ($object) {
+            $id = $object->getId();
+            $code = $object->getCode();
+            $name = $object->getName();
+
+            $qb = $this->getModelManager()->createQuery(get_class($object), 'c');
+
+            if ($id !== null) {
+                $qb
+                    ->where('c.id <> :currentId')
+                    ->setParameter('currentId', $id);
+            } else {
+                $qb
+                    ->where('c.id IS NOT NULL');
+            }
+
+            $qbCode = clone $qb;
+            $qbName = clone $qb;
+            unset($qb);
+
+            // CHECK CODE UNICITY
+
+            $qbCode
+                ->andWhere('c.code = :currentCode')
+                ->setParameter('currentCode', $code);
+
+            if (count($qbCode->getQuery()->getResult()) != 0) {
+                $errorElement
+                    ->with('code')
+                        ->addViolation('lisem.channel_code.not_unique', ['%code%' => $code])
+                    ->end();
+            }
+
+            // CHECK NAME UNICITY
+
+            $qbName
+                ->andWhere('c.name = :currentName')
+                ->setParameter('currentName', $name);
+
+            if (count($qbName->getQuery()->getResult()) != 0) {
+                $errorElement
+                    ->with('name')
+                        ->addViolation('lisem.channel_name.not_unique', ['%name%' => $name])
+                    ->end();
+            }
+        }
     }
 }

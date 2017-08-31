@@ -173,7 +173,6 @@ parameters:
                     translations.metaDescription:
                         label: librinfo.label.meta_description
                     enabled: ~
-#                    available: ~
                     _options:
                         fieldsOrder:
                             - code
@@ -1612,7 +1611,9 @@ parameters:
                 pattern: librinfo/ecommerce/channel
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
+                forceTabs: true
                 remove:
+                    default: ~
                     id: ~
                     color: ~
                     baseCurrency: ~
@@ -1635,106 +1636,94 @@ parameters:
                     createdAt: ~
                     updatedAt: ~
                 add:
-                    main_tab:
-                        main_group:
+                    show_tab_general:
+                        _options:
+                            groupsOrder: [show_group_channel,show_group_parameters]
+                        show_group_parameters:
+                            locales: ~
+                            defaultLocale: ~
+                            currencies: ~
+                            baseCurrency: ~
+                            defaultTaxZone: ~
+                            taxCalculationStrategy: ~
+                            skippingShippingStepAllowed: ~
+                            skippingPaymentStepAllowed: ~
+                            accountVerificationRequired: ~
+                        show_group_channel:
                             code: ~
                             name: ~
                             description: ~
                             enabled: ~
                             hostname: ~
-                            createdAt: ~
-                            updatedAt: ~
+                            contactEmail: ~
+                            themeName: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 remove:
                     id: ~
                     code: ~
                     createdAt: ~
+                    color: ~
                 add:
                     form_tab_general:
                         form_group_parameters:
                             locales:
-                                label: librinfo.label.locales
                                 attr:
                                     class: inline-block
                                     width: 50
                             defaultLocale:
-                                label: librinfo.label.defaultLocale
                                 required: true
                                 attr:
                                     class: inline-block
                                     width: 50
                             currencies:
-                                label: librinfo.label.currencies
                                 attr:
                                     class: inline-block
                                     width: 50
                             baseCurrency:
-                                label: librinfo.label.baseCurrency
                                 required: true
                                 attr:
                                     class: inline-block
                                     width: 50
                             defaultTaxZone:
-                                label: librinfo.label.defaultTaxZone
                                 attr:
                                     class: inline-block
                                     width: 50
                             taxCalculationStrategy:
-                                label: librinfo.label.taxCalculationStrategy
                                 type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
                                 required: true
                                 attr:
                                     class: inline-block
                                     width: 50
-                            skippingShippingStepAllowed:
-                                label: librinfo.label.skippingShippingStepAllowed
-                            skippingPaymentStepAllowed:
-                                label: librinfo.label.skippingPaymentStepAllowed
-                            accountVerificationRequired:
-                                label: librinfo.label.accountVerificationRequired
+                            skippingShippingStepAllowed: ~
+                            skippingPaymentStepAllowed: ~
+                            accountVerificationRequired: ~
                         form_group_channel:
                             code:
-                                label: librinfo.label.code
                                 required: true
                                 type: Blast\UtilsBundle\Form\Type\UniqueFieldType
                                 attr:
                                     class: inline-block
                                     width: 50
                             name:
-                                label: librinfo.label.name
                                 required: true
                                 type: Blast\UtilsBundle\Form\Type\UniqueFieldType
                                 attr:
                                     class: inline-block
                                     width: 50
                             description:
-                                label: librinfo.label.description
                             enabled:
-                                label: librinfo.label.enabled
                             hostname:
-                                label: librinfo.label.hostname
                                 required: true
-                                type: Blast\UtilsBundle\Form\Type\UniqueFieldType
                                 attr:
                                     class: inline-block
                                     width: 50
                             contactEmail:
-                                label: librinfo.label.contactEmail
                                 required: true
-                                type: Blast\UtilsBundle\Form\Type\UniqueFieldType
-                                attr:
-                                    class: inline-block
-                                    width: 50
-                            color:
-                                label: librinfo.label.color
-                                required: false
-                                type: Blast\UtilsBundle\Form\Type\UniqueFieldType
                                 attr:
                                     class: inline-block
                                     width: 50
                             themeName:
-                                label: librinfo.label.themeName
                                 required: true
                                 type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
                                 attr:
@@ -1777,13 +1766,20 @@ parameters:
                     accountVerificationRequired: ~
                     updatedAt: ~
                 add:
-                    code: ~
-                    name: ~
-                    description: ~
-                    enabled: ~
-                    hostname: ~
-                    createdAt: ~
-                    updatedAt: ~
+                    code:
+                        label: librinfo.label.code
+                    name:
+                        label: librinfo.label.name
+                    description:
+                        label: librinfo.label.description
+                    enabled:
+                        label: librinfo.label.enabled
+                    hostname:
+                        label: librinfo.label.hostname
+                    createdAt:
+                        label: librinfo.label.createdAt
+                    updatedAt:
+                        label: librinfo.label.updatedAt
 
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
@@ -1802,10 +1798,17 @@ parameters:
                     skippingPaymentStepAllowed: ~
                     accountVerificationRequired: ~
                 add:
-                    code: ~
-                    name: ~
-                    description: ~
-                    enabled: ~
-                    hostname: ~
-                    createdAt: ~
-                    updatedAt: ~
+                    code:
+                        label: librinfo.label.code
+                    name:
+                        label: librinfo.label.name
+                    description:
+                        label: librinfo.label.description
+                    enabled:
+                        label: librinfo.label.enabled
+                    hostname:
+                        label: librinfo.label.hostname
+                    createdAt:
+                        label: librinfo.label.createdAt
+                    updatedAt:
+                        label: librinfo.label.updatedAt

@@ -1,13 +1,15 @@
 Action: Action
 Add product: Ajouter un produit
-Edit: Modifier
-There must be at least one item left in the order: Il doit y avoir au moins un élément dans la commande
 Add product: Ajouter un produit
 Add: Ajouter
-Products: Produits
+Channel Create: Créer un canal
 Channel List: Liste des canaux
-Order items based: Basé sur les produits des commandes
+Edit: Modifier
 Order item units based: Basé sur les variantes de produit des commandes
+Order items based: Basé sur les produits des commandes
+Products: Produits
+There must be at least one item left in the order: Il doit y avoir au moins un élément dans la commande
+
 form_group_availability: Disponibilité
 form_group_channel : Canal de vente
 form_group_channels_and_taxonomy: Canaux de vente & Catégories
@@ -22,12 +24,15 @@ form_group_variants: Variantes
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
+
 show_group_actions: Actions
 show_group_addresses: Adresses
 show_group_availability: Disponibilité
+show_group_channel : Canal de vente
 show_group_customer: Client
 show_group_history: Historique
 show_group_order: Commande
+show_group_parameters: Paramètres
 show_group_payments: Paiements
 show_group_pricing: Prix
 show_group_properties: Dimensions & poids
@@ -56,44 +61,50 @@ librinfo:
         setAsCover: Définir comme image de couverture
     label:
         account_verification_required: La vérification des comptes est-elle requise ?
+        accountVerificationRequired: Vérification de compte nécessaire
         adjustments_total: Total ajustements
         amount: Montant
-        available: Disponible
         available_on: Disponible à partir de
         available_until: Disponible jusqu'à
+        available: Disponible
         base_currency: Devise de référence
-        cancel_order: Annuler
-        cancel_this_order: Annuler cette commande
-        currencies: Devises
-        default_tax_zone: Zone de taxe par défaut
-        fulfill_order: Terminer
-        fulfill_this_order: Terminer cette commande
+        baseCurrency: Devise de base
         billing_address: Adresse de facturation
         calculator: Règle de calcul
+        cancel_order: Annuler
+        cancel_this_order: Annuler cette commande
         channel_code: Code boutique
         channel_pricings: Prix
         channels: Canal de vente
         checkout_completed_at: Panier validé le
         checkout_state: Statut validation
         contact_email: Email de contact
+        contactEmail: Email de contact
+        createdAt: Créé le
+        currencies: Devises
         currency_code: Devise
-        customer: Client
         customer_created_at: Client depuis
         customer_customer_circle: Groupe(s) du client
         customer_customer_code: Code client
-        customer_group: Groupe de tarification
         customer_group_admin: Groupes de client
         customer_group_code: Code du groupe
         customer_group_name: Nom du groupe
+        customer_group: Groupe de tarification
         customer_ip: Adresse IP client
         customer_name: Nom client
-        default_locale: Paramètres régionaux par défaut
+        customer: Client
         dashboard_title: Statistiques de vente
+        default_locale: Paramètres régionaux par défaut
+        default_tax_zone: Zone de taxe par défaut
+        defaultLocale: Langue par défaut
+        defaultTaxZone: Zone de taxe par défaut
         depth: profondeur
         exchange_rate: Taux de change
+        fulfill_order: Terminer
+        fulfill_this_order: Terminer cette commande
+        generating_invoice: Génération de la facture en cours...
         height: hauteur
         hostname: Nom d'hôte
-        generating_invoice: Génération de la facture en cours...
         id: Identifiant
         included_in_price: Compris dans le prix
         invoice_list: Factures
@@ -107,25 +118,26 @@ librinfo:
         on_hand: Stock disponible
         on_hold: Stock réservé
         option_values: Options
-        order: Commande
+        order_actions: Actions
         order_actions: Actions
         order_admin: Commande
         order_channel: Canal
         order_number: N° commande
         order_state: Statut commande
         order_total: Total commande
+        order: Commande
         original_price: Prix original
         payment_admin: Paiement
         payment_amount: Montant
         payment_date: Date de paiement
         payment_id: Identifiant de paiement
-        payment_method: Méthode de paiement
         payment_method_admin: Méthode de paiement
+        payment_method: Méthode de paiement
         payment_state: Statut paiement
         payments_list: Liste des paiements
+        plant_type: Type de plante
         position: Position
         price: Prix
-        product: Article
         product_code: Code article
         product_name: Nom article
         product_option: Option d'article
@@ -135,11 +147,13 @@ librinfo:
         product_variant_code: Code déclinaison
         product_variant_name: Nom déclinaison
         product_variant_prices: Prix
+        product: Article
         purchased_from: Achété sur
         rates: Taux de TVA
         sale_date: Date de vente
         sales_amount: Chiffre d'affaire
         sales_journal: Journal des ventes
+        sales: Ventes
         scope: Scope
         set_default_customer_address: Adresse principale
         ship: Expédier
@@ -148,36 +162,29 @@ librinfo:
         short_description: Brève description
         skipping_payment_step_allowed: Ignorez l'étape de paiement si un seul mode de paiement est disponible ?
         skipping_shipping_step_allowed: Ignorez l'étape d'expédition si un seul mode de livraison est disponible ?
+        skippingPaymentStepAllowed: Ignorer l'étape de paiement
+        skippingShippingStepAllowed: Ignorer l'étape de livraison
         slug: Slug
         state: État
         storage_type: Type d'enregistrement
         tax_calculation_strategy: Stratégie de calcul de la TVA
         tax_category: Catégorie de TVA
+        taxCalculationStrategy: Stratégie de calcul des taxes
         taxons: Catégories
         theme_name: Thème
+        themeName: Nom du thème
         token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks
         type: Type
+        updatedAt: MàJ le
+        validate_order: Valider la commande
         values: Valeurs
         variants: Déclinaisons
+        variety_list: Liste des variétés
         weight: Poids
         width: largeur
         zone: Zone
-        accountVerificationRequired: Vérification de compte nécessaire
-        baseCurrency: Devise de base
-        contactEmail: Email de contact
-        defaultLocale: Langue par défaut
-        defaultTaxZone: Zone de taxe par défaut
-        order_actions: Actions
-        plant_type: Type de plante
-        sales: Ventes
-        skippingPaymentStepAllowed: Ignorer l'étape de paiement
-        skippingShippingStepAllowed: Ignorer l'étape de livraison
-        validate_order: Valider la commande
-        variety_list: Liste des variétés
-        taxCalculationStrategy: Stratégie de calcul des taxes
-        themeName: Nom du thème
     link:
         channel_create: Nouveau Canal
         channel_list: Liste des canaux
