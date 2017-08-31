@@ -14,7 +14,9 @@ namespace Librinfo\EcommerceBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
+use SM\Factory\Factory;
 
 /**
  * Manage order item quantity.
@@ -41,17 +43,37 @@ class OrderItemUpdater
     private $orderItemClass;
 
     /**
+     * @var Factory
+     */
+    private $smFactory;
+
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
      * @param EntityManager                      $em
      * @param OrderItemQuantityModifierInterface $quantityModifier
      * @param MoneyFormatterInterface            $moneyFormatter
      * @param string                             $orderItemClass
+     * @param Factory                            $smFactory
+     * @param TranslatorInterface                $translator
      */
-    public function __construct(EntityManager $em, OrderItemQuantityModifierInterface $quantityModifier, MoneyFormatterInterface $moneyFormatter, $orderItemClass)
-    {
+    public function __construct(
+        EntityManager $em,
+        OrderItemQuantityModifierInterface $quantityModifier,
+        MoneyFormatterInterface $moneyFormatter,
+        $orderItemClass,
+        Factory $smFactory,
+        TranslatorInterface $translator
+    ) {
         $this->em = $em;
         $this->orderItemQuantityModifier = $quantityModifier;
         $this->moneyFormatter = $moneyFormatter;
         $this->orderItemClass = $orderItemClass;
+        $this->smFactory = $smFactory;
+        $this->translator = $translator;
     }
 
     /**
@@ -71,30 +93,39 @@ class OrderItemUpdater
         $order = $orderRepo->find($orderId);
         $item = $itemRepo->find($itemId);
 
-        if ($isAddition) {
-            $quantity = $item->getQuantity() + 1;
-        } else {
-            $quantity = $item->getQuantity() - 1;
-        }
+        $orderStateMachine = $this->smFactory->get($order, 'sylius_order');
 
-        if ($quantity < 1) {
-            if ($order->countItems() < 2) {
-                $lastItem = true;
+        if ($orderStateMachine->getState() === 'cancelled' || $orderStateMachine->getState() === 'fulfilled') {
+            return [
+                'lastItem' => true,
+                'message'  => $this->translator->trans('cannot_edit_order_because_of_state', [], 'SonataCoreBundle'),
+            ];
+        } else {
+            if ($isAddition) {
+                $quantity = $item->getQuantity() + 1;
             } else {
-                $order->removeItem($item);
-                $remove = true;
+                $quantity = $item->getQuantity() - 1;
             }
-        } else {
-            $this->orderItemQuantityModifier->modify($item, $quantity);
-            $item->recalculateUnitsTotal();
+
+            if ($quantity < 1) {
+                if ($order->countItems() < 2) {
+                    $lastItem = true;
+                } else {
+                    $order->removeItem($item);
+                    $remove = true;
+                }
+            } else {
+                $this->orderItemQuantityModifier->modify($item, $quantity);
+                $item->recalculateUnitsTotal();
+            }
+
+            $order->recalculateItemsTotal();
+
+            $this->em->persist($order);
+            $this->em->flush();
+
+            return $this->formatArray($order, $item, $remove, $lastItem);
         }
-
-        $order->recalculateItemsTotal();
-
-        $this->em->persist($order);
-        $this->em->flush();
-
-        return $this->formatArray($order, $item, $remove, $lastItem);
     }
 
     /**

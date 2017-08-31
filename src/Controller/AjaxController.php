@@ -79,10 +79,15 @@ class AjaxController extends Controller
 
     public function addnewProductAction(Request $request)
     {
-        $this->container
+        $newProduct = $this->container
             ->get('librinfo_ecommerce.order.updater')
             ->addProduct($request->get('orderId'), $request->get('variantId')
         );
+
+        if ($newProduct['item'] === null) {
+            // $this->container->get('sonata.core.flashmessage.manager')->
+            $this->container->get('session')->getFlashBag()->add('error', 'cannot_edit_order_because_of_state');
+        }
 
         return new JsonResponse('ok');
     }

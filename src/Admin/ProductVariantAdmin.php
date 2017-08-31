@@ -154,14 +154,21 @@ class ProductVariantAdmin extends CoreAdmin
 
             $qb = $this->getModelManager()->createQuery(get_class($object), 'p');
 
-            $qb
-                ->where('p.id <> :currentId')
-                ->andWhere('p.code = :currentCode')
-                ->setParameters([
-                    'currentId'   => $id,
-                    'currentCode' => $code,
-                ])
-                ;
+            if ($id !== null) {
+                $qb
+                    ->where('p.id <> :currentId')
+                    ->andWhere('p.code = :currentCode')
+                    ->setParameters([
+                        'currentId'   => $id,
+                        'currentCode' => $code,
+                    ])
+                    ;
+            } else {
+                $qb
+                    ->where('p.id IS NOT NULL')
+                    ->andWhere('p.code = :currentCode')
+                    ->setParameter('currentCode', $code);
+            }
 
             if (count($qb->getQuery()->getResult()) != 0) {
                 $errorElement
