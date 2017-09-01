@@ -222,3 +222,6 @@ services:
             - '%sylius.model.order_item.class%'
             - '@sm.factory'
             - '@translator'
+
+    librinfo.ecommerce.filters.customer:
+        class: Librinfo\EcommerceBundle\Services\Filters\CustomerFilter
