@@ -886,7 +886,10 @@ parameters:
                 add:
                     number:
                         label: librinfo.label.order_number
-                    customer.name: ~
+                    customer.fulltextName:
+                        type: doctrine_orm_callback
+                        serviceCallback: [librinfo.ecommerce.filters.customer, filterOnFullname, callback]
+                        field_type: text
                     customer.customerCode: ~
                     notes: ~
                     state:
@@ -1815,7 +1818,7 @@ parameters:
 
 
 ################################################################################
-# ShippingMethod  
+# ShippingMethod
 ################################################################################
 
         Librinfo\EcommerceBundle\Entity\ShippingMethod:
@@ -1826,7 +1829,7 @@ parameters:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 remove:
-                  id: 
+                  id:
                   configuration: ~
                 add:
                     show_tab_general:
@@ -1841,11 +1844,11 @@ parameters:
                             archivedAt: ~
                             createdAt: ~
                             updatedAt: ~
-    
-            # FORM    
+
+            # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 remove:
-                  id: 
+                  id:
                   configuration: ~
                 add:
                     form_tab_general:
@@ -1864,25 +1867,25 @@ parameters:
                                 disabled: true
                                 required: false
                                 dp_side_by_side: true
-                            createdAt: 
+                            createdAt:
                                 type: sonata_type_datetime_picker
                                 attr:
                                     readonly: true
                                 disabled: true
                                 required: false
                                 dp_side_by_side: true
-                            updatedAt: 
+                            updatedAt:
                                 type: sonata_type_datetime_picker
                                 attr:
                                     readonly: true
                                 disabled: true
                                 required: false
                                 dp_side_by_side: true
-    
-            # LIST    
+
+            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
-                  id: 
+                  id:
                   configuration: ~
                 add:
                     code: ~
@@ -1894,10 +1897,10 @@ parameters:
                     createdAt: ~
                     updatedAt: ~
 
-            # FILTERS 
+            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove:
-                  id: 
+                  id:
                   configuration: ~
                 add:
                     code: ~
