@@ -12,6 +12,8 @@
 
 namespace Librinfo\EcommerceBundle\Services\Filters;
 
+use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
+
 class CustomerFilter
 {
     public function filterOnFullname($queryBuilder, $alias, $field, $value)
@@ -20,12 +22,32 @@ class CustomerFilter
             return;
         }
 
-        $queryBuilder->andWhere(
-            $queryBuilder->expr()->orX(
-                $queryBuilder->expr()->like('customer.firstName', ':value'),
-                $queryBuilder->expr()->like('customer.lastName', ':value')
-            )
-        );
+        if (!isset($value['type'])) {
+            $value['type'] = ChoiceType::TYPE_CONTAINS;
+        }
+
+        switch ($value['type']) {
+            case ChoiceType::TYPE_CONTAINS:
+            default:
+                $queryBuilder->andWhere(
+                    $queryBuilder->expr()->orX(
+                        $queryBuilder->expr()->like('customer.firstName', ':value'),
+                        $queryBuilder->expr()->like('customer.lastName', ':value')
+                    )
+                );
+                break;
+            case ChoiceType::TYPE_NOT_CONTAINS:
+                $queryBuilder->andWhere(
+                    $queryBuilder->expr()->not(
+                        $queryBuilder->expr()->orX(
+                            $queryBuilder->expr()->like('customer.firstName', ':value'),
+                            $queryBuilder->expr()->like('customer.lastName', ':value')
+                        )
+                    )
+                );
+                break;
+        }
+
         $queryBuilder->setParameter('value', '%' . $value['value'] . '%');
 
         return true;

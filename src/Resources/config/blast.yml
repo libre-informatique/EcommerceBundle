@@ -890,6 +890,13 @@ parameters:
                         type: doctrine_orm_callback
                         serviceCallback: [librinfo.ecommerce.filters.customer, filterOnFullname, callback]
                         field_type: text
+                        operator_type: choice
+                        operator_options:
+                            choices: # See Sonata\AdminBundle\Form\Type\Filter\ChoiceType::buildForm() & consts
+                                label_type_contains: 1
+                                label_type_not_contains: 2
+                                # label_type_equals: 3     # Cannot use « equals » because of concat field
+                            translation_domain: SonataAdminBundle
                     customer.customerCode: ~
                     notes: ~
                     state:
