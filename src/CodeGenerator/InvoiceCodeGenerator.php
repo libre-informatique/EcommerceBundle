@@ -59,8 +59,7 @@ class InvoiceCodeGenerator implements CodeGeneratorInterface
             ->setMaxResults(1)
             ->addOrderBy('i.number', 'desc')
             ->getQuery()
-            ->getScalarResult()
-        ;
+            ->getScalarResult();
         $max = $res ? (int) $res[0]['number'] : 0;
 
         return sprintf('%s%0' . self::$codeLength . 'd', self::$codePrefix, $max + 1);

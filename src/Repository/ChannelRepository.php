@@ -21,8 +21,7 @@ class ChannelRepository extends BaseChannelRepository
         $qb = $this->createQueryBuilder('c');
 
         $qb
-            ->where('c.enabled = :enabled')
-        ;
+        ->where('c.enabled = :enabled');
 
         $qb->setParameter('enabled', true);
 

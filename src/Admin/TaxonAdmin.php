@@ -26,17 +26,16 @@ class TaxonAdmin extends CoreAdmin
         return $query;
     }
 
-
     public function getNewInstance()
     {
         /* Initialize locale and more */
-        
+
         $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.taxon');
         $object = $syliusFactory->createNew();
-        
+
         /*
         foreach ($this->getExtensions() as $extension) {
-            $extension->alterNewInstance($this, $object);
+        $extension->alterNewInstance($this, $object);
         }
         */
 

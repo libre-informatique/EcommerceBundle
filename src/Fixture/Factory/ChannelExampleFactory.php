@@ -26,7 +26,9 @@ class ChannelExampleFactory extends BaseFactory
      */
     public function create(array $options = [])
     {
-        /** @var ChannelInterface $channel */
+        /**
+         * @var ChannelInterface
+         */
         $channel = parent::create($options);
         $channel->setAccountVerificationRequired($options['account_verified_required']);
 
@@ -41,7 +43,6 @@ class ChannelExampleFactory extends BaseFactory
         parent::configureOptions($resolver);
         $resolver
             ->setDefault('account_verified_required', false)
-            ->setAllowedTypes('account_verified_required', 'bool')
-        ;
+            ->setAllowedTypes('account_verified_required', 'bool');
     }
 }

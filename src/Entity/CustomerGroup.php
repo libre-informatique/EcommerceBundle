@@ -21,7 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class CustomerGroup extends BaseCustomerGroup
 {
     use OuterExtensible,
-        CustomerGroupExtension;
+    CustomerGroupExtension;
 
     protected $customers;
 

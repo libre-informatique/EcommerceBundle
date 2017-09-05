@@ -40,13 +40,15 @@ class AnyChannelsType extends AbstractType
 
         $channels = $qb->getQuery()->getResult();
 
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'choices'      => $channels,
             'class'        => $this->anyClass,
             'choice_value' => 'id',
             'choice_label' => 'code',
             'label'        => false,
-        ]);
+            ]
+        );
     }
 
     public function getParent()

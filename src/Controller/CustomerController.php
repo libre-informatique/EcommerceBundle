@@ -29,8 +29,7 @@ class CustomerController extends ResourceController
     {
         $admin = $this->container
             ->get('sonata.admin.pool')
-            ->getAdminByAdminCode('librinfo_ecommerce.admin.customer')
-        ;
+            ->getAdminByAdminCode('librinfo_ecommerce.admin.customer');
 
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -83,15 +82,16 @@ class CustomerController extends ResourceController
         }
 
         $view = View::create()
-            ->setData([
-                'configuration'            => $configuration,
-                'metadata'                 => $this->metadata,
-                'resource'                 => $newResource,
-                $this->metadata->getName() => $newResource,
-                'form'                     => $form->createView(),
-            ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::CREATE . '.html'))
-        ;
+        ->setData(
+            [
+            'configuration'            => $configuration,
+            'metadata'                 => $this->metadata,
+            'resource'                 => $newResource,
+            $this->metadata->getName() => $newResource,
+            'form'                     => $form->createView(),
+            ]
+        )
+        ->setTemplate($configuration->getTemplate(ResourceActions::CREATE . '.html'));
 
         return $this->viewHandler->handle($configuration, $view);
     }
@@ -144,15 +144,16 @@ class CustomerController extends ResourceController
         }
 
         $view = View::create()
-            ->setData([
-                'configuration'            => $configuration,
-                'metadata'                 => $this->metadata,
-                'resource'                 => $resource,
-                $this->metadata->getName() => $resource,
-                'form'                     => $form->createView(),
-            ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
-        ;
+        ->setData(
+            [
+            'configuration'            => $configuration,
+            'metadata'                 => $this->metadata,
+            'resource'                 => $resource,
+            $this->metadata->getName() => $resource,
+            'form'                     => $form->createView(),
+            ]
+        )
+        ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'));
 
         return $this->viewHandler->handle($configuration, $view);
     }

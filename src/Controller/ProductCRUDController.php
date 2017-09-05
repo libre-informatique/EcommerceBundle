@@ -36,9 +36,11 @@ class ProductCRUDController extends CRUDController
     {
         $name = $request->query->get('name');
 
-        return new JsonResponse([
+        return new JsonResponse(
+            [
             'slug' => $this->get('sylius.generator.slug')->generate($name),
-        ]);
+            ]
+        );
     }
 
     protected function handleFiles($object)

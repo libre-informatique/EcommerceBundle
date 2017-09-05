@@ -47,7 +47,8 @@ class ProductVariantAdmin extends CoreAdmin
 
         // Limit the variant option values to the product options
         if ($product) {
-            $mapper->add('optionValues', 'entity', [
+            $mapper->add(
+                'optionValues', 'entity', [
                 'query_builder' => $this->optionValuesQueryBuilder(),
                 'class'         => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
                 'multiple'      => true,
@@ -55,7 +56,8 @@ class ProductVariantAdmin extends CoreAdmin
                 'choice_label'  => 'fullName',
                 ], [
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product',
-                ]);
+                ]
+            );
         }
     }
 
@@ -140,8 +142,7 @@ class ProductVariantAdmin extends CoreAdmin
         $repository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.product_option_value');
         $queryBuilder = $repository->createQueryBuilder('o')
             ->andWhere('o.option IN (SELECT o2 FROM LibrinfoEcommerceBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
-            ->setParameter('product', $this->product)
-        ;
+            ->setParameter('product', $this->product);
 
         return $queryBuilder;
     }
@@ -158,11 +159,12 @@ class ProductVariantAdmin extends CoreAdmin
                 $qb
                     ->where('p.id <> :currentId')
                     ->andWhere('p.code = :currentCode')
-                    ->setParameters([
+                    ->setParameters(
+                        [
                         'currentId'   => $id,
                         'currentCode' => $code,
-                    ])
-                    ;
+                        ]
+                    );
             } else {
                 $qb
                     ->where('p.id IS NOT NULL')
@@ -173,7 +175,7 @@ class ProductVariantAdmin extends CoreAdmin
             if (count($qb->getQuery()->getResult()) != 0) {
                 $errorElement
                     ->with('code')
-                        ->addViolation('lisem.product_variant_code.not_unique')
+                    ->addViolation('lisem.product_variant_code.not_unique')
                     ->end();
             }
         }

@@ -88,10 +88,10 @@ class InvoiceFactory implements InvoiceFactoryInterface
         $number = $this->codeGenerator::generate($invoice);
 
         $data = [
-            'order'    => $order,
-            'number'   => $number,
-            'date'     => date('d/m/Y'),
-            'base_dir' => $this->rootDir . '/../web',
+        'order'    => $order,
+        'number'   => $number,
+        'date'     => date('d/m/Y'),
+        'base_dir' => $this->rootDir . '/../web',
         ];
         $html = $this->templating->render($this->template, $data);
         $pdf = $this->pdfGenerator->getOutputFromHtml($html);

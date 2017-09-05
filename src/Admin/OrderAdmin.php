@@ -22,9 +22,9 @@ class OrderAdmin extends CoreAdmin
     protected $baseRoutePattern = 'librinfo/ecommerce/order';
     protected $classnameLabel = 'Order';
     protected $datagridValues = [
-        '_page'       => 1,
-        '_sort_order' => 'DESC',
-        '_sort_by'    => 'createdAt',
+    '_page'       => 1,
+    '_sort_order' => 'DESC',
+    '_sort_by'    => 'createdAt',
     ];
 
     protected function configureRoutes(RouteCollection $collection)
@@ -41,13 +41,13 @@ class OrderAdmin extends CoreAdmin
         $actions = parent::configureBatchActions($actions);
 
         $actions['cancel'] = [
-            'ask_confirmation' => true,
-            'label'            => 'librinfo.label.cancel_order',
+        'ask_confirmation' => true,
+        'label'            => 'librinfo.label.cancel_order',
         ];
 
         $actions['validate'] = [
-            'ask_confirmation' => true,
-            'label'            => 'librinfo.label.fulfill_order',
+        'ask_confirmation' => true,
+        'label'            => 'librinfo.label.fulfill_order',
         ];
 
         return $actions;
@@ -63,8 +63,7 @@ class OrderAdmin extends CoreAdmin
             ->addSelect('customer')
             ->leftJoin("$alias.customer", 'customer')
             ->andWhere("$alias.state != :state")
-            ->setParameter('state', OrderInterface::STATE_CART)
-        ;
+            ->setParameter('state', OrderInterface::STATE_CART);
 
         return $query;
     }

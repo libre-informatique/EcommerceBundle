@@ -24,7 +24,7 @@ class ProductImage extends BaseProductImage
     const TYPE_THUMBNAIL = 'thumbnail';
 
     use OuterExtensible,
-        ProductImageExtension;
+    ProductImageExtension;
 
     /**
      * @var string

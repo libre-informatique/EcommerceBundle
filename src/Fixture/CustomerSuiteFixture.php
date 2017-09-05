@@ -30,10 +30,9 @@ final class CustomerSuiteFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->integerNode('customer_number')->defaultValue(4)->end()
-                ->integerNode('customer_group_number')->defaultValue(2)->end()
-                ->scalarNode('email_domain')->defaultValue('libre-informatique.fr')->end()
-            ->end()
-        ;
+            ->integerNode('customer_number')->defaultValue(4)->end()
+            ->integerNode('customer_group_number')->defaultValue(2)->end()
+            ->scalarNode('email_domain')->defaultValue('libre-informatique.fr')->end()
+            ->end();
     }
 }

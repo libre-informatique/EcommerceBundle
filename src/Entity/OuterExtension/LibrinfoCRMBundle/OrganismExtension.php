@@ -474,9 +474,11 @@ trait OrganismExtension
             return null;
         }
 
-        $filtered = $this->oauthAccounts->filter(function (UserOAuthInterface $oauth) use ($provider) {
-            return $provider === $oauth->getProvider();
-        });
+        $filtered = $this->oauthAccounts->filter(
+            function (UserOAuthInterface $oauth) use ($provider) {
+                return $provider === $oauth->getProvider();
+            }
+        );
 
         if ($filtered->isEmpty()) {
             return null;
@@ -503,7 +505,8 @@ trait OrganismExtension
      */
     public function serialize()
     {
-        return serialize([
+        return serialize(
+            [
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -511,7 +514,8 @@ trait OrganismExtension
             $this->locked,
             $this->enabled,
             $this->id,
-        ]);
+            ]
+        );
     }
 
     /**
@@ -525,13 +529,13 @@ trait OrganismExtension
         $data = array_merge($data, array_fill(0, 2, null));
 
         list(
-            $this->password,
-            $this->salt,
-            $this->usernameCanonical,
-            $this->username,
-            $this->locked,
-            $this->enabled,
-            $this->id
+        $this->password,
+        $this->salt,
+        $this->usernameCanonical,
+        $this->username,
+        $this->locked,
+        $this->enabled,
+        $this->id
         ) = $data;
     }
 
@@ -781,11 +785,13 @@ trait OrganismExtension
         $firstname = mb_convert_case($this->getFirstName(), MB_CASE_TITLE);
         $name = mb_strtoupper($this->getLastName());
 
-        $this->setName(sprintf(
-            '%s %s',
-            $firstname,
-            $name
-        ));
+        $this->setName(
+            sprintf(
+                '%s %s',
+                $firstname,
+                $name
+            )
+        );
     }
 
     /**

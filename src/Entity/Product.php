@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 class Product extends BaseProduct
 {
     use OuterExtensible,
-        ProductExtension;
+    ProductExtension;
 
     /**
      * @var Collection|ImageInterface[]

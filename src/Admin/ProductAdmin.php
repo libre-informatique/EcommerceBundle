@@ -38,13 +38,17 @@ class ProductAdmin extends CoreAdmin
         $list = parent::configureActionButtons($action, $object);
 
         if ($action === 'list') {
-            $list = array_merge($list, [
+            $list = array_merge(
+                $list, [
                 ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'],
-            ]);
+                ]
+            );
         } elseif ($action === 'edit') {
-            $list = array_merge($list, [
+            $list = array_merge(
+                $list, [
                 ['template' => 'LibrinfoEcommerceBundle:CRUD:global__action_shop_link.html.twig'],
-            ]);
+                ]
+            );
         }
 
         return $list;
@@ -112,10 +116,14 @@ class ProductAdmin extends CoreAdmin
      */
     public function getNewInstance()
     {
-        /** @var ProductFactoryInterface $productFactory * */
+        /**
+         * @var ProductFactoryInterface *
+         */
         $productFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product');
 
-        /** @var ProductInterface $product */
+        /**
+         * @var ProductInterface
+         */
         $object = $productFactory->createNew();
 
         foreach ($this->getExtensions() as $extension) {
@@ -151,17 +159,18 @@ class ProductAdmin extends CoreAdmin
             $qb
                 ->where('p.id <> :currentId')
                 ->andWhere('p.code = :currentCode')
-                ->setParameters([
+                ->setParameters(
+                    [
                     'currentId'   => $id,
                     'currentCode' => $code,
-                ])
-                ;
+                    ]
+                );
 
             if (count($qb->getQuery()->getResult()) != 0) {
                 $errorElement
-                    ->with('code')
+                        ->with('code')
                         ->addViolation('lisem.product_code.not_unique')
-                    ->end();
+                        ->end();
             }
         }
     }

@@ -17,12 +17,11 @@ use Blast\CoreBundle\Admin\CoreAdmin;
 class ShippingMethodAdmin extends CoreAdmin
 {
     protected $datagridValues = [
-        '_page'       => 1,
-        '_sort_order' => 'ASC',
-        '_sort_by'    => 'code',
+    '_page'       => 1,
+    '_sort_order' => 'ASC',
+    '_sort_by'    => 'code',
     ];
 
- 
     public function createQuery($context = 'list')
     {
         $query = parent::createQuery($context);
@@ -30,11 +29,10 @@ class ShippingMethodAdmin extends CoreAdmin
         return $query;
     }
 
-
     public function getNewInstance()
     {
         /* Initialize locale and more */
-        
+
         $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.shipping_method');
         $object = $syliusFactory->createNew();
 

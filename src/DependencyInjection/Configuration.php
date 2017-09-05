@@ -35,23 +35,22 @@ class Configuration implements ConfigurationInterface
         // more information on that topic.
         $rootNode
             ->children()
-                ->arrayNode('code_generator')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('product')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductCodeGenerator')->end()
-                        ->scalarNode('product_variant')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
-                        ->scalarNode('product_variant_embedded')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
-                        ->scalarNode('invoice')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\InvoiceCodeGenerator')->end()
-                    ->end()
-                ->end()
-                ->arrayNode('invoice')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('template')->defaultValue('LibrinfoEcommerceBundle:Invoice:default.html.twig')->end()
-                    ->end()
-                ->end()
+            ->arrayNode('code_generator')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('product')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductCodeGenerator')->end()
+            ->scalarNode('product_variant')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
+            ->scalarNode('product_variant_embedded')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
+            ->scalarNode('invoice')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\InvoiceCodeGenerator')->end()
             ->end()
-        ;
+            ->end()
+            ->arrayNode('invoice')
+            ->addDefaultsIfNotSet()
+            ->children()
+            ->scalarNode('template')->defaultValue('LibrinfoEcommerceBundle:Invoice:default.html.twig')->end()
+            ->end()
+            ->end()
+            ->end();
 
         return $treeBuilder;
     }

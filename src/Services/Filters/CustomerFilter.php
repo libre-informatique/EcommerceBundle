@@ -27,25 +27,25 @@ class CustomerFilter
         }
 
         switch ($value['type']) {
-            case ChoiceType::TYPE_CONTAINS:
-            default:
-                $queryBuilder->andWhere(
+        case ChoiceType::TYPE_CONTAINS:
+        default:
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->like('customer.firstName', ':value'),
+                    $queryBuilder->expr()->like('customer.lastName', ':value')
+                )
+            );
+            break;
+        case ChoiceType::TYPE_NOT_CONTAINS:
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->not(
                     $queryBuilder->expr()->orX(
                         $queryBuilder->expr()->like('customer.firstName', ':value'),
                         $queryBuilder->expr()->like('customer.lastName', ':value')
                     )
-                );
-                break;
-            case ChoiceType::TYPE_NOT_CONTAINS:
-                $queryBuilder->andWhere(
-                    $queryBuilder->expr()->not(
-                        $queryBuilder->expr()->orX(
-                            $queryBuilder->expr()->like('customer.firstName', ':value'),
-                            $queryBuilder->expr()->like('customer.lastName', ':value')
-                        )
-                    )
-                );
-                break;
+                )
+            );
+            break;
         }
 
         $queryBuilder->setParameter('value', '%' . $value['value'] . '%');

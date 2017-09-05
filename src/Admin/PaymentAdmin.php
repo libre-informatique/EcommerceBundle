@@ -32,8 +32,7 @@ class PaymentAdmin extends CoreAdmin
                 $query->expr()->in(
                     "$alias.state", [PaymentInterface::STATE_COMPLETED, PaymentInterface::STATE_REFUNDED]
                 )
-            )
-        ;
+            );
 
         return $query;
     }

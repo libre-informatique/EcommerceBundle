@@ -21,7 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ProductVariant extends BaseProductVariant
 {
     use OuterExtensible,
-        ProductVariantExtension;
+    ProductVariantExtension;
 
     public function __construct()
     {

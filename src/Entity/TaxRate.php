@@ -21,7 +21,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 class TaxRate extends BaseTaxRate
 {
     use OuterExtensible,
-        TaxRateExtension;
+    TaxRateExtension;
 
     /**
      * @var ZoneInterface

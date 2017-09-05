@@ -20,7 +20,7 @@ use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ZoneExtension;
 class Zone extends BaseZone
 {
     use OuterExtensible,
-       ZoneExtension;
+    ZoneExtension;
 
     public function initZone()
     {

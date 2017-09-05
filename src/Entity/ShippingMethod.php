@@ -13,11 +13,10 @@
 namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Core\Model\ShippingMethod as BaseShippingMethod;
-
 //use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Blast\BaseEntitiesBundle\Entity\Traits\Stringable;
 
 class ShippingMethod extends BaseShippingMethod
 {
-     use Stringable;
+    use Stringable;
 }

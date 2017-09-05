@@ -76,8 +76,7 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
                 ->setFirstname($faker->firstName())
                 ->setLastname($faker->lastName())
                 ->setName(sprintf('%s %s', $customer->getFirstname(), $customer->getLastname()))
-                ->setGroup($group)
-            ;
+                ->setGroup($group);
 
             $this->customerManager->persist($customer);
 
@@ -96,7 +95,6 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
             ->children()
             ->integerNode('customer_number')->defaultValue(4)->end()
             ->integerNode('customer_group_number')->defaultValue(2)->end()
-            ->scalarNode('email_domain')->defaultValue('libre-informatique.fr')->end()
-        ;
+            ->scalarNode('email_domain')->defaultValue('libre-informatique.fr')->end();
     }
 }

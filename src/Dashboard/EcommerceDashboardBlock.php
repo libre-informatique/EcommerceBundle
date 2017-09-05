@@ -20,18 +20,18 @@ class EcommerceDashboardBlock extends AbstractDashboardBlock
     {
         // @TODO: Call a stat manager to get real graph data
         $fakeSalesData = [
-            ['x' => '2017-01-01', 'y' => 6500],
-            ['x' => '2017-02-01', 'y' => 5900],
-            ['x' => '2017-03-01', 'y' => 8000],
-            ['x' => '2017-04-01', 'y' => 8100],
-            ['x' => '2017-05-01', 'y' => 9600],
-            ['x' => '2017-06-01', 'y' => 12500],
-            ['x' => '2017-07-01', 'y' => 14000],
+        ['x' => '2017-01-01', 'y' => 6500],
+        ['x' => '2017-02-01', 'y' => 5900],
+        ['x' => '2017-03-01', 'y' => 8000],
+        ['x' => '2017-04-01', 'y' => 8100],
+        ['x' => '2017-05-01', 'y' => 9600],
+        ['x' => '2017-06-01', 'y' => 12500],
+        ['x' => '2017-07-01', 'y' => 14000],
         ];
 
         $this->templateParameters = [
-            'test'            => true,
-            'salesAmountData' => $fakeSalesData,
+        'test'            => true,
+        'salesAmountData' => $fakeSalesData,
         ];
     }
 }

@@ -23,7 +23,7 @@ use Blast\BaseEntitiesBundle\Entity\Traits\Timestampable;
 class Invoice
 {
     use BaseEntity,
-        Timestampable
+    Timestampable
     ;
 
     /**

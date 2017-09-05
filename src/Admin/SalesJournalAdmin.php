@@ -36,8 +36,7 @@ class SalesJournalAdmin extends OrderAdmin
             ->andWhere("$alias.state = :state")
             ->orWhere('payments.state = :statePayments')
             ->setParameter('state', OrderInterface::STATE_FULFILLED)
-            ->setParameter('statePayments', PaymentInterface::STATE_COMPLETED)
-        ;
+            ->setParameter('statePayments', PaymentInterface::STATE_COMPLETED);
 
         return $query;
     }

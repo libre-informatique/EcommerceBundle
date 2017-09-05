@@ -29,10 +29,14 @@ class ProductAttributeAdmin extends CoreAdmin
      */
     public function getNewInstance()
     {
-        /** @var AttributeFactoryInterface $attributeFactory * */
+        /**
+         * @var AttributeFactoryInterface *
+         */
         $attributeFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_attribute');
 
-        /** @var ProductAttributeInterface $object */
+        /**
+         * @var ProductAttributeInterface
+         */
         $object = $attributeFactory->createTyped('text');
 
         foreach ($this->getExtensions() as $extension) {
@@ -51,23 +55,23 @@ class ProductAttributeAdmin extends CoreAdmin
         parent::prePersistOrUpdate($object, $method);
 
         switch ($object->getType()) {
-            case IntegerAttributeType::TYPE:
-                $object->setStorageType(AttributeValueInterface::STORAGE_INTEGER);
-                break;
-            case PercentAttributeType::TYPE:
-                $object->setStorageType(AttributeValueInterface::STORAGE_FLOAT);
-                break;
-            case CheckboxAttributeType::TYPE:
-                $object->setStorageType(AttributeValueInterface::STORAGE_BOOLEAN);
-                break;
-            case DateAttributeType::TYPE:
-                $object->setStorageType(AttributeValueInterface::STORAGE_DATE);
-                break;
-            case DatetimeAttributeType::TYPE:
-                $object->setStorageType(AttributeValueInterface::STORAGE_DATETIME);
-                break;
-            default:
-                $object->setStorageType(AttributeValueInterface::STORAGE_TEXT);
+        case IntegerAttributeType::TYPE:
+            $object->setStorageType(AttributeValueInterface::STORAGE_INTEGER);
+            break;
+        case PercentAttributeType::TYPE:
+            $object->setStorageType(AttributeValueInterface::STORAGE_FLOAT);
+            break;
+        case CheckboxAttributeType::TYPE:
+            $object->setStorageType(AttributeValueInterface::STORAGE_BOOLEAN);
+            break;
+        case DateAttributeType::TYPE:
+            $object->setStorageType(AttributeValueInterface::STORAGE_DATE);
+            break;
+        case DatetimeAttributeType::TYPE:
+            $object->setStorageType(AttributeValueInterface::STORAGE_DATETIME);
+            break;
+        default:
+            $object->setStorageType(AttributeValueInterface::STORAGE_TEXT);
         }
     }
 }

@@ -97,8 +97,8 @@ class OrderItemUpdater
 
         if ($orderStateMachine->getState() === 'cancelled' || $orderStateMachine->getState() === 'fulfilled') {
             return [
-                'lastItem' => true,
-                'message'  => $this->translator->trans('cannot_edit_order_because_of_state', [], 'SonataCoreBundle'),
+            'lastItem' => true,
+            'message'  => $this->translator->trans('cannot_edit_order_because_of_state', [], 'SonataCoreBundle'),
             ];
         } else {
             if ($isAddition) {
@@ -137,33 +137,33 @@ class OrderItemUpdater
     private function formatArray($order, $item, $remove = false, $lastItem = true)
     {
         return [
-            'remove'   => $remove,
-            'lastItem' => $lastItem,
-            'item'     => [
-                'quantity' => $item->getQuantity(),
-                'total'    => $this->moneyFormatter->format(
-                    $item->getTotal(),
-                    $order->getCurrencyCode(),
-                    $order->getLocaleCode()
-                ),
-                'subtotal' => $this->moneyFormatter->format(
-                    $item->getSubTotal(),
-                    $order->getCurrencyCode(),
-                    $order->getLocaleCode()
-                ),
-            ],
-            'order' => [
-                'total' => $this->moneyFormatter->format(
-                    $order->getTotal(),
-                    $order->getCurrencyCode(),
-                    $order->getLocaleCode()
-                ),
-                'items-total' => $this->moneyFormatter->format(
-                    $order->getItemsTotal(),
-                    $order->getCurrencyCode(),
-                    $order->getLocaleCode()
-                ),
-            ],
+        'remove'   => $remove,
+        'lastItem' => $lastItem,
+        'item'     => [
+        'quantity' => $item->getQuantity(),
+        'total'    => $this->moneyFormatter->format(
+            $item->getTotal(),
+            $order->getCurrencyCode(),
+            $order->getLocaleCode()
+        ),
+        'subtotal' => $this->moneyFormatter->format(
+            $item->getSubTotal(),
+            $order->getCurrencyCode(),
+            $order->getLocaleCode()
+        ),
+        ],
+        'order' => [
+        'total' => $this->moneyFormatter->format(
+            $order->getTotal(),
+            $order->getCurrencyCode(),
+            $order->getLocaleCode()
+        ),
+        'items-total' => $this->moneyFormatter->format(
+            $order->getItemsTotal(),
+            $order->getCurrencyCode(),
+            $order->getLocaleCode()
+        ),
+        ],
         ];
     }
 }

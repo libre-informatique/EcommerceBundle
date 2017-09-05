@@ -80,8 +80,7 @@ class OrderUpdater
         //Retrieve order
         $order = $this->em
             ->getRepository('LibrinfoEcommerceBundle:Order')
-            ->find($orderId)
-        ;
+            ->find($orderId);
 
         $orderStateMachine = $this->smFactory->get($order, 'sylius_order');
 
@@ -91,8 +90,7 @@ class OrderUpdater
             //Retrieve product variant
             $variant = $this->em
                 ->getRepository('LibrinfoEcommerceBundle:ProductVariant')
-                ->find($variantId)
-            ;
+                ->find($variantId);
 
             //Create new OrderItem
             $item = $this->orderItemFactory->createNew();
@@ -115,8 +113,8 @@ class OrderUpdater
         }
 
         return [
-            'item'   => $item,
-            'object' => $order,
+        'item'   => $item,
+        'object' => $order,
         ];
     }
 }

@@ -24,7 +24,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 class Taxon extends BaseTaxon implements TaxonInterface
 {
     // use OuterExtensible, Stringable, TaxonExtension;
-     use Stringable;
+    use Stringable;
 
     private $images;
 
@@ -34,12 +34,12 @@ class Taxon extends BaseTaxon implements TaxonInterface
         //    $this->initializeTranslationsCollection();
         $this->initOuterExtendedClasses();
     }
+
     /*
     public function __toString()
     {
-        return (string) $this->getName();
-        }*/
-    
+    return (string) $this->getName();
+    }*/
 
     /**
      * __clone().
@@ -110,7 +110,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     public function removeImage(ImageInterface $image)
     {
     }
-    
+
     public function getName()
     {
         // Dirty hack to handle sonata sub form management

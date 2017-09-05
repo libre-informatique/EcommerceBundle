@@ -41,22 +41,21 @@ class ChannelFixture extends BaseFixture
 
         $resourceNode
             ->children()
-                ->scalarNode('name')->cannotBeEmpty()->end()
-                ->scalarNode('code')->cannotBeEmpty()->end()
-                ->scalarNode('hostname')->cannotBeEmpty()->end()
-                ->scalarNode('color')->cannotBeEmpty()->end()
-                ->scalarNode('default_tax_zone')->end()
-                ->scalarNode('tax_calculation_strategy')->end()
-                ->booleanNode('enabled')->end()
-                ->booleanNode('skipping_shipping_step_allowed')->end()
-                ->booleanNode('skipping_payment_step_allowed')->end()
-                ->scalarNode('default_locale')->cannotBeEmpty()->end()
-                ->arrayNode('locales')->prototype('scalar')->end()->end()
-                ->scalarNode('base_currency')->cannotBeEmpty()->end()
-                ->arrayNode('currencies')->prototype('scalar')->end()->end()
-                ->scalarNode('theme_name')->end()
-                ->scalarNode('contact_email')->end()
-                ->booleanNode('account_verified_required')->end()
-        ;
+            ->scalarNode('name')->cannotBeEmpty()->end()
+            ->scalarNode('code')->cannotBeEmpty()->end()
+            ->scalarNode('hostname')->cannotBeEmpty()->end()
+            ->scalarNode('color')->cannotBeEmpty()->end()
+            ->scalarNode('default_tax_zone')->end()
+            ->scalarNode('tax_calculation_strategy')->end()
+            ->booleanNode('enabled')->end()
+            ->booleanNode('skipping_shipping_step_allowed')->end()
+            ->booleanNode('skipping_payment_step_allowed')->end()
+            ->scalarNode('default_locale')->cannotBeEmpty()->end()
+            ->arrayNode('locales')->prototype('scalar')->end()->end()
+            ->scalarNode('base_currency')->cannotBeEmpty()->end()
+            ->arrayNode('currencies')->prototype('scalar')->end()->end()
+            ->scalarNode('theme_name')->end()
+            ->scalarNode('contact_email')->end()
+            ->booleanNode('account_verified_required')->end();
     }
 }

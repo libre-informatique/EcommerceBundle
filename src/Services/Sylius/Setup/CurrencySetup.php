@@ -74,7 +74,9 @@ final class CurrencySetup implements CurrencySetupInterface
         if (null === $name) {
             throw new \Exception(sprintf('Currency with code <info>%s</info> could not be resolved. Please check your "sylius_currency.currency" parameter', $this->currencyCode));
         }
-        /** @var CurrencyInterface $currency */
+        /**
+         * @var CurrencyInterface
+         */
         $currency = $this->currencyFactory->createNew();
         $currency->setCode($this->currencyCode);
         $this->currencyRepository->add($currency);

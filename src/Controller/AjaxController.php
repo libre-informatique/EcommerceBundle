@@ -81,8 +81,9 @@ class AjaxController extends Controller
     {
         $newProduct = $this->container
             ->get('librinfo_ecommerce.order.updater')
-            ->addProduct($request->get('orderId'), $request->get('variantId')
-        );
+            ->addProduct(
+                $request->get('orderId'), $request->get('variantId')
+            );
 
         if ($newProduct['item'] === null) {
             // $this->container->get('sonata.core.flashmessage.manager')->

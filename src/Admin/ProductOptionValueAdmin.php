@@ -42,12 +42,14 @@ class ProductOptionValueAdmin extends CoreAdmin
         // TODO: build the ProductOption form differently to handle multiple locales...
         $builder = $mapper->getFormBuilder();
         $admin = $this;
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($admin) {
-            if (!$event->getData()) {
-                $entity = $admin->getNewInstance();  // This will set the locale
-                $event->setData($entity);
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($admin) {
+                if (!$event->getData()) {
+                    $entity = $admin->getNewInstance();  // This will set the locale
+                    $event->setData($entity);
+                }
             }
-        });
+        );
     }
 
     /**

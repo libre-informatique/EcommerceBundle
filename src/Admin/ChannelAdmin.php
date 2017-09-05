@@ -20,29 +20,26 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class ChannelAdmin extends CoreAdmin
 {
     protected $datagridValues = [
-        '_page'       => 1,
-        '_sort_order' => 'ASC',
-        '_sort_by'    => 'code',
+    '_page'       => 1,
+    '_sort_order' => 'ASC',
+    '_sort_by'    => 'code',
     ];
 
-
-     
     public function getNewInstance()
     {
         /* Initialize locale and more */
         $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel');
         $object = $syliusFactory->createNew();
-        
+
         /*
         foreach ($this->getExtensions() as $extension) {
-            $extension->alterNewInstance($this, $object);
+        $extension->alterNewInstance($this, $object);
         }
         */
 
         return $object;
     }
 
-    
     /**
      * @param FormMapper $mapper
      */
@@ -52,7 +49,7 @@ class ChannelAdmin extends CoreAdmin
 
         $syliusThemeConfig = $this->getConfigurationPool()->getContainer()->get('sylius.theme.configuration.provider')->getConfigurations();
         $listOfThemes = [
-            'default' => 'Default Sylius theme',
+        'default' => 'Default Sylius theme',
         ];
         foreach ($syliusThemeConfig as $k => $conf) {
             $listOfThemes[$conf['name']] = $conf['title'];
@@ -61,26 +58,30 @@ class ChannelAdmin extends CoreAdmin
         $groups = $this->getFormGroups();
 
         $mapper->remove('taxCalculationStrategy');
-        $mapper->add('taxCalculationStrategy', ChoiceType::class, [
+        $mapper->add(
+            'taxCalculationStrategy', ChoiceType::class, [
             'label'    => 'librinfo.label.taxCalculationStrategy',
             'choices'  => array_flip($this->getConfigurationPool()->getContainer()->getParameter('sylius.taxation.calculation_strategy.list_values')),
             'required' => true,
             'attr'     => [
-                'class'=> 'inline-block',
-                'width'=> 50,
+            'class'=> 'inline-block',
+            'width'=> 50,
             ],
-        ]);
+            ]
+        );
 
         $mapper->remove('themeName');
-        $mapper->add('themeName', ChoiceType::class, [
+        $mapper->add(
+            'themeName', ChoiceType::class, [
             'label'    => 'librinfo.label.themeName',
             'choices'  => array_flip($listOfThemes),
             'required' => true,
             'attr'     => [
-                'class'=> 'inline-block',
-                'width'=> 50,
+            'class'=> 'inline-block',
+            'width'=> 50,
             ],
-        ]);
+            ]
+        );
 
         $tabs = $this->getFormTabs();
         unset($tabs['default']);
@@ -104,7 +105,7 @@ class ChannelAdmin extends CoreAdmin
                     ->setParameter('currentId', $id);
             } else {
                 $qb
-                    ->where('c.id IS NOT NULL');
+                ->where('c.id IS NOT NULL');
             }
 
             $qbCode = clone $qb;
@@ -120,7 +121,7 @@ class ChannelAdmin extends CoreAdmin
             if (count($qbCode->getQuery()->getResult()) != 0) {
                 $errorElement
                     ->with('code')
-                        ->addViolation('lisem.channel_code.not_unique', ['%code%' => $code])
+                    ->addViolation('lisem.channel_code.not_unique', ['%code%' => $code])
                     ->end();
             }
 
@@ -133,7 +134,7 @@ class ChannelAdmin extends CoreAdmin
             if (count($qbName->getQuery()->getResult()) != 0) {
                 $errorElement
                     ->with('name')
-                        ->addViolation('lisem.channel_name.not_unique', ['%name%' => $name])
+                    ->addViolation('lisem.channel_name.not_unique', ['%name%' => $name])
                     ->end();
             }
         }
