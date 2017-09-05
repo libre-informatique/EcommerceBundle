@@ -19,10 +19,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Librinfo\EcommerceBundle\Form\DataTransformer\ArrayCollectionTransformer;
 
-class ProductChannelsType extends AnyChannelsType
+class ShippingMethodChannelsType extends AnyChannelsType
 {
     public function getBlockPrefix()
     {
-        return 'librinfo_type_product_channels';
+        return 'librinfo_type_shipping_method_channels';
     }
 }
