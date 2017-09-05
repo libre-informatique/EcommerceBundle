@@ -1,14 +1,14 @@
 <?php
 
 /*
-* This file is part of the Blast Project package.
-*
-* Copyright (C) 2015-2017 Libre Informatique
-*
-* This file is licenced under the GNU LGPL v3.
-* For the full copyright and license information, please view the LICENSE.md
-* file that was distributed with this source code.
-*/
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
 
 namespace Librinfo\EcommerceBundle\Admin;
 
@@ -19,128 +19,128 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ChannelAdmin extends CoreAdmin
 {
-protected $datagridValues = [
-'_page'       => 1,
-'_sort_order' => 'ASC',
-'_sort_by'    => 'code',
-];
+    protected $datagridValues = [
+    '_page'       => 1,
+    '_sort_order' => 'ASC',
+    '_sort_by'    => 'code',
+    ];
 
-public function getNewInstance()
-{
-/* Initialize locale and more */
-$syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel');
-$object = $syliusFactory->createNew();
+    public function getNewInstance()
+    {
+        /* Initialize locale and more */
+        $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel');
+        $object = $syliusFactory->createNew();
 
-/*
-foreach ($this->getExtensions() as $extension) {
-$extension->alterNewInstance($this, $object);
-}
-*/
+        /*
+        foreach ($this->getExtensions() as $extension) {
+        $extension->alterNewInstance($this, $object);
+        }
+        */
 
-return $object;
-}
+        return $object;
+    }
 
-/**
-* @param FormMapper $mapper
-*/
-protected function configureFormFields(FormMapper $mapper)
-{
-parent::configureFormFields($mapper);
+    /**
+     * @param FormMapper $mapper
+     */
+    protected function configureFormFields(FormMapper $mapper)
+    {
+        parent::configureFormFields($mapper);
 
-$syliusThemeConfig = $this->getConfigurationPool()->getContainer()->get('sylius.theme.configuration.provider')->getConfigurations();
-$listOfThemes = [
-'default' => 'Default Sylius theme',
-];
-foreach ($syliusThemeConfig as $k => $conf) {
-$listOfThemes[$conf['name']] = $conf['title'];
-}
+        $syliusThemeConfig = $this->getConfigurationPool()->getContainer()->get('sylius.theme.configuration.provider')->getConfigurations();
+        $listOfThemes = [
+        'default' => 'Default Sylius theme',
+        ];
+        foreach ($syliusThemeConfig as $k => $conf) {
+            $listOfThemes[$conf['name']] = $conf['title'];
+        }
 
-$groups = $this->getFormGroups();
+        $groups = $this->getFormGroups();
 
-$mapper->remove('taxCalculationStrategy');
-$mapper->add(
-'taxCalculationStrategy',
-ChoiceType::class,
-[
-'label'    => 'librinfo.label.taxCalculationStrategy',
-'choices'  => array_flip($this->getConfigurationPool()->getContainer()->getParameter('sylius.taxation.calculation_strategy.list_values')),
-'required' => true,
-'attr'     => [
-'class'=> 'inline-block',
-'width'=> 50,
-],
-]
-);
+        $mapper->remove('taxCalculationStrategy');
+        $mapper->add(
+            'taxCalculationStrategy',
+            ChoiceType::class,
+            [
+            'label'    => 'librinfo.label.taxCalculationStrategy',
+            'choices'  => array_flip($this->getConfigurationPool()->getContainer()->getParameter('sylius.taxation.calculation_strategy.list_values')),
+            'required' => true,
+            'attr'     => [
+            'class'=> 'inline-block',
+            'width'=> 50,
+            ],
+            ]
+        );
 
-$mapper->remove('themeName');
-$mapper->add(
-'themeName',
-ChoiceType::class,
-[
-'label'    => 'librinfo.label.themeName',
-'choices'  => array_flip($listOfThemes),
-'required' => true,
-'attr'     => [
-'class'=> 'inline-block',
-'width'=> 50,
-],
-]
-);
+        $mapper->remove('themeName');
+        $mapper->add(
+            'themeName',
+            ChoiceType::class,
+            [
+            'label'    => 'librinfo.label.themeName',
+            'choices'  => array_flip($listOfThemes),
+            'required' => true,
+            'attr'     => [
+            'class'=> 'inline-block',
+            'width'=> 50,
+            ],
+            ]
+        );
 
-$tabs = $this->getFormTabs();
-unset($tabs['default']);
-$this->setFormTabs($tabs);
+        $tabs = $this->getFormTabs();
+        unset($tabs['default']);
+        $this->setFormTabs($tabs);
 
-$this->setFormGroups($groups);
-}
+        $this->setFormGroups($groups);
+    }
 
-public function validate(ErrorElement $errorElement, $object)
-{
-if ($object) {
-$id = $object->getId();
-$code = $object->getCode();
-$name = $object->getName();
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        if ($object) {
+            $id = $object->getId();
+            $code = $object->getCode();
+            $name = $object->getName();
 
-$qb = $this->getModelManager()->createQuery(get_class($object), 'c');
+            $qb = $this->getModelManager()->createQuery(get_class($object), 'c');
 
-if ($id !== null) {
-$qb
-->where('c.id <> :currentId')
-->setParameter('currentId', $id);
-} else {
-$qb
-->where('c.id IS NOT NULL');
-}
+            if ($id !== null) {
+                $qb
+                    ->where('c.id <> :currentId')
+                    ->setParameter('currentId', $id);
+            } else {
+                $qb
+                ->where('c.id IS NOT NULL');
+            }
 
-$qbCode = clone $qb;
-$qbName = clone $qb;
-unset($qb);
+            $qbCode = clone $qb;
+            $qbName = clone $qb;
+            unset($qb);
 
-// CHECK CODE UNICITY
+            // CHECK CODE UNICITY
 
-$qbCode
-->andWhere('c.code = :currentCode')
-->setParameter('currentCode', $code);
+            $qbCode
+                ->andWhere('c.code = :currentCode')
+                ->setParameter('currentCode', $code);
 
-if (count($qbCode->getQuery()->getResult()) != 0) {
-$errorElement
-->with('code')
-->addViolation('lisem.channel_code.not_unique', ['%code%' => $code])
-->end();
-}
+            if (count($qbCode->getQuery()->getResult()) != 0) {
+                $errorElement
+                    ->with('code')
+                    ->addViolation('lisem.channel_code.not_unique', ['%code%' => $code])
+                    ->end();
+            }
 
-// CHECK NAME UNICITY
+            // CHECK NAME UNICITY
 
-$qbName
-->andWhere('c.name = :currentName')
-->setParameter('currentName', $name);
+            $qbName
+                ->andWhere('c.name = :currentName')
+                ->setParameter('currentName', $name);
 
-if (count($qbName->getQuery()->getResult()) != 0) {
-$errorElement
-->with('name')
-->addViolation('lisem.channel_name.not_unique', ['%name%' => $name])
-->end();
-}
-}
-}
+            if (count($qbName->getQuery()->getResult()) != 0) {
+                $errorElement
+                    ->with('name')
+                    ->addViolation('lisem.channel_name.not_unique', ['%name%' => $name])
+                    ->end();
+            }
+        }
+    }
 }

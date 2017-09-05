@@ -1,84 +1,94 @@
-$(document).ready(function() {
-    $('#add-to-order').click(getProducts);
-});
+$(document).ready(
+    function() {
+        $('#add-to-order').click(getProducts);
+    }
+);
 
 var getProducts = function() {
     var data = $(this).data();
 
     //Retrieve product list
-    $.get(data.url, function(html) {
-        var modal = $('.li-modal.modal');
-        html = $(html);
+    $.get(
+        data.url, function(html) {
+            var modal = $('.li-modal.modal');
+            html = $(html);
         
-        //Turn list action buttons into variant list dropdowns
-        html.find('td.sonata-ba-list-field-select a').each(function(key, button) {
-            button  = $(button);
+            //Turn list action buttons into variant list dropdowns
+            html.find('td.sonata-ba-list-field-select a').each(
+                function(key, button) {
+                    button  = $(button);
             
-            button
-                .addClass('dropdown-toggle')
-                .attr('href', '#')
-                .html(data.btnText)
-                .attr('data-toggle', 'dropdown')
-                .append($('<span>').addClass('caret'))
-                .click(function() {
-                    if($(this)
-                        .siblings('ul')
-                        .find('.variant-list table')
-                        .length < 1
-                    ) {
-                        getVariants(data.orderId, $(this).parents('td').attr('objectid'), data.variantsUrl, data.addProductUrl);
-                    }
-                })
-            ;
+                    button
+                    .addClass('dropdown-toggle')
+                    .attr('href', '#')
+                    .html(data.btnText)
+                    .attr('data-toggle', 'dropdown')
+                    .append($('<span>').addClass('caret'))
+                    .click(
+                        function() {
+                            if($(this).siblings('ul').find('.variant-list table').length < 1
+                            ) {
+                                getVariants(data.orderId, $(this).parents('td').attr('objectid'), data.variantsUrl, data.addProductUrl);
+                            }
+                        }
+                    );
             
-            button.parent().html(
-                $('<div>')
-                    .addClass('dropdown')
-                    .html(button)
-                    .append(
-                        $('<ul>')
+                    button.parent().html(
+                        $('<div>')
+                        .addClass('dropdown')
+                        .html(button)
+                        .append(
+                            $('<ul>')
                             .addClass('dropdown-menu')
-                            .html($('<li>').addClass('variant-list')
+                            .html(
+                                $('<li>').addClass('variant-list')
+                            )
                         )
-                    )
+                    );
+                }
             );
-        });
         
-        //Prepare and open product list modal
-        modal.attr('id', 'order-edit-modal');
-        modal.find('.modal-title').html(data.title);
-        modal.find('.modal-body').html(html);
-        modal.modal('show');
-    });
+            //Prepare and open product list modal
+            modal.attr('id', 'order-edit-modal');
+            modal.find('.modal-title').html(data.title);
+            modal.find('.modal-body').html(html);
+            modal.modal('show');
+        }
+    );
 };
 
 //Retrieve product variant list
 var getVariants = function(orderId, productId, url, addProductUrl) {
-    $.get(url + '?productId=' + productId, function(html) {
-        html = $(html);
+    $.get(
+        url + '?productId=' + productId, function(html) {
+            html = $(html);
        
-        html.find('td.sonata-ba-list-field-select a').each(function(key, button) {
-            button = $(button);
+            html.find('td.sonata-ba-list-field-select a').each(
+                function(key, button) {
+                    button = $(button);
             
-            var variantId = button.parent().attr('objectid');
+                    var variantId = button.parent().attr('objectid');
             
-            //Remove variants that are already in the order
-            if($('#order-summary').find('[data-variant-id="' + variantId + '"]').length > 0) {
-                button.parents('tr').remove();
-            }
+                    //Remove variants that are already in the order
+                    if($('#order-summary').find('[data-variant-id="' + variantId + '"]').length > 0) {
+                        button.parents('tr').remove();
+                    }
             
-            button.attr('href', '#').click(function() {
-                addProduct(orderId, $(this).parent().attr('objectid'), addProductUrl);
+                    button.attr('href', '#').click(
+                        function() {
+                            addProduct(orderId, $(this).parent().attr('objectid'), addProductUrl);
                 
-                return false;
-            });
-       });
+                            return false;
+                        }
+                    );
+                }
+            );
        
-       $('[objectid="' + productId + '"]')
+            $('[objectid="' + productId + '"]')
             .find('.variant-list')
-            .html(html.find('table'))
-        ;
-    });
+            .html(html.find('table'));
+        }
+    );
 };
 
 //Add product to order

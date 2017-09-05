@@ -1,14 +1,14 @@
 <?php
 
 /*
-* This file is part of the Blast Project package.
-*
-* Copyright (C) 2015-2017 Libre Informatique
-*
-* This file is licenced under the GNU LGPL v3.
-* For the full copyright and license information, please view the LICENSE.md
-* file that was distributed with this source code.
-*/
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
 
 namespace Librinfo\EcommerceBundle\Factory;
 
@@ -20,88 +20,88 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
-* Factory for Invoice entities.
-*
-* @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
-*/
+ * Factory for Invoice entities.
+ *
+ * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
+ */
 class InvoiceFactory implements InvoiceFactoryInterface
 {
-/**
-* @var CodeGeneratorInterface
-*/
-private $codeGenerator;
+    /**
+     * @var CodeGeneratorInterface
+     */
+    private $codeGenerator;
 
-/**
-* @var GeneratorInterface
-*/
-private $pdfGenerator;
+    /**
+     * @var GeneratorInterface
+     */
+    private $pdfGenerator;
 
-/**
-* @var EngineInterface
-*/
-private $templating;
+    /**
+     * @var EngineInterface
+     */
+    private $templating;
 
-/**
-* @var string
-*/
-private $template;
+    /**
+     * @var string
+     */
+    private $template;
 
-/**
-* @var string
-*/
-private $rootDir;
+    /**
+     * @var string
+     */
+    private $rootDir;
 
-/**
-* @param CodeGeneratorInterface $codeGenerator
-* @param GeneratorInterface     $pdfGenerator
-* @param EngineInterface        $templating
-* @param string                 $template
-* @param string                 $rootDir
-*/
-public function __construct($codeGenerator, $pdfGenerator, $templating, $template, $rootDir)
-{
-$this->codeGenerator = $codeGenerator;
-$this->pdfGenerator = $pdfGenerator;
-$this->templating = $templating;
-$this->template = $template;
-$this->rootDir = $rootDir;
-}
+    /**
+     * @param CodeGeneratorInterface $codeGenerator
+     * @param GeneratorInterface     $pdfGenerator
+     * @param EngineInterface        $templating
+     * @param string                 $template
+     * @param string                 $rootDir
+     */
+    public function __construct($codeGenerator, $pdfGenerator, $templating, $template, $rootDir)
+    {
+        $this->codeGenerator = $codeGenerator;
+        $this->pdfGenerator = $pdfGenerator;
+        $this->templating = $templating;
+        $this->template = $template;
+        $this->rootDir = $rootDir;
+    }
 
-/**
-* {@inheritdoc}
-*
-* @throws UnsupportedMethodException
-*/
-public function createNew()
-{
-throw new UnsupportedMethodException('createNew');
-}
+    /**
+     * {@inheritdoc}
+     *
+     * @throws UnsupportedMethodException
+     */
+    public function createNew()
+    {
+        throw new UnsupportedMethodException('createNew');
+    }
 
-/**
-* @param OrderInterface $order
-*
-* @return Invoice
-*/
-public function createForOrder(OrderInterface $order)
-{
-$invoice = new Invoice();
-$number = $this->codeGenerator::generate($invoice);
+    /**
+     * @param OrderInterface $order
+     *
+     * @return Invoice
+     */
+    public function createForOrder(OrderInterface $order)
+    {
+        $invoice = new Invoice();
+        $number = $this->codeGenerator::generate($invoice);
 
-$data = [
-'order'    => $order,
-'number'   => $number,
-'date'     => date('d/m/Y'),
-'base_dir' => $this->rootDir . '/../web',
-];
-$html = $this->templating->render($this->template, $data);
-$pdf = $this->pdfGenerator->getOutputFromHtml($html);
+        $data = [
+        'order'    => $order,
+        'number'   => $number,
+        'date'     => date('d/m/Y'),
+        'base_dir' => $this->rootDir . '/../web',
+        ];
+        $html = $this->templating->render($this->template, $data);
+        $pdf = $this->pdfGenerator->getOutputFromHtml($html);
 
-$invoice->setOrder($order);
-$invoice->setNumber($number);
-$invoice->setMimeType('application/pdf');
-$invoice->setFile($pdf);
-$invoice->setTotal($order->getTotal());
+        $invoice->setOrder($order);
+        $invoice->setNumber($number);
+        $invoice->setMimeType('application/pdf');
+        $invoice->setFile($pdf);
+        $invoice->setTotal($order->getTotal());
 
-return $invoice;
-}
+        return $invoice;
+    }
 }
