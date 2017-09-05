@@ -75,6 +75,7 @@ librinfo:
         cancel_order: Annuler
         cancel_this_order: Annuler cette commande
         category_requirement: Catégorie
+        channel_admin:  Canal de vente
         channel_code: Code boutique
         channel_pricings: Prix
         channels: Canal de vente
@@ -162,6 +163,8 @@ librinfo:
         set_default_customer_address: Adresse principale
         ship: Expédier
         shipping_address: Adresse de livraison
+        shipping_method: Mode de livraison
+        shipping_method_admin: Mode de livraison
         shipping_state: Statut livraison
         short_description: Brève description
         skipping_payment_step_allowed: Ignorez l'étape de paiement si un seul mode de paiement est disponible ?
@@ -209,6 +212,8 @@ librinfo:
         productoption_list: Liste des options d'article
         productoptionvalue_list: Liste des contenus options d'article
         productvariant_list: Liste des déclinaisons d'article
+        shipping_method_create: Nouvelle méthodes de livraison
+        shipping_method_list: Liste des méthodes de livraison
         shippingmethod_list: Liste des méthodes de livraison
         sales_journal_list: Journal des ventes
         salesjournal_list: Journal des ventes
