@@ -15,6 +15,7 @@ namespace Librinfo\EcommerceBundle\Entity;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
+use Blast\BaseEntitiesBundle\Entity\Traits\Stringable;
 /* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\TaxonExtension;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,21 +23,23 @@ use Sylius\Component\Core\Model\ImageInterface;
 
 class Taxon extends BaseTaxon implements TaxonInterface
 {
-    use OuterExtensible,
-       TaxonExtension;
+    // use OuterExtensible, Stringable, TaxonExtension;
+     use Stringable;
 
     private $images;
 
     public function initTaxon()
     {
         $this->images = new ArrayCollection();
+        //    $this->initializeTranslationsCollection();
         $this->initOuterExtendedClasses();
     }
-
+    /*
     public function __toString()
     {
         return (string) $this->getName();
-    }
+        }*/
+    
 
     /**
      * __clone().
@@ -106,5 +109,15 @@ class Taxon extends BaseTaxon implements TaxonInterface
      */
     public function removeImage(ImageInterface $image)
     {
+    }
+    
+    public function getName()
+    {
+        // Dirty hack to handle sonata sub form management
+        if ($this->currentLocale === null) {
+            $this->setCurrentLocale('fr_FR');
+        }
+
+        return $this->getTranslation()->getName();
     }
 }

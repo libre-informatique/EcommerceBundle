@@ -14,6 +14,7 @@ namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Core\Model\Channel as BaseChannel;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
+use Blast\BaseEntitiesBundle\Entity\Traits\Stringable;
 /* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\ChannelExtension;
 
@@ -22,10 +23,5 @@ use AppBundle\Entity\OuterExtension\ChannelExtension;
  */
 class Channel extends BaseChannel
 {
-    use OuterExtensible, ChannelExtension;
-
-    public function __toString()
-    {
-        return (string) $this->getName();
-    }
+    use OuterExtensible, Stringable, ChannelExtension;
 }

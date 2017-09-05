@@ -16,4 +16,9 @@ use Blast\CoreBundle\Admin\CoreAdmin;
 
 class TaxCategoryAdmin extends CoreAdmin
 {
+    public function toString($object)
+    {
+        /* (As we don't have name here for title) */
+        return $object->getcode() ?: $object->getId();
+    }
 }

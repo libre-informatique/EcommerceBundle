@@ -19,20 +19,30 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ChannelAdmin extends CoreAdmin
 {
-    protected $baseRouteName = 'admin_librinfo_ecommerce_channel';
-    protected $baseRoutePattern = 'librinfo/ecommerce/channel';
-    protected $classnameLabel = 'Channel';
     protected $datagridValues = [
         '_page'       => 1,
         '_sort_order' => 'ASC',
         '_sort_by'    => 'code',
     ];
 
-    public function toString($object)
+
+     
+    public function getNewInstance()
     {
-        return $object->getCode() ?: $object->getId();
+        /* Initialize locale and more */
+        $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel');
+        $object = $syliusFactory->createNew();
+        
+        /*
+        foreach ($this->getExtensions() as $extension) {
+            $extension->alterNewInstance($this, $object);
+        }
+        */
+
+        return $object;
     }
 
+    
     /**
      * @param FormMapper $mapper
      */
