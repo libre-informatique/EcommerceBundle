@@ -1,14 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blast Project package.
- *
- * Copyright (C) 2015-2017 Libre Informatique
- *
- * This file is licenced under the GNU LGPL v3.
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
+* This file is part of the Blast Project package.
+*
+* Copyright (C) 2015-2017 Libre Informatique
+*
+* This file is licenced under the GNU LGPL v3.
+* For the full copyright and license information, please view the LICENSE.md
+* file that was distributed with this source code.
+*/
 
 namespace Librinfo\EcommerceBundle\EventListener;
 
@@ -18,36 +18,36 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
 /**
- * This event is called on order completion
- * It creates the invoice and sends it as an attachment file to the order confirmation email.
- *
- * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
- */
+* This event is called on order completion
+* It creates the invoice and sends it as an attachment file to the order confirmation email.
+*
+* @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
+*/
 class OrderCompleteListener
 {
-    /**
-     * @var OrderEmailManagerInterface
-     */
-    private $orderEmailManager;
+/**
+* @var OrderEmailManagerInterface
+*/
+private $orderEmailManager;
 
-    /**
-     * @param OrderEmailManagerInterface $orderEmailManager
-     */
-    public function __construct(OrderEmailManagerInterface $orderEmailManager)
-    {
-        $this->orderEmailManager = $orderEmailManager;
-    }
+/**
+* @param OrderEmailManagerInterface $orderEmailManager
+*/
+public function __construct(OrderEmailManagerInterface $orderEmailManager)
+{
+$this->orderEmailManager = $orderEmailManager;
+}
 
-    /**
-     * @param GenericEvent $event
-     */
-    public function sendConfirmationEmail(GenericEvent $event)
-    {
-        // TODO: generate invoice
+/**
+* @param GenericEvent $event
+*/
+public function sendConfirmationEmail(GenericEvent $event)
+{
+// TODO: generate invoice
 
-        $order = $event->getSubject();
-        Assert::isInstanceOf($order, OrderInterface::class);
+$order = $event->getSubject();
+Assert::isInstanceOf($order, OrderInterface::class);
 
-        $this->orderEmailManager->sendConfirmationEmail($order);
-    }
+$this->orderEmailManager->sendConfirmationEmail($order);
+}
 }

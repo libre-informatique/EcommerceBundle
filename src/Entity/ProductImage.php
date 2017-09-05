@@ -1,14 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blast Project package.
- *
- * Copyright (C) 2015-2017 Libre Informatique
- *
- * This file is licenced under the GNU LGPL v3.
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
+* This file is part of the Blast Project package.
+*
+* Copyright (C) 2015-2017 Libre Informatique
+*
+* This file is licenced under the GNU LGPL v3.
+* For the full copyright and license information, please view the LICENSE.md
+* file that was distributed with this source code.
+*/
 
 namespace Librinfo\EcommerceBundle\Entity;
 
@@ -20,94 +20,94 @@ use Librinfo\MediaBundle\Entity\File;
 
 class ProductImage extends BaseProductImage
 {
-    const TYPE_COVER = 'main';
-    const TYPE_THUMBNAIL = 'thumbnail';
+const TYPE_COVER = 'main';
+const TYPE_THUMBNAIL = 'thumbnail';
 
-    use OuterExtensible,
-    ProductImageExtension;
+use OuterExtensible,
+ProductImageExtension;
 
-    /**
-     * @var string
-     */
-    protected $type = self::TYPE_THUMBNAIL;
+/**
+* @var string
+*/
+protected $type = self::TYPE_THUMBNAIL;
 
-    /**
-     * @var File
-     */
-    protected $realFile;
+/**
+* @var File
+*/
+protected $realFile;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
+public function __construct()
+{
+parent::__construct();
+}
 
-    public function getName()
-    {
-        return $this->realFile === null ? null : $this->realFile->getName();
-    }
+public function getName()
+{
+return $this->realFile === null ? null : $this->realFile->getName();
+}
 
-    public function getBase64File()
-    {
-        return $this->realFile === null ? null : $this->realFile->getBase64File();
-    }
+public function getBase64File()
+{
+return $this->realFile === null ? null : $this->realFile->getBase64File();
+}
 
-    public function getMimeType()
-    {
-        return $this->realFile === null ? null : $this->realFile->getMimeType();
-    }
+public function getMimeType()
+{
+return $this->realFile === null ? null : $this->realFile->getMimeType();
+}
 
-    public function getRealFile()
-    {
-        return $this->realFile;
-    }
+public function getRealFile()
+{
+return $this->realFile;
+}
 
-    public function setRealFile(File $file)
-    {
-        $this->realFile = $file;
+public function setRealFile(File $file)
+{
+$this->realFile = $file;
 
-        return $this;
-    }
+return $this;
+}
 
-    public function getFile()
-    {
-        return parent::getFile();
-    }
+public function getFile()
+{
+return parent::getFile();
+}
 
-    public function setFile(\SplFileInfo $file)
-    {
-        // Shouldn't be used
-        parent::setFile($file);
+public function setFile(\SplFileInfo $file)
+{
+// Shouldn't be used
+parent::setFile($file);
 
-        return $this;
-    }
+return $this;
+}
 
-    public function setOwner($owner)
-    {
-        parent::setOwner($owner);
+public function setOwner($owner)
+{
+parent::setOwner($owner);
 
-        return $this;
-    }
+return $this;
+}
 
-    public function setPath($path)
-    {
-        parent::setPath($path);
+public function setPath($path)
+{
+parent::setPath($path);
 
-        if ($this->realFile !== null) {
-            $this->path = md5($this->realFile->getId());
-        }
+if ($this->realFile !== null) {
+$this->path = md5($this->realFile->getId());
+}
 
-        return $this;
-    }
+return $this;
+}
 
-    public function setType($type)
-    {
-        parent::setType($type);
+public function setType($type)
+{
+parent::setType($type);
 
-        return $this;
-    }
+return $this;
+}
 
-    public function __toString()
-    {
-        return (string) $this->getPath();
-    }
+public function __toString()
+{
+return (string) $this->getPath();
+}
 }

@@ -1,14 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blast Project package.
- *
- * Copyright (C) 2015-2017 Libre Informatique
- *
- * This file is licenced under the GNU LGPL v3.
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
+* This file is part of the Blast Project package.
+*
+* Copyright (C) 2015-2017 Libre Informatique
+*
+* This file is licenced under the GNU LGPL v3.
+* For the full copyright and license information, please view the LICENSE.md
+* file that was distributed with this source code.
+*/
 
 namespace Librinfo\EcommerceBundle\Entity;
 
@@ -16,197 +16,197 @@ use Blast\BaseEntitiesBundle\Entity\Traits\BaseEntity;
 use Blast\BaseEntitiesBundle\Entity\Traits\Timestampable;
 
 /**
- * Invoice Entity.
- *
- * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
- */
+* Invoice Entity.
+*
+* @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
+*/
 class Invoice
 {
-    use BaseEntity,
-    Timestampable
-    ;
+use BaseEntity,
+Timestampable
+;
 
-    /**
-     * @var string
-     */
-    private $number;
+/**
+* @var string
+*/
+private $number;
 
-    /**
-     * @var string
-     */
-    private $mimeType;
+/**
+* @var string
+*/
+private $mimeType;
 
-    /**
-     * @var int
-     */
-    private $size;
+/**
+* @var int
+*/
+private $size;
 
-    /**
-     * @var string
-     */
-    private $file;
+/**
+* @var string
+*/
+private $file;
 
-    /**
-     * @var Order
-     */
-    private $order;
+/**
+* @var Order
+*/
+private $order;
 
-    /**
-     * @var int
-     */
-    private $total;
+/**
+* @var int
+*/
+private $total;
 
-    /**
-     * Called by __toString().
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->number;
-    }
+/**
+* Called by __toString().
+*
+* @return string
+*/
+public function getName()
+{
+return $this->number;
+}
 
-    /**
-     * Set number.
-     *
-     * @param string $number
-     *
-     * @return Invoice
-     */
-    public function setNumber($number)
-    {
-        $this->number = $number;
+/**
+* Set number.
+*
+* @param string $number
+*
+* @return Invoice
+*/
+public function setNumber($number)
+{
+$this->number = $number;
 
-        return $this;
-    }
+return $this;
+}
 
-    /**
-     * Get number.
-     *
-     * @return string
-     */
-    public function getNumber()
-    {
-        return $this->number;
-    }
+/**
+* Get number.
+*
+* @return string
+*/
+public function getNumber()
+{
+return $this->number;
+}
 
-    /**
-     * Set mimeType.
-     *
-     * @param string $mimeType
-     *
-     * @return Invoice
-     */
-    public function setMimeType($mimeType)
-    {
-        $this->mimeType = $mimeType;
+/**
+* Set mimeType.
+*
+* @param string $mimeType
+*
+* @return Invoice
+*/
+public function setMimeType($mimeType)
+{
+$this->mimeType = $mimeType;
 
-        return $this;
-    }
+return $this;
+}
 
-    /**
-     * Get mimeType.
-     *
-     * @return string
-     */
-    public function getMimeType()
-    {
-        return $this->mimeType;
-    }
+/**
+* Get mimeType.
+*
+* @return string
+*/
+public function getMimeType()
+{
+return $this->mimeType;
+}
 
-    /**
-     * Set size.
-     *
-     * @param int $size
-     *
-     * @return Invoice
-     */
-    public function setSize($size)
-    {
-        $this->size = $size;
+/**
+* Set size.
+*
+* @param int $size
+*
+* @return Invoice
+*/
+public function setSize($size)
+{
+$this->size = $size;
 
-        return $this;
-    }
+return $this;
+}
 
-    /**
-     * Get size.
-     *
-     * @return int
-     */
-    public function getSize()
-    {
-        return $this->size;
-    }
+/**
+* Get size.
+*
+* @return int
+*/
+public function getSize()
+{
+return $this->size;
+}
 
-    /**
-     * Set file.
-     *
-     * @param string $file
-     *
-     * @return Invoice
-     */
-    public function setFile($file)
-    {
-        $this->file = base64_encode($file);
+/**
+* Set file.
+*
+* @param string $file
+*
+* @return Invoice
+*/
+public function setFile($file)
+{
+$this->file = base64_encode($file);
 
-        return $this;
-    }
+return $this;
+}
 
-    /**
-     * Get file.
-     *
-     * @return string
-     */
-    public function getFile()
-    {
-        return base64_decode($this->file);
-    }
+/**
+* Get file.
+*
+* @return string
+*/
+public function getFile()
+{
+return base64_decode($this->file);
+}
 
-    /**
-     * Set total.
-     *
-     * @param int $total
-     *
-     * @return Invoice
-     */
-    public function setTotal($total)
-    {
-        $this->total = $total;
+/**
+* Set total.
+*
+* @param int $total
+*
+* @return Invoice
+*/
+public function setTotal($total)
+{
+$this->total = $total;
 
-        return $this;
-    }
+return $this;
+}
 
-    /**
-     * Get total.
-     *
-     * @return int
-     */
-    public function getTotal()
-    {
-        return $this->total;
-    }
+/**
+* Get total.
+*
+* @return int
+*/
+public function getTotal()
+{
+return $this->total;
+}
 
-    /**
-     * Set order.
-     *
-     * @param Order $order
-     *
-     * @return Invoice
-     */
-    public function setOrder(\Librinfo\EcommerceBundle\Entity\Order $order = null)
-    {
-        $this->order = $order;
+/**
+* Set order.
+*
+* @param Order $order
+*
+* @return Invoice
+*/
+public function setOrder(\Librinfo\EcommerceBundle\Entity\Order $order = null)
+{
+$this->order = $order;
 
-        return $this;
-    }
+return $this;
+}
 
-    /**
-     * Get order.
-     *
-     * @return Order
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
+/**
+* Get order.
+*
+* @return Order
+*/
+public function getOrder()
+{
+return $this->order;
+}
 }

@@ -1,14 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blast Project package.
- *
- * Copyright (C) 2015-2017 Libre Informatique
- *
- * This file is licenced under the GNU LGPL v3.
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
+* This file is part of the Blast Project package.
+*
+* Copyright (C) 2015-2017 Libre Informatique
+*
+* This file is licenced under the GNU LGPL v3.
+* For the full copyright and license information, please view the LICENSE.md
+* file that was distributed with this source code.
+*/
 
 namespace Librinfo\EcommerceBundle\CodeGenerator;
 
@@ -17,72 +17,72 @@ use Blast\CoreBundle\CodeGenerator\CodeGeneratorInterface;
 use Librinfo\EcommerceBundle\Entity\Invoice;
 
 /**
- * Sequencial invoice number generator (9 digits).
- *
- * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
- */
+* Sequencial invoice number generator (9 digits).
+*
+* @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
+*/
 class InvoiceCodeGenerator implements CodeGeneratorInterface
 {
-    const ENTITY_CLASS = 'Librinfo\EcommerceBundle\Entity\Invoice';
-    const ENTITY_FIELD = 'number';
+const ENTITY_CLASS = 'Librinfo\EcommerceBundle\Entity\Invoice';
+const ENTITY_FIELD = 'number';
 
-    // TODO: this should be in app configuration:
-    public static $codePrefix = '';
-    public static $codeLength = 9;
+// TODO: this should be in app configuration:
+public static $codePrefix = '';
+public static $codeLength = 9;
 
-    /**
-     * @var EntityManager
-     */
-    private static $em;
+/**
+* @var EntityManager
+*/
+private static $em;
 
-    public static function setEntityManager(EntityManager $em)
-    {
-        self::$em = $em;
-    }
+public static function setEntityManager(EntityManager $em)
+{
+self::$em = $em;
+}
 
-    /**
-     * @param Invoice $invoice
-     *
-     * @return string
-     */
-    public static function generate($invoice)
-    {
-        if ($invoice->getNumber() !== null) {
-            return $invoice->getNumber();
-        }
+/**
+* @param Invoice $invoice
+*
+* @return string
+*/
+public static function generate($invoice)
+{
+if ($invoice->getNumber() !== null) {
+return $invoice->getNumber();
+}
 
-        $repo = self::$em->getRepository(Invoice::class);
-        $regexp = sprintf('^%s(\d{%d})$', self::$codePrefix, self::$codeLength);
-        $res = $repo->createQueryBuilder('i')
-            ->select('i.number')
-            ->where("SUBSTRING(i.number, '$regexp') != ''")
-            ->setMaxResults(1)
-            ->addOrderBy('i.number', 'desc')
-            ->getQuery()
-            ->getScalarResult();
-        $max = $res ? (int) $res[0]['number'] : 0;
+$repo = self::$em->getRepository(Invoice::class);
+$regexp = sprintf('^%s(\d{%d})$', self::$codePrefix, self::$codeLength);
+$res = $repo->createQueryBuilder('i')
+->select('i.number')
+->where("SUBSTRING(i.number, '$regexp') != ''")
+->setMaxResults(1)
+->addOrderBy('i.number', 'desc')
+->getQuery()
+->getScalarResult();
+$max = $res ? (int) $res[0]['number'] : 0;
 
-        return sprintf('%s%0' . self::$codeLength . 'd', self::$codePrefix, $max + 1);
-    }
+return sprintf('%s%0' . self::$codeLength . 'd', self::$codePrefix, $max + 1);
+}
 
-    /**
-     * @param string  $number
-     * @param Invoice $invoice
-     *
-     * @return bool
-     */
-    public static function validate($number, $invoice = null)
-    {
-        $regexp = sprintf('/^%s(\d{%d})$/', self::$codePrefix, self::$codeLength);
+/**
+* @param string  $number
+* @param Invoice $invoice
+*
+* @return bool
+*/
+public static function validate($number, $invoice = null)
+{
+$regexp = sprintf('/^%s(\d{%d})$/', self::$codePrefix, self::$codeLength);
 
-        return preg_match($regexp, $number);
-    }
+return preg_match($regexp, $number);
+}
 
-    /**
-     * @return string
-     */
-    public static function getHelp()
-    {
-        return 'Sequential numbering for invoices, six digits';
-    }
+/**
+* @return string
+*/
+public static function getHelp()
+{
+return 'Sequential numbering for invoices, six digits';
+}
 }

@@ -1,14 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blast Project package.
- *
- * Copyright (C) 2015-2017 Libre Informatique
- *
- * This file is licenced under the GNU LGPL v3.
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
+* This file is part of the Blast Project package.
+*
+* Copyright (C) 2015-2017 Libre Informatique
+*
+* This file is licenced under the GNU LGPL v3.
+* For the full copyright and license information, please view the LICENSE.md
+* file that was distributed with this source code.
+*/
 
 namespace Librinfo\EcommerceBundle\Controller;
 
@@ -24,159 +24,159 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 
 /**
- * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
- */
+* @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
+*/
 class OrderCRUDController extends CRUDController
 {
-    /**
-     * @param Request $request
-     * @param mixed   $object
-     *
-     * @return Response|null
-     */
-    protected function preCreate(Request $request, $object)
-    {
-        throw new AccessDeniedException();
-    }
+/**
+* @param Request $request
+* @param mixed   $object
+*
+* @return Response|null
+*/
+protected function preCreate(Request $request, $object)
+{
+throw new AccessDeniedException();
+}
 
-    /**
-     * @param Request $request
-     * @param mixed   $object
-     *
-     * @return Response|null
-     */
-    protected function preEdit(Request $request, $object)
-    {
-        throw new AccessDeniedException();
-    }
+/**
+* @param Request $request
+* @param mixed   $object
+*
+* @return Response|null
+*/
+protected function preEdit(Request $request, $object)
+{
+throw new AccessDeniedException();
+}
 
-    /**
-     * @param Request $request
-     * @param mixed   $object
-     *
-     * @return Response|null
-     */
-    protected function preDelete(Request $request, $object)
-    {
-        if ($object->getState() != PaymentInterface::STATE_NEW) {
-            throw new AccessDeniedException('An order cannot be deleted after the checkout is completed. You should cancel it instead.');
-        }
-    }
+/**
+* @param Request $request
+* @param mixed   $object
+*
+* @return Response|null
+*/
+protected function preDelete(Request $request, $object)
+{
+if ($object->getState() != PaymentInterface::STATE_NEW) {
+throw new AccessDeniedException('An order cannot be deleted after the checkout is completed. You should cancel it instead.');
+}
+}
 
-    /**
-     * @param mixed $object
-     *
-     * @return Response|null
-     */
-    protected function preDuplicate($object)
-    {
-        throw new AccessDeniedException();
-    }
+/**
+* @param mixed $object
+*
+* @return Response|null
+*/
+protected function preDuplicate($object)
+{
+throw new AccessDeniedException();
+}
 
-    public function updateShippingAction(Request $request)
-    {
-        $modelManager = $this->admin->getModelManager();
+public function updateShippingAction(Request $request)
+{
+$modelManager = $this->admin->getModelManager();
 
-        $orderId = $request->get('id');
-        $shipmentId = $request->get('_shipmentId');
-        $action = $request->get('_action');
-        $tracking = $request->get('_tracking');
+$orderId = $request->get('id');
+$shipmentId = $request->get('_shipmentId');
+$action = $request->get('_action');
+$tracking = $request->get('_tracking');
 
-        $shipment = $modelManager->find($this->container->getParameter('sylius.model.shipment.class'), $shipmentId);
-        $order = $modelManager->find($this->admin->getClass(), $orderId);
+$shipment = $modelManager->find($this->container->getParameter('sylius.model.shipment.class'), $shipmentId);
+$order = $modelManager->find($this->admin->getClass(), $orderId);
 
-        $stateMachineFactory = $this->container->get('sm.factory');
+$stateMachineFactory = $this->container->get('sm.factory');
 
-        $stateMachineShipment = $stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH);
-        $stateMachineShipment->apply($action);
+$stateMachineShipment = $stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH);
+$stateMachineShipment->apply($action);
 
-        $shipment->setTracking($tracking);
+$shipment->setTracking($tracking);
 
-        $this->container->get('sylius.manager.shipment')->flush();
+$this->container->get('sylius.manager.shipment')->flush();
 
-        return new RedirectResponse(
-            $this->admin->generateUrl('show', ['id' => $orderId])
-        );
-    }
+return new RedirectResponse(
+$this->admin->generateUrl('show', ['id' => $orderId])
+);
+}
 
-    public function updatePaymentAction(Request $request)
-    {
-        $modelManager = $this->admin->getModelManager();
+public function updatePaymentAction(Request $request)
+{
+$modelManager = $this->admin->getModelManager();
 
-        $orderId = $request->get('id');
-        $paymentId = $request->get('_paymentId');
-        $action = $request->get('_action');
+$orderId = $request->get('id');
+$paymentId = $request->get('_paymentId');
+$action = $request->get('_action');
 
-        $payment = $modelManager->find($this->container->getParameter('sylius.model.payment.class'), $paymentId);
-        $order = $modelManager->find($this->admin->getClass(), $orderId);
+$payment = $modelManager->find($this->container->getParameter('sylius.model.payment.class'), $paymentId);
+$order = $modelManager->find($this->admin->getClass(), $orderId);
 
-        $stateMachineFactory = $this->container->get('sm.factory');
+$stateMachineFactory = $this->container->get('sm.factory');
 
-        $stateMachinePayment = $stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
-        $stateMachinePayment->apply($action);
+$stateMachinePayment = $stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
+$stateMachinePayment->apply($action);
 
-        $this->container->get('sylius.manager.payment')->flush();
+$this->container->get('sylius.manager.payment')->flush();
 
-        return new RedirectResponse(
-            $this->admin->generateUrl('show', ['id' => $orderId])
-        );
-    }
+return new RedirectResponse(
+$this->admin->generateUrl('show', ['id' => $orderId])
+);
+}
 
-    public function cancelOrderAction($id, Request $request = null)
-    {
-        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CANCEL, [$id]);
-    }
+public function cancelOrderAction($id, Request $request = null)
+{
+return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CANCEL, [$id]);
+}
 
-    public function validateOrderAction($id, Request $request = null)
-    {
-        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, [$id]);
-    }
+public function validateOrderAction($id, Request $request = null)
+{
+return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, [$id]);
+}
 
-    public function batchActionCancel(ProxyQueryInterface $selectedModelQuery, Request $request = null)
-    {
-        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CANCEL, $request->request->get('idx'));
-    }
+public function batchActionCancel(ProxyQueryInterface $selectedModelQuery, Request $request = null)
+{
+return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CANCEL, $request->request->get('idx'));
+}
 
-    public function batchActionValidate(ProxyQueryInterface $selectedModelQuery, Request $request = null)
-    {
-        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, $request->request->get('idx'));
-    }
+public function batchActionValidate(ProxyQueryInterface $selectedModelQuery, Request $request = null)
+{
+return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, $request->request->get('idx'));
+}
 
-    protected function validateOrCancelOrders($action, $targets)
-    {
-        $modelManager = $this->admin->getModelManager();
+protected function validateOrCancelOrders($action, $targets)
+{
+$modelManager = $this->admin->getModelManager();
 
-        $stateMachineFactory = $this->container->get('sm.factory');
+$stateMachineFactory = $this->container->get('sm.factory');
 
-        $successes = 0;
+$successes = 0;
 
-        foreach ($targets as $target) {
-            $selectedModel = $modelManager->find($this->admin->getClass(), $target);
+foreach ($targets as $target) {
+$selectedModel = $modelManager->find($this->admin->getClass(), $target);
 
-            if ($selectedModel === null) {
-                $this->addFlash('sonata_flash_info', 'flash_batch_cancel_or_validate_no_target');
+if ($selectedModel === null) {
+$this->addFlash('sonata_flash_info', 'flash_batch_cancel_or_validate_no_target');
 
-                return new RedirectResponse(
-                    $this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
-                );
-            }
+return new RedirectResponse(
+$this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
+);
+}
 
-            try {
-                $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
-                $stateMachine->apply($action);
-                $this->container->get('sylius.manager.order')->flush();
-                ++$successes;
-            } catch (\Exception $e) {
-                $this->addFlash('sonata_flash_error', $e->getMessage());
-            }
-        }
+try {
+$stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
+$stateMachine->apply($action);
+$this->container->get('sylius.manager.order')->flush();
+++$successes;
+} catch (\Exception $e) {
+$this->addFlash('sonata_flash_error', $e->getMessage());
+}
+}
 
-        if ($successes > 0) {
-            $this->addFlash('sonata_flash_success', 'flash_batch_cancel_or_validate_success');
-        }
+if ($successes > 0) {
+$this->addFlash('sonata_flash_success', 'flash_batch_cancel_or_validate_success');
+}
 
-        return new RedirectResponse(
-            $this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
-        );
-    }
+return new RedirectResponse(
+$this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
+);
+}
 }

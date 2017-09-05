@@ -1,14 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blast Project package.
- *
- * Copyright (C) 2015-2017 Libre Informatique
- *
- * This file is licenced under the GNU LGPL v3.
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
+* This file is part of the Blast Project package.
+*
+* Copyright (C) 2015-2017 Libre Informatique
+*
+* This file is licenced under the GNU LGPL v3.
+* For the full copyright and license information, please view the LICENSE.md
+* file that was distributed with this source code.
+*/
 
 namespace Librinfo\EcommerceBundle\Entity;
 
@@ -23,101 +23,101 @@ use Sylius\Component\Core\Model\ImageInterface;
 
 class Taxon extends BaseTaxon implements TaxonInterface
 {
-    // use OuterExtensible, Stringable, TaxonExtension;
-    use Stringable;
+// use OuterExtensible, Stringable, TaxonExtension;
+use Stringable;
 
-    private $images;
+private $images;
 
-    public function initTaxon()
-    {
-        $this->images = new ArrayCollection();
-        //    $this->initializeTranslationsCollection();
-        $this->initOuterExtendedClasses();
-    }
+public function initTaxon()
+{
+$this->images = new ArrayCollection();
+//    $this->initializeTranslationsCollection();
+$this->initOuterExtendedClasses();
+}
 
-    /*
-    public function __toString()
-    {
-    return (string) $this->getName();
-    }*/
+/*
+public function __toString()
+{
+return (string) $this->getName();
+}*/
 
-    /**
-     * __clone().
-     */
-    public function __clone()
-    {
-        $this->id = null;
-    }
+/**
+* __clone().
+*/
+public function __clone()
+{
+$this->id = null;
+}
 
-    /**
-     * @return mixed
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
+/**
+* @return mixed
+*/
+public function getImages()
+{
+return $this->images;
+}
 
-    /**
-     * @param mixed images
-     *
-     * @return self
-     */
-    public function setImages($images)
-    {
-        $this->images = $images;
+/**
+* @param mixed images
+*
+* @return self
+*/
+public function setImages($images)
+{
+$this->images = $images;
 
-        return $this;
-    }
+return $this;
+}
 
-    /**
-     * @param string $type
-     *
-     * @return Collection|ImageInterface[]
-     */
-    public function getImagesByType($type)
-    {
-        return new ArrayCollection();
-    }
+/**
+* @param string $type
+*
+* @return Collection|ImageInterface[]
+*/
+public function getImagesByType($type)
+{
+return new ArrayCollection();
+}
 
-    /**
-     * @return bool
-     */
-    public function hasImages()
-    {
-        return false;
-    }
+/**
+* @return bool
+*/
+public function hasImages()
+{
+return false;
+}
 
-    /**
-     * @param ImageInterface $image
-     *
-     * @return bool
-     */
-    public function hasImage(ImageInterface $image)
-    {
-        return false;
-    }
+/**
+* @param ImageInterface $image
+*
+* @return bool
+*/
+public function hasImage(ImageInterface $image)
+{
+return false;
+}
 
-    /**
-     * @param ImageInterface $image
-     */
-    public function addImage(ImageInterface $image)
-    {
-    }
+/**
+* @param ImageInterface $image
+*/
+public function addImage(ImageInterface $image)
+{
+}
 
-    /**
-     * @param ImageInterface $image
-     */
-    public function removeImage(ImageInterface $image)
-    {
-    }
+/**
+* @param ImageInterface $image
+*/
+public function removeImage(ImageInterface $image)
+{
+}
 
-    public function getName()
-    {
-        // Dirty hack to handle sonata sub form management
-        if ($this->currentLocale === null) {
-            $this->setCurrentLocale('fr_FR');
-        }
+public function getName()
+{
+// Dirty hack to handle sonata sub form management
+if ($this->currentLocale === null) {
+$this->setCurrentLocale('fr_FR');
+}
 
-        return $this->getTranslation()->getName();
-    }
+return $this->getTranslation()->getName();
+}
 }
