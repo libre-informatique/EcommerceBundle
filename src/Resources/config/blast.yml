@@ -1587,7 +1587,8 @@ parameters:
                 add:
                     '':
                         form_group_general:
-                            name: ~
+                            translation.name:
+                                type: text
                             code: ~
                             parent: ~
             Sonata\AdminBundle\Datagrid\ListMapper:
@@ -1839,6 +1840,7 @@ parameters:
                             calculator: ~
                             enabled: ~
                             position: ~
+                            zone: ~
                     show_tab_history:
                         '':
                             archivedAt: ~
@@ -1858,6 +1860,11 @@ parameters:
                             calculator: ~
                             enabled: ~
                             position: ~
+                            zone: ~
+                            channels:
+                                type: Librinfo\EcommerceBundle\Form\Type\ShippingMethodChannelsType
+                                multiple: true
+                                expanded: true
                     form_tab_history:
                         '':
                             archivedAt:
@@ -1893,6 +1900,7 @@ parameters:
                     calculator: ~
                     enabled: ~
                     position: ~
+                    zone: ~
                     archivedAt: ~
                     createdAt: ~
                     updatedAt: ~
@@ -1908,6 +1916,7 @@ parameters:
                     calculator: ~
                     enabled: ~
                     position: ~
+                    zone: ~
                     archivedAt: ~
                     createdAt: ~
                     updatedAt: ~

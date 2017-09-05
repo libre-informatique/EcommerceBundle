@@ -74,6 +74,15 @@ services:
             - '%sylius.model.channel.class%'
             - '%sylius.model.product.class%'
 
+    librinfo_ecommerce.form.type.shipping_method_channels:
+        class: Librinfo\EcommerceBundle\Form\Type\ShippingMethodChannelsType
+        tags:
+            - { name: form.type, alias: librinfo_type_shipping_method_channels }
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '%sylius.model.channel.class%'
+            - '%sylius.model.shipping_method.class%'
+
 # EMAIL MANAGERS
 
     librinfo_ecommerce.email_manager.order:
