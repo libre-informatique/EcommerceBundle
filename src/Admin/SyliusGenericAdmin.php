@@ -27,7 +27,7 @@ class SyliusGenericAdmin extends CoreAdmin
       public function configure()
       {
       parent::configure();
-      
+
       dump($this->getConfigurationPool()->getContainer()->get('sylius.context.locale')->getLocaleCode());
       dump($this->getConfigurationPool()->getContainer()->get('sylius.locale_provider')->getDefaultLocaleCode());
       dump($this->getClass());
@@ -40,12 +40,11 @@ class SyliusGenericAdmin extends CoreAdmin
       public function createQuery($context = 'list')
       {
       $query = parent::createQuery($context);
-      
+
       return $query;
       }
     */
-    
-   
+
     public function getNewInstance()
     {
         $object = parent::getNewInstance();
@@ -56,24 +55,20 @@ class SyliusGenericAdmin extends CoreAdmin
             $object->setFallbackLocale($defaultLocale);
         }
 
-        
         /* @todo :  Think about this cleaner way to Initialize locale and more (find a good way to find good the FactoryName) */
         /*
           $syliusFactory = $this->getConfigurationPool()->getContainer()->get($this->getFactoryName());
           $object = $syliusFactory->createNew();
         */
-        
+
         // @todo : check if it useless or not
         foreach ($this->getExtensions() as $extension) {
             $extension->alterNewInstance($this, $object);
         }
-        
 
         return $object;
     }
-    
-    
-    
+
     public function getFactoryName()
     {
         throw new \Exception(sprintf(
@@ -81,7 +76,7 @@ class SyliusGenericAdmin extends CoreAdmin
             __FUNCTION__ /*__METHOD__*/,
             get_class($this)  /* __CLASS__ */
         ));
-        
+
         return null;
     }
 }
