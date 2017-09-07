@@ -16,7 +16,7 @@ doctrine:
             SyliusProductBundle:
                 type: xml
                 prefix: Sylius\Component\Product\Model
-                dir: Resources/config/doctrine/model
+                dir: Resources/config/doctrine/model    
 
 sylius_product:
     driver: doctrine/orm
@@ -114,7 +114,7 @@ sylius_shipping:
                 model: Librinfo\EcommerceBundle\Entity\ShippingMethod
 
 
-                
+
 fos_rest:
     exception: ~
     view:

@@ -234,3 +234,9 @@ services:
 
     librinfo.ecommerce.filters.customer:
         class: Librinfo\EcommerceBundle\Services\Filters\CustomerFilter
+
+
+    sylius.controller.shop.homepage:
+        class: Librinfo\EcommerceBundle\Controller\SyliusHomepageController
+        calls:
+            - [setContainer, ['@service_container']]
