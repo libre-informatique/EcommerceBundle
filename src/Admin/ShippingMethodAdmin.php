@@ -12,36 +12,30 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
-
-class ShippingMethodAdmin extends CoreAdmin
+class ShippingMethodAdmin extends SyliusGenericAdmin
 {
-    protected $datagridValues = [
-    '_page'       => 1,
-    '_sort_order' => 'ASC',
-    '_sort_by'    => 'code',
-    ];
+    /*    protected $datagridValues = [
+          '_page'       => 1,
+          '_sort_order' => 'ASC',
+          '_sort_by'    => 'code',
+          ];
 
-    public function createQuery($context = 'list')
-    {
-        $query = parent::createQuery($context);
+          public function createQuery($context = 'list')
+          {
+          $query = parent::createQuery($context);
 
-        return $query;
-    }
+          return $query;
+          }
 
-    public function getNewInstance()
-    {
-        /* Initialize locale and more */
+          public function getNewInstance()
+          {
 
-        $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.shipping_method');
-        $object = $syliusFactory->createNew();
 
-        /*
-        foreach ($this->getExtensions() as $extension) {
-        $extension->alterNewInstance($this, $object);
-        }
-        */
+          $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.shipping_method');
+          $object = $syliusFactory->createNew();
 
-        return $object;
-    }
+
+          return $object;
+          }
+    */
 }
