@@ -19,4 +19,8 @@ use Blast\BaseEntitiesBundle\Entity\Traits\Stringable;
 class ShippingMethod extends BaseShippingMethod
 {
     use Stringable;
+    /* public function __construct()
+       {
+       $this->initializeTranslationsCollection();
+       }*/
 }
