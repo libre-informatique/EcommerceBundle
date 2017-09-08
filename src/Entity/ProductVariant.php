@@ -32,7 +32,7 @@ class ProductVariant extends BaseProductVariant
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->getProduct()) {
             $string = $this->getProduct()->getName();
@@ -62,7 +62,7 @@ class ProductVariant extends BaseProductVariant
         return $this->currentLocale;
     }
 
-    public function getName()
+    public function getName(): string
     {
         // Dirty hack to handle sonata sub form management
         if ($this->currentLocale === null) {

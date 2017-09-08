@@ -23,7 +23,7 @@ class ChannelFixture extends BaseFixture
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'li_channel';
     }
@@ -31,7 +31,7 @@ class ChannelFixture extends BaseFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
+    protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
         //        parent::configureResourceNode($resourceNode);
         //        $resourceNode

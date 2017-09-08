@@ -55,7 +55,7 @@ class OrderEmailManager implements OrderEmailManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function sendConfirmationEmail(OrderInterface $order)
+    public function sendConfirmationEmail(OrderInterface $order): void
     {
         $attachment = $this->generateInvoice($order);
         $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order], [$attachment]);

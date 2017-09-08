@@ -60,7 +60,7 @@ final class CurrencySetup implements CurrencySetupInterface
     /**
      * {@inheritdoc}
      */
-    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): CurrencyInterface
     {
         $existingCurrency = $this->currencyRepository->findOneBy(['code' => $this->currencyCode]);
         if (null !== $existingCurrency) {

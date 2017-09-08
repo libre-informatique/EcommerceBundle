@@ -31,17 +31,27 @@ class Product extends BaseProduct
     protected $images;
 
     protected $taxons = null;
+    /**
+     * @var Collection|ReviewInterface[]
+     */
+    protected $reviews;
 
     public function __construct()
     {
         parent::__construct();
-        $this->initOuterExtendedClasses();
+        $this->initProduct();
+    }
+
+    public function initProduct()
+    {
         $this->images = new ArrayCollection();
         $this->productTaxons = new ArrayCollection();
         $this->taxons = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+        $this->initOuterExtendedClasses();
     }
 
-    public function getImages()
+    public function getImages(): Collection
     {
         return $this->images;
     }
@@ -85,7 +95,7 @@ class Product extends BaseProduct
         return $this;
     }
 
-    public function getTaxons()
+    public function getTaxons(): Collection
     {
         // $this->initTaxons();
 
@@ -107,7 +117,7 @@ class Product extends BaseProduct
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) parent::__toString();
     }

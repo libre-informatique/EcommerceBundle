@@ -34,7 +34,7 @@ trait AddressExtension
     /**
      * {@inheritdoc}
      */
-    public function getCustomer()
+    public function getCustomer(): ?CustomerInterface
     {
         return $this->customer;
     }
@@ -42,7 +42,7 @@ trait AddressExtension
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(CustomerInterface $customer = null)
+    public function setCustomer(?CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }
@@ -82,7 +82,7 @@ trait AddressExtension
     /**
      * @return string|null
      */
-    public function getFullName(): ?string
+    public function getFullName(): string
     {
         return sprintf(
             '%s %s',

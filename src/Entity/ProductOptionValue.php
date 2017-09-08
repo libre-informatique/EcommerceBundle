@@ -24,7 +24,7 @@ class ProductOptionValue extends BaseProductOptionValue
     /**
      * @return string "Option name: OptionValue value"
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         return sprintf('%s: %s', $this->option->getName(), $this->getValue());
     }

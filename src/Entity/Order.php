@@ -38,7 +38,7 @@ class Order extends BaseOrder
     /**
      * {@inheritdoc}
      */
-    public function setCurrencyCode($currencyCode)
+    public function setCurrencyCode(?string $currencyCode): void
     {
         $this->currencyCode = $currencyCode;
     }

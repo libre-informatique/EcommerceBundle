@@ -44,12 +44,12 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
         $this->codeGenerator = $codeGenerator;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'lisem_customer_customer';
     }
 
-    public function load(array $options)
+    public function load(array $options): void
     {
         $faker = \Faker\Factory::create();
         $groups = [];
@@ -89,7 +89,7 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
     /**
      * @param ArrayNodeDefinition $optionsNode
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()

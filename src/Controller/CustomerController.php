@@ -13,6 +13,7 @@
 namespace Librinfo\EcommerceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
@@ -25,7 +26,7 @@ class CustomerController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request): Response
     {
         $admin = $this->container
             ->get('sonata.admin.pool')
@@ -99,7 +100,7 @@ class CustomerController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request): Response
     {
         $admin = $this->container->get('librinfo_ecommerce.admin.customer');
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

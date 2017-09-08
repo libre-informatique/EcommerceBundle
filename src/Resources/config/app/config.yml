@@ -16,7 +16,7 @@ doctrine:
             SyliusProductBundle:
                 type: xml
                 prefix: Sylius\Component\Product\Model
-                dir: Resources/config/doctrine/model    
+                dir: Resources/config/doctrine/model
 
 sylius_product:
     driver: doctrine/orm
@@ -33,6 +33,17 @@ sylius_product:
         product_option_value:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\ProductOptionValue
+
+sylius_review:
+    resources:
+        review:
+            subject: Librinfo\EcommerceBundle\Entity\ProductReview
+            review:
+                classes:
+                    model: Librinfo\EcommerceBundle\Entity\ProductReview
+            reviewer:
+                classes:
+                    model: Librinfo\CRMBundle\Entity\Organism
 
 sylius_order:
     resources:

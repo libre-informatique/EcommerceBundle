@@ -17,6 +17,7 @@ use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ProductImageExtensio
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\ProductImage as BaseProductImage;
 use Librinfo\MediaBundle\Entity\File;
+use SplFileInfo;
 
 class ProductImage extends BaseProductImage
 {
@@ -68,45 +69,37 @@ class ProductImage extends BaseProductImage
         return $this;
     }
 
-    public function getFile()
+    public function getFile(): ?SplFileInfo
     {
         return parent::getFile();
     }
 
-    public function setFile(\SplFileInfo $file)
+    public function setFile(?SplFileInfo $file): void
     {
         // Shouldn't be used
         parent::setFile($file);
-
-        return $this;
     }
 
-    public function setOwner($owner)
+    public function setOwner($owner): void
     {
         parent::setOwner($owner);
-
-        return $this;
     }
 
-    public function setPath($path)
+    public function setPath(?string $path): void
     {
         parent::setPath($path);
 
         if ($this->realFile !== null) {
             $this->path = md5($this->realFile->getId());
         }
-
-        return $this;
     }
 
-    public function setType($type)
+    public function setType(?string $type): void
     {
         parent::setType($type);
-
-        return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getPath();
     }

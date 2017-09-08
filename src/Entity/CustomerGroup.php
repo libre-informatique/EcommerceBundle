@@ -31,7 +31,7 @@ class CustomerGroup extends BaseCustomerGroup
         $this->initOuterExtendedClasses();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) sprintf('%s (%s)', $this->getName(), $this->getCode());
     }

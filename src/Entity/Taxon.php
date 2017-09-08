@@ -18,6 +18,7 @@ use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Blast\BaseEntitiesBundle\Entity\Traits\Stringable;
 /* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\TaxonExtension;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\ImageInterface;
 
@@ -52,7 +53,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * @return mixed
      */
-    public function getImages()
+    public function getImages(): Collection
     {
         return $this->images;
     }
@@ -74,7 +75,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
      *
      * @return Collection|ImageInterface[]
      */
-    public function getImagesByType($type)
+    public function getImagesByType(string $type): Collection
     {
         return new ArrayCollection();
     }
@@ -82,7 +83,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * @return bool
      */
-    public function hasImages()
+    public function hasImages(): bool
     {
         return false;
     }
@@ -92,7 +93,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
      *
      * @return bool
      */
-    public function hasImage(ImageInterface $image)
+    public function hasImage(ImageInterface $image): bool
     {
         return false;
     }
@@ -100,18 +101,18 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * @param ImageInterface $image
      */
-    public function addImage(ImageInterface $image)
+    public function addImage(ImageInterface $image): void
     {
     }
 
     /**
      * @param ImageInterface $image
      */
-    public function removeImage(ImageInterface $image)
+    public function removeImage(ImageInterface $image): void
     {
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         // Dirty hack to handle sonata sub form management
         if ($this->currentLocale === null) {
