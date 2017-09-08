@@ -12,14 +12,30 @@
 
 namespace Librinfo\EcommerceBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Symfony\Bundle\TwigBundle\TwigEngine;
 
-class SyliusHomepageController extends Controller
+class SyliusHomepageController
 {
+    /**
+     * @var ChannelContextInterface
+     */
+    private $channelContext;
+
+    /**
+     * @var string
+     */
+    private $fallbackChannelCode;
+
+    /**
+     * @var TwigEngine
+     */
+    private $templating;
+
     /**
      * @param Request $request
      *
@@ -28,16 +44,38 @@ class SyliusHomepageController extends Controller
     public function indexAction(Request $request)
     {
         $response = new Response();
-        $channelContext = $this->container->get('sylius.context.channel');
         try {
-            $this->container->get('sylius.context.channel')->getChannel();
+            $this->channelContext->getChannel();
         } catch (ChannelNotFoundException $e) {
-            $defaultChannelCode = $this->container->getParameter('sylius_fallback_channel_code');
-            $response->headers->setCookie(new Cookie('_channel_code', $defaultChannelCode));
+            $response->headers->setCookie(new Cookie('_channel_code', $this->fallbackChannelCode));
         }
 
-        $response->setContent($this->renderView('@SyliusShop/Homepage/index.html.twig'));
+        $response->setContent($this->templating->render('@SyliusShop/Homepage/index.html.twig'));
 
         return $response;
+    }
+
+    /**
+     * @param ChannelContextInterface channelContext
+     */
+    public function setChannelContext(ChannelContextInterface $channelContext)
+    {
+        $this->channelContext = $channelContext;
+    }
+
+    /**
+     * @param string fallbackChannelCode
+     */
+    public function setFallbackChannelCode($fallbackChannelCode)
+    {
+        $this->fallbackChannelCode = $fallbackChannelCode;
+    }
+
+    /**
+     * @param TwigEngine templating
+     */
+    public function setTemplating(TwigEngine $templating)
+    {
+        $this->templating = $templating;
     }
 }
