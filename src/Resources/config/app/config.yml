@@ -36,8 +36,8 @@ sylius_product:
 
 sylius_review:
     resources:
-        review:
-            subject: Librinfo\EcommerceBundle\Entity\ProductReview
+        product:
+            subject: "%sylius.model.product.class%"
             review:
                 classes:
                     model: Librinfo\EcommerceBundle\Entity\ProductReview

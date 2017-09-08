@@ -13,19 +13,9 @@
 namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Core\Model\ProductReview as BaseProductReview;
+use Blast\BaseEntitiesBundle\Entity\Traits\BaseEntity;
 
 class ProductReview extends BaseProductReview
 {
-    /**
-     * @var string
-     */
-    protected $id;
-
-    /**
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+    use BaseEntity;
 }
