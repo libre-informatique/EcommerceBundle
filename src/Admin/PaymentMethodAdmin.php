@@ -15,7 +15,7 @@ namespace Librinfo\EcommerceBundle\Admin;
 use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class PaymentMethodAdmin extends CoreAdmin
+class PaymentMethodAdmin extends SyliusGenericAdmin
 {
     protected $baseRouteName = 'admin_librinfo_ecommerce_payment_method';
     protected $baseRoutePattern = 'librinfo/ecommerce/payment_method';
@@ -43,10 +43,10 @@ class PaymentMethodAdmin extends CoreAdmin
         return $list;
     }
 
-    public function toString($object)
-    {
-        return $object->getcode() ?: $object->getId();
-    }
+    //   public function toString($object)
+    // {
+    //    return $object->getcode() ?: $object->getId();
+    // }
 
     protected function configureRoutes(RouteCollection $collection)
     {

@@ -17,29 +17,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class ChannelAdmin extends CoreAdmin
+class ChannelAdmin extends SyliusGenericAdmin
 {
-    protected $datagridValues = [
-    '_page'       => 1,
-    '_sort_order' => 'ASC',
-    '_sort_by'    => 'code',
-    ];
-
-    public function getNewInstance()
-    {
-        /* Initialize locale and more */
-        $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel');
-        $object = $syliusFactory->createNew();
-
-        /*
-        foreach ($this->getExtensions() as $extension) {
-        $extension->alterNewInstance($this, $object);
-        }
-        */
-
-        return $object;
-    }
-
+    
     /**
      * @param FormMapper $mapper
      */

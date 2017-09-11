@@ -25,7 +25,7 @@ use Librinfo\EcommerceBundle\Entity\ProductVariant;
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-class ProductVariantAdmin extends CoreAdmin
+class ProductVariantAdmin extends SyliusGenericAdmin
 {
     /**
      * @var ProductInterface
@@ -48,13 +48,16 @@ class ProductVariantAdmin extends CoreAdmin
         // Limit the variant option values to the product options
         if ($product) {
             $mapper->add(
-                'optionValues', 'entity', [
+                'optionValues',
+                'entity',
+                [
                 'query_builder' => $this->optionValuesQueryBuilder(),
                 'class'         => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
                 'multiple'      => true,
                 'required'      => false,
                 'choice_label'  => 'fullName',
-                ], [
+                ],
+                [
                 'admin_code' => 'librinfo_ecommerce_option_value.admin.product',
                 ]
             );
@@ -66,19 +69,21 @@ class ProductVariantAdmin extends CoreAdmin
      */
     public function getNewInstance()
     {
-        $productVariantFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_variant');
+        // $productVariantFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_variant');
 
-        /* @var $object ProductVariant */
-        $object = $productVariantFactory->createNew();
-        if ($this->getProduct()) {
-            $object->setProduct($this->getProduct());
-        }
+        // /* @var $object ProductVariant */
+        // $object = $productVariantFactory->createNew();
+        // if ($this->getProduct()) {
+        //     $object->setProduct($this->getProduct());
+        // }
 
+        parent::getNewInstance();
+        
         $this->buildDefaultPricings($object);
 
-        foreach ($this->getExtensions() as $extension) {
-            $extension->alterNewInstance($this, $object);
-        }
+        // foreach ($this->getExtensions() as $extension) {
+        //     $extension->alterNewInstance($this, $object);
+        // }
 
         return $object;
     }
@@ -140,10 +145,11 @@ class ProductVariantAdmin extends CoreAdmin
     protected function optionValuesQueryBuilder()
     {
         $repository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.product_option_value');
+        /* todo: check this request */
         $queryBuilder = $repository->createQueryBuilder('o')
-            ->andWhere('o.option IN (SELECT o2 FROM LibrinfoEcommerceBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
-            ->setParameter('product', $this->product);
-
+                      ->andWhere('o.option IN (SELECT o2 FROM LibrinfoEcommerceBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
+                      ->setParameter('product', $this->product);
+        
         return $queryBuilder;
     }
 

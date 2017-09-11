@@ -16,7 +16,7 @@ use Blast\CoreBundle\Admin\CoreAdmin;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class OrderAdmin extends CoreAdmin
+class OrderAdmin extends SyliusGenericAdmin
 {
     protected $baseRouteName = 'admin_librinfo_ecommerce_order';
     protected $baseRoutePattern = 'librinfo/ecommerce/order';
