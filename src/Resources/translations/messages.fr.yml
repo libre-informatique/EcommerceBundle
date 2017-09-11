@@ -227,7 +227,7 @@ librinfo:
     order_state:
         cancelled: Annulée
         cart: Panier
-        fulfilled: Terminée
+        fulfilled: Validée
         new: Nouvelle
     payment_state:
         awaiting_payment: En attente
@@ -256,4 +256,4 @@ librinfo:
         ready: Prêt
         shipped: Expédié
     help:
-        order_is_fulfilled: Cette commande est terminée, vous ne pouvez plus la modifier
+        order_is_fulfilled: Cette commande est validée, vous ne pouvez plus la modifier

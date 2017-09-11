@@ -30,26 +30,23 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('librinfo_ecommerce');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
         $rootNode
             ->children()
-            ->arrayNode('code_generator')
-            ->addDefaultsIfNotSet()
-            ->children()
-            ->scalarNode('product')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductCodeGenerator')->end()
-            ->scalarNode('product_variant')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
-            ->scalarNode('product_variant_embedded')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
-            ->scalarNode('invoice')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\InvoiceCodeGenerator')->end()
-            ->end()
-            ->end()
-            ->arrayNode('invoice')
-            ->addDefaultsIfNotSet()
-            ->children()
-            ->scalarNode('template')->defaultValue('LibrinfoEcommerceBundle:Invoice:default.html.twig')->end()
-            ->end()
-            ->end()
+                ->arrayNode('code_generator')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('product')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductCodeGenerator')->end()
+                        ->scalarNode('product_variant')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
+                        ->scalarNode('product_variant_embedded')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\ProductVariantCodeGenerator')->end()
+                        ->scalarNode('invoice')->defaultValue('Librinfo\EcommerceBundle\CodeGenerator\InvoiceCodeGenerator')->end()
+                    ->end()
+                ->end()
+                ->arrayNode('invoice')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('template')->defaultValue('LibrinfoEcommerceBundle:Invoice:default.html.twig')->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
