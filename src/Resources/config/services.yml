@@ -242,3 +242,11 @@ services:
             - [setTemplating, ['@templating']]
             - [setChannelContext, ['@sylius.context.channel']]
             - [setFallbackChannelCode, ['%sylius_fallback_channel_code%']]
+
+    librinfo.ecommerce.sylius_shop_request_listener:
+        class: Librinfo\EcommerceBundle\EventListener\SyliusRequestChannelContext
+        calls:
+            - [setFallbackChannelCode, ['%sylius_fallback_channel_code%']]
+            - [setChannelRepository, ['@sylius.repository.channel']]
+        tags:
+            - { name: sylius.context.channel.request_based.resolver }
