@@ -12,8 +12,6 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
-
 class TaxonAdmin extends SyliusGenericAdmin
 {
     public function createQuery($context = 'list')
@@ -25,20 +23,4 @@ class TaxonAdmin extends SyliusGenericAdmin
 
         return $query;
     }
-
-    // public function getNewInstance()
-    // {
-    //     /* Initialize locale and more */
-
-    //     $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.taxon');
-    //     $object = $syliusFactory->createNew();
-
-    //     /*
-    //     foreach ($this->getExtensions() as $extension) {
-    //     $extension->alterNewInstance($this, $object);
-    //     }
-    //     */
-
-    //     return $object;
-    // }
 }

@@ -12,8 +12,6 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
-
 class CustomerGroupAdmin extends SyliusGenericAdmin
 {
 }

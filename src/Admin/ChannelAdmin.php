@@ -12,14 +12,12 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ChannelAdmin extends SyliusGenericAdmin
 {
-    
     /**
      * @param FormMapper $mapper
      */
@@ -29,7 +27,7 @@ class ChannelAdmin extends SyliusGenericAdmin
 
         $syliusThemeConfig = $this->getConfigurationPool()->getContainer()->get('sylius.theme.configuration.provider')->getConfigurations();
         $listOfThemes = [
-        'default' => 'Default Sylius theme',
+            'default' => 'Default Sylius theme',
         ];
         foreach ($syliusThemeConfig as $k => $conf) {
             $listOfThemes[$conf['name']] = $conf['title'];
@@ -42,13 +40,13 @@ class ChannelAdmin extends SyliusGenericAdmin
             'taxCalculationStrategy',
             ChoiceType::class,
             [
-            'label'    => 'librinfo.label.taxCalculationStrategy',
-            'choices'  => array_flip($this->getConfigurationPool()->getContainer()->getParameter('sylius.taxation.calculation_strategy.list_values')),
-            'required' => true,
-            'attr'     => [
-            'class'=> 'inline-block',
-            'width'=> 50,
-            ],
+                'label'    => 'librinfo.label.taxCalculationStrategy',
+                'choices'  => array_flip($this->getConfigurationPool()->getContainer()->getParameter('sylius.taxation.calculation_strategy.list_values')),
+                'required' => true,
+                'attr'     => [
+                    'class' => 'inline-block',
+                    'width' => 50,
+                ],
             ]
         );
 
@@ -57,13 +55,13 @@ class ChannelAdmin extends SyliusGenericAdmin
             'themeName',
             ChoiceType::class,
             [
-            'label'    => 'librinfo.label.themeName',
-            'choices'  => array_flip($listOfThemes),
-            'required' => true,
-            'attr'     => [
-            'class'=> 'inline-block',
-            'width'=> 50,
-            ],
+                'label'    => 'librinfo.label.themeName',
+                'choices'  => array_flip($listOfThemes),
+                'required' => true,
+                'attr'     => [
+                    'class'=> 'inline-block',
+                    'width'=> 50,
+                ],
             ]
         );
 
@@ -89,7 +87,7 @@ class ChannelAdmin extends SyliusGenericAdmin
                     ->setParameter('currentId', $id);
             } else {
                 $qb
-                ->where('c.id IS NOT NULL');
+                    ->where('c.id IS NOT NULL');
             }
 
             $qbCode = clone $qb;

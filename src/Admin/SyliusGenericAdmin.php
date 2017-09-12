@@ -16,38 +16,6 @@ use Blast\CoreBundle\Admin\CoreAdmin;
 
 class SyliusGenericAdmin extends CoreAdmin
 {
-    /* @todo: remove this */
-    /*
-    protected $datagridValues = [
-        '_page'       => 1,
-        '_sort_order' => 'ASC',
-        '_sort_by'    => 'code',
-    ];
-    */
-    
-    /* @todo: remove this */
-    /*
-      public function configure()
-      {
-      parent::configure();
-
-      dump($this->getConfigurationPool()->getContainer()->get('sylius.context.locale')->getLocaleCode());
-      dump($this->getConfigurationPool()->getContainer()->get('sylius.locale_provider')->getDefaultLocaleCode());
-      dump($this->getClass());
-      dump(debug_backtrace(1));
-      }
-    */
-
-    /* @todo: remove this */
-    /*
-      public function createQuery($context = 'list')
-      {
-      $query = parent::createQuery($context);
-
-      return $query;
-      }
-    */
-
     public function getNewInstance()
     {
         $object = parent::getNewInstance();

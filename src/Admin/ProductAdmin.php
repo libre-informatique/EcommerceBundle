@@ -13,13 +13,10 @@
 namespace Librinfo\EcommerceBundle\Admin;
 
 use Blast\CoreBundle\Admin\Traits\HandlesRelationsAdmin;
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Sylius\Component\Product\Factory\ProductFactoryInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -41,14 +38,14 @@ class ProductAdmin extends SyliusGenericAdmin
             $list = array_merge(
                 $list,
                 [
-                ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'],
+                    ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'],
                 ]
             );
         } elseif ($action === 'edit') {
             $list = array_merge(
                 $list,
                 [
-                ['template' => 'LibrinfoEcommerceBundle:CRUD:global__action_shop_link.html.twig'],
+                    ['template' => 'LibrinfoEcommerceBundle:CRUD:global__action_shop_link.html.twig'],
                 ]
             );
         }
@@ -113,28 +110,6 @@ class ProductAdmin extends SyliusGenericAdmin
         $this->configShowHandlesRelations($mapper);
     }
 
-    /**
-     * @return ProductInterface
-     */
-    // public function getNewInstance()
-    // {
-    //     /**
-    //      * @var ProductFactoryInterface *
-    //      */
-    //     $productFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product');
-
-    //     /**
-    //      * @var ProductInterface
-    //      */
-    //     $object = $productFactory->createNew();
-
-    //     foreach ($this->getExtensions() as $extension) {
-    //         $extension->alterNewInstance($this, $object);
-    //     }
-
-    //     return $object;
-    // }
-
     public function prePersist($product)
     {
         parent::prePersist($product);
@@ -163,8 +138,8 @@ class ProductAdmin extends SyliusGenericAdmin
                 ->andWhere('p.code = :currentCode')
                 ->setParameters(
                     [
-                    'currentId'   => $id,
-                    'currentCode' => $code,
+                        'currentId'   => $id,
+                        'currentCode' => $code,
                     ]
                 );
 

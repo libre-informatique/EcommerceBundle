@@ -12,12 +12,13 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-class PaymentAdmin extends CoreAdmin
+class PaymentAdmin extends SyliusGenericAdmin
 {
+    /* @todo : remove this useless protected attributes */
+
     protected $baseRouteName = 'admin_librinfo_ecommerce_payment';
     protected $baseRoutePattern = 'librinfo/ecommerce/payment';
     protected $classnameLabel = 'Payment';
@@ -30,7 +31,8 @@ class PaymentAdmin extends CoreAdmin
         $query
             ->where(
                 $query->expr()->in(
-                    "$alias.state", [PaymentInterface::STATE_COMPLETED, PaymentInterface::STATE_REFUNDED]
+                    "$alias.state",
+                    [PaymentInterface::STATE_COMPLETED, PaymentInterface::STATE_REFUNDED]
                 )
             );
 

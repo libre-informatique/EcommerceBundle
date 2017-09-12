@@ -12,19 +12,20 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class OrderAdmin extends SyliusGenericAdmin
 {
+    /* @todo : remove this useless protected attributes */
+
     protected $baseRouteName = 'admin_librinfo_ecommerce_order';
     protected $baseRoutePattern = 'librinfo/ecommerce/order';
     protected $classnameLabel = 'Order';
     protected $datagridValues = [
-    '_page'       => 1,
-    '_sort_order' => 'DESC',
-    '_sort_by'    => 'createdAt',
+        '_page'       => 1,
+        '_sort_order' => 'DESC',
+        '_sort_by'    => 'createdAt',
     ];
 
     protected function configureRoutes(RouteCollection $collection)
@@ -41,13 +42,13 @@ class OrderAdmin extends SyliusGenericAdmin
         $actions = parent::configureBatchActions($actions);
 
         $actions['cancel'] = [
-        'ask_confirmation' => true,
-        'label'            => 'librinfo.label.cancel_order',
+            'ask_confirmation' => true,
+            'label'            => 'librinfo.label.cancel_order',
         ];
 
         $actions['validate'] = [
-        'ask_confirmation' => true,
-        'label'            => 'librinfo.label.fulfill_order',
+            'ask_confirmation' => true,
+            'label'            => 'librinfo.label.fulfill_order',
         ];
 
         return $actions;

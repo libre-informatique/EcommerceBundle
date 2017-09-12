@@ -14,5 +14,4 @@ namespace Librinfo\EcommerceBundle\Admin;
 
 class ShippingMethodAdmin extends SyliusGenericAdmin
 {
-    //protected $classnameLabel = 'ShippingMethod';
 }

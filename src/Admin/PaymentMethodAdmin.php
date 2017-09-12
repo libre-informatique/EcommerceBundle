@@ -12,11 +12,11 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class PaymentMethodAdmin extends SyliusGenericAdmin
 {
+    /* @todo : remove this useless protected attributes */
     protected $baseRouteName = 'admin_librinfo_ecommerce_payment_method';
     protected $baseRoutePattern = 'librinfo/ecommerce/payment_method';
     protected $classnameLabel = 'PaymentMethod';
@@ -43,10 +43,10 @@ class PaymentMethodAdmin extends SyliusGenericAdmin
         return $list;
     }
 
-    //   public function toString($object)
-    // {
-    //    return $object->getcode() ?: $object->getId();
-    // }
+    public function toString($object)
+    {
+        return $object->getcode() ?: $object->getId();
+    }
 
     protected function configureRoutes(RouteCollection $collection)
     {
