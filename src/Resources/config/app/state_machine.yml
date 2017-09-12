@@ -1,12 +1,13 @@
 winzou_state_machine:
     sylius_order:
-        # transitions:
-        #     restaure:
-        #         from: [cancelled]
-        #         to: new
         callbacks:
             before:
                 sylius_save_addresses_on_customer:
-                    on: ["create"]
-                    do: ["@librinfo_ecommerce.order_customer_manager", "associateUserAndAddress"]
+                    on:   ["create"]
+                    do:   ["@librinfo_ecommerce.order_customer_manager", "associateUserAndAddress"]
+                    args: ["object"]
+            after:
+                librinfo_ecommerce_order_validated:
+                    on:   ["create"]
+                    do:   ["@librinfo_ecommerce.order_state_manager", "validateOrder"]
                     args: ["object"]

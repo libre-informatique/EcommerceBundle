@@ -35,7 +35,7 @@ class SyliusGuidableListener implements LoggerAwareInterface, EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-        'loadClassMetadata',
+            'loadClassMetadata',
         ];
     }
 

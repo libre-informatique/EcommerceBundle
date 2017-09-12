@@ -43,8 +43,6 @@ class OrderCompleteListener
      */
     public function sendConfirmationEmail(GenericEvent $event)
     {
-        // TODO: generate invoice
-
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
 

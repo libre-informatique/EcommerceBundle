@@ -48,11 +48,10 @@ class SyliusHomepageController
             $this->channelContext->getChannel();
         } catch (ChannelNotFoundException $e) {
             $response->headers->setCookie(new Cookie('_channel_code', $this->fallbackChannelCode));
+            $request->query->set('_channel_code', $this->fallbackChannelCode);
         }
 
-        $response->setContent($this->templating->render('@SyliusShop/Homepage/index.html.twig'));
-
-        return $response;
+        return $this->templating->renderResponse('@SyliusShop/Homepage/index.html.twig', [], $response);
     }
 
     /**

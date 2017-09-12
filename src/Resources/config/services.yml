@@ -1,6 +1,14 @@
 imports:
      - { resource: "dashboard.yml" }
 
+parameters:
+    sylius.form.type.checkout_address.validation_groups:
+        - librinfo_ecommerce_organism
+        - librinfo_ecommerce_address
+    sylius.form.type.address.validation_groups:
+        - librinfo_ecommerce_organism
+        - librinfo_ecommerce_address
+
 services:
 # ENTITY CODE GENERATORS
 
@@ -98,6 +106,13 @@ services:
         class: Librinfo\EcommerceBundle\Services\OrderCustomerManager
         arguments:
             - '@doctrine.orm.entity_manager'
+
+    librinfo_ecommerce.order_state_manager:
+        class: Librinfo\EcommerceBundle\Services\OrderStateManager
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        calls:
+            - [setStateMachine, ['@sm.factory']]
 
 # EVENT LISTENERS
 
@@ -235,7 +250,6 @@ services:
     librinfo.ecommerce.filters.customer:
         class: Librinfo\EcommerceBundle\Services\Filters\CustomerFilter
 
-
     sylius.controller.shop.homepage:
         class: Librinfo\EcommerceBundle\Controller\SyliusHomepageController
         calls:
@@ -250,3 +264,18 @@ services:
             - [setChannelRepository, ['@sylius.repository.channel']]
         tags:
             - { name: sylius.context.channel.request_based.resolver }
+
+    librinfo_ecommerce.form.type.address_type_extension:
+        class: Librinfo\EcommerceBundle\Form\Type\AddressTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\AddressingBundle\Form\Type\AddressType}
+
+    librinfo_ecommerce.form.type.checkout_address_extension:
+        class: Librinfo\EcommerceBundle\Form\Type\CheckoutAddressTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType }
+
+    librinfo_ecommerce.form.type.customer_guest_type_extension:
+        class: Librinfo\EcommerceBundle\Form\Type\CustomerGuestTypeExtension
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType }
