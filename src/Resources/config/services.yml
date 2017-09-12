@@ -266,16 +266,13 @@ services:
             - { name: sylius.context.channel.request_based.resolver }
 
     librinfo_ecommerce.form.type.address_type_extension:
-        class: Librinfo\EcommerceBundle\Form\Type\AddressTypeExtension
+        class: Librinfo\EcommerceBundle\Form\Type\Checkout\AddressTypeExtension
         tags:
             - { name: form.type_extension, extended_type: Sylius\Bundle\AddressingBundle\Form\Type\AddressType}
 
-    librinfo_ecommerce.form.type.checkout_address_extension:
-        class: Librinfo\EcommerceBundle\Form\Type\CheckoutAddressTypeExtension
-        tags:
-            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType }
-
     librinfo_ecommerce.form.type.customer_guest_type_extension:
-        class: Librinfo\EcommerceBundle\Form\Type\CustomerGuestTypeExtension
+        class: Librinfo\EcommerceBundle\Form\Type\Checkout\CustomerGuestTypeExtension
+        calls:
+            - [setValidator, ['@validator']]
         tags:
             - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType }
