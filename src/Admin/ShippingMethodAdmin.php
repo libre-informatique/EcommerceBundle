@@ -14,28 +14,5 @@ namespace Librinfo\EcommerceBundle\Admin;
 
 class ShippingMethodAdmin extends SyliusGenericAdmin
 {
-    /*    protected $datagridValues = [
-          '_page'       => 1,
-          '_sort_order' => 'ASC',
-          '_sort_by'    => 'code',
-          ];
-
-          public function createQuery($context = 'list')
-          {
-          $query = parent::createQuery($context);
-
-          return $query;
-          }
-
-          public function getNewInstance()
-          {
-
-
-          $syliusFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.shipping_method');
-          $object = $syliusFactory->createNew();
-
-
-          return $object;
-          }
-    */
+    //protected $classnameLabel = 'ShippingMethod';
 }

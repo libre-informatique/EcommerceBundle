@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-class ProductAdmin extends CoreAdmin
+class ProductAdmin extends SyliusGenericAdmin
 {
     use HandlesRelationsAdmin {
         configureFormFields as configFormHandlesRelations;
@@ -39,13 +39,15 @@ class ProductAdmin extends CoreAdmin
 
         if ($action === 'list') {
             $list = array_merge(
-                $list, [
+                $list,
+                [
                 ['template' => 'LibrinfoEcommerceBundle:CRUD:list__action_shop_link.html.twig'],
                 ]
             );
         } elseif ($action === 'edit') {
             $list = array_merge(
-                $list, [
+                $list,
+                [
                 ['template' => 'LibrinfoEcommerceBundle:CRUD:global__action_shop_link.html.twig'],
                 ]
             );
@@ -114,24 +116,24 @@ class ProductAdmin extends CoreAdmin
     /**
      * @return ProductInterface
      */
-    public function getNewInstance()
-    {
-        /**
-         * @var ProductFactoryInterface *
-         */
-        $productFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product');
+    // public function getNewInstance()
+    // {
+    //     /**
+    //      * @var ProductFactoryInterface *
+    //      */
+    //     $productFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product');
 
-        /**
-         * @var ProductInterface
-         */
-        $object = $productFactory->createNew();
+    //     /**
+    //      * @var ProductInterface
+    //      */
+    //     $object = $productFactory->createNew();
 
-        foreach ($this->getExtensions() as $extension) {
-            $extension->alterNewInstance($this, $object);
-        }
+    //     foreach ($this->getExtensions() as $extension) {
+    //         $extension->alterNewInstance($this, $object);
+    //     }
 
-        return $object;
-    }
+    //     return $object;
+    // }
 
     public function prePersist($product)
     {

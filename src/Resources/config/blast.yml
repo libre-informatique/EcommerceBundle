@@ -1837,11 +1837,11 @@ parameters:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 remove:
-                  id:
-                  configuration: ~
+                    id:
+                    configuration: ~
                 add:
                     show_tab_general:
-                        main_group:
+                        show_group_general:
                             code: ~
                             categoryRequirement: ~
                             calculator: ~
@@ -1849,7 +1849,7 @@ parameters:
                             position: ~
                             zone: ~
                     show_tab_history:
-                        '':
+                        show_group_history:
                             archivedAt: ~
                             createdAt: ~
                             updatedAt: ~
@@ -1857,11 +1857,11 @@ parameters:
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 remove:
-                  id:
-                  configuration: ~
+                    id:
+                    configuration: ~
                 add:
                     form_tab_general:
-                        main_group:
+                        form_group_general:
                             code: ~
                             categoryRequirement: ~
                             calculator: ~
@@ -1873,7 +1873,7 @@ parameters:
                                 multiple: true
                                 expanded: true
                     form_tab_history:
-                        '':
+                        form_group_history:
                             archivedAt:
                                 type: sonata_type_datetime_picker
                                 attr:
@@ -1899,8 +1899,8 @@ parameters:
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
-                  id:
-                  configuration: ~
+                    id:
+                    configuration: ~
                 add:
                     code: ~
                     categoryRequirement: ~
@@ -1911,12 +1911,12 @@ parameters:
                     archivedAt: ~
                     createdAt: ~
                     updatedAt: ~
-
+                                        
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove:
-                  id:
-                  configuration: ~
+                    id:
+                    configuration: ~
                 add:
                     code: ~
                     categoryRequirement: ~

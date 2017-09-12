@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-class ProductOptionValueAdmin extends CoreAdmin
+class ProductOptionValueAdmin extends SyliusGenericAdmin
 {
     /**
      * @param FormMapper $mapper
@@ -43,7 +43,8 @@ class ProductOptionValueAdmin extends CoreAdmin
         $builder = $mapper->getFormBuilder();
         $admin = $this;
         $builder->addEventListener(
-            FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($admin) {
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) use ($admin) {
                 if (!$event->getData()) {
                     $entity = $admin->getNewInstance();  // This will set the locale
                     $event->setData($entity);
@@ -55,16 +56,16 @@ class ProductOptionValueAdmin extends CoreAdmin
     /**
      * @return ProductOptionValueInterface
      */
-    public function getNewInstance()
-    {
-        $productOptionFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_option_value');
+    // public function getNewInstance()
+    // {
+    //     $productOptionFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_option_value');
 
-        $object = $productOptionFactory->createNew();
+    //     $object = $productOptionFactory->createNew();
 
-        foreach ($this->getExtensions() as $extension) {
-            $extension->alterNewInstance($this, $object);
-        }
+    //     foreach ($this->getExtensions() as $extension) {
+    //         $extension->alterNewInstance($this, $object);
+    //     }
 
-        return $object;
-    }
+    //     return $object;
+    // }
 }

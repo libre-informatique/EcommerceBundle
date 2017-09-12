@@ -16,12 +16,15 @@ use Blast\CoreBundle\Admin\CoreAdmin;
 
 class SyliusGenericAdmin extends CoreAdmin
 {
+    /* @todo: remove this */
+    /*
     protected $datagridValues = [
-    '_page'       => 1,
-    '_sort_order' => 'ASC',
-    '_sort_by'    => 'code',
+        '_page'       => 1,
+        '_sort_order' => 'ASC',
+        '_sort_by'    => 'code',
     ];
-
+    */
+    
     /* @todo: remove this */
     /*
       public function configure()
