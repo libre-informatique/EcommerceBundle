@@ -17,7 +17,7 @@
         "knplabs/knp-snappy-bundle": "^1.5@dev"
     },
     "require-dev": {
-	"symfony/phpunit-bridge": ">=3.2"
+        "symfony/phpunit-bridge": ">=3.2"
     },
     "config": {
         "sllh-composer-lint": {
