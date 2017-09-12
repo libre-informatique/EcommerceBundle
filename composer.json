@@ -14,7 +14,7 @@
         "sylius/product-bundle": "1.0.x-dev",
         "libre-informatique/sonata-sylius-user-bundle": "dev-wip-lisem",
         "libre-informatique/crm-bundle": "dev-wip-lisem",
-        "knplabs/knp-snappy-bundle": "^1.5@dev"
+        "knplabs/knp-snappy-bundle": "dev-master"
     },
     "require-dev": {
         "symfony/phpunit-bridge": ">=3.2"
