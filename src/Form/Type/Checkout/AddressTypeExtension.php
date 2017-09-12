@@ -10,28 +10,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\EcommerceBundle\Form\Type;
+namespace Librinfo\EcommerceBundle\Form\Type\Checkout;
 
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType as BaseCheckoutAddressType;
-use Symfony\Component\Validator\Constraints\Valid;
-use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType;
+use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as BaseAddressType;
 
-class CheckoutAddressTypeExtension extends AbstractTypeExtension
+class AddressTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        if ($builder->has('customer')) {
-            $builder
-                ->remove('customer')
-            ;
-        }
         $builder
-            ->add('customer', CustomerGuestType::class, ['constraints' => [new Valid()]]);
+            ->remove('postcode')
+        ;
+
+        $builder
+            ->add('postCode', TextType::class, [
+                'label' => 'sylius.form.address.postcode',
+            ]);
     }
 
     /**
@@ -39,6 +39,6 @@ class CheckoutAddressTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return BaseCheckoutAddressType::class;
+        return BaseAddressType::class;
     }
 }
