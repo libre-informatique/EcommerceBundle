@@ -94,10 +94,9 @@ class ProductCRUDController extends CRUDController
     protected function getProductImageEntity($file, $product)
     {
         $productImage = new ProductImage();
-        $productImage
-            ->setRealFile($file)
-            ->setOwner($product)
-            ->setPath($product->getSlug());
+        $productImage->setRealFile($file);
+        $productImage->setOwner($product);
+        $productImage->setPath($product->getSlug());
 
         return $productImage;
     }
