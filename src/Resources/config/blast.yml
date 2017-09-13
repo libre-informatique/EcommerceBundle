@@ -1583,7 +1583,8 @@ parameters:
                             code: ~
                             category: ~
                             categoryRequirement: ~
-                            calculator: ~
+                            calculator:
+                                type: Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType
                             taxCategory: ~
                             enabled: ~
                             position: ~
