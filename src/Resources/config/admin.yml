@@ -215,3 +215,14 @@ services:
               group: admin
               label: librinfo.label.shipping_method_admin
               label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.shipping_category:
+        class: Librinfo\EcommerceBundle\Admin\ShippingCategoryAdmin
+        arguments: [~, Sylius\Component\Shipping\Model\ShippingCategory, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: ShippingCategory
+              label_translator_strategy: blast_core.label.strategy.librinfo
+
