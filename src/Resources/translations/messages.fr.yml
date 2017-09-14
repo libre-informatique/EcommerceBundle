@@ -183,6 +183,7 @@ librinfo:
         token_value: Jeton
         total: Total
         tracked_stock: Suivi des stocks
+        translation_name: Nom
         type: Type
         updatedAt: MàJ le
         validate_order: Valider la commande

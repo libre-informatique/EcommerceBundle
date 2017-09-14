@@ -12,6 +12,6 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-class ShippingCategoryAdmin extends SyliusGenericAdmin
+class ShippingMethodTranslationAdmin extends SyliusGenericAdmin
 {
 }

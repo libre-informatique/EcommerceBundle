@@ -1557,18 +1557,19 @@ parameters:
                 add:
                     show_tab_general:
                         show_group_general:
-                            code: ~
-                            category: ~
-                            categoryRequirement: ~
-                            taxCategory: ~
-                            calculator: ~
-                            enabled: ~
                             position: ~
-                            channels: ~
-                            zone: ~
+                            code: ~
+                            translation.name: ~
+#                            category: ~
+                            calculator: ~
+                            taxCategory: ~
+                            enabled: ~
+                        show_group_channel:
+                          channels: ~
+                          zone: ~
+
                     show_tab_history:
                         show_group_history:
-                            archivedAt: ~
                             createdAt: ~
                             updatedAt: ~
 
@@ -1580,28 +1581,27 @@ parameters:
                 add:
                     form_tab_general:
                         form_group_general:
+                            position: ~
                             code: ~
-                            category: ~
-                            categoryRequirement: ~
+                            translation.name:
+                                label: librinfo.label.translation_name
+                                type: text
+#                            category:
+#                                type: sonata_type_model
+#                                btn_add: Add
                             calculator:
                                 type: Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType
                             taxCategory: ~
                             enabled: ~
-                            position: ~
-                            zone: ~
+                        form_group_parameters:
                             channels:
                                 type: Librinfo\EcommerceBundle\Form\Type\ShippingMethodChannelsType
                                 multiple: true
                                 expanded: true
+                            zone: ~
+                            
                     form_tab_history:
                         form_group_history:
-                            archivedAt:
-                                type: sonata_type_datetime_picker
-                                attr:
-                                    readonly: true
-                                disabled: true
-                                required: false
-                                dp_side_by_side: true
                             createdAt:
                                 type: sonata_type_datetime_picker
                                 attr:
@@ -1625,13 +1625,14 @@ parameters:
                 add:
                     position: ~
                     code: ~
-                    category: ~
-                    categoryRequirement: ~
+                    translation.name: ~
+#                    category: ~
                     calculator: ~
                     taxCategory: ~
-                    enabled: ~
-                    channels: ~
                     zone: ~
+                    channels: ~
+                    enabled: ~
+                    
                                         
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
@@ -1641,22 +1642,74 @@ parameters:
                 add:
                     position: ~
                     code: ~
-                    categoryRequirement: ~
-                    category: ~
+                    # sonata s***                    
+                    translation.name:
+                        type: doctrine_orm_string
+#                    category: ~
                     calculator: ~
                     taxCategory: ~
-                    enabled: ~
-                    channels: ~
                     zone: ~
+                    channels: ~
+                    enabled: ~
 
+                    
 ################################################################################
 # ShippingCategory
 ################################################################################
 
-        Sylius\Component\Shipping\Model\ShippingCategory:
+#        Sylius\Component\Shipping\Model\ShippingCategory:
+#            baseRoute:
+#                name: admin_librinfo_ecommerce_shipping_category
+#                pattern: librinfo/ecommerce/shipping_category
+#                
+#            # SHOW
+#            Sonata\AdminBundle\Show\ShowMapper:
+#                remove:
+#                    id: ~
+#                add:
+#                    show_tab_general:
+#                        show_group_general:
+#                            code: ~
+#                            name: ~
+#                            description: ~
+#    
+#            # FORM
+#            Sonata\AdminBundle\Form\FormMapper:
+#                remove:
+#                    id: ~
+#                add:
+#                    form_tab_general:
+#                        form_group_general:
+#                            code: ~
+#                            name: ~
+#                            description: ~
+#    
+#            # LIST
+#            Sonata\AdminBundle\Datagrid\ListMapper:
+#                remove:
+#                    id: ~
+#                add:
+#                    code: ~
+#                    name: ~
+#                    description: ~
+#                
+#            # FILTERS
+#            Sonata\AdminBundle\Datagrid\DatagridMapper:
+#                remove:
+#                    id: ~
+#                add:
+#                    code: ~
+#                    name: ~
+#                    description: ~
+#
+################################################################################
+# ShippingMethodTranslation
+################################################################################
+
+        Sylius\Component\Shipping\Model\ShippingMethodTranslation:
             baseRoute:
-                name: admin_librinfo_ecommerce_shippingcategory
-                pattern: librinfo/ecommerce/shippingcategory
+                name: admin_librinfo_ecommerce_shipping_method_translation
+                pattern: librinfo/ecommerce/shipping_method_translation
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 remove:
@@ -1664,9 +1717,9 @@ parameters:
                 add:
                     show_tab_general:
                         show_group_general:
-                            code: ~
                             name: ~
                             description: ~
+                            locale: ~
     
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
@@ -1675,25 +1728,27 @@ parameters:
                 add:
                     form_tab_general:
                         form_group_general:
-                            code: ~
                             name: ~
                             description: ~
+                            locale: ~
     
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
                     id: ~
                 add:
-                    code: ~
                     name: ~
                     description: ~
-                
+                    locale: ~
+
+    
+
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove:
                     id: ~
                 add:
-                    code: ~
                     name: ~
                     description: ~
+                    locale: ~
 
