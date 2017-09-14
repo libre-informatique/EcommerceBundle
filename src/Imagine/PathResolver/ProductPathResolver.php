@@ -22,24 +22,31 @@ class ProductPathResolver extends DefaultResolver implements PathResolverInterfa
     public function resolvePath($path)
     {
         try {
-            if (null === $this->cacheFile) {
-                /* @var $this->cacheFile File */
-                $this->cacheFile = $this->findFile($path);
+            if (!preg_match_all('/[0-9a-fA-F]*/', $path)) {
+                // This requested path is not managed as ProductImage
+                // ProductImages path are hexadecimals strings
+                return parent::resolvePath($path);
             }
 
-            $webFilePath = $this->webDir . '/' . $path;
+            $this->cacheFile = $this->findFile($path);
 
-            if (!is_file($webFilePath)) {
-                $webFilePath = $this->webDir . '/bundles/librinfoecommerce/img/default-product-picture.png';
+            if ($this->cacheFile !== null) {
+                return $this->cacheFile->getFile();
+            } else {
+                // Cannot find the product image
+                // So creating fake file for default product image
+                $webPath = $this->webDir . '/' . $path;
+
+                if (!is_file($webPath)) {
+                    $webPath = $this->webDir . '/bundles/librinfoecommerce/img/default-product-picture.png';
+                }
+
+                $fakeFile = new File();
+                $fakeFile->setFile(base64_encode(file_get_contents($webPath)));
+                $fakeFile->setMimeType(mime_content_type($webPath));
+
+                $this->cacheFile = $fakeFile;
             }
-
-            $fakeFile = new File();
-            $fakeFile->setFile(base64_encode(file_get_contents($webFilePath)));
-            $fakeFile->setMimeType(mime_content_type($webFilePath));
-
-            $this->cacheFile = $fakeFile;
-
-            return $fakeFile->getFile();
 
             if (null === $this->cacheFile) {
                 throw new NotFoundHttpException(sprintf('File « %s » was not found', $path));

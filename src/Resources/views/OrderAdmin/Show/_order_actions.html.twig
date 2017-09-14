@@ -7,11 +7,12 @@
         {% if sm_can(object, 'fulfill', 'sylius_order') %}
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="col-md-6">
-                    <span>{{ 'librinfo.label.fulfill_this_order'|trans }}
-                        :</span>
+                    <span>
+                        {{ 'librinfo.label.fulfill_this_order'|trans }}:
+                    </span>
                 </div>
                 <div class="col-md-6">
-                    <a href="{{ path('admin_librinfo_ecommerce_order_validateOrder',{id: object.id})}}" class="btn btn-success">
+                    <a href="{{ path('admin_librinfo_ecommerce_order_validateOrder',{id: object.id})}}" class="btn btn-success confirmable" data-confirm-title="{{ 'librinfo.help.confirm_validate'|trans}}">
                         {{ 'librinfo.label.fulfill_order'|trans }}&nbsp;<i class="fa fa-check"></i>
                     </a>
                 </div>
@@ -21,11 +22,12 @@
         {% if sm_can(object, 'cancel', 'sylius_order') %}
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="col-md-6">
-                    <span>{{ 'librinfo.label.cancel_this_order'|trans }}
-                        :</span>
+                    <span>
+                        {{ 'librinfo.label.cancel_this_order'|trans }}:
+                    </span>
                 </div>
                 <div class="col-md-6">
-                    <a href="{{ path('admin_librinfo_ecommerce_order_cancelOrder',{id: object.id})}}" class="btn btn-danger">
+                    <a href="{{ path('admin_librinfo_ecommerce_order_cancelOrder',{id: object.id})}}" class="btn btn-danger confirmable" data-confirm-title="{{ 'librinfo.help.confirm_cancel'|trans}}">
                         {{ 'librinfo.label.cancel_order'|trans }}&nbsp;<i class="fa fa-ban"></i>
                     </a>
                 </div>

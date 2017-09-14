@@ -1,5 +1,9 @@
 winzou_state_machine:
     sylius_order:
+        transitions:
+            cancel:
+                from: [new, fulfilled]
+                to: cancelled
         callbacks:
             before:
                 sylius_save_addresses_on_customer:
