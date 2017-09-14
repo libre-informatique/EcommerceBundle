@@ -1,3 +1,4 @@
+
 # Copyright (C) 2015-2016 Libre Informatique
 #
 # This file is licenced under the GNU GPL v3.
@@ -554,206 +555,6 @@ parameters:
                             original_price:
                                 label: librinfo.label.original_price
                                 type: Librinfo\EcommerceBundle\Form\Type\PriceCentsType
-
-#######################
-# CRM bundle overrides
-######################
-#        Librinfo\CRMBundle\Admin\OrganismAdmin:
-#            form_theme:
-#                - LibrinfoEcommerceBundle:OrganismAdmin:theme.html.twig
-#            Sonata\AdminBundle\Show\ShowMapper:
-#                forceTabs: true
-#                remove:
-#                    positions: ~
-#                    description: ~
-#                    phones: ~
-#                    email: ~
-#                    emailNpai: ~
-#                    emailNoNewsletter: ~
-#                    vcard_uid: ~
-#                    address: ~
-#                    zip: ~
-#                    city: ~
-#                    country: ~
-#                    npai: ~
-#                add:
-#                    form_group_general:
-#                        '':
-#                            active: ~
-#                            isCustomer:
-#                                template: 'LibrinfoCRMBundle:CRUD:show_field_customer.html.twig'
-#                            isSupplier:
-#                                template: 'LibrinfoCRMBundle:CRUD:show_field_supplier.html.twig'
-#                            category.name: ~
-#                            url: ~
-#                            description:
-#                                label: librinfo.label.organism_description
-#                            email:
-#                                template: 'LibrinfoCRMBundle:CRUD:show_field_email.html.twig'
-#                            _options:
-#                                fieldsOrder:
-#                                    - name
-#                                    - isCustomer
-#                                    - isSupplier
-#                                    - circles
-#                                    - category.name
-#                                    - description
-#                                    - email
-#                                    - url
-#                        form_group_main_address:
-#                            fulltext_address:
-#                                template: LibrinfoCRMBundle:CRUD:show_field_fulltext_address.html.twig
-#                                label: librinfo.label.main_address
-#                        form_group_phones:
-#                            phones: ~
-#                        form_group_administrative:
-#                            vat:
-#                                template: 'LibrinfoCRMBundle:CRUD:show_field_vat.html.twig'
-#                            iban: ~
-#                        _options:
-#                            groupsOrder:
-#                                - ''
-#                                - form_group_main_address
-#                                - form_group_phones
-#                                - form_group_administrative
-#                    form_group_contacts:
-#                        '':
-#                            positions:
-#                                associated_property: organismDescription
-#                                label: librinfo.label.contacts
-#                                template: 'LibrinfoCRMBundle:CRUD:show_field_organism_positions.html.twig'
-#                                cascade_validation: true
-#    #                                admin_code: test_code
-#                            _options:
-#                                class: positions-box
-#                        _options:
-#                            #TODO tabs descriptions should be translated (improve Sonata Admin)
-#                            description: "Liste des Contacts appartenant à ce Tiers"
-#                    form_tab_info:
-#                        '':
-#                            source:
-#                                type: Blast\UtilsBundle\Form\Type\CustomChoiceType
-#                                choices_field: organism.source
-#                                blast_choices: [Catalogue, Foire, Ami, Internet, Magazine]
-#                                required: false
-#                                attr:
-#                                    class: new-line
-#                                    width: 30
-#                            catalogue_sent: ~
-#                            catalogue_send_mean: ~
-#                            first_catalogue_sent_date: ~
-#                            last_catalogue_sent_date: ~
-#                    _options:
-#                        tabsOrder:
-#                            - form_group_general
-#                            - form_tab_info
-#                            - form_group_contacts
-#                            - form_group_specifics
-#                    _helper_links:
-#                        - url: https://framacalc.org/libio_validation_crm
-#                          title: Framacalc de validation
-#                          class: framacalc
-#            Sonata\AdminBundle\Form\FormMapper:
-#                remove:
-#                    address: ~
-#                    zip: ~
-#                    city: ~
-#                    country: ~
-#                    npai: ~
-#                add:
-#                    form_tab_address_book:
-#                        form_group_default_address:
-#                            defaultAddress:
-#                                type: text
-#                                disabled: true
-#                                label: false
-#                        form_group_addresses:
-#                            addresses:
-#                                type: sonata_type_collection
-#                                label: false
-#                                by_reference: false
-#                                required: true
-#                                _options:
-#                                    sortable: updatedAt
-#                                    edit: inline
-#                        _options:
-#                            groupsOrder:
-#                                - form_group_default_address
-#                                - form_group_addresses
-#                    _options:
-#                        tabsOrder:
-#                            - form_group_general
-#                            - form_tab_address_book
-#                            - form_group_contacts
-#                            - form_tab_info
-#                            - form_group_specifics
-#
-#            Sonata\AdminBundle\Datagrid\ListMapper:
-#                remove:
-#                    createdAt: ~
-#                    zip: ~
-#                    country: ~
-#                    email: ~
-#                add:
-#                    name:
-#                        identifier: true
-#                        label: librinfo.label.list_organism_name
-#                    city: ~
-#                    customerCode:
-#                        template: LibrinfoCRMBundle:OrganismAdmin:list_field_customer.html.twig
-#                    supplierCode:
-#                        template: LibrinfoCRMBundle:OrganismAdmin:list_field_supplier.html.twig
-#                    category.name: ~
-#                    circles: ~
-#                    alert: ~
-#                    active: ~
-#                    _options:
-#                        fieldsOrder:
-#                            - name
-#                            - customerCode
-#                            - supplierCode
-#                            - city
-#                            - category.name
-#                            - circles
-#                            - alert
-#                            - active
-#                    _export_formats:
-#                        csv: [name, address, zip, city, country, alert, email, url, category, administrativeNumber, description, createdAt, updatedAt, vcardUid, npai, emailNpai, emailNoNewsletter, phones]
-#                        xls: csv
-#                        json: csv
-#                        xml: csv
-#                        vcard: [name, address, zip, city, country, email, url, description, phones, personal]
-#                    _helper_links:
-#                        - url: https://framacalc.org/libio_validation_crm
-#                          title: Framacalc de validation
-#                          class: framacalc
-#            Sonata\AdminBundle\Datagrid\DatagridMapper:
-#                add:
-#                    active: ~
-#                    name:
-#                        label: librinfo.label.organism_name_filter
-#                    positions.contact.name:
-#                        type: doctrine_orm_callback
-#                        callback: [Librinfo\CRMBundle\Admin\OrganismAdmin, contactFilterQueryBuilder]
-#                        label: librinfo.label.organism_contact_filter
-#                    category: ~
-#                    isCustomer: ~
-#                    customerCode: ~
-#                    isSupplier: ~
-#                    supplierCode: ~
-#                    circles: ~
-#                    alert: ~
-#                    _options:
-#                        fieldsOrder:
-#                            - name
-#                            - positions.contact.name
-#                            - category
-#                            - isCustomer
-#                            - customerCode
-#                            - isSupplier
-#                            - supplierCode
-#                            - circles
-#                            - alert
 
 ########
 # ORDER
@@ -1345,92 +1146,6 @@ parameters:
                         label: librinfo.label.customer_group_code
 
 ##########
-# CHANNEL
-##########
-
-        Sylius\Component\Core\Model\Channel:
-            # SHOW
-            Sonata\AdminBundle\Show\ShowMapper:
-                add:
-                    form_tab_general:
-                        form_group_general:
-                            code: ~
-                            name: ~
-                            color: ~
-                            description: ~
-                            enabled: ~
-                            hostname: ~
-                            createdAt: ~
-                            updatedAt: ~
-                            id: ~
-                            themeName: ~
-                            taxCalculationStrategy: ~
-                            contactEmail: ~
-                            skippingShippingStepAllowed: ~
-                            skippingPaymentStepAllowed: ~
-                            accountVerificationRequired: ~
-
-            # FORM
-            Sonata\AdminBundle\Form\FormMapper:
-                add:
-                    form_tab_general:
-                        form_group_general:
-                            code: ~
-                            name: ~
-                            color: ~
-                            description: ~
-                            enabled: ~
-                            hostname: ~
-                            createdAt: ~
-                            updatedAt: ~
-                            id: ~
-                            themeName: ~
-                            taxCalculationStrategy: ~
-                            contactEmail: ~
-                            skippingShippingStepAllowed: ~
-                            skippingPaymentStepAllowed: ~
-                            accountVerificationRequired: ~
-
-            # LIST
-            Sonata\AdminBundle\Datagrid\ListMapper:
-                add:
-                    code: ~
-                    name: ~
-                    color: ~
-                    description: ~
-                    enabled: ~
-                    hostname: ~
-                    createdAt: ~
-                    updatedAt: ~
-                    id: ~
-                    themeName: ~
-                    taxCalculationStrategy: ~
-                    contactEmail: ~
-                    skippingShippingStepAllowed: ~
-                    skippingPaymentStepAllowed: ~
-                    accountVerificationRequired: ~
-
-
-            # FILTERS
-            Sonata\AdminBundle\Datagrid\DatagridMapper:
-                add:
-                    code: ~
-                    name: ~
-                    color: ~
-                    description: ~
-                    enabled: ~
-                    hostname: ~
-                    createdAt: ~
-                    updatedAt: ~
-                    id: ~
-                    themeName: ~
-                    taxCalculationStrategy: ~
-                    contactEmail: ~
-                    skippingShippingStepAllowed: ~
-                    skippingPaymentStepAllowed: ~
-                    accountVerificationRequired: ~
-
-##########
 # TAXRATE
 ##########
 
@@ -1837,16 +1552,19 @@ parameters:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 remove:
-                    id:
+                    id: ~
                     configuration: ~
                 add:
                     show_tab_general:
                         show_group_general:
                             code: ~
+                            category: ~
                             categoryRequirement: ~
+                            taxCategory: ~
                             calculator: ~
                             enabled: ~
                             position: ~
+                            channels: ~
                             zone: ~
                     show_tab_history:
                         show_group_history:
@@ -1857,14 +1575,17 @@ parameters:
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 remove:
-                    id:
+                    id: ~
                     configuration: ~
                 add:
                     form_tab_general:
                         form_group_general:
                             code: ~
+                            category: ~
                             categoryRequirement: ~
-                            calculator: ~
+                            calculator:
+                                type: Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType
+                            taxCategory: ~
                             enabled: ~
                             position: ~
                             zone: ~
@@ -1899,31 +1620,80 @@ parameters:
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
-                    id:
+                    id: ~
                     configuration: ~
                 add:
+                    position: ~
                     code: ~
+                    category: ~
                     categoryRequirement: ~
                     calculator: ~
+                    taxCategory: ~
                     enabled: ~
-                    position: ~
+                    channels: ~
                     zone: ~
-                    archivedAt: ~
-                    createdAt: ~
-                    updatedAt: ~
                                         
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove:
-                    id:
+                    id: ~
                     configuration: ~
                 add:
+                    position: ~
                     code: ~
                     categoryRequirement: ~
+                    category: ~
                     calculator: ~
+                    taxCategory: ~
                     enabled: ~
-                    position: ~
+                    channels: ~
                     zone: ~
-                    archivedAt: ~
-                    createdAt: ~
-                    updatedAt: ~
+
+################################################################################
+# ShippingCategory
+################################################################################
+
+        Sylius\Component\Shipping\Model\ShippingCategory:
+            baseRoute:
+                name: admin_librinfo_ecommerce_shippingcategory
+                pattern: librinfo/ecommerce/shippingcategory
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                remove:
+                    id: ~
+                add:
+                    show_tab_general:
+                        show_group_general:
+                            code: ~
+                            name: ~
+                            description: ~
+    
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                remove:
+                    id: ~
+                add:
+                    form_tab_general:
+                        form_group_general:
+                            code: ~
+                            name: ~
+                            description: ~
+    
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+                    id: ~
+                add:
+                    code: ~
+                    name: ~
+                    description: ~
+                
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                remove:
+                    id: ~
+                add:
+                    code: ~
+                    name: ~
+                    description: ~
+
