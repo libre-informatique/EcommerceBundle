@@ -44,4 +44,16 @@ class UploadControllerEventListener extends BaseUploadControllerEventListener
     public function postGetEntity(GenericEvent $event)
     {
     }
+
+    public function removeEntity(GenericEvent $event)
+    {
+        $file = $event->getSubject();
+        $repo = $this->em->getRepository('LibrinfoEcommerceBundle:ProductImage');
+        $productImage = $repo->findOneBy(['realFile' => $file]);
+
+        if ($productImage !== null) {
+            $this->em->remove($productImage);
+            $this->em->flush($productImage);
+        }
+    }
 }

@@ -226,6 +226,7 @@ services:
         tags:
             - { name: kernel.event_listener, event: librinfo.events.media.load.preGetEntity, method: preGetEntity, priority: 10 }
             - { name: kernel.event_listener, event: librinfo.events.media.load.postGetEntity, method: postGetEntity, priority: 10 }
+            - { name: kernel.event_listener, event: librinfo.events.media.removeEntity, method: removeEntity, priority: 10 }
 
     librinfo_ecommerce.order.updater:
         class: Librinfo\EcommerceBundle\Services\OrderUpdater
