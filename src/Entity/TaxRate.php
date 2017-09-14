@@ -16,19 +16,18 @@ use Sylius\Component\Core\Model\TaxRate as BaseTaxRate;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 /* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\TaxRateExtension;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 
 class TaxRate extends BaseTaxRate
 {
     use OuterExtensible,
     TaxRateExtension;
-    
+
     public function __construct()
     {
         parent::__construct();
         $this->initTaxRate();
     }
-    
+
     public function initTaxRate()
     {
         $this->initOuterExtendedClasses();

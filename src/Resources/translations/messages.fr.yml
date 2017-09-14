@@ -258,3 +258,5 @@ librinfo:
         shipped: Expédié
     help:
         order_is_fulfilled: Cette commande est validée, vous ne pouvez plus la modifier
+        confirm_cancel: Voulez-vous vraiment annuler cette commande ?
+        confirm_validate: Voulez-vous vraiment valider cette commande ?
