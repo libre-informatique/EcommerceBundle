@@ -216,13 +216,23 @@ services:
               label: librinfo.label.shipping_method_admin
               label_translator_strategy: blast_core.label.strategy.librinfo
 
-    librinfo_ecommerce.admin.shipping_category:
-        class: Librinfo\EcommerceBundle\Admin\ShippingCategoryAdmin
-        arguments: [~, Sylius\Component\Shipping\Model\ShippingCategory, BlastCoreBundle:CRUD]
+#    librinfo_ecommerce.admin.shipping_category:
+#        class: Librinfo\EcommerceBundle\Admin\ShippingCategoryAdmin
+#        arguments: [~, Sylius\Component\Shipping\Model\ShippingCategory, BlastCoreBundle:CRUD]
+#        tags:
+#            - name: sonata.admin
+#              manager_type: orm
+#              group: admin
+#              label: librinfo.label.shipping_category
+#              label_translator_strategy: blast_core.label.strategy.librinfo
+
+    librinfo_ecommerce.admin.shipping_method_translation:
+        class: Librinfo\EcommerceBundle\Admin\ShippingMethodTranslationAdmin
+        arguments: [~, Sylius\Component\Shipping\Model\ShippingMethodTranslation, BlastCoreBundle:CRUD]
         tags:
             - name: sonata.admin
               manager_type: orm
               group: admin
-              label: ShippingCategory
+              label: librinfo.label.shipping_method_translation
               label_translator_strategy: blast_core.label.strategy.librinfo
 
