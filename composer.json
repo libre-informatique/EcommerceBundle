@@ -5,13 +5,13 @@
     "require": {
         "php": ">= 7.1",
         "symfony/symfony": ">=3.3",
-        "blast-project/core-bundle": "dev-wip-lisem",
-        "blast-project/base-entities-bundle": "dev-wip-lisem",
-        "blast-project/utils-bundle": "dev-wip-lisem",
-        "blast-project/outer-extension-bundle": "dev-wip-lisem",
+        "blast-project/core-bundle": "self.version",
+        "blast-project/base-entities-bundle": "self.version",
+        "blast-project/utils-bundle": "self.version",
+        "blast-project/outer-extension-bundle": "self.version",
         "sylius/sylius": "^1.0",
-        "libre-informatique/sonata-sylius-user-bundle": "dev-wip-lisem",
-        "libre-informatique/crm-bundle": "dev-wip-lisem",
+        "libre-informatique/sonata-sylius-user-bundle": "self.version",
+        "libre-informatique/crm-bundle": "self.version",
         "knplabs/knp-snappy-bundle": "dev-master"
     },
     "require-dev": {
