@@ -21,7 +21,7 @@
         "sllh-composer-lint": {
             "php": true,
             "type": true,
-            "minimum-stability": true,
+            "minimum-stability": false,
             "version-constraints": true
         }
     },
