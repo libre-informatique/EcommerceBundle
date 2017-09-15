@@ -15,8 +15,10 @@ namespace Librinfo\EcommerceBundle\Services;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Order\Model\OrderInterface;
 use SM\Factory\Factory;
+use Librinfo\EcommerceBundle\Factory\InvoiceFactoryInterface;
+use Librinfo\EcommerceBundle\Entity\Invoice;
 
-class OrderStateManager
+class OrderManager
 {
     /**
      * @var EntityManager
@@ -27,6 +29,11 @@ class OrderStateManager
      * @var Factory
      */
     private $stateMachine;
+
+    /**
+     * @var InvoiceFactoryInterface
+     */
+    private $invoiceFactory;
 
     /**
      * @param EntityManager $em
@@ -45,6 +52,14 @@ class OrderStateManager
         $stateMachine->apply('fulfill');
     }
 
+    public function generateCreditInvoice(OrderInterface $object)
+    {
+        $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_CREDIT);
+
+        $this->em->persist($invoice);
+        $this->em->flush();
+    }
+
     /**
      * @param Factory stateMachine
      *
@@ -55,5 +70,13 @@ class OrderStateManager
         $this->stateMachine = $stateMachine;
 
         return $this;
+    }
+
+    /**
+     * @param InvoiceFactoryInterface invoiceFactory
+     */
+    public function setInvoiceFactory(InvoiceFactoryInterface $invoiceFactory): void
+    {
+        $this->invoiceFactory = $invoiceFactory;
     }
 }

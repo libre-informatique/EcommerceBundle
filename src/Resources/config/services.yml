@@ -108,12 +108,13 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
 
-    librinfo_ecommerce.order_state_manager:
-        class: Librinfo\EcommerceBundle\Services\OrderStateManager
+    librinfo_ecommerce.order_manager:
+        class: Librinfo\EcommerceBundle\Services\OrderManager
         arguments:
             - '@doctrine.orm.entity_manager'
         calls:
             - [setStateMachine, ['@sm.factory']]
+            - [setInvoiceFactory, ['@librinfo_ecommerce.factory.invoice']]
 
 # EVENT LISTENERS
 

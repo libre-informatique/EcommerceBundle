@@ -26,5 +26,5 @@ interface InvoiceFactoryInterface extends FactoryInterface
      *
      * @return Invoice
      */
-    public function createForOrder(OrderInterface $order);
+    public function createForOrder(OrderInterface $order, $type = Invoice::TYPE_DEBIT);
 }

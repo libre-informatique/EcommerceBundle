@@ -113,6 +113,7 @@ librinfo:
         id: Identifiant
         included_in_price: Compris dans le prix
         invoice_list: Factures
+        invoice_credit_item_name: Annulation de commande
         items_total: Total articles
         locale_code: Langue
         locales: Langues

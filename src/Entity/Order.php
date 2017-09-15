@@ -81,4 +81,14 @@ class Order extends BaseOrder
     {
         return $this->invoices;
     }
+
+    /**
+     * @return Invoice
+     */
+    public function getLastDebitInvoice()
+    {
+        return $this->invoices->filter(function ($item) {
+            return $item->getType() === Invoice::TYPE_DEBIT;
+        })->first();
+    }
 }

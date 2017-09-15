@@ -17,6 +17,9 @@ Librinfo\EcommerceBundle\Entity\Invoice:
         total:
             type: integer
             nullable: false
+        type:
+            type: integer
+            nullable: false
 
     manyToOne:
         order:
