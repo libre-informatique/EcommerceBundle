@@ -2,6 +2,7 @@
     "name": "libre-informatique/ecommerce-bundle",
     "type": "symfony-bundle",
     "description": "Bridge bundle between librinfo bundles and sylius",
+    "minimum-stability": "dev",
     "require": {
         "php": ">= 7.1",
         "symfony/symfony": ">=3.3",
