@@ -48,6 +48,18 @@ class ProductPathResolver extends DefaultResolver implements PathResolverInterfa
                 $this->cacheFile = $fakeFile;
             }
 
+            $webFilePath = $this->webDir . '/' . $path;
+
+            if (is_file($webFilePath)) {
+                $fakeFile = new File();
+                $fakeFile->setFile(base64_encode(file_get_contents($webFilePath)));
+                $fakeFile->setMimeType(mime_content_type($webFilePath));
+
+                $this->cacheFile = $fakeFile;
+
+                return $fakeFile->getFile();
+            }
+
             if (null === $this->cacheFile) {
                 throw new NotFoundHttpException(sprintf('File « %s » was not found', $path));
             } else {

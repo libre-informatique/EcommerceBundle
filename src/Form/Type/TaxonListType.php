@@ -52,9 +52,9 @@ class TaxonListType extends AbstractType
 
         $resolver->setDefaults(
             [
-            'choices'      => $taxons,
-            'no_cart'      => false,
-            'choice_value' => 'id',
+                'choices'      => $taxons,
+                'no_cart'      => false,
+                'choice_value' => 'id',
             ]
         );
     }

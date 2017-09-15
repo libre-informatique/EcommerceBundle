@@ -82,6 +82,7 @@ services:
             - '%sylius.model.channel.class%'
             - '%sylius.model.product.class%'
 
+
     librinfo_ecommerce.form.type.shipping_method_channels:
         class: Librinfo\EcommerceBundle\Form\Type\ShippingMethodChannelsType
         tags:

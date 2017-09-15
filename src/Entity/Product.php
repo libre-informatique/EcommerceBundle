@@ -31,6 +31,7 @@ class Product extends BaseProduct
     protected $images;
 
     protected $taxons = null;
+
     /**
      * @var Collection|ReviewInterface[]
      */

@@ -12,6 +12,7 @@
 
 namespace Librinfo\EcommerceBundle\Form\Type;
 
+
 class ProductChannelsType extends AnyChannelsType
 {
     public function getBlockPrefix()

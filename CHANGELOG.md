@@ -1,5 +1,28 @@
 # Change Log
 
+## [Unreleased](https://github.com/libre-informatique/EcommerceBundle/tree/HEAD)
+
+[Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.4.5...HEAD)
+
+**Merged pull requests:**
+
+- Lisem fix & features [\#18](https://github.com/libre-informatique/EcommerceBundle/pull/18) ([FanchTheSystem](https://github.com/FanchTheSystem))
+
+## [0.4.5](https://github.com/libre-informatique/EcommerceBundle/tree/0.4.5) (2017-07-26)
+[Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.4.4...0.4.5)
+
+**Merged pull requests:**
+
+- DevKit updates for EcommerceBundle [\#17](https://github.com/libre-informatique/EcommerceBundle/pull/17) ([BlastCI](https://github.com/BlastCI))
+- Lisem fix & features [\#15](https://github.com/libre-informatique/EcommerceBundle/pull/15) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- DevKit updates for EcommerceBundle [\#14](https://github.com/libre-informatique/EcommerceBundle/pull/14) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for EcommerceBundle [\#13](https://github.com/libre-informatique/EcommerceBundle/pull/13) ([BlastCI](https://github.com/BlastCI))
+- Wip lisem [\#12](https://github.com/libre-informatique/EcommerceBundle/pull/12) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- DevKit updates for EcommerceBundle [\#11](https://github.com/libre-informatique/EcommerceBundle/pull/11) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for EcommerceBundle [\#10](https://github.com/libre-informatique/EcommerceBundle/pull/10) ([BlastCI](https://github.com/BlastCI))
+- Vel check [\#9](https://github.com/libre-informatique/EcommerceBundle/pull/9) ([PapsOu](https://github.com/PapsOu))
+- Wip velcheck [\#8](https://github.com/libre-informatique/EcommerceBundle/pull/8) ([FanchTheSystem](https://github.com/FanchTheSystem))
+
 ## [0.4.4](https://github.com/libre-informatique/EcommerceBundle/tree/0.4.4) (2017-06-27)
 [Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.4.3...0.4.4)
 

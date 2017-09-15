@@ -137,33 +137,33 @@ class OrderItemUpdater
     private function formatArray($order, $item, $remove = false, $lastItem = true)
     {
         return [
-        'remove'   => $remove,
-        'lastItem' => $lastItem,
-        'item'     => [
-        'quantity' => $item->getQuantity(),
-        'total'    => $this->moneyFormatter->format(
-            $item->getTotal(),
-            $order->getCurrencyCode(),
-            $order->getLocaleCode()
-        ),
-        'subtotal' => $this->moneyFormatter->format(
-            $item->getSubTotal(),
-            $order->getCurrencyCode(),
-            $order->getLocaleCode()
-        ),
-        ],
-        'order' => [
-        'total' => $this->moneyFormatter->format(
-            $order->getTotal(),
-            $order->getCurrencyCode(),
-            $order->getLocaleCode()
-        ),
-        'items-total' => $this->moneyFormatter->format(
-            $order->getItemsTotal(),
-            $order->getCurrencyCode(),
-            $order->getLocaleCode()
-        ),
-        ],
+            'remove'   => $remove,
+            'lastItem' => $lastItem,
+            'item'     => [
+                'quantity' => $item->getQuantity(),
+                'total'    => $this->moneyFormatter->format(
+                    $item->getTotal(),
+                    $order->getCurrencyCode(),
+                    $order->getLocaleCode()
+                ),
+                'subtotal' => $this->moneyFormatter->format(
+                    $item->getSubTotal(),
+                    $order->getCurrencyCode(),
+                    $order->getLocaleCode()
+                ),
+            ],
+            'order' => [
+                'total' => $this->moneyFormatter->format(
+                    $order->getTotal(),
+                    $order->getCurrencyCode(),
+                    $order->getLocaleCode()
+                ),
+                'items-total' => $this->moneyFormatter->format(
+                    $order->getItemsTotal(),
+                    $order->getCurrencyCode(),
+                    $order->getLocaleCode()
+                ),
+            ],
         ];
     }
 }
