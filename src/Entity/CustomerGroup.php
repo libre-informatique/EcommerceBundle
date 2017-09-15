@@ -12,6 +12,7 @@
 
 namespace Librinfo\EcommerceBundle\Entity;
 
+/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\CustomerGroupExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Customer\Model\CustomerGroup as BaseCustomerGroup;
@@ -20,7 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class CustomerGroup extends BaseCustomerGroup
 {
     use OuterExtensible,
-        CustomerGroupExtension;
+    CustomerGroupExtension;
 
     protected $customers;
 
@@ -30,7 +31,7 @@ class CustomerGroup extends BaseCustomerGroup
         $this->initOuterExtendedClasses();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) sprintf('%s (%s)', $this->getName(), $this->getCode());
     }

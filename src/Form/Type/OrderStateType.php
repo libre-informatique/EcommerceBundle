@@ -27,10 +27,10 @@ class OrderStateType extends AbstractType
     {
         $choices = function (Options $options) {
             $choices = [
-                'librinfo.order_state.cart' => OrderInterface::STATE_CART,
-                'librinfo.order_state.new' => OrderInterface::STATE_NEW,
-                'librinfo.order_state.fulfilled' => OrderInterface::STATE_FULFILLED,
-                'librinfo.order_state.cancelled' => OrderInterface::STATE_CANCELLED,
+            'librinfo.order_state.cart'      => OrderInterface::STATE_CART,
+            'librinfo.order_state.new'       => OrderInterface::STATE_NEW,
+            'librinfo.order_state.fulfilled' => OrderInterface::STATE_FULFILLED,
+            'librinfo.order_state.cancelled' => OrderInterface::STATE_CANCELLED,
             ];
             if ($options['no_cart']) {
                 unset($choices[OrderInterface::STATE_CART]);
@@ -39,10 +39,12 @@ class OrderStateType extends AbstractType
             return $choices;
         };
 
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'choices' => $choices,
             'no_cart' => false,
-        ]);
+            ]
+        );
 
         $resolver->setAllowedTypes('no_cart', 'bool');
     }

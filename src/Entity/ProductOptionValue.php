@@ -12,6 +12,7 @@
 
 namespace Librinfo\EcommerceBundle\Entity;
 
+/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ProductOptionValueExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Product\Model\ProductOptionValue as BaseProductOptionValue;
@@ -23,7 +24,7 @@ class ProductOptionValue extends BaseProductOptionValue
     /**
      * @return string "Option name: OptionValue value"
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         return sprintf('%s: %s', $this->option->getName(), $this->getValue());
     }

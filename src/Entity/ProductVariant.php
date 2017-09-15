@@ -12,6 +12,7 @@
 
 namespace Librinfo\EcommerceBundle\Entity;
 
+/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ProductVariantExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
@@ -20,7 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class ProductVariant extends BaseProductVariant
 {
     use OuterExtensible,
-        ProductVariantExtension;
+    ProductVariantExtension;
 
     public function __construct()
     {
@@ -31,7 +32,7 @@ class ProductVariant extends BaseProductVariant
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->getProduct()) {
             $string = $this->getProduct()->getName();
@@ -61,7 +62,7 @@ class ProductVariant extends BaseProductVariant
         return $this->currentLocale;
     }
 
-    public function getName()
+    public function getName(): string
     {
         // Dirty hack to handle sonata sub form management
         if ($this->currentLocale === null) {

@@ -12,9 +12,7 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
-
-class TaxonAdmin extends CoreAdmin
+class TaxonAdmin extends SyliusGenericAdmin
 {
     public function createQuery($context = 'list')
     {

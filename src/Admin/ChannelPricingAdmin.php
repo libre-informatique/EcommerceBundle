@@ -12,17 +12,15 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Blast\CoreBundle\Admin\Traits\EmbeddedAdmin;
 
-class ChannelPricingAdmin extends CoreAdmin
+class ChannelPricingAdmin extends SyliusGenericAdmin
 {
     use EmbeddedAdmin;
 
     protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection)
     {
         parent::configureRoutes($collection);
-
         $collection->remove('create');
     }
 
@@ -31,15 +29,9 @@ class ChannelPricingAdmin extends CoreAdmin
      */
     public function getNewInstance()
     {
-        $channelPricingFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.channel_pricing');
-
-        $object = $channelPricingFactory->createNew();
+        $object = parent::getNewInstance();
         if ($this->getProductVariant()) {
             $object->setProductVariant($this->getProductVariant());
-        }
-
-        foreach ($this->getExtensions() as $extension) {
-            $extension->alterNewInstance($this, $object);
         }
 
         return $object;

@@ -1,0 +1,66 @@
+{% extends 'BlastCoreBundle:Dashboard:dashboardBlock.html.twig' %}
+
+{% block title %}
+    {{ 'librinfo.label.dashboard_title'|trans }}
+{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <h4>{{ 'librinfo.label.sales_amount'|trans }}</h4>
+            <canvas id="dashboard-ecommerce-sales-amount"></canvas>
+        </div>
+        <div class="col-lg-4 col-md-6"></div>
+        <div class="col-lg-4 col-md-6"></div>
+    </div>
+{% endblock content %}
+
+{% block graphScripts %}
+    <script>
+        var dashboardEcommerceSalesChartDOM = $("#dashboard-ecommerce-sales-amount");
+
+        var dashboardEcommerceSalesChartData = {
+            "datasets": [
+                {
+                    "label": "{{ 'librinfo.label.sales_amount'|trans|raw }}",
+                    "data": {{ salesAmountData|json_encode|raw }},
+                    "fill": true,
+                    "backgroundColor": "rgba(60, 141, 188, 0.2)",
+                    "borderColor": "rgba(60, 141, 188, 1)",
+                    "lineTension": 0.2
+                }
+            ]
+        };
+
+        var dashboardEcommerceSalesChart = new Chart(dashboardEcommerceSalesChartDOM, {
+            type: 'line',
+            data: dashboardEcommerceSalesChartData,
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [
+                        {
+                            type: 'time',
+                            display: true,
+                            time: {
+                                unit: 'month',
+                                displayFormats: {
+                                    month: 'MMM YYYY'
+                                }
+                            }
+                        }
+                    ],
+                    yAxes: [
+                        {
+                            ticks: {
+                                suggestedMin: 0
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+    </script>
+{% endblock graphScripts %}

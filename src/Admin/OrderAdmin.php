@@ -12,14 +12,47 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sonata\AdminBundle\Route\RouteCollection;
 
-class OrderAdmin extends CoreAdmin
+class OrderAdmin extends SyliusGenericAdmin
 {
+    /* @todo : remove this useless protected attributes */
+
     protected $baseRouteName = 'admin_librinfo_ecommerce_order';
     protected $baseRoutePattern = 'librinfo/ecommerce/order';
     protected $classnameLabel = 'Order';
+    protected $datagridValues = [
+        '_page'       => 1,
+        '_sort_order' => 'DESC',
+        '_sort_by'    => 'createdAt',
+    ];
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(array('list', 'show', 'batch'));
+        $collection->add('updateShipping', $this->getRouterIdParameter() . '/updateShipping');
+        $collection->add('updatePayment', $this->getRouterIdParameter() . '/updatePayment');
+        $collection->add('cancelOrder', $this->getRouterIdParameter() . '/cancelOrder');
+        $collection->add('validateOrder', $this->getRouterIdParameter() . '/validateOrder');
+    }
+
+    public function configureBatchActions($actions)
+    {
+        $actions = parent::configureBatchActions($actions);
+
+        $actions['cancel'] = [
+            'ask_confirmation' => true,
+            'label'            => 'librinfo.label.cancel_order',
+        ];
+
+        $actions['validate'] = [
+            'ask_confirmation' => true,
+            'label'            => 'librinfo.label.fulfill_order',
+        ];
+
+        return $actions;
+    }
 
     public function createQuery($context = 'list')
     {
@@ -31,8 +64,7 @@ class OrderAdmin extends CoreAdmin
             ->addSelect('customer')
             ->leftJoin("$alias.customer", 'customer')
             ->andWhere("$alias.state != :state")
-            ->setParameter('state', OrderInterface::STATE_CART)
-        ;
+            ->setParameter('state', OrderInterface::STATE_CART);
 
         return $query;
     }

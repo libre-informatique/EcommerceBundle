@@ -12,43 +12,28 @@
 
 namespace Librinfo\EcommerceBundle\Entity;
 
-use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
+use Sylius\Component\Core\Model\TaxRate as BaseTaxRate;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
+/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\TaxRateExtension;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 
 class TaxRate extends BaseTaxRate
 {
     use OuterExtensible,
-        TaxRateExtension;
+    TaxRateExtension;
 
-    /**
-     * @var ZoneInterface
-     */
-    private $zone;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->initTaxRate();
+    }
 
     public function initTaxRate()
     {
         $this->initOuterExtendedClasses();
     }
 
-    /**
-     * @return ZoneInterface
-     */
-    public function getZone()
-    {
-        return $this->zone;
-    }
-
-    /**
-     * @param ZoneInterface $zone
-     */
-    public function setZone(ZoneInterface $zone)
-    {
-        $this->zone = $zone;
-    }
-
-    public function __toString()
+    public function __toString(): string
     {
         return (string) sprintf('%s (%s)', $this->getName(), $this->getCode());
     }

@@ -7,7 +7,6 @@
 {% set product = variant.product %}
 
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
-
 <tr class="product">
     <td class="single line">
         <div class="ui header">
@@ -57,7 +56,22 @@
         {{ money.convertAndFormat(item.total) }}
     </td>
     <td class="actions" style="text-align: center">
-        <a class="remove-from-cart btn btn-primary btn-small" data-url='{{ path('librinfo_ecommerce.order.remove_item') }}' data-order-id="{{ object.id }}" data-item-id="{{ item.id }}"><i class="fa fa-minus-circle"></i></a>
-        <a class="add-to-cart btn btn-primary btn-small" data-url='{{ path('librinfo_ecommerce.order.add_item') }}' data-order-id="{{ object.id }}" data-item-id="{{ item.id }}"><i class="fa fa-plus-circle"></i></a>
+        {% if sm_state(object, 'sylius_order') != 'fulfilled' and sm_state(object, 'sylius_order') != 'cancelled' %}
+            <a class="remove-from-cart btn btn-primary btn-small"
+               data-url='{{ path('librinfo_ecommerce.order.remove_item') }}'
+               data-order-id="{{ object.id }}"
+               data-item-id="{{ item.id }}"
+            >
+                <i class="fa fa-minus-circle"></i>
+            </a>
+            <a class="add-to-cart btn btn-primary btn-small"
+               data-url='{{ path('librinfo_ecommerce.order.add_item') }}'
+               data-order-id="{{ object.id }}"
+               data-item-id="{{ item.id }}"
+               data-variant-id="{{ item.variant.id }}"
+            >
+                <i class="fa fa-plus-circle"></i>
+            </a>
+        {% endif %}
     </td>
 </tr>

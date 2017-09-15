@@ -1,0 +1,60 @@
+{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set itemPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT') %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
+
+{% set variant = item.variant %}
+{% set product = variant.product %}
+
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+<tr class="product">
+    <td class="single line">
+        <div class="ui header">
+            <div class="item-desc" style="display: inline-block">
+                <span class="product-name">
+                    {{ product.name }}
+                </span>
+                <span class="variant-code">
+                    {{ variant.code }}
+                </span>
+                {% if product.hasOptions() %}
+                    <div class="ui horizontal divided list sylius-product-options">
+                        {% for optionValue in variant.optionValues %}
+                            <div class="item" data-sylius-option-name="{{ optionValue.name }}">
+                                {{ optionValue.value }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% elseif variant.name is not null %}
+                    <div class="ui horizontal divided list">
+                        <div class="item sylius-product-variant-name">
+                            {{ variant.name }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </td>
+    <td class="unit-price" style="text-align: right">
+        {{ money.convertAndFormat(item.unitPrice) }}
+    </td>
+    <td class="discounted-unit-price" style="text-align: right">
+        {{ money.convertAndFormat(item.discountedUnitPrice) }}
+    </td>
+    <td class="quantity" style="text-align: right">
+        {{ item.quantity }}
+    </td>
+    <td class="subtotal" style="text-align: right">
+        {{ money.convertAndFormat(item.subtotal) }}
+    </td>
+    <td class="discount" style="text-align: right">
+        {{ money.convertAndFormat(item.getAdjustmentsTotalRecursively(orderPromotionAdjustment)) }}
+    </td>
+    <td class="tax" style="text-align: right">
+        {{ money.convertAndFormat(item.taxTotal) }}
+    </td>
+    <td class="total" style="text-align: right">
+        {{ money.convertAndFormat(item.total) }}
+    </td>
+</tr>

@@ -1,7 +1,5 @@
 {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
-
-<a class="navbar-brand" href="#">
     {{ 'librinfo.label.order'|trans() }} #{{ admin.toString(object) }}
 </a>
 <p class="navbar-text" style="color: #EEE">{{ object.checkoutCompletedAt|format_date }}</p>
@@ -15,3 +13,4 @@
     {{ 'librinfo.label.purchased_from'|trans }}
     <strong>{{ object.channel }}</strong>
 </p>
+<a href="#">

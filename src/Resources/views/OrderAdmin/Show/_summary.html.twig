@@ -1,6 +1,6 @@
 {% set order = object %}
 
-<table class="table table-bordered table-condensed">
+<table id="order-summary" class="table table-bordered table-condensed">
     <thead>
         <tr>
             <th class="sylius-table-column-item">{{ 'librinfo.label.product'|trans }}</th>
@@ -24,4 +24,22 @@
     </tfoot>
 </table>
 
+{% if sm_state(object, 'sylius_order') != 'fulfilled' and sm_state(object, 'sylius_order') != 'cancelled' %}
+    <a
+        id="add-to-order"
+        class="btn btn-primary pull-right"
+        href="#"
+        data-url="{{ path('admin_librinfo_ecommerce_product_list') }}"
+        data-variants-url="{{ path('admin_librinfo_ecommerce_productvariant_list') }}"
+        data-add-product-url="{{ path('librinfo_ecommerce.order.add_product') }}"
+        data-btn-text="{{ 'Add'|trans }}"
+        data-title=" {{ 'Products'|trans }}"
+        data-order-id="{{ order.id }}"
+    >
+        <i class="fa fa-plus-circle"></i>&nbsp;{{ 'Add product'|trans }}
+    </a>
+{% endif %}
+
+<link rel="stylesheet" href="{{ asset('bundles/librinfoecommerce/css/update-order.css') }}" />
+<script type="text/javascript" src="{{ asset('bundles/librinfoecommerce/js/update-order.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/librinfoecommerce/js/update-cart-item.js') }}"></script>

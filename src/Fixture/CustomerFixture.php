@@ -44,12 +44,12 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
         $this->codeGenerator = $codeGenerator;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'lisem_customer_customer';
     }
 
-    public function load(array $options)
+    public function load(array $options): void
     {
         $faker = \Faker\Factory::create();
         $groups = [];
@@ -76,8 +76,7 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
                 ->setFirstname($faker->firstName())
                 ->setLastname($faker->lastName())
                 ->setName(sprintf('%s %s', $customer->getFirstname(), $customer->getLastname()))
-                ->setGroup($group)
-            ;
+                ->setGroup($group);
 
             $this->customerManager->persist($customer);
 
@@ -90,13 +89,12 @@ class CustomerFixture extends AbstractFixture implements FixtureInterface
     /**
      * @param ArrayNodeDefinition $optionsNode
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode): void
     {
         $optionsNode
             ->children()
             ->integerNode('customer_number')->defaultValue(4)->end()
             ->integerNode('customer_group_number')->defaultValue(2)->end()
-            ->scalarNode('email_domain')->defaultValue('libre-informatique.fr')->end()
-        ;
+            ->scalarNode('email_domain')->defaultValue('libre-informatique.fr')->end();
     }
 }

@@ -13,6 +13,7 @@
 namespace Librinfo\EcommerceBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Resource\ResourceActions;
@@ -25,12 +26,11 @@ class CustomerController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request): Response
     {
         $admin = $this->container
             ->get('sonata.admin.pool')
-            ->getAdminByAdminCode('librinfo_ecommerce.admin.customer')
-        ;
+            ->getAdminByAdminCode('librinfo_ecommerce.admin.customer');
 
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -83,15 +83,16 @@ class CustomerController extends ResourceController
         }
 
         $view = View::create()
-            ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $newResource,
-                $this->metadata->getName() => $newResource,
-                'form' => $form->createView(),
-            ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::CREATE . '.html'))
-        ;
+        ->setData(
+            [
+            'configuration'            => $configuration,
+            'metadata'                 => $this->metadata,
+            'resource'                 => $newResource,
+            $this->metadata->getName() => $newResource,
+            'form'                     => $form->createView(),
+            ]
+        )
+        ->setTemplate($configuration->getTemplate(ResourceActions::CREATE . '.html'));
 
         return $this->viewHandler->handle($configuration, $view);
     }
@@ -99,7 +100,7 @@ class CustomerController extends ResourceController
     /**
      * {@inheritdoc}
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request): Response
     {
         $admin = $this->container->get('librinfo_ecommerce.admin.customer');
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -144,15 +145,16 @@ class CustomerController extends ResourceController
         }
 
         $view = View::create()
-            ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $resource,
-                $this->metadata->getName() => $resource,
-                'form' => $form->createView(),
-            ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
-        ;
+        ->setData(
+            [
+            'configuration'            => $configuration,
+            'metadata'                 => $this->metadata,
+            'resource'                 => $resource,
+            $this->metadata->getName() => $resource,
+            'form'                     => $form->createView(),
+            ]
+        )
+        ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'));
 
         return $this->viewHandler->handle($configuration, $view);
     }

@@ -12,27 +12,9 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
-use Sylius\Component\Product\Model\ProductOptionInterface;
-
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-class ProductOptionAdmin extends CoreAdmin
+class ProductOptionAdmin extends SyliusGenericAdmin
 {
-    /**
-     * @return ProductOptionInterface
-     */
-    public function getNewInstance()
-    {
-        $productOptionFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_option');
-
-        $object = $productOptionFactory->createNew();
-
-        foreach ($this->getExtensions() as $extension) {
-            $extension->alterNewInstance($this, $object);
-        }
-
-        return $object;
-    }
 }

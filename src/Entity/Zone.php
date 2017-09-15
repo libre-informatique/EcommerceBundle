@@ -14,19 +14,20 @@ namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Addressing\Model\Zone as BaseZone;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
+/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ZoneExtension;
 
 class Zone extends BaseZone
 {
     use OuterExtensible,
-       ZoneExtension;
+    ZoneExtension;
 
     public function initZone()
     {
         $this->initOuterExtendedClasses();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getName();
     }

@@ -1,15 +1,36 @@
-payum:
-    resource: "@PayumBundle/Resources/config/routing/capture.xml"
-    prefix: /
-    
 librinfo_ecommerce.order.inline_edit:
-    path: /librinfo/ecommerce/order/inline_edit
+    path: /admin/librinfo/ecommerce/order/inline_edit
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:orderInlineEdit }
-    
+
 librinfo_ecommerce.order.add_item:
-    path: /librinfo/ecommerce/order/item/add
+    path: /admin/librinfo/ecommerce/order/item/add
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:addToOrder }
-    
+
 librinfo_ecommerce.order.remove_item:
-    path: /librinfo/ecommerce/order/item/remove
+    path: /admin/librinfo/ecommerce/order/item/remove
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:removeFromOrder }
+
+librinfo_ecommerce.order.add_product:
+    path: /admin/librinfo/ecommerce/order/product/add
+    defaults: { _controller: LibrinfoEcommerceBundle:Ajax:addNewProduct }
+
+sylius_shop_checkout_address_override:
+    path: /checkout/address
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            event: address
+            flash: false
+            template: LibrinfoEcommerceBundle:Checkout:address.html.twig
+            form:
+                type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType
+                options:
+                    customer: expr:service('sylius.context.customer').getCustomer()
+            repository:
+                method: findCartForAddressing
+                arguments:
+                    - "expr:service('sylius.context.cart').getCart().getId()"
+            state_machine:
+                graph: sylius_order_checkout
+                transition: address

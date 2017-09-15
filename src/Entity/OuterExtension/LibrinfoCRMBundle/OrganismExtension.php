@@ -20,6 +20,8 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
+use Doctrine\Common\Collections\Collection;
+use DateTimeInterface;
 
 trait OrganismExtension
 {
@@ -474,9 +476,11 @@ trait OrganismExtension
             return null;
         }
 
-        $filtered = $this->oauthAccounts->filter(function (UserOAuthInterface $oauth) use ($provider) {
-            return $provider === $oauth->getProvider();
-        });
+        $filtered = $this->oauthAccounts->filter(
+            function (UserOAuthInterface $oauth) use ($provider) {
+                return $provider === $oauth->getProvider();
+            }
+        );
 
         if ($filtered->isEmpty()) {
             return null;
@@ -503,7 +507,8 @@ trait OrganismExtension
      */
     public function serialize()
     {
-        return serialize([
+        return serialize(
+            [
             $this->password,
             $this->salt,
             $this->usernameCanonical,
@@ -511,7 +516,8 @@ trait OrganismExtension
             $this->locked,
             $this->enabled,
             $this->id,
-        ]);
+            ]
+        );
     }
 
     /**
@@ -525,13 +531,13 @@ trait OrganismExtension
         $data = array_merge($data, array_fill(0, 2, null));
 
         list(
-            $this->password,
-            $this->salt,
-            $this->usernameCanonical,
-            $this->username,
-            $this->locked,
-            $this->enabled,
-            $this->id
+        $this->password,
+        $this->salt,
+        $this->usernameCanonical,
+        $this->username,
+        $this->locked,
+        $this->enabled,
+        $this->id
         ) = $data;
     }
 
@@ -577,15 +583,20 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getOrders()
+    public function getOrders(): Collection
     {
         return $this->orders;
+    }
+
+    public function addOrder($order)
+    {
+        return $this->orders->add($order);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUser()
+    public function getUser(): ?UserInterface
     {
         return $this->user;
     }
@@ -593,7 +604,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setUser(UserInterface $user = null)
+    public function setUser(?UserInterface $user): void
     {
         if ($this->user !== $user) {
             $this->user = $user;
@@ -604,7 +615,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function hasUser()
+    public function hasUser(): bool
     {
         return null !== $this->user;
     }
@@ -622,7 +633,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getEmailCanonical()
+    public function getEmailCanonical(): ?string
     {
         return $this->emailCanonical;
     }
@@ -630,7 +641,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setEmailCanonical($emailCanonical)
+    public function setEmailCanonical(?string $emailCanonical): void
     {
         $this->emailCanonical = $emailCanonical;
     }
@@ -638,7 +649,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         return trim(sprintf('%s %s', $this->firstName, $this->lastName));
     }
@@ -646,7 +657,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
@@ -654,7 +665,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setFirstName($firstName)
+    public function setFirstName(?string $firstName): VOID
     {
         $this->firstName = $firstName;
     }
@@ -662,7 +673,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
@@ -670,7 +681,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setLastName($lastName)
+    public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -678,7 +689,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getBirthday()
+    public function getBirthday(): ?DateTimeInterface
     {
         return $this->birthday;
     }
@@ -686,7 +697,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setBirthday(\DateTime $birthday = null)
+    public function setBirthday(?DateTimeInterface $birthday): void
     {
         $this->birthday = $birthday;
     }
@@ -694,7 +705,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getGender()
+    public function getGender(): string
     {
         return $this->gender;
     }
@@ -702,7 +713,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setGender($gender)
+    public function setGender(string $gender): void
     {
         $this->gender = $gender;
     }
@@ -710,7 +721,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function isMale()
+    public function isMale(): bool
     {
         return CustomerInterface::MALE_GENDER === $this->gender;
     }
@@ -718,7 +729,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function isFemale()
+    public function isFemale(): bool
     {
         return CustomerInterface::FEMALE_GENDER === $this->gender;
     }
@@ -726,7 +737,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getGroup()
+    public function getGroup(): ?CustomerGroupInterface
     {
         return $this->group;
     }
@@ -734,7 +745,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setGroup(CustomerGroupInterface $group = null)
+    public function setGroup(?CustomerGroupInterface $group): void
     {
         $this->group = $group;
     }
@@ -742,7 +753,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
@@ -750,7 +761,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(?string $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
@@ -758,7 +769,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function isSubscribedToNewsletter()
+    public function isSubscribedToNewsletter(): bool
     {
         return $this->subscribedToNewsletter;
     }
@@ -766,7 +777,7 @@ trait OrganismExtension
     /**
      * {@inheritdoc}
      */
-    public function setSubscribedToNewsletter($subscribedToNewsletter)
+    public function setSubscribedToNewsletter(bool $subscribedToNewsletter): void
     {
         $this->subscribedToNewsletter = $subscribedToNewsletter;
     }
@@ -776,17 +787,19 @@ trait OrganismExtension
         $firstname = mb_convert_case($this->getFirstName(), MB_CASE_TITLE);
         $name = mb_strtoupper($this->getLastName());
 
-        $this->setName(sprintf(
-            '%s %s',
-            $firstname,
-            $name
-        ));
+        $this->setName(
+            sprintf(
+                '%s %s',
+                $firstname,
+                $name
+            )
+        );
     }
 
     /**
      * @return AddressInterface
      */
-    public function getDefaultAddress()
+    public function getDefaultAddress(): ?AddressInterface
     {
         return $this->defaultAddress;
     }
@@ -796,15 +809,13 @@ trait OrganismExtension
      *
      * @return self
      */
-    public function setDefaultAddress(AddressInterface $defaultAddress = null)
+    public function setDefaultAddress(?AddressInterface $defaultAddress): void
     {
         $this->defaultAddress = $defaultAddress;
 
         if (null !== $defaultAddress) {
             $this->addAddress($defaultAddress);
         }
-
-        return $this;
     }
 
     /**
@@ -812,7 +823,7 @@ trait OrganismExtension
      *
      * @return self
      */
-    public function addAddress(AddressInterface $address)
+    public function addAddress(AddressInterface $address): void
     {
         if (!$this->hasAddress($address)) {
             if ($this->isIndividual()) {
@@ -833,8 +844,6 @@ trait OrganismExtension
                 $this->setDefaultAddress($address);
             }
         }
-
-        return $this;
     }
 
     /**
@@ -842,7 +851,7 @@ trait OrganismExtension
      *
      * @return self
      */
-    public function removeAddress(AddressInterface $address)
+    public function removeAddress(AddressInterface $address): void
     {
         $this->addresses->removeElement($address);
 
@@ -853,8 +862,6 @@ trait OrganismExtension
                 $this->defaultAddress = null;
             }
         }
-
-        return $this;
     }
 
     /**
@@ -862,7 +869,7 @@ trait OrganismExtension
      *
      * @return bool
      */
-    public function hasAddress(AddressInterface $address)
+    public function hasAddress(AddressInterface $address): bool
     {
         return $this->addresses->contains($address);
     }
@@ -870,7 +877,7 @@ trait OrganismExtension
     /**
      * @return Collection|AddressInterface[]
      */
-    public function getAddresses()
+    public function getAddresses(): Collection
     {
         return $this->addresses;
     }

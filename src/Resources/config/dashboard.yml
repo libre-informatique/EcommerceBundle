@@ -1,0 +1,8 @@
+services:
+    librinfo_ecommerce.dashboard.main:
+        parent: blast_core.dashboard.block
+        class: Librinfo\EcommerceBundle\Dashboard\EcommerceDashboardBlock
+        arguments:
+            - 'LibrinfoEcommerceBundle:Dashboard:ecommerce_dashboard.html.twig'
+        tags:
+            - { name: blast.dashboard_block }

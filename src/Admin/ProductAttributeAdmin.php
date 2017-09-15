@@ -12,7 +12,6 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Attribute\AttributeType\DateAttributeType;
 use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
@@ -22,17 +21,22 @@ use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 
-class ProductAttributeAdmin extends CoreAdmin
+class ProductAttributeAdmin extends SyliusGenericAdmin
 {
     /**
      * @return ProductAttributeInterface
      */
     public function getNewInstance()
     {
-        /** @var AttributeFactoryInterface $attributeFactory * */
+        /**
+         * @var AttributeFactoryInterface
+         */
         $attributeFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_attribute');
 
-        /** @var ProductAttributeInterface $object */
+        /**
+         * @var ProductAttributeInterface
+         */
+        /* @todo: find a way to use parent getNewInstance from SyliusGenericAdmin */
         $object = $attributeFactory->createTyped('text');
 
         foreach ($this->getExtensions() as $extension) {

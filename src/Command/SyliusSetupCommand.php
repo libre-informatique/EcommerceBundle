@@ -49,12 +49,12 @@ final class SyliusSetupCommand extends AbstractInstallCommand
         $this
             ->setName('librinfo:sylius:setup')
             ->setDescription('Sylius configuration setup for the LiSem project.')
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>%command.name%</info> command allows user to configure basic Sylius data for the LiSem project
 (currency, locale, channel and administrator).
 EOT
-            )
-        ;
+            );
     }
 
     /**
@@ -144,17 +144,20 @@ EOT
     private function createEmailQuestion(OutputInterface $output)
     {
         return (new Question('E-mail:'))
-            ->setValidator(function ($value) use ($output) {
-                /** @var ConstraintViolationListInterface $errors */
+        ->setValidator(
+            function ($value) use ($output) {
+                /**
+                 * @var ConstraintViolationListInterface
+                 */
                 $errors = $this->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
                 foreach ($errors as $error) {
                     throw new \DomainException($error->getMessage());
                 }
 
                 return $value;
-            })
-            ->setMaxAttempts(3)
-        ;
+            }
+        )
+        ->setMaxAttempts(3);
     }
 
     /**
@@ -165,7 +168,9 @@ EOT
      */
     private function getAdministratorPassword(InputInterface $input, OutputInterface $output)
     {
-        /** @var QuestionHelper $questionHelper */
+        /**
+         * @var QuestionHelper
+         */
         $questionHelper = $this->getHelper('question');
         $validator = $this->getPasswordQuestionValidator($output);
 
@@ -192,7 +197,9 @@ EOT
     private function getPasswordQuestionValidator(OutputInterface $output)
     {
         return function ($value) use ($output) {
-            /** @var ConstraintViolationListInterface $errors */
+            /**
+             * @var ConstraintViolationListInterface
+             */
             $errors = $this->get('validator')->validate($value, [new NotBlank()]);
             foreach ($errors as $error) {
                 throw new \DomainException($error->getMessage());
@@ -211,10 +218,9 @@ EOT
     private function createPasswordQuestion($message, \Closure $validator)
     {
         return (new Question($message))
-            ->setValidator($validator)
-            ->setMaxAttempts(3)
-            ->setHidden(true)
-            ->setHiddenFallback(false)
-        ;
+        ->setValidator($validator)
+        ->setMaxAttempts(3)
+        ->setHidden(true)
+        ->setHiddenFallback(false);
     }
 }

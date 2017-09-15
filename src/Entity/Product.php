@@ -12,6 +12,7 @@
 
 namespace Librinfo\EcommerceBundle\Entity;
 
+/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\ProductExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\Product as BaseProduct;
@@ -22,7 +23,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 class Product extends BaseProduct
 {
     use OuterExtensible,
-        ProductExtension;
+    ProductExtension;
 
     /**
      * @var Collection|ImageInterface[]
@@ -31,16 +32,27 @@ class Product extends BaseProduct
 
     protected $taxons = null;
 
+    /**
+     * @var Collection|ReviewInterface[]
+     */
+    protected $reviews;
+
     public function __construct()
     {
         parent::__construct();
-        $this->initOuterExtendedClasses();
+        $this->initProduct();
+    }
+
+    public function initProduct()
+    {
         $this->images = new ArrayCollection();
         $this->productTaxons = new ArrayCollection();
         $this->taxons = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+        $this->initOuterExtendedClasses();
     }
 
-    public function getImages()
+    public function getImages(): Collection
     {
         return $this->images;
     }
@@ -84,7 +96,7 @@ class Product extends BaseProduct
         return $this;
     }
 
-    public function getTaxons()
+    public function getTaxons(): Collection
     {
         // $this->initTaxons();
 
@@ -106,7 +118,7 @@ class Product extends BaseProduct
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) parent::__toString();
     }

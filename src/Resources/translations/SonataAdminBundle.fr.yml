@@ -1,0 +1,2 @@
+'Transition "cancel" cannot be applied on state "fulfilled" of object "Librinfo\EcommerceBundle\Entity\Order" with graph "sylius_order"': "Il n'est pas possible d'annuler une commande terminée"
+flash_batch_cancel_or_validate_success: "Commande(s) mise(s) à jour avec succès"

@@ -12,7 +12,6 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
 use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
@@ -20,12 +19,11 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Librinfo\EcommerceBundle\Repository\ChannelRepository;
-use Librinfo\EcommerceBundle\Entity\ProductVariant;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
  */
-class ProductVariantAdmin extends CoreAdmin
+class ProductVariantAdmin extends SyliusGenericAdmin
 {
     /**
      * @var ProductInterface
@@ -47,15 +45,20 @@ class ProductVariantAdmin extends CoreAdmin
 
         // Limit the variant option values to the product options
         if ($product) {
-            $mapper->add('optionValues', 'entity', [
-                'query_builder' => $this->optionValuesQueryBuilder(),
-                'class' => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
-                'multiple' => true,
-                'required' => false,
-                'choice_label' => 'fullName',
-                ], [
-                'admin_code' => 'librinfo_ecommerce_option_value.admin.product',
-                ]);
+            $mapper->add(
+                'optionValues',
+                'entity',
+                [
+                    'query_builder' => $this->optionValuesQueryBuilder(),
+                    'class'         => 'Librinfo\\EcommerceBundle\\Entity\\ProductOptionValue',
+                    'multiple'      => true,
+                    'required'      => false,
+                    'choice_label'  => 'fullName',
+                ],
+                [
+                    'admin_code' => 'librinfo_ecommerce_option_value.admin.product',
+                ]
+            );
         }
     }
 
@@ -64,19 +67,12 @@ class ProductVariantAdmin extends CoreAdmin
      */
     public function getNewInstance()
     {
-        $productVariantFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.product_variant');
-
-        /* @var $object ProductVariant */
-        $object = $productVariantFactory->createNew();
+        $object = parent::getNewInstance();
         if ($this->getProduct()) {
             $object->setProduct($this->getProduct());
         }
 
         $this->buildDefaultPricings($object);
-
-        foreach ($this->getExtensions() as $extension) {
-            $extension->alterNewInstance($this, $object);
-        }
 
         return $object;
     }
@@ -138,10 +134,10 @@ class ProductVariantAdmin extends CoreAdmin
     protected function optionValuesQueryBuilder()
     {
         $repository = $this->getConfigurationPool()->getContainer()->get('sylius.repository.product_option_value');
+        /* todo: check this request */
         $queryBuilder = $repository->createQueryBuilder('o')
-            ->andWhere('o.option IN (SELECT o2 FROM LibrinfoEcommerceBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
-            ->setParameter('product', $this->product)
-        ;
+                      ->andWhere('o.option IN (SELECT o2 FROM LibrinfoEcommerceBundle:Product p LEFT JOIN p.options o2 WHERE p = :product)')
+                      ->setParameter('product', $this->product);
 
         return $queryBuilder;
     }
@@ -154,19 +150,27 @@ class ProductVariantAdmin extends CoreAdmin
 
             $qb = $this->getModelManager()->createQuery(get_class($object), 'p');
 
-            $qb
-                ->where('p.id <> :currentId')
-                ->andWhere('p.code = :currentCode')
-                ->setParameters([
-                    'currentId' => $id,
-                    'currentCode' => $code,
-                ])
-                ;
+            if ($id !== null) {
+                $qb
+                    ->where('p.id <> :currentId')
+                    ->andWhere('p.code = :currentCode')
+                    ->setParameters(
+                        [
+                            'currentId'   => $id,
+                            'currentCode' => $code,
+                        ]
+                    );
+            } else {
+                $qb
+                    ->where('p.id IS NOT NULL')
+                    ->andWhere('p.code = :currentCode')
+                    ->setParameter('currentCode', $code);
+            }
 
             if (count($qb->getQuery()->getResult()) != 0) {
                 $errorElement
                     ->with('code')
-                        ->addViolation('lisem.product_variant_code.not_unique')
+                    ->addViolation('lisem.product_variant_code.not_unique')
                     ->end();
             }
         }

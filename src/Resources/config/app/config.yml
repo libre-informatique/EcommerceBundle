@@ -4,6 +4,12 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
+parameters:
+    sonata.core.flashmessage.manager.class: Librinfo\EcommerceBundle\Services\FlashManager
+
+imports:
+     - { resource: "state_machine.yml" }
+
 doctrine:
     orm:
         mappings:
@@ -27,6 +33,17 @@ sylius_product:
         product_option_value:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\ProductOptionValue
+
+sylius_review:
+    resources:
+        product:
+            subject: "%sylius.model.product.class%"
+            review:
+                classes:
+                    model: Librinfo\EcommerceBundle\Entity\ProductReview
+            reviewer:
+                classes:
+                    model: Librinfo\CRMBundle\Entity\Organism
 
 sylius_order:
     resources:
@@ -94,6 +111,43 @@ sylius_taxonomy:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\Taxon
 
+sylius_taxonomy:
+    resources:
+        taxon:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\Taxon
+
+sylius_shipping:
+    driver: doctrine/orm
+    resources:
+        shipping_method:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\ShippingMethod
+
+sylius_shop:
+    # resources:
+    #     checkout_address:
+    #         templates:
+    #             form: LibrinfoEcommerceBundle:Checkout:address.html.twig
+
+    checkout_resolver:
+        pattern: /checkout/.+
+        route_map:
+            empty_order:
+                route: sylius_shop_cart_summary
+            cart:
+                route: sylius_shop_checkout_address_override
+            addressed:
+                route: sylius_shop_checkout_select_shipping
+            shipping_selected:
+                route: sylius_shop_checkout_select_payment
+            shipping_skipped:
+                route: sylius_shop_checkout_select_payment
+            payment_selected:
+                route: sylius_shop_checkout_complete
+            payment_skipped:
+                route: sylius_shop_checkout_complete
+
 fos_rest:
     exception: ~
     view:
@@ -117,3 +171,14 @@ liip_imagine:
         sylius_shop_product_large_thumbnail:
             filters:
                 thumbnail: { size: [550, 412], mode: outbound, allow_upscale: true }
+
+knp_snappy:
+    #process_timeout: 20 # In seconds
+    pdf:
+        enabled: true
+        binary:  /usr/bin/xvfb-run /usr/bin/wkhtmltopdf
+        options: []
+    image:
+        enabled: false
+        binary:  /usr/bin/wkhtmltoimage
+        options: []

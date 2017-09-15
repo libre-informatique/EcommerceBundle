@@ -12,8 +12,11 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
-
-class TaxCategoryAdmin extends CoreAdmin
+class TaxCategoryAdmin extends SyliusGenericAdmin
 {
+    public function toString($object)
+    {
+        /* (As we don't have name here for title) */
+        return $object->getcode() ?: $object->getId();
+    }
 }

@@ -13,7 +13,9 @@
 namespace Librinfo\EcommerceBundle\Entity;
 
 use Sylius\Component\Product\Model\ProductAttribute as BaseProductAttribute;
+use Blast\BaseEntitiesBundle\Entity\Traits\Stringable;
 
 class ProductAttribute extends BaseProductAttribute
 {
+    use Stringable;
 }

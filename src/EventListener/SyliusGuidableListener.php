@@ -41,7 +41,9 @@ class SyliusGuidableListener implements LoggerAwareInterface, EventSubscriber
 
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
-        /** @var ClassMetadata $metadata */
+        /**
+         * @var ClassMetadata
+         */
         $metadata = $eventArgs->getClassMetadata();
 
         // Transform Sylius entities only (check class ancestors too)
@@ -83,12 +85,14 @@ class SyliusGuidableListener implements LoggerAwareInterface, EventSubscriber
         unset($metadata->fieldMappings['id']);
         unset($metadata->fieldNames['id']);
         unset($metadata->columnNames['id']);
-        $metadata->mapField([
-            'id' => true,
-            'fieldName' => 'id',
-            'type' => 'guid',
+        $metadata->mapField(
+            [
+            'id'         => true,
+            'fieldName'  => 'id',
+            'type'       => 'guid',
             'columnName' => 'id',
-        ]);
+            ]
+        );
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadataInfo::GENERATOR_TYPE_UUID);
         $metadata->setIdGenerator(new UuidGenerator());
 

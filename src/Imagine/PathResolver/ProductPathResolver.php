@@ -22,9 +22,30 @@ class ProductPathResolver extends DefaultResolver implements PathResolverInterfa
     public function resolvePath($path)
     {
         try {
-            if (null === $this->cacheFile) {
-                /* @var $this->cacheFile File */
-                $this->cacheFile = $this->findFile($path);
+            if (!preg_match_all('/[0-9a-fA-F]*/', $path)) {
+                // This requested path is not managed as ProductImage
+                // ProductImages path are hexadecimals strings
+                return parent::resolvePath($path);
+            }
+
+            $this->cacheFile = $this->findFile($path);
+
+            if ($this->cacheFile !== null) {
+                return $this->cacheFile->getFile();
+            } else {
+                // Cannot find the product image
+                // So creating fake file for default product image
+                $webPath = $this->webDir . '/' . $path;
+
+                if (!is_file($webPath)) {
+                    $webPath = $this->webDir . '/bundles/librinfoecommerce/img/default-product-picture.png';
+                }
+
+                $fakeFile = new File();
+                $fakeFile->setFile(base64_encode(file_get_contents($webPath)));
+                $fakeFile->setMimeType(mime_content_type($webPath));
+
+                $this->cacheFile = $fakeFile;
             }
 
             $webFilePath = $this->webDir . '/' . $path;

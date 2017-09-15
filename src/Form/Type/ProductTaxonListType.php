@@ -50,15 +50,19 @@ class ProductTaxonListType extends AbstractType
 
         $taxons = $qb->getQuery()->getResult();
 
-        array_walk($taxons, function (&$item) {
-            $item->displayName = str_repeat('  ', $item->getLevel()) . $item->getName(); // double white space utf-8 char
-        });
+        array_walk(
+            $taxons, function (&$item) {
+                $item->displayName = str_repeat('  ', $item->getLevel()) . $item->getName(); // double white space utf-8 char
+            }
+        );
 
-        $resolver->setDefaults([
-            'choices' => $taxons,
-            'class' => $this->productTaxonClass,
-            'choice_value' => 'id',
-        ]);
+        $resolver->setDefaults(
+            [
+                'choices'      => $taxons,
+                'class'        => $this->productTaxonClass,
+                'choice_value' => 'id',
+            ]
+        );
     }
 
     public function getParent()
