@@ -1,25 +1,23 @@
 # Change Log
 
-## [Unreleased](https://github.com/libre-informatique/EcommerceBundle/tree/HEAD)
-
-[Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.4.5...HEAD)
+## [0.5.1](https://github.com/libre-informatique/EcommerceBundle/tree/0.5.1) (2017-09-15)
+[Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.4.5...0.5.1)
 
 **Merged pull requests:**
 
-- Lisem fix & features [\#18](https://github.com/libre-informatique/EcommerceBundle/pull/18) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- Lisem fix & features [\#25](https://github.com/libre-informatique/EcommerceBundle/pull/25) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- Wip lisem [\#23](https://github.com/libre-informatique/EcommerceBundle/pull/23) ([AhamadaMBARAKA](https://github.com/AhamadaMBARAKA))
+- add ChannelAdmin [\#22](https://github.com/libre-informatique/EcommerceBundle/pull/22) ([AhamadaMBARAKA](https://github.com/AhamadaMBARAKA))
+- PDF invoice generation [\#20](https://github.com/libre-informatique/EcommerceBundle/pull/20) ([marcoslibre](https://github.com/marcoslibre))
 
-## [0.4.5](https://github.com/libre-informatique/EcommerceBundle/tree/0.4.5) (2017-07-26)
+## [0.4.5](https://github.com/libre-informatique/EcommerceBundle/tree/0.4.5) (2017-07-28)
 [Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.4.4...0.4.5)
 
 **Merged pull requests:**
 
-- DevKit updates for EcommerceBundle [\#17](https://github.com/libre-informatique/EcommerceBundle/pull/17) ([BlastCI](https://github.com/BlastCI))
+- Lisem fix & features [\#18](https://github.com/libre-informatique/EcommerceBundle/pull/18) ([FanchTheSystem](https://github.com/FanchTheSystem))
 - Lisem fix & features [\#15](https://github.com/libre-informatique/EcommerceBundle/pull/15) ([FanchTheSystem](https://github.com/FanchTheSystem))
-- DevKit updates for EcommerceBundle [\#14](https://github.com/libre-informatique/EcommerceBundle/pull/14) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for EcommerceBundle [\#13](https://github.com/libre-informatique/EcommerceBundle/pull/13) ([BlastCI](https://github.com/BlastCI))
 - Wip lisem [\#12](https://github.com/libre-informatique/EcommerceBundle/pull/12) ([FanchTheSystem](https://github.com/FanchTheSystem))
-- DevKit updates for EcommerceBundle [\#11](https://github.com/libre-informatique/EcommerceBundle/pull/11) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for EcommerceBundle [\#10](https://github.com/libre-informatique/EcommerceBundle/pull/10) ([BlastCI](https://github.com/BlastCI))
 - Vel check [\#9](https://github.com/libre-informatique/EcommerceBundle/pull/9) ([PapsOu](https://github.com/PapsOu))
 - Wip velcheck [\#8](https://github.com/libre-informatique/EcommerceBundle/pull/8) ([FanchTheSystem](https://github.com/FanchTheSystem))
 
@@ -29,19 +27,8 @@
 ## [0.4.3](https://github.com/libre-informatique/EcommerceBundle/tree/0.4.3) (2017-06-13)
 [Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.4.2...0.4.3)
 
-**Merged pull requests:**
-
-- DevKit updates for EcommerceBundle [\#7](https://github.com/libre-informatique/EcommerceBundle/pull/7) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for EcommerceBundle [\#6](https://github.com/libre-informatique/EcommerceBundle/pull/6) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for EcommerceBundle [\#5](https://github.com/libre-informatique/EcommerceBundle/pull/5) ([BlastCI](https://github.com/BlastCI))
-- DevKit updates for EcommerceBundle [\#3](https://github.com/libre-informatique/EcommerceBundle/pull/3) ([BlastCI](https://github.com/BlastCI))
-
 ## [0.4.2](https://github.com/libre-informatique/EcommerceBundle/tree/0.4.2) (2017-05-05)
 [Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.2...0.4.2)
-
-**Merged pull requests:**
-
-- DevKit updates for EcommerceBundle [\#2](https://github.com/libre-informatique/EcommerceBundle/pull/2) ([BlastCI](https://github.com/BlastCI))
 
 ## [0.2](https://github.com/libre-informatique/EcommerceBundle/tree/0.2) (2017-03-07)
 [Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/pre-sf3.2...0.2)
