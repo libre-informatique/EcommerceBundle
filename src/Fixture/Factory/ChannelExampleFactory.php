@@ -24,7 +24,7 @@ class ChannelExampleFactory extends BaseFactory
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): ChannelInterface
     {
         /**
          * @var ChannelInterface

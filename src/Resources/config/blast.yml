@@ -1558,7 +1558,8 @@ parameters:
                             code: ~
                             translation.name: ~
 #                            category: ~
-                            calculator: ~
+                            calculator:
+                                template: SonataAdminBundle:CRUD:show_trans.html.twig
                             taxCategory: ~
                             enabled: ~
                         show_group_channel:
@@ -1588,6 +1589,7 @@ parameters:
 #                                btn_add: Add
                             calculator:
                                 type: Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType
+                            calculator: ~
                             taxCategory: ~
                             enabled: ~
                         form_group_parameters:
@@ -1624,7 +1626,8 @@ parameters:
                     code: ~
                     translation.name: ~
 #                    category: ~
-                    calculator: ~
+                    calculator:
+                        template: SonataAdminBundle:CRUD:list_trans.html.twig
                     taxCategory: ~
                     zone: ~
                     channels: ~
