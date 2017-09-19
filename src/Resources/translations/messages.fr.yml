@@ -105,8 +105,8 @@ librinfo:
         defaultTaxZone: Zone de taxe par défaut
         depth: profondeur
         exchange_rate: Taux de change
-        fulfill_order: Terminer
-        fulfill_this_order: Terminer cette commande
+        fulfill_order: Valider
+        fulfill_this_order: Valider cette commande
         generating_invoice: Génération de la facture en cours...
         height: hauteur
         hostname: Nom d'hôte

@@ -560,7 +560,8 @@ parameters:
 # ORDER
 ########
 
-        Sylius\Component\Core\Model\Order:
+        # Sylius\Component\Core\Model\Order:
+        Librinfo\EcommerceBundle\Entity\Order:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 titleTemplate: LibrinfoEcommerceBundle:OrderAdmin/Show:show_title.html.twig
@@ -644,11 +645,7 @@ parameters:
                             checkoutCompletedAt: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
-                add:
-                    form_tab_general:
-                        form_group_general:
-                            shipping_address: ~
-                            notes: ~
+                add: ~
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
@@ -1599,7 +1596,7 @@ parameters:
                                 multiple: true
                                 expanded: true
                             zone: ~
-                            
+
                     form_tab_history:
                         form_group_history:
                             createdAt:
@@ -1632,8 +1629,8 @@ parameters:
                     zone: ~
                     channels: ~
                     enabled: ~
-                    
-                                        
+
+
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove:
@@ -1642,7 +1639,7 @@ parameters:
                 add:
                     position: ~
                     code: ~
-                    # sonata s***                    
+                    # sonata s***
                     translation.name:
                         type: doctrine_orm_string
 #                    category: ~
@@ -1652,7 +1649,7 @@ parameters:
                     channels: ~
                     enabled: ~
 
-                    
+
 ################################################################################
 # ShippingCategory
 ################################################################################
@@ -1661,7 +1658,7 @@ parameters:
 #            baseRoute:
 #                name: admin_librinfo_ecommerce_shipping_category
 #                pattern: librinfo/ecommerce/shipping_category
-#                
+#
 #            # SHOW
 #            Sonata\AdminBundle\Show\ShowMapper:
 #                remove:
@@ -1672,7 +1669,7 @@ parameters:
 #                            code: ~
 #                            name: ~
 #                            description: ~
-#    
+#
 #            # FORM
 #            Sonata\AdminBundle\Form\FormMapper:
 #                remove:
@@ -1683,7 +1680,7 @@ parameters:
 #                            code: ~
 #                            name: ~
 #                            description: ~
-#    
+#
 #            # LIST
 #            Sonata\AdminBundle\Datagrid\ListMapper:
 #                remove:
@@ -1692,7 +1689,7 @@ parameters:
 #                    code: ~
 #                    name: ~
 #                    description: ~
-#                
+#
 #            # FILTERS
 #            Sonata\AdminBundle\Datagrid\DatagridMapper:
 #                remove:
@@ -1720,7 +1717,7 @@ parameters:
                             name: ~
                             description: ~
                             locale: ~
-    
+
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 remove:
@@ -1731,7 +1728,7 @@ parameters:
                             name: ~
                             description: ~
                             locale: ~
-    
+
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
@@ -1741,7 +1738,7 @@ parameters:
                     description: ~
                     locale: ~
 
-    
+
 
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
@@ -1751,4 +1748,3 @@ parameters:
                     name: ~
                     description: ~
                     locale: ~
-

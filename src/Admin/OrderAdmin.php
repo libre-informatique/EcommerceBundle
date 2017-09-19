@@ -14,8 +14,9 @@ namespace Librinfo\EcommerceBundle\Admin;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Blast\CoreBundle\Admin\CoreAdmin;
 
-class OrderAdmin extends SyliusGenericAdmin
+class OrderAdmin extends CoreAdmin
 {
     /* @todo : remove this useless protected attributes */
 
@@ -30,7 +31,7 @@ class OrderAdmin extends SyliusGenericAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list', 'show', 'batch'));
+        $collection->clearExcept(array('list', 'show', 'batch', 'create'));
         $collection->add('updateShipping', $this->getRouterIdParameter() . '/updateShipping');
         $collection->add('updatePayment', $this->getRouterIdParameter() . '/updatePayment');
         $collection->add('cancelOrder', $this->getRouterIdParameter() . '/cancelOrder');
@@ -77,7 +78,7 @@ class OrderAdmin extends SyliusGenericAdmin
         $list = parent::configureActionButtons($action, $object);
 
         if (isset($list['create'])) {
-            unset($list['create']);
+            // unset($list['create']);
         }
 
         return $list;

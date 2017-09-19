@@ -36,7 +36,7 @@ class OrderCRUDController extends CRUDController
      */
     protected function preCreate(Request $request, $object)
     {
-        throw new AccessDeniedException();
+        // throw new AccessDeniedException();
     }
 
     /**
