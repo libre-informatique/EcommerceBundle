@@ -46,6 +46,9 @@ show_tab_payment_delivery: Paiement / Livraison
 show_tab_payment_details: Détails du paiement
 show_tab_variants: Déclinaisons
 
+flat_rate: Prix fixe par envoi
+per_unit_rate: Montant forfaitaire par unité
+
 librinfo:
     action:
         add_variant: Ajouter une déclinaison
