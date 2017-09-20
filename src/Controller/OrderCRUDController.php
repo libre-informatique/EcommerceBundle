@@ -162,6 +162,9 @@ class OrderCRUDController extends CRUDController
             }
 
             try {
+                if ($action === 'validate' && $selectedModel->getNumber() === null) {
+                    $this->container->get('sylius.order_number_assigner')->assignNumber($selectedModel);
+                }
                 $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
                 $stateMachine->apply($action);
                 $this->container->get('sylius.manager.order')->flush();
@@ -178,5 +181,22 @@ class OrderCRUDController extends CRUDController
         return new RedirectResponse(
             $this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
         );
+    }
+
+    /**
+     * Redirect the user depend on this choice.
+     *
+     * @param object $object
+     *
+     * @return RedirectResponse
+     */
+    protected function redirectTo($object)
+    {
+        $request = $this->getRequest();
+        if ($request->get('btn_create_and_show')) {
+            return new RedirectResponse($this->admin->generateObjectUrl('show', $object));
+        } else {
+            return parent::redirectTo($object);
+        }
     }
 }

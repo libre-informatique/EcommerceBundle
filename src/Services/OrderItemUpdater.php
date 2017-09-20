@@ -17,6 +17,7 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use SM\Factory\Factory;
+use Sylius\Component\Order\Processor\CompositeOrderProcessor;
 
 /**
  * Manage order item quantity.
@@ -53,12 +54,18 @@ class OrderItemUpdater
     private $translator;
 
     /**
+     * @var CompositeOrderProcessor
+     */
+    private $orderProcessor;
+
+    /**
      * @param EntityManager                      $em
      * @param OrderItemQuantityModifierInterface $quantityModifier
      * @param MoneyFormatterInterface            $moneyFormatter
      * @param string                             $orderItemClass
      * @param Factory                            $smFactory
      * @param TranslatorInterface                $translator
+     * @param CompositeOrderProcessor            $orderProcessor
      */
     public function __construct(
         EntityManager $em,
@@ -66,7 +73,8 @@ class OrderItemUpdater
         MoneyFormatterInterface $moneyFormatter,
         $orderItemClass,
         Factory $smFactory,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        CompositeOrderProcessor $orderProcessor
     ) {
         $this->em = $em;
         $this->orderItemQuantityModifier = $quantityModifier;
@@ -74,6 +82,7 @@ class OrderItemUpdater
         $this->orderItemClass = $orderItemClass;
         $this->smFactory = $smFactory;
         $this->translator = $translator;
+        $this->orderProcessor = $orderProcessor;
     }
 
     /**
@@ -97,8 +106,8 @@ class OrderItemUpdater
 
         if ($orderStateMachine->getState() === 'cancelled' || $orderStateMachine->getState() === 'fulfilled') {
             return [
-            'lastItem' => true,
-            'message'  => $this->translator->trans('cannot_edit_order_because_of_state', [], 'SonataCoreBundle'),
+                'lastItem' => true,
+                'message'  => $this->translator->trans('cannot_edit_order_because_of_state', [], 'SonataCoreBundle'),
             ];
         } else {
             if ($isAddition) {
@@ -119,7 +128,8 @@ class OrderItemUpdater
                 $item->recalculateUnitsTotal();
             }
 
-            $order->recalculateItemsTotal();
+            // $order->recalculateItemsTotal();
+            $this->orderProcessor->process($order);
 
             $this->em->persist($order);
             $this->em->flush();
@@ -164,6 +174,22 @@ class OrderItemUpdater
                     $order->getLocaleCode()
                 ),
             ],
+            'payments' => $this->getPaymentsTotals($order),
         ];
+    }
+
+    private function getPaymentsTotals($order)
+    {
+        $paiements = [];
+
+        foreach ($order->getPayments() as $payment) {
+            $paiements[$payment->getId()] = $this->moneyFormatter->format(
+                $payment->getAmount(),
+                $order->getCurrencyCode(),
+                $order->getLocaleCode()
+            );
+        }
+
+        return $paiements;
     }
 }

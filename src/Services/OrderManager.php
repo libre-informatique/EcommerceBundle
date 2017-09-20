@@ -17,6 +17,7 @@ use Sylius\Component\Order\Model\OrderInterface;
 use SM\Factory\Factory;
 use Librinfo\EcommerceBundle\Factory\InvoiceFactoryInterface;
 use Librinfo\EcommerceBundle\Entity\Invoice;
+use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner;
 
 class OrderManager
 {
@@ -36,6 +37,11 @@ class OrderManager
     private $invoiceFactory;
 
     /**
+     * @var OrderNumberAssigner
+     */
+    private $orderNumberAssigner;
+
+    /**
      * @param EntityManager $em
      */
     public function __construct(EntityManager $em)
@@ -47,9 +53,18 @@ class OrderManager
     {
         $order = $object;
 
+        if ($order->getNumber() === null) {
+            $this->orderNumberAssigner->assignNumber($order);
+            $this->em->flush($order);
+        }
+
         $stateMachine = $this->stateMachine->get($order, 'sylius_order');
 
         $stateMachine->apply('fulfill');
+
+dump($order);
+
+        die;
     }
 
     public function generateCreditInvoice(OrderInterface $object)
@@ -78,5 +93,13 @@ class OrderManager
     public function setInvoiceFactory(InvoiceFactoryInterface $invoiceFactory): void
     {
         $this->invoiceFactory = $invoiceFactory;
+    }
+
+    /**
+     * @param OrderNumberAssigner orderNumberAssigner
+     */
+    public function setOrderNumberAssigner(OrderNumberAssigner $orderNumberAssigner): void
+    {
+        $this->orderNumberAssigner = $orderNumberAssigner;
     }
 }

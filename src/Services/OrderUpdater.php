@@ -16,6 +16,8 @@ use Doctrine\ORM\EntityManager;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
+use Sylius\Component\Order\Processor\CompositeOrderProcessor;
+use Sylius\Component\Core\OrderPaymentTransitions;
 use SM\Factory\Factory;
 
 /**
@@ -51,24 +53,32 @@ class OrderUpdater
     private $smFactory;
 
     /**
+     * @var CompositeOrderProcessor
+     */
+    private $orderProcessor;
+
+    /**
      * @param EntityManager                 $em
      * @param ChannelContextInterface       $channelContext
      * @param FactoryInterface              $orderItemFactory
      * @param OrderItemUnitFactoryInterface $orderItemUnitFactory
      * @param Factory                       $smFactory
+     * @param CompositeOrderProcessor       $orderProcessor
      */
     public function __construct(
         EntityManager $em,
         ChannelContextInterface $channelContext,
         FactoryInterface $orderItemFactory,
         OrderItemUnitFactoryInterface $orderItemUnitFactory,
-        Factory $smFactory
+        Factory $smFactory,
+        CompositeOrderProcessor $orderProcessor
     ) {
         $this->em = $em;
         $this->channel = $channelContext->getChannel();
         $this->orderItemFactory = $orderItemFactory;
         $this->orderItemUnitFactory = $orderItemUnitFactory;
         $this->smFactory = $smFactory;
+        $this->orderProcessor = $orderProcessor;
     }
 
     /**
@@ -103,9 +113,13 @@ class OrderUpdater
             //Create OrderItemUnit from OrderItem
             $this->orderItemUnitFactory->createForItem($item);
 
-            //Recalculate Order totals
-            $item->recalculateUnitsTotal();
-            $order->recalculateItemstotal();
+            // //Recalculate Order totals
+            // $item->recalculateUnitsTotal();
+            // $order->recalculateItemstotal();
+
+            $order->getPayments()->clear(); // Avoid payement duplicates
+
+            $this->orderProcessor->process($order);
 
             //Persist Order
             $this->em->persist($order);
@@ -113,8 +127,8 @@ class OrderUpdater
         }
 
         return [
-        'item'   => $item,
-        'object' => $order,
-            ];
+            'item'   => $item,
+            'object' => $order,
+        ];
     }
 }

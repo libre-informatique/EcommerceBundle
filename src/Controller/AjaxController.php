@@ -15,6 +15,7 @@ namespace Librinfo\EcommerceBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
  * @author Romain SANCHEZ <romain.sanchez@libre-informatique.fr>
@@ -31,13 +32,13 @@ class AjaxController extends Controller
     public function orderInlineEditAction(Request $request)
     {
         $value = $request->get('value');
-        $setter = 'set' . ucfirst($request->get('field'));
         $manager = $this->getDoctrine()->getManager();
         $repo = $manager->getRepository('LibrinfoEcommerceBundle:Order');
 
         $order = $repo->find($request->get('id'));
 
-        $order->$setter($value);
+        $propertyAccessor = new PropertyAccessor();
+        $propertyAccessor->setValue($order, $request->get('field'), $value);
 
         $manager->persist($order);
         $manager->flush();

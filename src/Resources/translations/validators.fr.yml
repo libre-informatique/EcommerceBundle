@@ -9,3 +9,7 @@ librinfo:
         not_unique: Le code du canal doit être unique, le code « %code% » est déjà utilisé
     channel_name:
         not_unique: Le nom du canal doit être unique, le nom « %name% » est déjà utilisé
+    order_payment:
+        not_null: Il faut séléctionner au moins un mode de paiement
+    order_shipping:
+        not_null: Il faut séléctionner au moins un mode de livraison

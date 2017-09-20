@@ -670,14 +670,26 @@ parameters:
                             notes:
                                 type: Symfony\Component\Form\Extension\Core\Type\TextareaType
                         form_group_shipping_and_payment_methods:
-                            payments:
+                            payment:
                                 label: librinfo.label.payment_method
                                 type: Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType
-                                multiple: true
-                            shipments:
+                                multiple: false
+                                mapped: false
+                                error_bubbling: true
+                                required: true
+                                constraints:
+                                    - Symfony\Component\Validator\Constraints\Valid
+                                    - Symfony\Component\Validator\Constraints\NotBlank
+                            shipment:
                                 label: librinfo.label.shipping_method
                                 type: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType
-                                multiple: true
+                                multiple: false
+                                mapped: false
+                                error_bubbling: true
+                                required: true
+                                constraints:
+                                    - Symfony\Component\Validator\Constraints\Valid
+                                    - Symfony\Component\Validator\Constraints\NotBlank
                         form_group_addresses:
                             shippingAddress:
                                 type: Librinfo\EcommerceBundle\Form\Type\OrderAddressType
