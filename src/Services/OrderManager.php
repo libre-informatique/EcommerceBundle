@@ -61,10 +61,6 @@ class OrderManager
         $stateMachine = $this->stateMachine->get($order, 'sylius_order');
 
         $stateMachine->apply('fulfill');
-
-dump($order);
-
-        die;
     }
 
     public function generateCreditInvoice(OrderInterface $object)
