@@ -279,3 +279,10 @@ services:
             - [setValidator, ['@validator']]
         tags:
             - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType }
+
+    librinfo_ecommerce.form.type.order_address_type:
+        class: Librinfo\EcommerceBundle\Form\Type\OrderAddressType
+        calls:
+            - [setAddressClass, ['%sylius.model.address.class%']]
+        tags:
+            - { name: form.type }

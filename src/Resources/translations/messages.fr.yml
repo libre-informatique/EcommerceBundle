@@ -24,6 +24,7 @@ form_group_variants: Variantes
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
+form_group_shipping_and_payment_methods: Paiements et Livraisons
 
 show_group_actions: Actions
 show_group_addresses: Adresses
@@ -229,6 +230,7 @@ librinfo:
         taxrate_list: Liste des taux de TVA
         zone_create: Nouvelle zone
         zone_list: Liste des zones
+        order_create: Nouvelle commande
     order_state:
         cancelled: Annulée
         cart: Panier

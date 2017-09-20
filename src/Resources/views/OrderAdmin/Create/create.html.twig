@@ -1,0 +1,5 @@
+{% extends 'BlastCoreBundle:CRUD:base_edit.html.twig' %}
+{% block bottom_js %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/librinfoecommerce/js/order_address.js') }}"></script>
+{% endblock %}
