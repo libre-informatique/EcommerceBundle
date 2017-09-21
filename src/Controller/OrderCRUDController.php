@@ -162,7 +162,7 @@ class OrderCRUDController extends CRUDController
             }
 
             try {
-                if ($action === 'validate' && $selectedModel->getNumber() === null) {
+                if ($action === OrderTransitions::TRANSITION_FULFILL && $selectedModel->getNumber() === null) {
                     $this->container->get('sylius.order_number_assigner')->assignNumber($selectedModel);
                 }
                 $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
