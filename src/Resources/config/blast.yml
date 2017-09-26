@@ -627,7 +627,6 @@ parameters:
                             notes:
                                 type: Symfony\Component\Form\Extension\Core\Type\TextareaType
                         form_group_shipping_and_payment_methods:
-<<<<<<< Updated upstream
                             payment:
                                 label: librinfo.label.payment_method
                                 type: Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType
@@ -640,12 +639,6 @@ parameters:
                                     - Symfony\Component\Validator\Constraints\NotBlank
                             shipment:
                                 label: librinfo.label.shipping_method
-=======
-                            payments:
-                                type: Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType
-                                multiple: true
-                            shipments:
->>>>>>> Stashed changes
                                 type: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType
                                 multiple: false
                                 mapped: false
