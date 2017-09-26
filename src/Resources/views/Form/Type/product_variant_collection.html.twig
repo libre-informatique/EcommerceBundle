@@ -118,11 +118,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="sonata-ba-tbody">
-
-
-
                                     {% for nested_group_field_name, nested_group_field in form.children %}
-
                                         <tr>
                                             {% for field_name, nested_field in nested_group_field.children %}
                                                 {% if field_name != '_delete' and  field_name != 'id' and field_name in showFields %}

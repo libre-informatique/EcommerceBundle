@@ -69,6 +69,6 @@ class ProductVariant extends BaseProductVariant
             $this->setCurrentLocale('fr_FR');
         }
 
-        return $this->getTranslation()->getName();
+        return (string) $this->getTranslation()->getName();
     }
 }
