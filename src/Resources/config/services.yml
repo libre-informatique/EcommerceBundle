@@ -10,8 +10,11 @@ parameters:
         - librinfo_ecommerce_address
 
 services:
-# ENTITY CODE GENERATORS
+    blast_core.label.strategy.librinfo_ecommerce:
+        class: Blast\CoreBundle\Translator\LibrinfoLabelTranslatorStrategy
+        arguments: ['Librinfo\EcommerceBundle']
 
+# ENTITY CODE GENERATORS
     librinfo_ecommerce.code_generator.product:
         class: Librinfo\EcommerceBundle\CodeGenerator\ProductCodeGenerator
         factory:   ['@blast_core.code_generator_factory', create]
