@@ -300,3 +300,8 @@ services:
     sylius.provider.product_variants_prices:
         class: Librinfo\EcommerceBundle\Services\ProductVariantsPricesProvider
         arguments: ["@sylius.calculator.product_variant_price"]
+
+    librinfo_ecommerce.twig.product_variant_collection_helper:
+        class: Librinfo\EcommerceBundle\Twig\ProductVariantCollectionHelper
+        tags:
+            - { name: twig.extension }

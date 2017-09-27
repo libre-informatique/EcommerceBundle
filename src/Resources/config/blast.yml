@@ -295,6 +295,8 @@ parameters:
                     tracked:
                         type: boolean
                         label: librinfo.label.tracked_stock
+                    enabled:
+                        type: boolean
                     _options:
                         fieldsOrder:
                             - code
