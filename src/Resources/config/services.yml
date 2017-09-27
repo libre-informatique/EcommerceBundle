@@ -296,3 +296,7 @@ services:
             - [setMoneyFormater, ['@sylius.money_formatter']]
         tags:
             - { name: twig.extension }
+
+    sylius.provider.product_variants_prices:
+        class: Librinfo\EcommerceBundle\Services\ProductVariantsPricesProvider
+        arguments: ["@sylius.calculator.product_variant_price"]

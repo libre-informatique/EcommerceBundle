@@ -117,7 +117,7 @@ parameters:
                                 label: false
                                 by_reference: true
                                 attr:
-                                    data-showFields: 'name,code'
+                                    data-showFields: 'name,code,enabled'
                                 type_options:
                                     btn_add: false
                                 required: true    # if not true, child form fields cannot be required (why ??)
@@ -239,6 +239,7 @@ parameters:
                                 type: sonata_type_model_hidden
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
+                            enabled: ~
                             _options:
                                 fieldsOrder: [product, name, code]
                         form_group_pricing:
