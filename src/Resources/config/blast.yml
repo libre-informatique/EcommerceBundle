@@ -612,6 +612,8 @@ parameters:
                                 mapped: false
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_order_actions.html.twig
                         _options:
+                            attr:
+                                class: inline-block
                             groupsOrder:
                                 - show_group_actions
                                 - show_group_order

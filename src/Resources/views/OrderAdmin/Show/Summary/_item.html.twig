@@ -7,6 +7,9 @@
 {% set product = variant.product %}
 
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+
+
 <tr class="product">
     <td class="single line">
         <div class="ui header">
@@ -41,7 +44,22 @@
         {{ money.convertAndFormat(item.discountedUnitPrice) }}
     </td>
     <td class="quantity" style="text-align: right">
-        {{ item.quantity }}
+        {% if item.isBulk() %}
+            <form>
+                <div class="input-group">
+                    <span class="input-group-addon">{{'librinfo.help.quantity_in_grams'|trans}} :</span>
+                    <input type="text" class="form-control" value="{{item.quantity / 1000}}" placeholder="{{ 'sylius.ui.quantity'|trans }} (g)">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-save"></i>
+                        </button>
+                    </span>
+                </div>
+                <em>TODO : Ajax item update for bulk</em>
+            </form>
+        {% else %}
+            {{ item.quantity }}
+        {% endif %}
     </td>
     <td class="subtotal" style="text-align: right">
         {{ money.convertAndFormat(item.subtotal) }}
@@ -56,21 +74,33 @@
         {{ money.convertAndFormat(item.total) }}
     </td>
     <td class="actions" style="text-align: center">
-        {% if sm_state(object, 'sylius_order') != 'fulfilled' and sm_state(object, 'sylius_order') != 'cancelled' %}
-            <a class="remove-from-cart btn btn-primary btn-small"
-               data-url='{{ path('librinfo_ecommerce.order.remove_item') }}'
+        {% if not item.isBulk() %}
+            {% if sm_state(object, 'sylius_order') != 'fulfilled' and sm_state(object, 'sylius_order') != 'cancelled' %}
+                <a class="remove-from-cart btn btn-primary btn-small"
+                   data-url='{{ path('librinfo_ecommerce.order.remove_item') }}'
+                   data-order-id="{{ object.id }}"
+                   data-item-id="{{ item.id }}"
+                >
+                    <i class="fa fa-minus-circle"></i>
+                </a>
+                <a class="add-to-cart btn btn-primary btn-small"
+                   data-url='{{ path('librinfo_ecommerce.order.add_item') }}'
+                   data-order-id="{{ object.id }}"
+                   data-item-id="{{ item.id }}"
+                   data-variant-id="{{ item.variant.id }}"
+                >
+                    <i class="fa fa-plus-circle"></i>
+                </a>
+            {% endif %}
+        {% else %}
+            <a class="remove-from-cart btn btn-primary btn-small confirmable"
+               data-confirm-action="triggerClick"
+               data-confirm-title="{{'librinfo.confirm.delete_bulk_product'|trans}}"
+               data-url="{{ path('librinfo_ecommerce.order.remove_item') }}"
                data-order-id="{{ object.id }}"
                data-item-id="{{ item.id }}"
             >
-                <i class="fa fa-minus-circle"></i>
-            </a>
-            <a class="add-to-cart btn btn-primary btn-small"
-               data-url='{{ path('librinfo_ecommerce.order.add_item') }}'
-               data-order-id="{{ object.id }}"
-               data-item-id="{{ item.id }}"
-               data-variant-id="{{ item.variant.id }}"
-            >
-                <i class="fa fa-plus-circle"></i>
+                <i class="fa fa-trash"></i>
             </a>
         {% endif %}
     </td>

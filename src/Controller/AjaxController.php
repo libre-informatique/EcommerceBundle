@@ -78,7 +78,7 @@ class AjaxController extends Controller
         return new JsonResponse($result);
     }
 
-    public function addnewProductAction(Request $request)
+    public function addNewProductAction(Request $request)
     {
         $newProduct = $this->container
             ->get('librinfo_ecommerce.order.updater')

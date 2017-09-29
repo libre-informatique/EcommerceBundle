@@ -113,7 +113,11 @@ class OrderItemUpdater
             if ($isAddition) {
                 $quantity = $item->getQuantity() + 1;
             } else {
-                $quantity = $item->getQuantity() - 1;
+                if ($item->isBulk()) {
+                    $quantity = 0;
+                } else {
+                    $quantity = $item->getQuantity() - 1;
+                }
             }
 
             if ($quantity < 1) {

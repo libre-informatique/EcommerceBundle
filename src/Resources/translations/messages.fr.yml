@@ -266,3 +266,6 @@ librinfo:
         order_is_fulfilled: Cette commande est validée, vous ne pouvez plus la modifier
         confirm_cancel: Voulez-vous vraiment annuler cette commande ?
         confirm_validate: Voulez-vous vraiment valider cette commande ?
+        quantity_in_grams: Quantité en (g)
+    confirm:
+        delete_bulk_product: Voulez-vous vraiment supprimer cet article vrac ?

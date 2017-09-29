@@ -50,6 +50,10 @@ sylius_order:
         order:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\Order
+        order_item:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\OrderItem
+                controller: Librinfo\EcommerceBundle\Controller\SyliusOrderItemController
 
 sylius_taxation:
     resources:

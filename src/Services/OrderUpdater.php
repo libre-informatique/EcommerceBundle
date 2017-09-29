@@ -19,6 +19,8 @@ use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
 use Sylius\Component\Order\Processor\CompositeOrderProcessor;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use SM\Factory\Factory;
+use Librinfo\EcommerceBundle\Entity\Product;
+use Librinfo\EcommerceBundle\Entity\ProductVariant;
 
 /**
  * Add products to existing order.
@@ -98,14 +100,27 @@ class OrderUpdater
             $item = null;
         } else {
             //Retrieve product variant
+            /** @var ProductVariant $variant **/
             $variant = $this->em
                 ->getRepository('LibrinfoEcommerceBundle:ProductVariant')
                 ->find($variantId);
+
+            $optionCode = $variant->getOptionValues()->first()->getOption()->getCode();
+            $optionValue = $variant->getOptionValues()->first()->getCode();
+
+            $isBulk = ($optionCode === Product::$PACKAGING_OPTION_CODE && $optionValue === 'BULK');
+
 
             //Create new OrderItem
             $item = $this->orderItemFactory->createNew();
             $item->setVariant($variant);
             $item->setOrder($order);
+            $item->setBulk($isBulk);
+
+            if ($isBulk) {
+                $item->setquantity(999);
+            }
+
             $item->setUnitPrice(
                 $variant->getchannelPricingForChannel($this->channel)->getPrice()
             );

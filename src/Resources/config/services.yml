@@ -305,3 +305,20 @@ services:
         class: Librinfo\EcommerceBundle\Twig\ProductVariantCollectionHelper
         tags:
             - { name: twig.extension }
+
+    librinfo_ecommerce.order_item_quantity_modifier:
+        class: Librinfo\EcommerceBundle\Modifier\OrderItemQuantityModifier
+        arguments: ["@sylius.factory.order_item_unit"]
+
+    librinfo_ecommerce.order_item_quantity_modifier.limiting:
+        class: Librinfo\EcommerceBundle\Modifier\LimitingOrderItemQuantityModifier
+        decorates: sylius.order_item_quantity_modifier.limiting
+        decoration_priority: 254
+        arguments: ["@sylius.order_item_quantity_modifier.limiting.inner", 9999]
+        calls:
+            - [setBulkOrderItemQuantityModifier,["@librinfo_ecommerce.order_item_quantity_modifier"]]
+
+    librinfo_ecommerce.event_listener.sylius_order_item_controller:
+        class: Librinfo\EcommerceBundle\EventListener\SyliusOrderItemControllerListener
+        tags:
+            - { name: kernel.event_listener, event: sylius.order_item.pre_add, method: onOrderItemAddToCart }
