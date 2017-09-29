@@ -24,10 +24,10 @@ class InvoiceAdmin extends CoreAdmin
         $collection->add('generate', '{order_id}/generate');
 
         /* see InvoiceCRUDController which trigger AccessDeniedException for some route */
-        $collection->remove(['create',
-                             'edit',
-                             'delete',
-                             'duplicate']);
+        $collection->remove('create');
+        $collection->remove('edit');
+        $collection->remove('delete');
+        $collection->remove('duplicate');
     }
 
     public function createQuery($context = 'list')
