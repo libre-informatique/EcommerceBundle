@@ -89,10 +89,11 @@ class OrderItemUpdater
      * @param string $orderId
      * @param string $itemId
      * @param bool   $isAddition
+     * @param int    $quantity
      *
      * @return array
      */
-    public function updateItemCount($orderId, $itemId, $isAddition)
+    public function updateItemCount($orderId, $itemId, $isAddition, $stepQuantity = 1)
     {
         $remove = false;
         $lastItem = false;
@@ -110,14 +111,10 @@ class OrderItemUpdater
                 'message'  => $this->translator->trans('cannot_edit_order_because_of_state', [], 'SonataCoreBundle'),
             ];
         } else {
-            if ($isAddition) {
-                $quantity = $item->getQuantity() + 1;
+            if (!$item->isBulk()) {
+                $quantity = ($isAddition ? $item->getQuantity() + $stepQuantity : $item->getQuantity() - $stepQuantity);
             } else {
-                if ($item->isBulk()) {
-                    $quantity = 0;
-                } else {
-                    $quantity = $item->getQuantity() - 1;
-                }
+                $quantity = ($isAddition ? $stepQuantity : 0);
             }
 
             if ($quantity < 1) {
@@ -132,7 +129,7 @@ class OrderItemUpdater
                 $item->recalculateUnitsTotal();
             }
 
-            // $order->recalculateItemsTotal();
+            $order->recalculateItemsTotal();
             $this->orderProcessor->process($order);
 
             $this->em->persist($order);

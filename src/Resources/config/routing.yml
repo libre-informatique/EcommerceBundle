@@ -34,3 +34,7 @@ sylius_shop_checkout_address_override:
             state_machine:
                 graph: sylius_order_checkout
                 transition: address
+
+librinfo_ecommerce.order.updateBulk:
+    path: /admin/librinfo/ecommerce/order/item/updateBulk
+    defaults: { _controller: LibrinfoEcommerceBundle:Ajax:updateOrderItemBulkQuatity }
