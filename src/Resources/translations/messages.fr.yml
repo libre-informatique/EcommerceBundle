@@ -7,77 +7,82 @@ librinfo:
         sales_amount: Chiffre d'affaire
         #'
         admin:
-            payment_method: ~
+            payment_method: Mode de paiement
 
         channel:
             breadcrumb:
                 order_create: Nouvelle commande
                 order_list: Liste des commandes
             form:
-                basecurrency: ~
-                billingaddress: ~
-                channel: ~
+                basecurrency: Devise de référence
+                billingaddress: Adresse de facturation
+                channel: Canal de vente
                 channels: Canal de vente
                 currencies: Devises
                 currency_code: Devise
-                defaultlocale: ~
                 locales: Langues
                 notes: Notes
-                shippingaddress: ~
+                shippingaddress: Adresse de livraison
         channelpricing:
-                channelcode: ~
+                channelcode: Code du canal
                 original_price: Prix original
                 price: Prix
         customergroup:
             breadcrumb:
-                customergroup_create: ~
-                customergroup_list: ~
+                customergroup_create: Créer un groupe de client
+                customergroup_list: Liste des groupes de client
             form:
                 code: Code
-                name: 'Nom'
+                name: Nom
         paymentmethod:
             breadcrumb:
-                paymentmethod_create: ~
-                paymentmethod_list: ~
+                paymentmethod_create: Créer un mode de paiement
+                paymentmethod_list: Liste des modes de paiement
             form:
                 code: Code
-                enabled: ~
-                position: 'Fonctions'
+                enabled: Actif
+                position: Fonctions
         product:
             breadcrumb:
-                productvariant_create: ~
+                productvariant_create: Nouvelle déclinaisons d'article
+                #'
                 productvariant_list: Liste des déclinaisons d'article
                 #'
             form:
                 code: Code
-                name: 'Nom'
-                product: ~
+                name: Nom
+                product: Produit
         productattribute:
             breadcrumb:
-                productattribute_create: ~
+                productattribute_create: Nouvel attribut d'article
+                #'
                 productattribute_list: Liste des attributs d'article
                 #'
             form:
                 code: Code
-                name: 'Nom'
+                name: Nom
                 type: Type
         productoption:
             breadcrumb:
-                productoptionvalue_create: ~
+                productoptionvalue_create: Nouvelle option d'article
+                #'
                 productoptionvalue_list: Liste des contenus options d'article
                 #'
             form:
                 code: Code
                 description: Description
-                metadescription: ~
-                metakeywords: ~
-                name: 'Nom'
-                option: ~
-                options: ~
-                shortdescription: ~
+                metadescription: Méta description
+                metakeywords: Meta mots-clés
+                name: Nom
+                option: Option d'article
+                #'
+                options: Options d'article
+                #'
+                shortdescription: Brève description
         productoptionvalue:
             breadcrumb:
-                productoption_create: ~
+                productoption_create: Nouvelle option d'article
+                #'
                 productoption_list: Liste des options d'article
                 #'
             form:
@@ -90,80 +95,74 @@ librinfo:
                 product_list: Liste des articles
             form:
                 code: Code
-                enabled: ~
-                name: 'Nom'
+                enabled: Actif
+                name: Nom
                 slug: Slug
         shippingmethod:
                 calculator: Règle de calcul
                 code: Code
-                position: 'Fonctions'
-                translation__name: ~
+                position: Fonctions
         shippingmethodtranslation:
-            breadcrumb:
-                shippingmethodtranslation_create: ~
-                shippingmethodtranslation_list: ~
             form:
                 description: Description
-                locale: ~
-                name: 'Nom'
+                name: Nom
         taxcategory:
                 code: Code
-                createdat: ~
+                createdat: Créé le
                 description: Description
-                enabled: ~
-                name: 'Nom'
-                taxcategory: ~
-                updatedat: ~
+                enabled: Actif
+                name: Nom
+                taxcategory: Catégories de TVA
+                updatedat: Modifié le
         taxon:
             breadcrumb:
-                taxon_create: ~
+                taxon_create: Créer une catégorie
                 taxon_list: Liste des catégories
             form:
                 code: Code
-                maintaxon: ~
+                maintaxon: Catégorie principale
                 parent: Variété
                 taxons: Catégories
-                translation__name: ~
         taxrate:
             breadcrumb:
-                taxcategory_create: ~
+                taxcategory_create: Nouvelle catégorie de TVA
                 taxcategory_list: Liste des catégories de TVA
             form:
                 amount: Montant
                 calculator: Règle de calcul
                 code: Code
-                includedinprice: ~
-                name: 'Nom'
+                includedinprice: Compris dans le prix
+                name: Nom
                 rates: Taux de TVA
         zone:
             breadcrumb:
                 channel_create: Nouveau Canal
                 channel_list: Liste des canaux
-                shippingmethod_create: ~
+                shippingmethod_create: Nouvelle méthode de livraison
                 shippingmethod_list: Liste des méthodes de livraison
-                taxrate_create: ~
+                taxrate_create: Nouveau taux de TVA
                 taxrate_list: Liste des taux de TVA
                 zone_create: Nouvelle zone
                 zone_list: Liste des zones
             form:
-                accountverificationrequired: ~
+                accountverificationrequired: La vérification des comptes est-elle requise ?
                 code: Code
-                contactemail: ~
-                createdat: ~
-                defaulttaxzone: ~
+                contactemail: Email de contact
+                createdat: Créé le
+                defaulttaxzone: Zone de taxe par défaut
                 description: Description
-                enabled: ~
+                enabled: Actif
                 hostname: Nom d'hôte
                 #'
-                name: 'Nom'
+                name: Nom
                 scope: Scope
-                skippingpaymentstepallowed: ~
-                skippingshippingstepallowed: ~
+                skippingpaymentstepallowed: Ignorez l'étape de paiement si un seul mode de paiement est disponible ?
+                #'
+                skippingshippingstepallowed: Ignorez l’étape expédition si un seul mode de livraison est disponible ?
+                #'
                 type: Type
-                updatedat: ~
+                updatedat: Modifié le
                 zone: Zone
-
-
 
 
 Action: Action
@@ -190,6 +189,7 @@ form_group_properties: Dimensions & poids
 form_group_stock: Stock
 form_group_variants: Variantes
 form_tab_new_product_variant : Nouvelle déclinaison d'article
+#'
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
 form_group_shipping_and_payment_methods: Paiements et Livraisons
