@@ -2,6 +2,45 @@
 
 
 librinfo:
+    action:
+        add_variant: Ajouter une déclinaison
+        edit: Modifier
+        generate_invoice: Générer la facture
+        generate_variants: Générer les déclinaisons
+        list_variants: Liste des déclinaisons
+        manage_variants: Gérer les déclinaisons
+        product_shop_link: Voir sur la boutique
+    button:
+        continue: Continuer
+        go_to_list: Voir la liste
+        setAsCover: Définir comme image de couverture
+    order_state:
+        cancelled: Annulée
+        cart: Panier
+        fulfilled: Validée
+        new: Nouvelle
+    payment_state:
+        awaiting_payment: En attente
+        cancelled: Annulé
+        cart: Panier
+        completed: Payé
+        new: Nouveau
+        paid: Payé
+        partially_paid: Partiellement payé
+        partially_refunded: Partiellement remboursé
+        refunded: Remboursé
+    shipping_state:
+        cart: Panier
+        cancelled: Annulé
+        ready: Prêt
+        shipped: Expédié
+    help:
+        order_is_fulfilled: Cette commande est validée, vous ne pouvez plus la modifier
+        confirm_cancel: Voulez-vous vraiment annuler cette commande ?
+        confirm_validate: Voulez-vous vraiment valider cette commande ?
+        quantity_in_grams: Quantité (g)
+    confirm:
+        delete_bulk_product: Voulez-vous vraiment supprimer cet article vrac ?
     ecommercebundle:
         dashboard_title: Statistiques de vente
         sales_amount: Chiffre d'affaire
