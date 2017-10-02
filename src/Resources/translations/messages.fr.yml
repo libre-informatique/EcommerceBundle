@@ -5,274 +5,218 @@ librinfo:
     ecommercebundle:
         dashboard_title: Statistiques de vente
         sales_amount: Chiffre d'affaire
+        #'
+        admin:
+            payment_method: ~
+
+        channel:
+            breadcrumb:
+                order_create: Nouvelle commande
+                order_list: Liste des commandes
+            form:
+                basecurrency: ~
+                billingaddress: ~
+                channel: ~
+                channels: Canal de vente
+                currencies: Devises
+                currency_code: Devise
+                defaultlocale: ~
+                locales: Langues
+                notes: Notes
+                shippingaddress: ~
+        channelpricing:
+                channelcode: ~
+                original_price: Prix original
+                price: Prix
+        customergroup:
+            breadcrumb:
+                customergroup_create: ~
+                customergroup_list: ~
+            form:
+                code: Code
+                name: 'Nom'
+        paymentmethod:
+            breadcrumb:
+                paymentmethod_create: ~
+                paymentmethod_list: ~
+            form:
+                code: Code
+                enabled: ~
+                position: 'Fonctions'
+        product:
+            breadcrumb:
+                productvariant_create: ~
+                productvariant_list: Liste des déclinaisons d'article
+                #'
+            form:
+                code: Code
+                name: 'Nom'
+                product: ~
+        productattribute:
+            breadcrumb:
+                productattribute_create: ~
+                productattribute_list: Liste des attributs d'article
+                #'
+            form:
+                code: Code
+                name: 'Nom'
+                type: Type
+        productoption:
+            breadcrumb:
+                productoptionvalue_create: ~
+                productoptionvalue_list: Liste des contenus options d'article
+                #'
+            form:
+                code: Code
+                description: Description
+                metadescription: ~
+                metakeywords: ~
+                name: 'Nom'
+                option: ~
+                options: ~
+                shortdescription: ~
+        productoptionvalue:
+            breadcrumb:
+                productoption_create: ~
+                productoption_list: Liste des options d'article
+                #'
+            form:
+                code: Code
+                value: ~
+                values: Valeurs
+        productvariant:
+            breadcrumb:
+                product_create: Nouvel Article
+                product_list: Liste des articles
+            form:
+                code: Code
+                enabled: ~
+                name: 'Nom'
+                slug: Slug
+        shippingmethod:
+                calculator: Règle de calcul
+                code: Code
+                position: 'Fonctions'
+                translation__name: ~
+        shippingmethodtranslation:
+            breadcrumb:
+                shippingmethodtranslation_create: ~
+                shippingmethodtranslation_list: ~
+            form:
+                description: Description
+                locale: ~
+                name: 'Nom'
+        taxcategory:
+                code: Code
+                createdat: ~
+                description: Description
+                enabled: ~
+                name: 'Nom'
+                taxcategory: ~
+                updatedat: ~
+        taxon:
+            breadcrumb:
+                taxon_create: ~
+                taxon_list: Liste des catégories
+            form:
+                code: Code
+                maintaxon: ~
+                parent: Variété
+                taxons: Catégories
+                translation__name: ~
+        taxrate:
+            breadcrumb:
+                taxcategory_create: ~
+                taxcategory_list: Liste des catégories de TVA
+            form:
+                amount: Montant
+                calculator: Règle de calcul
+                code: Code
+                includedinprice: ~
+                name: 'Nom'
+                rates: Taux de TVA
+        zone:
+            breadcrumb:
+                channel_create: Nouveau Canal
+                channel_list: Liste des canaux
+                shippingmethod_create: ~
+                shippingmethod_list: Liste des méthodes de livraison
+                taxrate_create: ~
+                taxrate_list: Liste des taux de TVA
+                zone_create: Nouvelle zone
+                zone_list: Liste des zones
+            form:
+                accountverificationrequired: ~
+                code: Code
+                contactemail: ~
+                createdat: ~
+                defaulttaxzone: ~
+                description: Description
+                enabled: ~
+                hostname: Nom d'hôte
+                #'
+                name: 'Nom'
+                scope: Scope
+                skippingpaymentstepallowed: ~
+                skippingshippingstepallowed: ~
+                type: Type
+                updatedat: ~
+                zone: Zone
 
 
 
-Action.old: Action
-Add product.old: Ajouter un produit
-Add product.old: Ajouter un produit
-Add.old: Ajouter
-Channel Create.old: Créer un canal
-Channel List.old: Liste des canaux
-Edit.old: Modifier
-Order item units based.old: Basé sur les variantes de produit des commandes
-Order items based.old: Basé sur les produits des commandes
-Products.old: Produits
-There must be at least one item left in the order.old: Il doit y avoir au moins un élément dans la commande
 
-form_group_availability.old: Disponibilité
-form_group_channel .old: Canal de vente
-form_group_channels_and_taxonomy.old: Canaux de vente & Catégories
-form_group_customer.old: Client
-form_group_images.old: Images
-form_group_parameters .old: Paramètres
-form_group_pricing.old: Tarifs
-form_group_product_channels.old: Canaux de vente
-form_group_properties.old: Dimensions & poids
-form_group_stock.old: Stock
-form_group_variants.old: Variantes
-form_tab_new_product_variant .old: Nouvelle déclinaison d'article
-form_tab_values.old: Valeurs possibles
-form_tab_variants.old: Déclinaisons
-form_group_shipping_and_payment_methods.old: Paiements et Livraisons
+Action: Action
+Add product: Ajouter un produit
+Add product: Ajouter un produit
+Add: Ajouter
+Channel Create: Créer un canal
+Channel List: Liste des canaux
+Edit: Modifier
+Order item units based: Basé sur les variantes de produit des commandes
+Order items based: Basé sur les produits des commandes
+Products: Produits
+There must be at least one item left in the order: Il doit y avoir au moins un élément dans la commande
 
-show_group_actions.old: Actions
-show_group_addresses.old: Adresses
-show_group_availability.old: Disponibilité
-show_group_channel .old: Canal de vente
-show_group_customer.old: Client
-show_group_history.old: Historique
-show_group_order.old: Commande
-show_group_parameters.old: Paramètres
-show_group_payments.old: Paiements
-show_group_pricing.old: Prix
-show_group_properties.old: Dimensions & poids
-show_group_shipments.old: Expéditions
-show_group_stock.old: Stock
-show_group_totals.old: Totaux
-show_tab_history.old: Historique
-show_tab_order_details.old: Commande
-show_tab_order_summary.old: Récapitulatif
-show_tab_payment_delivery.old: Paiement / Livraison
-show_tab_payment_details.old: Détails du paiement
-show_tab_variants.old: Déclinaisons
+form_group_availability: Disponibilité
+form_group_channel : Canal de vente
+form_group_channels_and_taxonomy: Canaux de vente & Catégories
+form_group_customer: Client
+form_group_images: Images
+form_group_parameters : Paramètres
+form_group_pricing: Tarifs
+form_group_product_channels: Canaux de vente
+form_group_properties: Dimensions & poids
+form_group_stock: Stock
+form_group_variants: Variantes
+form_tab_new_product_variant : Nouvelle déclinaison d'article
+form_tab_values: Valeurs possibles
+form_tab_variants: Déclinaisons
+form_group_shipping_and_payment_methods: Paiements et Livraisons
 
-flat_rate.old: Prix fixe par envoi
-per_unit_rate.old: Montant forfaitaire par unité
+show_group_actions: Actions
+show_group_addresses: Adresses
+show_group_availability: Disponibilité
+show_group_channel : Canal de vente
+show_group_customer: Client
+show_group_history: Historique
+show_group_order: Commande
+show_group_parameters: Paramètres
+show_group_payments: Paiements
+show_group_pricing: Prix
+show_group_properties: Dimensions & poids
+show_group_shipments: Expéditions
+show_group_stock: Stock
+show_group_totals: Totaux
+show_tab_history: Historique
+show_tab_order_details: Commande
+show_tab_order_summary: Récapitulatif
+show_tab_payment_delivery: Paiement / Livraison
+show_tab_payment_details: Détails du paiement
+show_tab_variants: Déclinaisons
 
-librinfo.old:
-    action.old:
-        add_variant.old: Ajouter une déclinaison
-        edit.old: Modifier
-        generate_invoice.old: Générer la facture
-        generate_variants.old: Générer les déclinaisons
-        list_variants.old: Liste des déclinaisons
-        manage_variants.old: Gérer les déclinaisons
-        product_shop_link.old: Voir sur la boutique
-    button.old:
-        continue.old: Continuer
-        go_to_list.old: Voir la liste
-        setAsCover.old: Définir comme image de couverture
-    label.old:
-        account_verification_required.old: La vérification des comptes est-elle requise ?
-        accountVerificationRequired.old: Vérification de compte nécessaire
-        adjustments_total.old: Total ajustements
-        amount.old: Montant
-        archived_at.old: Archivé le
-        available_on.old: Disponible à partir de
-        available_until.old: Disponible jusqu'à
-        available.old: Disponible
-        base_currency.old: Devise de référence
-        baseCurrency.old: Devise de base
-        billing_address.old: Adresse de facturation
-        calculator.old: Règle de calcul
-        cancel_order.old: Annuler
-        cancel_this_order.old: Annuler cette commande
-        category_requirement.old: Catégorie
-        channel_admin.old:  Canal de vente
-        channel_code.old: Code boutique
-        channel_pricings.old: Prix
-        channels.old: Canal de vente
-        checkout_completed_at.old: Panier validé le
-        checkout_state.old: Statut validation
-        code.old: Code
-        contact_email.old: Email de contact
-        contactEmail.old: Email de contact
-        createdAt.old: Créé le
-        currencies.old: Devises
-        currency_code.old: Devise
-        customer_created_at.old: Client depuis
-        customer_customer_circle.old: Groupe(s) du client
-        customer_customer_code.old: Code client
-        customer_fulltext_name.old: Nom complet client
-        customer_group_admin.old: Groupes de client
-        customer_group_code.old: Code du groupe
-        customer_group_name.old: Nom du groupe
-        customer_group.old: Groupe de tarification
-        customer_ip.old: Adresse IP client
-        customer_name.old: Nom client
-        customer.old: Client
-        dashboard_title.old: Statistiques de vente
-        default_locale.old: Paramètres régionaux par défaut
-        default_tax_zone.old: Zone de taxe par défaut
-        defaultLocale.old: Langue par défaut
-        defaultTaxZone.old: Zone de taxe par défaut
-        depth.old: profondeur
-        exchange_rate.old: Taux de change
-        fulfill_order.old: Valider
-        fulfill_this_order.old: Valider cette commande
-        generating_invoice.old: Génération de la facture en cours...
-        height.old: hauteur
-        hostname.old: Nom d'hôte
-        id.old: Identifiant
-        included_in_price.old: Compris dans le prix
-        invoice_list.old: Factures
-        invoice_credit_item_name.old: Annulation de commande
-        items_total.old: Total articles
-        locale_code.old: Langue
-        locales.old: Langues
-        main_taxon.old: Catégorie principale
-        meta_description.old: Meta description
-        meta_keywords.old: Meta keywords
-        notes.old: Notes
-        on_hand.old: Stock disponible
-        on_hold.old: Stock réservé
-        option_values.old: Options
-        order_actions.old: Actions
-        order_actions.old: Actions
-        order_admin.old: Commande
-        order_channel.old: Canal
-        order_number.old: N° commande
-        order_state.old: Statut commande
-        order_total.old: Total commande
-        order.old: Commande
-        original_price.old: Prix original
-        payment_admin.old: Paiement
-        payment_amount.old: Montant
-        payment_date.old: Date de paiement
-        payment_id.old: Identifiant de paiement
-        payment_method_admin.old: Méthode de paiement
-        payment_method.old: Méthode de paiement
-        payment_state.old: Statut paiement
-        payments_list.old: Liste des paiements
-        plant_type.old: Type de plante
-        position.old: Position
-        price.old: Prix
-        product_code.old: Code article
-        product_name.old: Nom article
-        product_option.old: Option d'article
-        product_options.old: Options d'article
-        product_shop_url.old: URL boutique
-        product_taxons.old: Catégories de produit
-        product_variant_code.old: Code déclinaison
-        product_variant_name.old: Nom déclinaison
-        product_variant_prices.old: Prix
-        product.old: Article
-        purchased_from.old: Achété sur
-        rates.old: Taux de TVA
-        sale_date.old: Date de vente
-        sales_amount.old: Chiffre d'affaire
-        sales_journal.old: Journal des ventes
-        sales.old: Ventes
-        scope.old: Scope
-        set_default_customer_address.old: Adresse principale
-        ship.old: Expédier
-        shipping_address.old: Adresse de livraison
-        shipping_method.old: Mode de livraison
-        shipping_method_admin.old: Mode de livraison
-        shipping_state.old: Statut livraison
-        short_description.old: Brève description
-        skipping_payment_step_allowed.old: Ignorez l'étape de paiement si un seul mode de paiement est disponible ?
-        skipping_shipping_step_allowed.old: Ignorez l'étape d'expédition si un seul mode de livraison est disponible ?
-        skippingPaymentStepAllowed.old: Ignorer l'étape de paiement
-        skippingShippingStepAllowed.old: Ignorer l'étape de livraison
-        slug.old: Slug
-        state.old: État
-        storage_type.old: Type d'enregistrement
-        tax_calculation_strategy.old: Stratégie de calcul de la TVA
-        tax_category.old: Catégorie de TVA
-        taxCalculationStrategy.old: Stratégie de calcul des taxes
-        taxons.old: Catégories
-        theme_name.old: Thème
-        themeName.old: Nom du thème
-        token_value.old: Jeton
-        total.old: Total
-        tracked_stock.old: Suivi des stocks
-        translation_name.old: Nom
-        type.old: Type
-        updatedAt.old: MàJ le
-        validate_order.old: Valider la commande
-        values.old: Valeurs
-        variants.old: Déclinaisons
-        variety_list.old: Liste des variétés
-        weight.old: Poids
-        width.old: largeur
-        zone.old: Zone
-    link.old:
-        channel_create.old: Nouveau Canal
-        channel_list.old: Liste des canaux
-        order_list.old: Liste des commandes
-        payment_list.old: Liste des paiements
-        payment_method_list.old: Liste des méthodes de paiement
-        product_attribute_create.old: Nouvel attribut d'article
-        product_attribute_list.old: Liste des attributs d'article
-        product_create.old: Nouvel Article
-        product_list.old: Liste des articles
-        product_option_create.old: Nouvelle option d'article
-        product_option_list.old: Liste des options d'article
-        product_option_value_create.old: Nouveau contenu d'option d'article
-        product_option_value_list.old: Liste des contenus options d'article
-        product_variant_create.old: Nouvelle déclinaison d'article
-        product_variant_list.old: Liste des déclinaisons d'article
-        productattribute_list.old: Liste des attributs d'article
-        productoption_list.old: Liste des options d'article
-        productoptionvalue_list.old: Liste des contenus options d'article
-        productvariant_list.old: Liste des déclinaisons d'article
-        shipping_method_create.old: Nouvelle méthodes de livraison
-        shipping_method_list.old: Liste des méthodes de livraison
-        shippingmethod_list.old: Liste des méthodes de livraison
-        sales_journal_list.old: Journal des ventes
-        salesjournal_list.old: Journal des ventes
-        tax_category_list.old: Liste des catégories de TVA
-        tax_rate_list.old: Liste des taux de TVA
-        taxcategory_list.old: Liste des catégories de TVA
-        taxon_list.old: Liste des catégories
-        taxrate_list.old: Liste des taux de TVA
-        zone_create.old: Nouvelle zone
-        zone_list.old: Liste des zones
-        order_create.old: Nouvelle commande
-    order_state.old:
-        cancelled.old: Annulée
-        cart.old: Panier
-        fulfilled.old: Validée
-        new.old: Nouvelle
-    payment_state.old:
-        awaiting_payment.old: En attente
-        cancelled.old: Annulé
-        cart.old: Panier
-        completed.old: Payé
-        new.old: Nouveau
-        paid.old: Payé
-        partially_paid.old: Partiellement payé
-        partially_refunded.old: Partiellement remboursé
-        refunded.old: Remboursé
-    product.old:
-        product_admin.old:
-            label.old: Article
-        product_attribute_admin.old:
-            label.old: Attribut d'article
-        product_option_admin.old:
-            label.old: Option d'article
-        product_option_value_admin.old:
-            label.old: Contenu d'option d'article
-        product_variant_admin.old:
-            label.old: Déclinaison d'article
-    shipping_state.old:
-        cart.old: Panier
-        cancelled.old: Annulé
-        ready.old: Prêt
-        shipped.old: Expédié
-    help.old:
-        order_is_fulfilled.old: Cette commande est validée, vous ne pouvez plus la modifier
-        confirm_cancel.old: Voulez-vous vraiment annuler cette commande ?
-        confirm_validate.old: Voulez-vous vraiment valider cette commande ?
+flat_rate: Prix fixe par envoi
+per_unit_rate: Montant forfaitaire par unité
+
+
+
