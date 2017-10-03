@@ -52,6 +52,21 @@ librinfo:
             breadcrumb:
                 order_create: Nouvelle commande
                 order_list: Liste des commandes
+            filter:
+                adjustmentstotal: Total ajustements
+                checkoutcompletedat: Panier validé le
+                createdat: Créé le
+                customer_customercode: Code client
+                customer_fulltextname: Nom complet client
+                customerip: Adresse IP client
+                itemstotal: Total
+                notes: Notes
+                number: Numéro
+                paymentstate: Etat du paiement
+                shippingstate: Statut de la livraison
+                state: État
+                total: Total
+                updatedat: Modifié le
             form:
                 basecurrency: Devise de référence
                 billingaddress: Adresse de facturation
@@ -59,12 +74,15 @@ librinfo:
                 channels: Canal de vente
                 currencies: Devises
                 currency_code: Devise
+                defaultlocale: Langue par défaut
                 locales: Langues
                 notes: Notes
                 shippingaddress: Adresse de livraison
+                
         channelpricing:
                 channelcode: Code du canal
-                original_price: Prix original
+                original_price:  Prix d'origine
+#'
                 price: Prix
         customergroup:
             breadcrumb:
@@ -73,6 +91,8 @@ librinfo:
             form:
                 code: Code
                 name: Nom
+        link:
+            order_list: Liste des commandes
         paymentmethod:
             breadcrumb:
                 paymentmethod_create: Créer un mode de paiement
@@ -126,7 +146,7 @@ librinfo:
                 #'
             form:
                 code: Code
-                value: ~
+                value: Valeur
                 values: Valeurs
         productvariant:
             breadcrumb:
@@ -138,14 +158,17 @@ librinfo:
                 name: Nom
                 slug: Slug
         shippingmethod:
+            form:
                 calculator: Règle de calcul
                 code: Code
                 position: Fonctions
+                translation__name: Nom
         shippingmethodtranslation:
             form:
                 description: Description
                 name: Nom
         taxcategory:
+            form:
                 code: Code
                 createdat: Créé le
                 description: Description
@@ -162,6 +185,7 @@ librinfo:
                 maintaxon: Catégorie principale
                 parent: Variété
                 taxons: Catégories
+                translation__name: Nom
         taxrate:
             breadcrumb:
                 taxcategory_create: Nouvelle catégorie de TVA
