@@ -47,7 +47,9 @@ librinfo:
         #'
         admin:
             payment_method: Mode de paiement
-
+        link:
+            order_list: Liste des commandes
+            payment_list: Liste des paiements
         channel:
             breadcrumb:
                 order_create: Nouvelle commande
@@ -80,6 +82,7 @@ librinfo:
                 shippingaddress: Adresse de livraison
                 
         channelpricing:
+            form:
                 channelcode: Code du canal
                 original_price:  Prix d'origine
 #'
@@ -91,12 +94,21 @@ librinfo:
             form:
                 code: Code
                 name: Nom
-        link:
-            order_list: Liste des commandes
+
         paymentmethod:
             breadcrumb:
                 paymentmethod_create: Créer un mode de paiement
                 paymentmethod_list: Liste des modes de paiement
+                payment_list: Liste des paiements
+            filter:
+                amount: Montant
+                createdat: Crée le
+                method: Mode
+                order_customer_customercode: Code Client
+                order_customer_name: Nom
+                order_number: N°
+                state: Etat
+                updatedat: Modifié le
             form:
                 code: Code
                 enabled: Actif
@@ -164,9 +176,13 @@ librinfo:
                 position: Fonctions
                 translation__name: Nom
         shippingmethodtranslation:
+            breadcrumb:
+                shippingmethodtranslation_create: Créer une methode de livraison
+                shippingmethodtranslation_list: Liste des methode de livraison
             form:
                 description: Description
                 name: Nom
+                locale: Langue
         taxcategory:
             form:
                 code: Code
