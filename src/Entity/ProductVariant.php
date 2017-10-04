@@ -23,9 +23,18 @@ class ProductVariant extends BaseProductVariant
     use OuterExtensible,
     ProductVariantExtension;
 
+    /**
+     * Allow enabling of product variant.
+     *
+     * @var bool
+     */
+    protected $enabled = true;
+
     public function __construct()
     {
         parent::__construct();
+        $this->initCollections();
+        $this->initOuterExtendedClasses();
         $this->translations = new ArrayCollection();
     }
 
@@ -70,5 +79,21 @@ class ProductVariant extends BaseProductVariant
         }
 
         return (string) $this->getTranslation()->getName();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param bool enabled
+     */
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
     }
 }

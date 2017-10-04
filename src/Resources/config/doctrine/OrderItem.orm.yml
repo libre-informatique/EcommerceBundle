@@ -1,8 +1,8 @@
-Librinfo\EcommerceBundle\Entity\ProductVariant:
+Librinfo\EcommerceBundle\Entity\OrderItem:
     type: entity
     fields:
-        enabled:
+        bulk:
             type: boolean
             nullable: false
             options:
-                default: true
+                default: false

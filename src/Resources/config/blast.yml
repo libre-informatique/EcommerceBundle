@@ -110,7 +110,7 @@ parameters:
                                 label: false
                                 by_reference: true
                                 attr:
-                                    data-showFields: 'name,code'
+                                    data-showFields: 'name,code,enabled'
                                 type_options:
                                     btn_add: false
                                 required: true    # if not true, child form fields cannot be required (why ??)
@@ -219,6 +219,7 @@ parameters:
                                 type: sonata_type_model_hidden
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
+                            enabled: ~
                             _options:
                                 fieldsOrder: [product, name, code]
                         form_group_pricing:
@@ -268,6 +269,8 @@ parameters:
                     onHand: ~
                     onHold: ~
                     tracked:
+                        type: boolean
+                    enabled:
                         type: boolean
                     _options:
                         fieldsOrder:
@@ -567,6 +570,8 @@ parameters:
                                 mapped: false
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_order_actions.html.twig
                         _options:
+                            attr:
+                                class: inline-block
                             groupsOrder:
                                 - show_group_actions
                                 - show_group_order
