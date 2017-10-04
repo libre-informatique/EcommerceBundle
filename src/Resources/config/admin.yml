@@ -237,3 +237,13 @@ services:
               group: admin
               label: librinfo.ecommercebundle.admin.shipping_method_translation
               label_translator_strategy: blast_core.label.strategy.librinfo_ecommerce
+
+    librinfo_ecommerce.admin.shop_user:
+        class: Librinfo\EcommerceBundle\Admin\ShopUserAdmin
+        arguments: [~, Sylius\Component\Core\Model\ShopUser, BlastCoreBundle:CRUD]
+        tags:
+            - name: sonata.admin
+              manager_type: orm
+              group: admin
+              label: librinfo.ecommercebundle.admin.shop_user
+              label_translator_strategy: blast_core.label.strategy.librinfo_ecommerce

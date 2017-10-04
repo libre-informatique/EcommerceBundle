@@ -1713,3 +1713,120 @@ parameters:
                     name: ~
                     description: ~
                     locale: ~
+
+################################################################################
+# ShopUser
+################################################################################
+
+        Sylius\Component\Core\Model\ShopUser:
+            baseRoute:
+                name: admin_librinfo_ecommerce_shop_user
+                pattern: librinfo/ecommerce/shop_user
+                
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                remove:
+                    createdAt: ~
+                    credentialsExpireAt: ~
+                    emailCanonical: ~
+                    emailVerificationToken: ~
+                    expiresAt: ~
+                    id: ~
+                    locked: ~
+                    password: ~
+                    passwordRequestedAt: ~
+                    passwordResetToken: ~
+                    roles: ~
+                    salt: ~
+                    updatedAt: ~
+                    usernameCanonical: ~
+                    verifiedAt: ~
+                add:
+                    show_tab_general:
+                        show_group_general:
+                            username: ~
+                            email: ~
+                            enabled: ~
+                            lastLogin: ~
+    
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                remove:
+                    usernameCanonical: ~
+                    passwordResetToken: ~
+                    passwordRequestedAt: ~
+                    emailVerificationToken: ~
+                    verifiedAt: ~
+                    expiresAt: ~
+                    credentialsExpireAt: ~
+                    roles: ~
+                    emailCanonical: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    id: ~
+                    password: ~
+                    salt: ~
+                    locked: ~
+                add:
+                    form_tab_general:
+                        form_group_general:
+                            username:
+                                attr:
+                                    readonly: ~
+                            email:
+                                attr:
+                                    readonly: ~
+                            enabled: ~
+                            lastLogin:
+                                attr:
+                                    readonly: ~
+                            
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+                    usernameCanonical: ~
+                    passwordResetToken: ~
+                    passwordRequestedAt: ~
+                    emailVerificationToken: ~
+                    verifiedAt: ~
+                    expiresAt: ~
+                    credentialsExpireAt: ~
+                    roles: ~
+                    emailCanonical: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    id: ~
+                    password: ~
+                    salt: ~
+                    locked: ~ 
+                add:
+                    username: ~
+                    email: ~
+                    enabled: ~
+                    lastLogin: ~
+
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                remove:
+                    usernameCanonical: ~
+                    passwordResetToken: ~
+                    passwordRequestedAt: ~
+                    emailVerificationToken: ~
+                    verifiedAt: ~
+                    expiresAt: ~
+                    credentialsExpireAt: ~
+                    roles: ~
+                    emailCanonical: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    id: ~
+                    password: ~
+                    salt: ~
+                    locked: ~
+                add:
+                    username: ~
+                    email: ~
+                    enabled: ~
+                    lastLogin: ~
+
+   
