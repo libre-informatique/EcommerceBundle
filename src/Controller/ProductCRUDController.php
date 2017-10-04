@@ -34,7 +34,7 @@ class ProductCRUDController extends CRUDController
 
     public function generateProductSlugAction(Request $request)
     {
-        $name = $request->query->get('name');
+        $name = (string) $request->query->get('name');
 
         return new JsonResponse(
             [

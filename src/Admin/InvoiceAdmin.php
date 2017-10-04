@@ -1,11 +1,11 @@
 <?php
 
 /*
- * This file is part of the Blast Project package.
+ * This file is part of the Lisem Project.
  *
  * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU LGPL v3.
+ * This file is licenced under the GNU GPL v3.
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
@@ -22,6 +22,12 @@ class InvoiceAdmin extends CoreAdmin
         parent::configureRoutes($collection);
         $collection->add('showFile', $this->getRouterIdParameter() . '/show_file');
         $collection->add('generate', '{order_id}/generate');
+
+        /* see InvoiceCRUDController which trigger AccessDeniedException for some route */
+        $collection->remove('create');
+        $collection->remove('edit');
+        $collection->remove('delete');
+        $collection->remove('duplicate');
     }
 
     public function createQuery($context = 'list')
