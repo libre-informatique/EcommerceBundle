@@ -1772,15 +1772,18 @@ parameters:
                         form_group_general:
                             username:
                                 attr:
-                                    readonly: ~
+                                    readonly: true
                             email:
                                 attr:
-                                    readonly: ~
+                                    readonly: true
                             enabled: ~
                             lastLogin:
+                                type: sonata_type_datetime_picker
                                 attr:
-                                    readonly: ~
-                            
+                                    readonly: true
+                                disabled: true
+                                required: false
+                                dp_side_by_side: true                                                       
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
