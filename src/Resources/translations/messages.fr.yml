@@ -41,8 +41,17 @@ librinfo:
         quantity_in_grams: Quantité (g)
     confirm:
         delete_bulk_product: Voulez-vous vraiment supprimer cet article vrac ?
-    ecommercebundle:
-        
+    label:
+        cancel_order: Annuler
+        cancel_this_order: Annuler cette commande
+        fulfill_order: Terminer
+        fulfill_this_order: Terminer cette commande
+        generating_invoice: Génération de la facture en cours...
+        order: Commande
+        product: Article
+        purchased_from: Achété sur
+        ship: Expédier
+    ecommercebundle:        
         dashboard_title: Statistiques de vente
         sales_amount: 'Chiffre d''affaire'
 
