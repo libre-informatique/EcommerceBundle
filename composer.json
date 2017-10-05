@@ -13,7 +13,7 @@
         "sylius/sylius": "^1.0",
         "libre-informatique/sonata-sylius-user-bundle": "self.version",
         "libre-informatique/crm-bundle": "self.version",
-        "knplabs/knp-snappy-bundle": "dev-master"
+        "knplabs/knp-snappy-bundle": "^1.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": ">=3.2"
