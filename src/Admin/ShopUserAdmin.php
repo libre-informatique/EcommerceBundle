@@ -17,7 +17,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class ShopUserAdmin extends CoreAdmin
 {
-
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(array('list', 'show', 'edit'));
