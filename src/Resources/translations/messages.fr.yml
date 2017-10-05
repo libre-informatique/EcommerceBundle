@@ -42,6 +42,7 @@ librinfo:
     confirm:
         delete_bulk_product: Voulez-vous vraiment supprimer cet article vrac ?
     ecommercebundle:
+        
         dashboard_title: Statistiques de vente
         sales_amount: Chiffre d'affaire
         #'
@@ -51,10 +52,11 @@ librinfo:
             order_list: Liste des commandes
             payment_list: Liste des paiements
 
-
+        _action: Action
         accountverificationrequired: La vérification des comptes est-elle requise ?
         adjustmentstotal: Total ajustements
         amount: Montant
+        available: Disponible
         basecurrency: Devise de référence
         billingaddress: Adresse de facturation
         calculator: Règle de calcul
@@ -71,16 +73,20 @@ librinfo:
         currency_code: Devise
         customer_customercode: Code client
         customer_fulltextname: Nom complet client
+        customer_group: Groupes de client
         customergroup_create: Créer un groupe de client
         customergroup_list: Liste des groupes de client
         customerip: Adresse IP client
         defaultlocale: Langue par défaut
         defaulttaxzone: Zone de taxe par défaut
         description: Description
+        email: Email
         enabled: Actif
         hostname: 'Nom d''hôte'
         includedinprice: Compris dans le prix
+        invoice_list: Factures
         itemstotal: Total
+        lastlogin: Dernière connexion
         locale: Langue
         locales: Langues
         maintaxon: Catégorie principale
@@ -90,8 +96,11 @@ librinfo:
         name: Nom
         notes: Notes
         number: Numéro
+        onhand: Disponible
+        onhold: En attente
         option: 'Option d''article'
         options: 'Options d''article'
+        optionvalues: Options
         order_create: Nouvelle commande
         order_customer_customercode: Code Client
         order_customer_name: Nom
@@ -106,6 +115,7 @@ librinfo:
         position: Fonctions
         price: Prix
         product: Produit
+        product_code: Code Produit
         product_create: Nouvel Article
         product_list: Liste des articles
         productattribute_create: 'Nouvel attribut d''article'
@@ -117,6 +127,7 @@ librinfo:
         productvariant_create: 'Nouvelle déclinaisons d''article'
         productvariant_list: 'Liste des déclinaisons d''article'
         rates: Taux de TVA
+        salesjournal_list: Journal des ventes
         scope: Scope
         shippingaddress: Adresse de livraison
         shippingmethod_create: Nouvelle méthode de livraison
@@ -124,11 +135,13 @@ librinfo:
         shippingmethodtranslation_create: Créer une methode de livraison
         shippingmethodtranslation_list: Liste des methode de livraison
         shippingstate: Statut de la livraison
+        shopuser_list: Client boutique
         shortdescription: Brève description
         skippingpaymentstepallowed: 'Ignorez l''étape de paiement si un seul mode de paiement est disponible ?'
         skippingshippingstepallowed: 'Ignorez l''étape expédition si un seul mode de livraison est disponible ?'
         slug: Slug
         state: Etat
+        storagetype: Type de stockage
         taxcategory: Catégories de TVA
         taxcategory_create: Nouvelle catégorie de TVA
         taxcategory_list: Liste des catégories de TVA
@@ -138,9 +151,18 @@ librinfo:
         taxrate_create: Nouveau taux de TVA
         taxrate_list: Liste des taux de TVA
         total: Total
+        tracked: Suivi
         translation__name: Nom
+        translation_name: Nom
+        translations_description: Description
+        translations_metadescription: Méta Description
+        translations_metakeywords: Méta Mot Clef
+        translations_name: Noms
+        translations_shortdescription: Brève description
+        translations_value: Valeur
         type: Type
         updatedat: Modifié le
+        username: Utilisateur
         value: Valeur
         values: Valeurs
         zone: Zone
