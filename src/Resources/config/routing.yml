@@ -1,17 +1,17 @@
 librinfo_ecommerce.order.inline_edit:
-    path: /admin/librinfo/ecommerce/order/inline_edit
+    path: /%librinfo.url_prefix%/librinfo/ecommerce/order/inline_edit
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:orderInlineEdit }
 
 librinfo_ecommerce.order.add_item:
-    path: /admin/librinfo/ecommerce/order/item/add
+    path: /%librinfo.url_prefix%/librinfo/ecommerce/order/item/add
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:addToOrder }
 
 librinfo_ecommerce.order.remove_item:
-    path: /admin/librinfo/ecommerce/order/item/remove
+    path: /%librinfo.url_prefix%/librinfo/ecommerce/order/item/remove
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:removeFromOrder }
 
 librinfo_ecommerce.order.add_product:
-    path: /admin/librinfo/ecommerce/order/product/add
+    path: /%librinfo.url_prefix%/librinfo/ecommerce/order/product/add
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:addNewProduct }
 
 sylius_shop_checkout_address_override:
@@ -36,5 +36,5 @@ sylius_shop_checkout_address_override:
                 transition: address
 
 librinfo_ecommerce.order.updateBulk:
-    path: /admin/librinfo/ecommerce/order/item/updateBulk
+    path: /%librinfo.url_prefix%/librinfo/ecommerce/order/item/updateBulk
     defaults: { _controller: LibrinfoEcommerceBundle:Ajax:updateOrderItemBulkQuatity }

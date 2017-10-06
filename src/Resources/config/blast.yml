@@ -154,7 +154,7 @@ parameters:
                 add:
                     translations.name: ~
                     code: ~
-                    translations.description: ~                        
+                    translations.description: ~
                     translations.shortDescription: ~
                     translations.metaKeywords: ~
                     translations.metaDescription: ~
@@ -932,15 +932,18 @@ parameters:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
                     _actions: ~
-                    _batch_actions: ~
+                    # _batch_actions: ~
                     _list_actions: [create,edit]
                 add:
                     order.number: ~
-                    order.channel: ~
+                    order.getLastDebitInvoice.number:
+                        label: librinfo.ecommercebundle.invoice_number
                     order.customer:
+                        label: librinfo.ecommercebundle.customer
                         admin_code: librinfo_ecommerce.admin.customer
+                    order.channel: ~
                     method: ~
-                    state: 
+                    state:
                         template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_state.html.twig
                     amount:
                         type: text
@@ -953,7 +956,10 @@ parameters:
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    order.number: ~
+                    order.number:
+                        label: librinfo.ecommercebundle.order_number
+                    order.getLastDebitInvoice.number:
+                        label: librinfo.ecommercebundle.invoice_number
                     order.customer.name: ~
                     order.customer.customerCode: ~
                     # order.customer.circle: ~
@@ -1496,7 +1502,7 @@ parameters:
                     description: ~
                     enabled: ~
                     hostname: ~
-                    createdAt: ~ 
+                    createdAt: ~
                     updatedAt: ~
 
 
@@ -1722,7 +1728,7 @@ parameters:
             baseRoute:
                 name: admin_librinfo_ecommerce_shop_user
                 pattern: librinfo/ecommerce/shop_user
-                
+
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 remove:
@@ -1748,7 +1754,7 @@ parameters:
                             email: ~
                             enabled: ~
                             lastLogin: ~
-    
+
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 remove:
@@ -1783,7 +1789,7 @@ parameters:
                                     readonly: true
                                 disabled: true
                                 required: false
-                                dp_side_by_side: true                                                       
+                                dp_side_by_side: true
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
@@ -1801,7 +1807,7 @@ parameters:
                     id: ~
                     password: ~
                     salt: ~
-                    locked: ~ 
+                    locked: ~
                 add:
                     username: ~
                     email: ~
@@ -1831,5 +1837,3 @@ parameters:
                     email: ~
                     enabled: ~
                     lastLogin: ~
-
-   
