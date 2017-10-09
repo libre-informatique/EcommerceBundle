@@ -13,6 +13,7 @@
 namespace Librinfo\EcommerceBundle\Admin;
 
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 class PaymentAdmin extends SyliusGenericAdmin
@@ -29,10 +30,18 @@ class PaymentAdmin extends SyliusGenericAdmin
         $alias = $query->getRootAliases()[0];
 
         $query
+            ->join("$alias.order", 'ord')
             ->where(
                 $query->expr()->in(
-                    "$alias.state",
-                    [PaymentInterface::STATE_COMPLETED, PaymentInterface::STATE_REFUNDED]
+                    'ord.paymentState',
+                    [OrderPaymentStates::STATE_PAID, OrderPaymentStates::STATE_REFUNDED, OrderPaymentStates::STATE_AWAITING_PAYMENT]
+                )
+            )->andWhere(
+                $query->expr()->not(
+                    $query->expr()->in(
+                        "$alias.state",
+                        [PaymentInterface::STATE_CART]
+                    )
                 )
             );
 
@@ -60,6 +69,29 @@ class PaymentAdmin extends SyliusGenericAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list', 'show'));
+        $collection->clearExcept(array('list', 'show', 'export'));
+    }
+
+    public function getDataSourceIterator()
+    {
+        $iterator = parent::getDataSourceIterator();
+        $iterator->setDateTimeFormat('d/m/Y H:i:s');
+
+        return $iterator;
+    }
+
+    public function getExportFields()
+    {
+        return [
+            'order.number'                                              => 'order.number',
+            $this->trans('librinfo.ecommercebundle.invoice_number')     => 'order.getLastDebitInvoice.number',
+            'order.customer'                                            => 'order.customer',
+            'order.channel'                                             => 'order.channel',
+            'method'                                                    => 'method',
+            'order.paymentState'                                        => 'order.paymentState',
+            'amount'                                                    => 'amount',
+            'createdAt'                                                 => 'createdAt',
+            'updatedAt'                                                 => 'updatedAt',
+        ];
     }
 }

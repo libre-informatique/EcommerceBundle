@@ -325,3 +325,11 @@ services:
         class: Librinfo\EcommerceBundle\EventListener\SyliusOrderItemControllerListener
         tags:
             - { name: kernel.event_listener, event: sylius.order_item.pre_add, method: onOrderItemAddToCart }
+
+    librinfo_ecommerce.listener.payement:
+        class: Librinfo\EcommerceBundle\EventListener\PaymentMappingListener
+        calls:
+            - [setLogger, ['@logger']]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

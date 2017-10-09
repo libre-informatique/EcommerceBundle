@@ -128,6 +128,13 @@ sylius_shipping:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\ShippingMethod
 
+sylius_payment:
+    driver: doctrine/orm
+    resources:
+        payment:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\Payment
+
 sylius_shop:
     # resources:
     #     checkout_address:

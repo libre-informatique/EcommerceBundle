@@ -870,9 +870,13 @@ parameters:
 # ORDER PAYMENT
 ################
 
-        Sylius\Component\Core\Model\Payment:
+        Librinfo\EcommerceBundle\Entity\Payment:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
+                remove:
+
+                    createdAt: ~
+                    updatedAt: ~
                 forceTabs: true
                 add:
                     show_tab_payment_details:
@@ -884,6 +888,8 @@ parameters:
                                 template: LibrinfoEcommerceBundle:PaymentAdmin/Show:_payment_state.html.twig
                             amount:
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                            updatedAt:
+                                label: librinfo.ecommercebundle.paid_at
                         show_group_order:
                             order.customer:
                                 admin_code: librinfo_ecommerce.admin.customer
@@ -896,17 +902,11 @@ parameters:
                             order.total:
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
                             order.currencyCode: ~
-                            order.exchangeRate: ~
-                    show_tab_history:
-                        '':
-                            createdAt: ~
-                            updatedAt: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     '':
                         '':
-
                             state:
                                 type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                             amount:
@@ -935,19 +935,25 @@ parameters:
                     # _batch_actions: ~
                     _list_actions: [create,edit]
                 add:
-                    order.number: ~
+                    order.number:
+                        label: librinfo.ecommercebundle.order_number
                     order.getLastDebitInvoice.number:
                         label: librinfo.ecommercebundle.invoice_number
                     order.customer:
                         label: librinfo.ecommercebundle.customer
                         admin_code: librinfo_ecommerce.admin.customer
                     order.channel: ~
-                    method: ~
-                    state:
+                    method:
+                        label: librinfo.ecommercebundle.payment_method
+                    order.paymentState:
                         template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_state.html.twig
                     amount:
                         type: text
                         template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_amount.html.twig
+                    dueAmount:
+                        type: text
+                        template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_due_amount.html.twig
+                        mapped: false
                     createdAt: ~
                     updatedAt: ~
                     _actions:
@@ -963,7 +969,7 @@ parameters:
                     order.customer.name: ~
                     order.customer.customerCode: ~
                     # order.customer.circle: ~
-                    state:
+                    order.paymentState:
                         type: doctrine_orm_string
                         field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                         field_options:
