@@ -1,3 +1,4 @@
+
 librinfo:
     action:
         add_variant: Ajouter une déclinaison
@@ -51,7 +52,7 @@ librinfo:
     ecommercebundle:
         dashboard_title: Statistiques de vente
         sales_amount: 'Chiffre d''affaire'
-
+        localecode: Langue
         admin:
             payment: Paiement
             payment_method: Mode de paiement
