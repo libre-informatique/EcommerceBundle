@@ -100,7 +100,7 @@ services:
 
     librinfo_ecommerce.admin.payment:
         class: Librinfo\EcommerceBundle\Admin\PaymentAdmin
-        arguments: [~, Sylius\Component\Core\Model\Payment, LibrinfoEcommerceBundle:PaymentCRUD]
+        arguments: [~, Librinfo\EcommerceBundle\Entity\Payment, LibrinfoEcommerceBundle:PaymentCRUD]
         tags:
             - name: sonata.admin
               manager_type: orm

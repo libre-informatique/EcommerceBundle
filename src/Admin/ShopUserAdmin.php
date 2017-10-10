@@ -12,10 +12,10 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Blast\CoreBundle\Admin\CoreAdmin;
+// use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ShopUserAdmin extends CoreAdmin
+class ShopUserAdmin extends SyliusGenericAdmin
 {
     protected function configureRoutes(RouteCollection $collection)
     {

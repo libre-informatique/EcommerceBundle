@@ -53,6 +53,7 @@ librinfo:
         sales_amount: 'Chiffre d''affaire'
 
         admin:
+            payment: Paiement
             payment_method: Mode de paiement
             channel: Canal de vente
             order: Commande
@@ -97,6 +98,7 @@ librinfo:
         defaultlocale: Langue par défaut
         defaulttaxzone: Zone de taxe par défaut
         description: Description
+        dueamount: Montant dû
         email: Email
         enabled: Actif
         exchangerate: Taux de change
@@ -121,14 +123,24 @@ librinfo:
         option: 'Option d''article'
         options: 'Options d''article'
         optionvalues: Options
+        order_adjustmentstotal: Total ajustements
+        order_channel: Canal de vente
         order_create: Nouvelle commande
+        order_currencycode: Devise
+        order_customer: Client
         order_customer_customercode: Code Client
         order_customer_name: Nom
+        order_itemstotal: Total produits
         order_list: Liste des commandes
-        order_number: N°
+        order_number: N° de commande
+        order_paymentstate: État du paiement
+        order_tokenvalue: Jeton
+        order_total: Total commande
         original_price:  'Prix d''origine'
+        paid_at: Payé le
         parent: Variété
         payment_list: Liste des paiements
+        payment_method: Mode de paiement
         paymentmethod_create: Créer un mode de paiement
         paymentmethod_list: Liste des modes de paiement
         paymentstate: Etat du paiement
