@@ -673,7 +673,7 @@ parameters:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
                     _actions: [edit]
-                     _batch_actions: [delete]
+                    _batch_actions: [delete]
                     _list_actions: [create]
                 add:
                     _batch_actions: [cancel]
