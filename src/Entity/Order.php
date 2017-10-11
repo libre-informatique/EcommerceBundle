@@ -43,11 +43,6 @@ class Order extends BaseOrder
         $this->currencyCode = $currencyCode;
     }
 
-    public function __toString()
-    {
-        return (string) $this->getId();
-    }
-
     /**
      * Add invoice.
      *
@@ -90,5 +85,14 @@ class Order extends BaseOrder
         return $this->invoices->filter(function ($item) {
             return $item->getType() === Invoice::TYPE_DEBIT;
         })->first();
+    }
+
+    public function __toString()
+    {
+        if ($this->number !== null) {
+            return (string) $this->number;
+        }
+
+        return (string) $this->id;
     }
 }

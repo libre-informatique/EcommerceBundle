@@ -12,33 +12,26 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Blast\CoreBundle\Admin\CoreAdmin;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 
-class SalesJournalAdmin extends OrderAdmin
+class SalesJournalAdmin extends CoreAdmin
 {
     protected $baseRouteName = 'admin_librinfo_ecommerce_sales_journal';
     protected $baseRoutePattern = 'librinfo/ecommerce/sales_journal';
     protected $classnameLabel = 'SalesJournal';
 
+    protected $datagridValues = array(
+        '_page'       => 1,
+        '_per_page'   => 192,
+        '_sort_order' => 'DESC',
+        '_sort_by'    => 'operationDate',
+    );
+
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(array('list', 'show'));
-    }
-
-    public function createQuery($context = 'list')
-    {
-        $query = parent::createQuery($context);
-        $alias = $query->getRootAliases()[0];
-        $query
-            ->leftJoin("$alias.payments", 'payments')
-            ->andWhere("$alias.state = :state")
-            ->orWhere('payments.state = :statePayments')
-            ->setParameter('state', OrderInterface::STATE_FULFILLED)
-            ->setParameter('statePayments', PaymentInterface::STATE_COMPLETED);
-
-        return $query;
     }
 
     /**
@@ -61,6 +54,16 @@ class SalesJournalAdmin extends OrderAdmin
         unset($actions['delete']);
 
         return $actions;
+    }
+
+    /**
+     * @param ListMapper $list
+     */
+    protected function configureListFields(ListMapper $list)
+    {
+        parent::configureListFields($list);
+
+        $list->remove('batch');
     }
 
     public function toString($object)

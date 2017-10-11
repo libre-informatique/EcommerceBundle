@@ -67,6 +67,7 @@ librinfo:
             payment_list: Liste des paiements
 
         _action: Action
+
         accountverificationrequired: La vérification des comptes est-elle requise ?
         adjustmentstotal: Total ajustements
         amount: Montant
@@ -84,9 +85,11 @@ librinfo:
         code: Code
         contactemail: Email de contact
         createdat: Crée le
+        credit: Crédit
         currencies: Devises
         currency_code: Devise
         currencycode: Devise
+        customer_circles: Groupes client
         customer_createdat: Client depuis
         customer_customercode: Code client
         customer_fulltextname: Nom complet client
@@ -95,6 +98,7 @@ librinfo:
         customergroup_create: Créer un groupe de client
         customergroup_list: Liste des groupes de client
         customerip: Adresse IP client
+        debit: Débit
         defaultlocale: Langue par défaut
         defaulttaxzone: Zone de taxe par défaut
         description: Description
@@ -107,6 +111,7 @@ librinfo:
         invoice_list: Factures
         invoice_number: N° Facture
         itemstotal: Total
+        label: Libélé
         lastlogin: Dernière connexion
         locale_code: Code langue
         locale: Langue
@@ -120,6 +125,7 @@ librinfo:
         number: Numéro
         onhand: Disponible
         onhold: En attente
+        operationdate: 'Date de l''opération'
         option: 'Option d''article'
         options: 'Options d''article'
         optionvalues: Options
@@ -139,6 +145,7 @@ librinfo:
         original_price:  'Prix d''origine'
         paid_at: Payé le
         parent: Variété
+        payment: Paiement
         payment_list: Liste des paiements
         payment_method: Mode de paiement
         paymentmethod_create: Créer un mode de paiement

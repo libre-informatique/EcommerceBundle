@@ -187,7 +187,7 @@ parameters:
                         show_group_pricing:
                             taxCategory: ~
                             price:
-                                template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                         show_group_stock:
                             onHand: ~
                             onHold: ~
@@ -556,11 +556,11 @@ parameters:
                             tokenValue: ~
                         show_group_totals:
                             itemsTotal:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             adjustmentsTotal:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             total:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             currencyCode: ~
                             exchangeRate: ~
                         show_group_actions:
@@ -887,7 +887,7 @@ parameters:
                             state:
                                 template: LibrinfoEcommerceBundle:PaymentAdmin/Show:_payment_state.html.twig
                             amount:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             updatedAt:
                                 label: librinfo.ecommercebundle.paid_at
                         show_group_order:
@@ -896,11 +896,11 @@ parameters:
                             order.tokenValue: ~
                         show_group_totals:
                             order.itemsTotal:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             order.adjustmentsTotal:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             order.total:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             order.currencyCode: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
@@ -935,8 +935,9 @@ parameters:
                     # _batch_actions: ~
                     _list_actions: [create,edit]
                 add:
-                    order.number:
+                    order:
                         label: librinfo.ecommercebundle.order_number
+                        admin_code: librinfo_ecommerce.admin.order
                     order.getLastDebitInvoice.number:
                         label: librinfo.ecommercebundle.invoice_number
                     order.customer:
@@ -994,36 +995,35 @@ parameters:
 #            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
-                    updatedAt: ~
-                    notes: ~
+                    _action: ~
+                add:
+                    operationDate: ~
+                    # account: ~
+                    order:
+                        label: librinfo.ecommercebundle.order_number
+                    invoice:
+                        label: librinfo.ecommercebundle.invoice_number
+                    payment: ~
+                    label: ~
+                    debit:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig
+                    credit:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig
 
 
 #            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
-                remove:
-                    updatedAt: ~
-                    createdAt: ~
-                    notes: ~
-                    itemsTotal: ~
-                    adjustmentsTotal: ~
-                    checkoutCompletedAt: ~
-                    customerIp: ~
-                    states: ~
                 add:
-                    customer.group: ~
-                    state:
-                        type: doctrine_orm_string
-                        field_type: Librinfo\EcommerceBundle\Form\Type\OrderStateType
-                        field_options:
-                            no_cart: true
-                    paymentState:
-                        type: doctrine_orm_string
-                        field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
-                        field_options:
-                            no_cart: true
-                    createdAt:
-                        type: doctrine_orm_date_range
-                        field_type: sonata_type_datetime_range_picker
+                    operationDate: ~
+                    # account: ~
+                    order: ~
+                    invoice: ~
+                    payment: ~
+                    label: ~
+                    debit:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig
+                    credit:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig
 
 
 #################

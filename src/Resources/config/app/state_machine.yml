@@ -2,7 +2,7 @@ winzou_state_machine:
     sylius_order:
         transitions:
             cancel:
-                from: [new, fulfilled]
+                from: [fulfilled]
                 to: cancelled
         callbacks:
             before:
@@ -12,7 +12,7 @@ winzou_state_machine:
                     args: ["object"]
             after:
                 librinfo_ecommerce_order_validated:
-                    on:   ["create"]
+                    on:   ["create","fulfill"]
                     do:   ["@librinfo_ecommerce.order_manager", "validateOrder"]
                     args: ["object"]
                 librinfo_ecommerce_order_generate_credit_note:

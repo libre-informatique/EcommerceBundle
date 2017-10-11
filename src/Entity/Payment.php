@@ -16,4 +16,16 @@ use Sylius\Component\Core\Model\Payment as BasePayement;
 
 class Payment extends BasePayement
 {
+    public function __toString()
+    {
+        $str = '';
+        if ($this->getMethod() !== null) {
+            $str .= $this->getMethod()->getCode() . '-';
+        }
+        if ($this->getAmount() !== null) {
+            $str .= $this->getAmount();
+        }
+
+        return $str;
+    }
 }

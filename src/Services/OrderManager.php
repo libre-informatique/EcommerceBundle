@@ -17,6 +17,7 @@ use Sylius\Component\Order\Model\OrderInterface;
 use SM\Factory\Factory;
 use Librinfo\EcommerceBundle\Factory\InvoiceFactoryInterface;
 use Librinfo\EcommerceBundle\Entity\Invoice;
+use Librinfo\EcommerceBundle\SalesJournal\SalesJournalService;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner;
 
 class OrderManager
@@ -42,6 +43,11 @@ class OrderManager
     private $orderNumberAssigner;
 
     /**
+     * @var SalesJournalService
+     */
+    private $salesJournalService;
+
+    /**
      * @param EntityManager $em
      */
     public function __construct(EntityManager $em)
@@ -58,9 +64,13 @@ class OrderManager
             $this->em->flush($order);
         }
 
-        $stateMachine = $this->stateMachine->get($order, 'sylius_order');
+        $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_DEBIT);
 
-        $stateMachine->apply('fulfill');
+        $this->em->persist($invoice);
+
+        $this->salesJournalService->traceDebitInvoice($object, $invoice);
+
+        $this->em->flush();
     }
 
     public function generateCreditInvoice(OrderInterface $object)
@@ -68,7 +78,12 @@ class OrderManager
         $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_CREDIT);
 
         $this->em->persist($invoice);
+
+        $this->salesJournalService->traceCreditInvoice($object, $invoice);
+
         $this->em->flush();
+
+
     }
 
     /**
@@ -97,5 +112,13 @@ class OrderManager
     public function setOrderNumberAssigner(OrderNumberAssigner $orderNumberAssigner): void
     {
         $this->orderNumberAssigner = $orderNumberAssigner;
+    }
+
+    /**
+     * @param SalesJournalService $salesJournalService
+     */
+    public function setSalesJournalService(SalesJournalService $salesJournalService): void
+    {
+        $this->salesJournalService = $salesJournalService;
     }
 }

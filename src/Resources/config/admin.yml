@@ -120,7 +120,7 @@ services:
 
     librinfo_ecommerce.admin.sales_journal:
         class: Librinfo\EcommerceBundle\Admin\SalesJournalAdmin
-        arguments: [~, Librinfo\EcommerceBundle\Entity\Order, LibrinfoEcommerceBundle:OrderCRUD]
+        arguments: [~, Librinfo\EcommerceBundle\Entity\SalesJournalItem, BlastCoreBundle:CRUD]
         tags:
             - name: sonata.admin
               manager_type: orm

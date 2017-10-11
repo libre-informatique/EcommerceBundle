@@ -105,8 +105,8 @@ class OrderUpdater
                 ->getRepository('LibrinfoEcommerceBundle:ProductVariant')
                 ->find($variantId);
 
-            $optionCode = $variant->getOptionValues()->first()->getOption()->getCode();
-            $optionValue = $variant->getOptionValues()->first()->getCode();
+            $optionCode = $variant->getOptionValues()->first() ? $variant->getOptionValues()->first()->getOption()->getCode() : false;
+            $optionValue = $variant->getOptionValues()->first() ? $variant->getOptionValues()->first()->getCode() : false;
 
             $isBulk = ($optionCode === Product::$PACKAGING_OPTION_CODE && $optionValue === 'BULK');
 
