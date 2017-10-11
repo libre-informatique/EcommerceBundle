@@ -42,7 +42,8 @@ class OrderAdmin extends CoreAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list', 'show', 'batch', 'create'));
+        parent::configureRoutes($collection);
+        $collection->clearExcept(array('list', 'show', 'batch', 'create', 'duplicate'));
         $collection->add('updateShipping', $this->getRouterIdParameter() . '/updateShipping');
         $collection->add('updatePayment', $this->getRouterIdParameter() . '/updatePayment');
         $collection->add('cancelOrder', $this->getRouterIdParameter() . '/cancelOrder');
