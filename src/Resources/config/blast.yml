@@ -672,8 +672,8 @@ parameters:
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
-                    _actions: [edit, duplicate]
-                    # _batch_actions: [delete]
+                    _actions: [edit]
+                     _batch_actions: [delete]
                     _list_actions: [create]
                 add:
                     _batch_actions: [cancel]
