@@ -82,8 +82,6 @@ class OrderManager
         $this->salesJournalService->traceCreditInvoice($object, $invoice);
 
         $this->em->flush();
-
-
     }
 
     /**
