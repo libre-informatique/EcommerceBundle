@@ -13,15 +13,18 @@
 namespace Librinfo\EcommerceBundle\Controller;
 
 use Blast\CoreBundle\Controller\CRUDController;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -70,7 +73,30 @@ class OrderCRUDController extends CRUDController
      */
     protected function preDuplicate($object)
     {
-        throw new AccessDeniedException();
+        // dump($object);
+        // dump((new \ReflectionClass($object))->getMethods());
+        $newOrder = $this->admin->getNewInstance();
+
+        
+        
+        $newOrder->addPayment(clone $object->getPayments()->first());
+        $newOrder->setChannel($object->getChannel());
+        $newOrder->setNumber($object->getNumber() + 1);
+        $newOrder->setCustomer($object->getCustomer());
+        $newOrder->setCurrencyCode($object->getCurrencyCode());
+        $newOrder->setLocaleCode($object->getLocaleCode());
+        $newOrder->addShipment(clone $object->getShipments()->first());
+        $newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
+        
+        foreach ($object->getItems() as $oItem) {
+            $newOrder->addItem(clone $oItem);
+        }
+        
+        /* call prePersist to persist ? */
+        $this->admin->prePersist($newOrder);
+        // dump($newOrder);
+        // die("DiE!");
+        return $this->showAction($object);
     }
 
     public function updateShippingAction(Request $request)
