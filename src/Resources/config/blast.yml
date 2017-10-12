@@ -1564,7 +1564,6 @@ parameters:
 #                                btn_add: Add
                             calculator:
                                 type: Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType
-                            calculator: ~
                             taxCategory: ~
                             enabled: ~
                         form_group_parameters:
