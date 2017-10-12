@@ -153,7 +153,7 @@ librinfo:
         paymentmethod_create: Créer un mode de paiement
         paymentmethod_list: Liste des modes de paiement
         paymentstate: Etat du paiement
-        position: Fonctions
+        position: Emplacement
         price: Prix
         product_code: Code Produit
         product_create: Nouvel Article
