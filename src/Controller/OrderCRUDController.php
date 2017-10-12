@@ -65,7 +65,19 @@ class OrderCRUDController extends CRUDController
             throw new AccessDeniedException('An order cannot be deleted after the checkout is completed. You should cancel it instead.');
         }
     }
+    
+    public function duplicateAction()
+    {
+        $id = $this->getRequest()->get($this->admin->getIdParameter());
+        $object = $this->admin->getObject($id); //clone $this->admin->getObject($id);
 
+        $preResponse = $this->preDuplicate($object);
+        if ($preResponse !== null) {
+            return $preResponse;
+        }
+        throw new AccessDeniedException('we should never be here');
+        return $this->createAction(null);
+    }
     /**
      * @param mixed $object
      *
@@ -73,6 +85,7 @@ class OrderCRUDController extends CRUDController
      */
     protected function preDuplicate($object)
     {
+        /* @todo: should we we use duplicateAction or preDuplicate ??? */
         // dump($object);
         // dump((new \ReflectionClass($object))->getMethods());
         $newOrder = $this->admin->getNewInstance();
@@ -81,7 +94,6 @@ class OrderCRUDController extends CRUDController
         
         $newOrder->addPayment(clone $object->getPayments()->first());
         $newOrder->setChannel($object->getChannel());
-        $newOrder->setNumber($object->getNumber() + 1);
         $newOrder->setCustomer($object->getCustomer());
         $newOrder->setCurrencyCode($object->getCurrencyCode());
         $newOrder->setLocaleCode($object->getLocaleCode());
@@ -91,12 +103,21 @@ class OrderCRUDController extends CRUDController
         foreach ($object->getItems() as $oItem) {
             $newOrder->addItem(clone $oItem);
         }
+
+        foreach ($object->getAdjustments() as $oAdjust) {
+            $newOrder->addAdjustment(clone $oAdjust);
+        }
         
         /* call prePersist to persist ? */
         $this->admin->prePersist($newOrder);
+        $this->container->get('sylius.manager.order')->flush(); /* Is it usefull */
+        
         // dump($newOrder);
         // die("DiE!");
-        return $this->showAction($object);
+        //        return $this->showAction($newOrder); /* Why show action does not work ? */
+        return new RedirectResponse(
+            $this->admin->generateUrl('show', ['id' => $newOrder->getId()])
+        );
     }
 
     public function updateShippingAction(Request $request)
