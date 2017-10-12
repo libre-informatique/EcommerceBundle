@@ -17,7 +17,6 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
@@ -67,7 +66,7 @@ class OrderCRUDController extends CRUDController
             throw new AccessDeniedException('An order cannot be deleted after the checkout is completed. You should cancel it instead.');
         }
     }
-    
+
     public function duplicateAction()
     {
         $id = $this->getRequest()->get($this->admin->getIdParameter());
@@ -80,6 +79,7 @@ class OrderCRUDController extends CRUDController
         throw new AccessDeniedException('we should never be here');
         return $this->createAction(null);
     }
+
     /**
      * @param mixed $object
      *
@@ -95,7 +95,6 @@ class OrderCRUDController extends CRUDController
         //}
         //  die("DiE!");
         $newOrder = $this->admin->getNewInstance();
-        
 
         $newOrder->setChannel($object->getChannel());
         $newOrder->setCustomer($object->getCustomer());
@@ -107,12 +106,12 @@ class OrderCRUDController extends CRUDController
         $newOrder->setPaymentState(PaymentInterface::STATE_NEW);
         $newOrder->setShippingState(ShipmentInterface::STATE_CART);
         //$newOrder->addPromotionCoupon($object->getPromotionCoupon());
-        
+
         //$newOrder->addShipment(clone $object->getShipments()->first());
         //$newOrder->addPayment(clone $object->getPayments()->first());
 
         /* @todo: payment or not payment */
-        
+
         /*
         foreach ($object->getPayments() as $oPayment) {
             $newOrder->addPayment(clone $oPayment);
@@ -121,7 +120,7 @@ class OrderCRUDController extends CRUDController
             $newOrder->addShipment(clone $oShipment);
         }
         */
-        
+
         /* @todo: clone or not clone ? */
 
         foreach ($object->getPromotions() as $oPro) {
@@ -138,23 +137,23 @@ class OrderCRUDController extends CRUDController
         $newOrder->recalculateAdjustmentsTotal();
 
         //$newOrder->recalculateTotal();
-        
+
         /* call prePersist to persist ? */
         //        $this->admin->prePersist($newOrder);
 
         /* @todo: factorize this in a service reusable in OrderAdmin.php */
         $this->container->get('sylius.repository.order')->add($newOrder);
         $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
-        
+
         $stateMachineFactory = $this->container->get('sm.factory');
         $stateMachine = $stateMachineFactory->get($newOrder, OrderShippingTransitions::GRAPH);
         $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
-        
+
         // $stateMachine = $stateMachineFactory->get($newOrder, OrderPaymentTransitions::GRAPH);
         // $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
-        
+
         $this->container->get('sylius.manager.order')->flush($newOrder);
-        
+
         // dump($newOrder);
         // die("DiE!");
         // return $this->showAction($newOrder); /* Why show action does not work ? */
