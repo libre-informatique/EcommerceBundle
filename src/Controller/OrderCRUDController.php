@@ -88,11 +88,11 @@ class OrderCRUDController extends CRUDController
     protected function preDuplicate($object)
     {
         /* @todo: should we we use duplicateAction or preDuplicate ??? */
-         dump($object);
+        // dump($object);
         // dump((new \ReflectionClass($object))->getMethods());
-        foreach ($object->getShipments() as $curShip) {
-            dump($curShip);
-        }
+        //foreach ($object->getShipments() as $curShip) {
+        //    dump($curShip);
+        //}
         //  die("DiE!");
         $newOrder = $this->admin->getNewInstance();
         
