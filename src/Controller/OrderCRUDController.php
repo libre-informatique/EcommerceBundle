@@ -103,8 +103,8 @@ class OrderCRUDController extends CRUDController
         $newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
         $newOrder->setCheckoutCompletedAt(new \DateTime('NOW'));
         $newOrder->setState(OrderInterface::STATE_NEW);
-        $newOrder->setPaymentState(PaymentInterface::STATE_NEW);
-        $newOrder->setShippingState(ShipmentInterface::STATE_CART);
+        // $newOrder->setPaymentState(PaymentInterface::STATE_PROCESSING);
+        // $newOrder->setShippingState(ShipmentInterface::STATE_CART);
         //$newOrder->addPromotionCoupon($object->getPromotionCoupon());
 
         //$newOrder->addShipment(clone $object->getShipments()->first());
@@ -149,8 +149,8 @@ class OrderCRUDController extends CRUDController
         $stateMachine = $stateMachineFactory->get($newOrder, OrderShippingTransitions::GRAPH);
         $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
 
-        // $stateMachine = $stateMachineFactory->get($newOrder, OrderPaymentTransitions::GRAPH);
-        // $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
+        $stateMachine = $stateMachineFactory->get($newOrder, OrderPaymentTransitions::GRAPH);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
 
         $this->container->get('sylius.manager.order')->flush($newOrder);
 
