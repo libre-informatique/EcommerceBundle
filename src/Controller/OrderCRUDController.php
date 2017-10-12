@@ -25,6 +25,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Core\OrderShippingTransitions;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -86,35 +88,76 @@ class OrderCRUDController extends CRUDController
     protected function preDuplicate($object)
     {
         /* @todo: should we we use duplicateAction or preDuplicate ??? */
-        // dump($object);
+         dump($object);
         // dump((new \ReflectionClass($object))->getMethods());
+        foreach ($object->getShipments() as $curShip) {
+            dump($curShip);
+        }
+        //  die("DiE!");
         $newOrder = $this->admin->getNewInstance();
+        
 
-        
-        
-        $newOrder->addPayment(clone $object->getPayments()->first());
         $newOrder->setChannel($object->getChannel());
         $newOrder->setCustomer($object->getCustomer());
         $newOrder->setCurrencyCode($object->getCurrencyCode());
         $newOrder->setLocaleCode($object->getLocaleCode());
-        $newOrder->addShipment(clone $object->getShipments()->first());
         $newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
+        $newOrder->setCheckoutCompletedAt(new \DateTime('NOW'));
+        $newOrder->setState(OrderInterface::STATE_NEW);
+        $newOrder->setPaymentState(PaymentInterface::STATE_NEW);
+        $newOrder->setShippingState(ShipmentInterface::STATE_CART);
+        //$newOrder->addPromotionCoupon($object->getPromotionCoupon());
         
+        //$newOrder->addShipment(clone $object->getShipments()->first());
+        //$newOrder->addPayment(clone $object->getPayments()->first());
+
+        /* @todo: payment or not payment */
+        
+        /*
+        foreach ($object->getPayments() as $oPayment) {
+            $newOrder->addPayment(clone $oPayment);
+        }
+        foreach ($object->getShipments() as $oShipment) {
+            $newOrder->addShipment(clone $oShipment);
+        }
+        */
+        
+        /* @todo: clone or not clone ? */
+
+        foreach ($object->getPromotions() as $oPro) {
+            $newOrder->addPromotion(clone $oPro);
+        }
         foreach ($object->getItems() as $oItem) {
             $newOrder->addItem(clone $oItem);
         }
+        $newOrder->recalculateItemsTotal();
 
         foreach ($object->getAdjustments() as $oAdjust) {
             $newOrder->addAdjustment(clone $oAdjust);
         }
+        $newOrder->recalculateAdjustmentsTotal();
+
+        //$newOrder->recalculateTotal();
         
         /* call prePersist to persist ? */
-        $this->admin->prePersist($newOrder);
-        $this->container->get('sylius.manager.order')->flush(); /* Is it usefull */
+        //        $this->admin->prePersist($newOrder);
+
+        /* @todo: factorize this in a service reusable in OrderAdmin.php */
+        $this->container->get('sylius.repository.order')->add($newOrder);
+        $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
+        
+        $stateMachineFactory = $this->container->get('sm.factory');
+        $stateMachine = $stateMachineFactory->get($newOrder, OrderShippingTransitions::GRAPH);
+        $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
+        
+        // $stateMachine = $stateMachineFactory->get($newOrder, OrderPaymentTransitions::GRAPH);
+        // $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
+        
+        $this->container->get('sylius.manager.order')->flush($newOrder);
         
         // dump($newOrder);
         // die("DiE!");
-        //        return $this->showAction($newOrder); /* Why show action does not work ? */
+        // return $this->showAction($newOrder); /* Why show action does not work ? */
         return new RedirectResponse(
             $this->admin->generateUrl('show', ['id' => $newOrder->getId()])
         );
