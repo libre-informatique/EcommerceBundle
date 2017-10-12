@@ -12,6 +12,26 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
+use Sonata\AdminBundle\Form\FormMapper;
+
 class ShippingMethodAdmin extends SyliusGenericAdmin
 {
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        parent::configureFormFields($formMapper);
+        $formMapper->add(
+            'configuration',
+            'sonata_type_immutable_array',
+            array(
+                'keys' => array(
+                    array('FR_WEB', 'sonata_type_immutable_array', array(
+                        'keys' => array(
+                            array('amount', 'text', array())
+                        )
+                    ))
+                    //
+                )
+            )
+        );
+    }
 }
