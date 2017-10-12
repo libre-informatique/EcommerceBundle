@@ -31,7 +31,7 @@ class SalesJournalAdmin extends CoreAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(array('list', 'show'));
+        $collection->clearExcept(['list', 'show', 'export']);
     }
 
     /**
@@ -69,5 +69,26 @@ class SalesJournalAdmin extends CoreAdmin
     public function toString($object)
     {
         return $object->getNumber() ?: $object->getId();
+    }
+
+    public function getDataSourceIterator()
+    {
+        $iterator = parent::getDataSourceIterator();
+        $iterator->setDateTimeFormat('d/m/Y H:i:s');
+
+        return $iterator;
+    }
+
+    public function getExportFields()
+    {
+        return [
+            'order.number'   => 'order.number',
+            'invoice.number' => 'invoice.number',
+            'payment'        => 'payment',
+            'label'          => 'label',
+            'debit'          => 'debit',
+            'credit'         => 'credit',
+            'operation_date' => 'operationDate',
+        ];
     }
 }

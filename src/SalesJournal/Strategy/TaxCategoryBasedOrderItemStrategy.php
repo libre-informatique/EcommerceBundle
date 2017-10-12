@@ -10,25 +10,39 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\EcommerceBundle\SalesJournal\Guesser\OrderItem;
+namespace Librinfo\EcommerceBundle\SalesJournal\Strategy;
 
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Librinfo\EcommerceBundle\Entity\ProductVariant;
-use Librinfo\EcommerceBundle\SalesJournal\Guesser\GuesserInterface;
+use Librinfo\EcommerceBundle\Entity\SalesJournalItem;
+use Librinfo\EcommerceBundle\SalesJournal\Strategy\StrategyInterface;
 
-class TaxCategoryBasedOrderItemGuesser implements GuesserInterface
+class TaxCategoryBasedOrderItemStrategy implements StrategyInterface
 {
     /**
      * @var string
      */
-    private $default = 'No VAT';
+    private $default = 'Products';
 
-    public function guessType(OrderItemInterface $item)
+    /**
+     * @param OrderItemInterface $item
+     *
+     * @return string
+     */
+    public function getLabel($item): string
     {
         /** @var ProductVariant $variant */
         $variant = $item->getVariant();
         $itemIdentifier = $variant->getTaxCategory() ? $variant->getTaxCategory()->getName() : $this->default;
 
         return $itemIdentifier;
+    }
+
+    /**
+     * @param OrderItemInterface $orderItem
+     */
+    public function handleOperation(SalesJournalItem $salesJournalItem, $orderItem): void
+    {
+        $salesJournalItem->addCredit($orderItem->getTotal());
     }
 }

@@ -874,7 +874,6 @@ parameters:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 remove:
-
                     createdAt: ~
                     updatedAt: ~
                 forceTabs: true
@@ -1016,8 +1015,10 @@ parameters:
                 add:
                     operationDate: ~
                     # account: ~
-                    order: ~
-                    invoice: ~
+                    order:
+                        label: librinfo.ecommercebundle.order_number
+                    invoice:
+                        label: librinfo.ecommercebundle.invoice_number
                     payment: ~
                     label: ~
                     debit:

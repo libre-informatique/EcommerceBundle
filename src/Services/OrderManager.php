@@ -64,24 +64,38 @@ class OrderManager
             $this->em->flush($order);
         }
 
-        $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_DEBIT);
+        $stateMachine = $this->stateMachine->get($order, 'sylius_order');
+        if ($stateMachine->can('fulfill')) {
+            $stateMachine->apply('fulfill');
+        }
+    }
 
+    public function generateDebitInvoice(OrderInterface $object): Invoice
+    {
+        $invoice = $object->getLastDebitInvoice();
+        if ($invoice) {
+            return $invoice;
+        }
+
+        $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_DEBIT);
         $this->em->persist($invoice);
 
         $this->salesJournalService->traceDebitInvoice($object, $invoice);
-
         $this->em->flush();
+
+        return $invoice;
     }
 
-    public function generateCreditInvoice(OrderInterface $object)
+    public function generateCreditInvoice(OrderInterface $object): Invoice
     {
         $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_CREDIT);
 
         $this->em->persist($invoice);
 
         $this->salesJournalService->traceCreditInvoice($object, $invoice);
-
         $this->em->flush();
+
+        return $invoice;
     }
 
     /**

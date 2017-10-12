@@ -14,32 +14,26 @@ namespace Librinfo\EcommerceBundle\SalesJournal\Handler;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Librinfo\EcommerceBundle\Entity\Invoice;
-use Librinfo\EcommerceBundle\SalesJournal\Guesser\GuesserInterface;
-use Librinfo\EcommerceBundle\SalesJournal\Factory\SalesJournalItemFactory;
-use Librinfo\EcommerceBundle\Repository\SalesJournalItemRepository;
+use Librinfo\EcommerceBundle\SalesJournal\Strategy\StrategyInterface;
 
-class OrderHandler
+class OrderHandler extends AbstractHandler
 {
     /**
-     * @var array
+     * @var StrategyInterface
      */
-    private $items;
+    private $orderItemStrategy;
 
     /**
-     * @var GuesserInterface
+     * @var StrategyInterface
      */
-    private $orderItemGuesser;
+    private $orderAdjustmentStrategy;
 
     /**
-     * @var SalesJournalItemFactory
+     * @var StrategyInterface
      */
-    private $salesJournalItemFactory;
-
-    /**
-     * @var SalesJournalItemRepository
-     */
-    private $salesJournalItemRepository;
+    private $customerStrategy;
 
     public function generateItemsFromOrder(OrderInterface $order, Invoice $invoice, $operationType)
     {
@@ -49,51 +43,58 @@ class OrderHandler
 
         $this->items = [];
 
+        // Generate Order Items sales journal item(s)
+
         /** @var OrderItemInterface $orderItem */
         foreach ($order->getItems() as $orderItem) {
-            $type = $this->handleItemType($orderItem);
-
-            if (array_key_exists($type, $this->items)) {
-                $salesJournalItem = $this->items[$type];
-            } else {
-                $salesJournalItem = $this->salesJournalItemFactory->newSalesJournalItem($type, $order, $invoice);
-                $this->items[$type] = $salesJournalItem;
-            }
-
-            $salesJournalItem->addDebit($orderItem->getTotal());
+            $label = $this->orderItemStrategy->getLabel($orderItem);
+            $salesJournalItem = $this->handleSalesJournalItem($label, $order, $invoice);
+            $this->orderItemStrategy->handleOperation($salesJournalItem, $orderItem);
         }
+
+        // Generate Order Adjustments sales journal item(s)
+
+        /** @var AdjustmentInterface $adjustment */
+        foreach ($order->getAdjustments() as $adjustment) {
+            $label = $this->orderAdjustmentStrategy->getLabel($adjustment);
+            $salesJournalItem = $this->handleSalesJournalItem($label, $order, $invoice);
+            $this->orderAdjustmentStrategy->handleOperation($salesJournalItem, $adjustment);
+        }
+
+        // Generate Customer sales journal item
+
+        $label = $this->customerStrategy->getLabel($order->getCustomer());
+        $salesJournalItem = $this->handleSalesJournalItem($label, $order, $invoice);
+        $this->customerStrategy->handleOperation($salesJournalItem, $order->getCustomer());
+
+        // Persisting all sales journal items
 
         foreach ($this->items as $item) {
             $this->salesJournalItemRepository->add($item);
         }
     }
 
-    private function handleItemType(OrderItemInterface $orderItem)
+    /**
+     * @param StrategyInterface orderItemStrategy
+     */
+    public function setOrderItemStrategy(StrategyInterface $orderItemStrategy): void
     {
-        return $this->orderItemGuesser->guessType($orderItem);
+        $this->orderItemStrategy = $orderItemStrategy;
     }
 
     /**
-     * @param GuesserInterface orderItemGuesser
+     * @param StrategyInterface $orderAdjustmentStrategy
      */
-    public function setOrderItemGuesser(GuesserInterface $orderItemGuesser): void
+    public function setOrderAdjustmentStrategy(StrategyInterface $orderAdjustmentStrategy): void
     {
-        $this->orderItemGuesser = $orderItemGuesser;
+        $this->orderAdjustmentStrategy = $orderAdjustmentStrategy;
     }
 
     /**
-     * @param SalesJournalItemFactory salesJournalItemFactory
+     * @param StrategyInterface $customerStrategy
      */
-    public function setSalesJournalItemFactory(SalesJournalItemFactory $salesJournalItemFactory): void
+    public function setCustomerStrategy(StrategyInterface $customerStrategy): void
     {
-        $this->salesJournalItemFactory = $salesJournalItemFactory;
-    }
-
-    /**
-     * @param SalesJournalItemRepository $salesJournalItemRepository
-     */
-    public function setSalesJournalItemRepository(SalesJournalItemRepository $salesJournalItemRepository): void
-    {
-        $this->salesJournalItemRepository = $salesJournalItemRepository;
+        $this->customerStrategy = $customerStrategy;
     }
 }

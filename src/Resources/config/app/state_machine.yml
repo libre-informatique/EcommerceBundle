@@ -12,10 +12,22 @@ winzou_state_machine:
                     args: ["object"]
             after:
                 librinfo_ecommerce_order_validated:
-                    on:   ["create","fulfill"]
+                    on:   ["create"]
                     do:   ["@librinfo_ecommerce.order_manager", "validateOrder"]
+                    args: ["object"]
+                librinfo_ecommerce_order_generate_debit_invoice:
+                    on:   ["fulfill"]
+                    do:   ["@librinfo_ecommerce.order_manager", "generateDebitInvoice"]
                     args: ["object"]
                 librinfo_ecommerce_order_generate_credit_note:
                     on:   ["cancel"]
                     do:   ["@librinfo_ecommerce.order_manager", "generateCreditInvoice"]
                     args: ["object"]
+
+    sylius_payment:
+        callbacks:
+            after:
+                librinfo_ecommerce_payment_done:
+                    on:   ["complete"]
+                    do:   ["@librinfo_ecommerce.sales_journal.service", "tracePayment"]
+                    args: ["object.getOrder()","object"]

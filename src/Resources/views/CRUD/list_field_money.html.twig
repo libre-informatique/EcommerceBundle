@@ -4,7 +4,7 @@
 
 {% block field %}
     {% if value == 0 %}
-        <em class="text-muted">{{ money.convertAndFormat(value) }}</em>
+        <em class="text-muted" style="opacity:0.3">{{ money.convertAndFormat(value) }}</em>
     {% else %}
         {{ money.convertAndFormat(value) }}
     {% endif %}

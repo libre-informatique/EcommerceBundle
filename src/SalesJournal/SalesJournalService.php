@@ -14,7 +14,9 @@ namespace Librinfo\EcommerceBundle\SalesJournal;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Librinfo\EcommerceBundle\Entity\Invoice;
+use Librinfo\EcommerceBundle\Entity\Payment;
 use Librinfo\EcommerceBundle\SalesJournal\Handler\OrderHandler;
+use Librinfo\EcommerceBundle\SalesJournal\Handler\PaymentHandler;
 use Librinfo\EcommerceBundle\SalesJournal\Factory\SalesJournalItemFactory;
 
 class SalesJournalService
@@ -29,6 +31,11 @@ class SalesJournalService
      */
     private $orderHandler;
 
+    /**
+     * @var PaymentHandler
+     */
+    private $paymentHandler;
+
     public function traceCreditInvoice(OrderInterface $order, Invoice $invoice)
     {
         $this->orderHandler->generateItemsFromOrder($order, $invoice, Invoice::TYPE_DEBIT);
@@ -41,6 +48,12 @@ class SalesJournalService
 
     public function tracePayment(OrderInterface $order, Payment $payment)
     {
+        $this->paymentHandler->generateItemsFromPayment($payment, Invoice::TYPE_DEBIT);
+    }
+
+    public function traceRefund(OrderInterface $order, Payment $payment)
+    {
+        $this->paymentHandler->generateItemsFromPayment($payment, Invoice::TYPE_CREDIT);
     }
 
     /**
@@ -57,5 +70,13 @@ class SalesJournalService
     public function setOrderHandler(OrderHandler $orderHandler): void
     {
         $this->orderHandler = $orderHandler;
+    }
+
+    /**
+     * @param PaymentHandler $paymentHandler
+     */
+    public function setPaymentHandler(PaymentHandler $paymentHandler): void
+    {
+        $this->paymentHandler = $paymentHandler;
     }
 }

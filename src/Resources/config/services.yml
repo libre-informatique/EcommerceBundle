@@ -101,7 +101,7 @@ services:
         class: Librinfo\EcommerceBundle\EmailManager\OrderEmailManager
         arguments:
             - '@sylius.email_sender'
-            - '@librinfo_ecommerce.factory.invoice'
+            - '@librinfo_ecommerce.order_manager'
             - '@doctrine.orm.entity_manager'
 
 # ORDER CUSTOMER MANAGER
@@ -342,6 +342,7 @@ services:
         calls:
             - [setSalesJournalItemFactory, ['@librinfo_ecommerce.sales_journal.sales_journal_item.factory']]
             - [setOrderHandler, ['@librinfo_ecommerce.sales_journal.handler.order_handler']]
+            - [setPaymentHandler, ['@librinfo_ecommerce.sales_journal.handler.payment_handler']]
 
     librinfo_ecommerce.repository.sales_journal_item:
         class: Librinfo\EcommerceBundle\Repository\SalesJournalItemRepository
@@ -349,16 +350,38 @@ services:
         arguments:
             - Librinfo\EcommerceBundle\Entity\SalesJournalItem
 
-
     librinfo_ecommerce.sales_journal.sales_journal_item.factory:
         class: Librinfo\EcommerceBundle\SalesJournal\Factory\SalesJournalItemFactory
 
-    librinfo_ecommerce.sales_journal.handler.order_handler:
-        class: Librinfo\EcommerceBundle\SalesJournal\Handler\OrderHandler
+    librinfo_ecommerce.sales_journal.handler.abstract_handler:
+        abstract: true
         calls:
-            - [setOrderItemGuesser, ['@librinfo_ecommerce.sales_journal.guesser.order_item.guesser']]
             - [setSalesJournalItemFactory, ['@librinfo_ecommerce.sales_journal.sales_journal_item.factory']]
             - [setSalesJournalItemRepository, ['@librinfo_ecommerce.repository.sales_journal_item']]
 
-    librinfo_ecommerce.sales_journal.guesser.order_item.guesser:
-        class: Librinfo\EcommerceBundle\SalesJournal\Guesser\OrderItem\TaxCategoryBasedOrderItemGuesser
+    librinfo_ecommerce.sales_journal.handler.order_handler:
+        parent: librinfo_ecommerce.sales_journal.handler.abstract_handler
+        class: Librinfo\EcommerceBundle\SalesJournal\Handler\OrderHandler
+        calls:
+            - [setOrderItemStrategy, ['@librinfo_ecommerce.sales_journal.strategy.order_item.strategy']]
+            - [setOrderAdjustmentStrategy, ['@librinfo_ecommerce.sales_journal.strategy.order_adjustment.strategy']]
+            - [setCustomerStrategy, ['@librinfo_ecommerce.sales_journal.strategy.customer.strategy']]
+
+    librinfo_ecommerce.sales_journal.handler.payment_handler:
+        parent: librinfo_ecommerce.sales_journal.handler.abstract_handler
+        class: Librinfo\EcommerceBundle\SalesJournal\Handler\PaymentHandler
+        calls:
+            - [setPaymentStrategy, ['@librinfo_ecommerce.sales_journal.strategy.payment.strategy']]
+            - [setCustomerStrategy, ['@librinfo_ecommerce.sales_journal.strategy.customer.strategy']]
+
+    librinfo_ecommerce.sales_journal.strategy.order_item.strategy:
+        class: Librinfo\EcommerceBundle\SalesJournal\Strategy\TaxCategoryBasedOrderItemStrategy
+
+    librinfo_ecommerce.sales_journal.strategy.order_adjustment.strategy:
+        class: Librinfo\EcommerceBundle\SalesJournal\Strategy\OrderAdjustmentStrategy
+
+    librinfo_ecommerce.sales_journal.strategy.payment.strategy:
+        class: Librinfo\EcommerceBundle\SalesJournal\Strategy\PaymentStrategy
+
+    librinfo_ecommerce.sales_journal.strategy.customer.strategy:
+        class: Librinfo\EcommerceBundle\SalesJournal\Strategy\CustomerStrategy

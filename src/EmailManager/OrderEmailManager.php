@@ -14,6 +14,7 @@ namespace Librinfo\EcommerceBundle\EmailManager;
 
 use Doctrine\ORM\EntityManager;
 use Librinfo\EcommerceBundle\Factory\InvoiceFactoryInterface;
+use Librinfo\EcommerceBundle\Services\OrderManager;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -32,9 +33,9 @@ class OrderEmailManager implements OrderEmailManagerInterface
     private $emailSender;
 
     /**
-     * @var InvoiceFactoryInterface
+     * @var OrderManager
      */
-    private $invoiceFactory;
+    private $orderManager;
 
     /**
      * @var EntityManager
@@ -44,11 +45,12 @@ class OrderEmailManager implements OrderEmailManagerInterface
     /**
      * @param SenderInterface         $emailSender
      * @param InvoiceFactoryInterface $invoiceFactory
+     * @param EntityManager           $em
      */
-    public function __construct(SenderInterface $emailSender, InvoiceFactoryInterface $invoiceFactory, EntityManager $em)
+    public function __construct(SenderInterface $emailSender, OrderManager $orderManager, EntityManager $em)
     {
         $this->emailSender = $emailSender;
-        $this->invoiceFactory = $invoiceFactory;
+        $this->orderManager = $orderManager;
         $this->em = $em;
     }
 
@@ -57,6 +59,7 @@ class OrderEmailManager implements OrderEmailManagerInterface
      */
     public function sendConfirmationEmail(OrderInterface $order): void
     {
+        $order->getInvoices()->count();
         $attachment = $this->generateInvoice($order);
         $this->emailSender->send(Emails::ORDER_CONFIRMATION, [$order->getCustomer()->getEmail()], ['order' => $order], [$attachment]);
         @unlink($attachment);
@@ -70,9 +73,7 @@ class OrderEmailManager implements OrderEmailManagerInterface
     private function generateInvoice($order)
     {
         // create and persist the invoice entity
-        $invoice = $this->invoiceFactory->createForOrder($order);
-        $this->em->persist($invoice);
-        $this->em->flush();
+        $invoice = $this->orderManager->generateDebitInvoice($order);
 
         // write invoice contents (pdf) in a temporary file
         $temp_file = sys_get_temp_dir() . '/librinfo_invoice_' . $invoice->getNumber() . '.pdf';
