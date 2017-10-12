@@ -13,15 +13,18 @@
 namespace Librinfo\EcommerceBundle\Controller;
 
 use Blast\CoreBundle\Controller\CRUDController;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -62,7 +65,19 @@ class OrderCRUDController extends CRUDController
             throw new AccessDeniedException('An order cannot be deleted after the checkout is completed. You should cancel it instead.');
         }
     }
+    
+    public function duplicateAction()
+    {
+        $id = $this->getRequest()->get($this->admin->getIdParameter());
+        $object = $this->admin->getObject($id); //clone $this->admin->getObject($id);
 
+        $preResponse = $this->preDuplicate($object);
+        if ($preResponse !== null) {
+            return $preResponse;
+        }
+        throw new AccessDeniedException('we should never be here');
+        return $this->createAction(null);
+    }
     /**
      * @param mixed $object
      *
@@ -70,7 +85,39 @@ class OrderCRUDController extends CRUDController
      */
     protected function preDuplicate($object)
     {
-        throw new AccessDeniedException();
+        /* @todo: should we we use duplicateAction or preDuplicate ??? */
+        // dump($object);
+        // dump((new \ReflectionClass($object))->getMethods());
+        $newOrder = $this->admin->getNewInstance();
+
+        
+        
+        $newOrder->addPayment(clone $object->getPayments()->first());
+        $newOrder->setChannel($object->getChannel());
+        $newOrder->setCustomer($object->getCustomer());
+        $newOrder->setCurrencyCode($object->getCurrencyCode());
+        $newOrder->setLocaleCode($object->getLocaleCode());
+        $newOrder->addShipment(clone $object->getShipments()->first());
+        $newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
+        
+        foreach ($object->getItems() as $oItem) {
+            $newOrder->addItem(clone $oItem);
+        }
+
+        foreach ($object->getAdjustments() as $oAdjust) {
+            $newOrder->addAdjustment(clone $oAdjust);
+        }
+        
+        /* call prePersist to persist ? */
+        $this->admin->prePersist($newOrder);
+        $this->container->get('sylius.manager.order')->flush(); /* Is it usefull */
+        
+        // dump($newOrder);
+        // die("DiE!");
+        //        return $this->showAction($newOrder); /* Why show action does not work ? */
+        return new RedirectResponse(
+            $this->admin->generateUrl('show', ['id' => $newOrder->getId()])
+        );
     }
 
     public function updateShippingAction(Request $request)
