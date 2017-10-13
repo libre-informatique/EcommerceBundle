@@ -39,25 +39,23 @@ class OrderCustomerManager
 
     public function associateUserAndAddress(OrderInterface $object)
     {
-        //dump($object);
-        //die("Die !");
         $shippingAddress = $object->getShippingAddress();
         $billingAddress = $object->getBillingAddress();
         $givenCustomer = $object->getCustomer();
-        
+
         $foundCustomer = $this->em->getRepository(Organism::class)
                        ->findOneBy(array('email' => $givenCustomer->getEmail())); /* As email must be unique */
 
         $customer = null; /* We love null :) */
         if (isset($foundCustomer)) {
             $customer = $foundCustomer;
-            $object->setCustomer($foundCustomer);
+
             /* @todo: should not ask user to set a firstname and lastname if the email already exist */
         } else {
             $customer = $givenCustomer;
             $customer->setIsIndividual(true);
             $customer->setIsCustomer(true);
-           
+
             $customer->setFirstname($billingAddress->getFirstName());
             $customer->setLastname($billingAddress->getLastName());
         }
@@ -65,12 +63,14 @@ class OrderCustomerManager
         if ($this->codeGenerator !== null && $customer->getCustomerCode() === null) {
             $customer->setCustomerCode($this->codeGenerator->generate($customer));
         }
-                
+
         /* @todo: check if addAddress check if adress already exist */
         $customer->addAddress($shippingAddress);
         $customer->addAddress($billingAddress);
 
+        $object->setCustomer($customer);
         $customer->addOrder($object);
+
 
 
         // $this->em->flush($customer);

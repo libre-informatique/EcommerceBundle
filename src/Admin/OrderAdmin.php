@@ -235,9 +235,11 @@ class OrderAdmin extends CoreAdmin
         // $order->setShippingState(ShipmentInterface::STATE_READY);
 
         $stateMachineFactory = $this->getConfigurationPool()->getContainer()->get('sm.factory');
-        //
-        //$payment = clone $order->getPayments()->first();
-        //$shipment = clone $order->getShipments()->first();
+
+        /* @todo should not be done ... */
+        $payment = clone $order->getPayments()->first();
+        $shipment = clone $order->getShipments()->first();
+
 
         /* Why Clear What */
         $order->getPayments()->clear();
