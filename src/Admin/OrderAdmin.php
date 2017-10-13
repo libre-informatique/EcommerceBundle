@@ -114,28 +114,35 @@ class OrderAdmin extends CoreAdmin
                 ->end()
             ->end()
         ;
-
+        $admin = $this;
         $mapper
             ->getFormBuilder()
 
-            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($admin) {
                 $data = $event->getData();
                 $form = $event->getForm();
-                $formData = $form->getData();
 
-                // dump($data,$formData);die;
+                $orderCreationTools = $this->getConfigurationPool()->getContainer()->get('librinfo_ecommerce.order_creation_manager');
+                $order = $orderCreationTools->createOrder(); //$admin->getSubject();
 
                 if (isset($data['channel'])) {
                     $channel = $this->getConfigurationPool()->getContainer()->get('sylius.repository.channel')->find($data['channel']);
-                    $formData->setChannel($channel);
+                    $order->setChannel($channel);
+                    /* @todo: check if shipping method is valid with this channel (Or inverse) */
                 }
-
+                
                 if (isset($data['shippingAddress']) && isset($data['shippingAddress']['email'])) {
-                    $formData->getCustomer()->setEmail($data['shippingAddress']['email']);
+                    $orderCreationTools->copyAddress($order, $data, 'shippingAddress');
+                    $customer = $order->getCustomer();
+                    $customer->setEmail($data['shippingAddress']['email']);
+                    $customer->setEmailCanonical($data['shippingAddress']['email']);
+                    //$customer->setUsernameCanonical($customer->getName());
+                    $orderCreationTools->copyAddress($order, $data, 'customerAddress');
                 }
 
                 if (isset($data['shippingAddress']) && isset($data['shippingAddress']['useSameAddressForBilling'])) {
                     if ((bool) $data['shippingAddress']['useSameAddressForBilling'] === true) {
+                        /* Hum... Why remove and add */
                         $form->remove('billingAddress');
                         $form->add('billingAddress', OrderAddressType::class, [
                             'label'       => false,
@@ -148,26 +155,17 @@ class OrderAdmin extends CoreAdmin
                             'validation_groups' => false,
                         ]);
 
+                        
                         $data['billingAddress'] = $data['shippingAddress'];
                         unset($data['billingAddress']['useSameAddressForBilling']);
-
-                        $billingData = $formData->getBillingAddress();
-                        foreach ($data['billingAddress'] as $field => $bData) {
-                            try {
-                                $propertyAccessor = new PropertyAccessor();
-                                $propertyAccessor->setValue($billingData, $field, $bData);
-                            } catch (NoSuchPropertyException $e) {
-                            }
-                        }
-
-                        $formData->setBillingAddress($billingData);
-
-                        $form->setData($formData);
-
-                        $event->setData($data);
+                        $orderCreationTools->copyAddress($order, $data, 'billingAddress');
+                        
+                        /* ? useless as we already get the referenced object in getBillingAddress ? */
+                        // $order->setBillingAddress($billingData);
                     }
                 }
 
+                /* @todo: add a tools to set payment from form in 'librinfo_ecommerce.order_creation_manager' */
                 if (isset($data['payment'])) {
                     $paymentCode = $data['payment'];
 
@@ -178,9 +176,10 @@ class OrderAdmin extends CoreAdmin
                     $payment->setCurrencyCode($currency->getCode());
                     $payment->setState(PaymentInterface::STATE_NEW);
 
-                    $formData->addPayment($payment);
+                    $order->addPayment($payment);
                 }
-
+                
+                /* @todo: add a tools to set shipment from form in 'librinfo_ecommerce.order_creation_manager' */
                 if (isset($data['shipment'])) {
                     $shipmentCode = $data['shipment'];
 
@@ -189,15 +188,21 @@ class OrderAdmin extends CoreAdmin
                     $shipment->setMethod($this->getConfigurationPool()->getContainer()->get('sylius.repository.shipping_method')->findOneBy(['code' => $shipmentCode]));
                     $shipment->setState(ShipmentInterface::STATE_READY);
 
-                    $formData->addShipment($shipment);
+                    $order->addShipment($shipment);
                 }
-            })
-        ;
+                
+
+                //dump($order);
+                //die("DiE!");
+                $form->setData($order);
+                $event->setData($data); /* useless ? */
+            });
     }
 
     public function getNewInstance()
     {
         $object = parent::getNewInstance();
+        /* @todo: check if we can use createOrder from 'librinfo_ecommerce.order_creation_manager' */
         $addressFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.address');
         $customerFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.customer');
 
@@ -217,8 +222,12 @@ class OrderAdmin extends CoreAdmin
         $order = $object;
 
         parent::prePersist($order);
+        
         $this->getConfigurationPool()->getContainer()->get('librinfo_ecommerce.order_customer_manager')->associateUserAndAddress($order);
 
+
+        /* @todo: remove all this to use 'librinfo_ecommerce.order_creation_manager' */
+        
         $order->setCheckoutCompletedAt(new \DateTime('NOW'));
 
         $order->setState(OrderInterface::STATE_NEW);
@@ -227,9 +236,10 @@ class OrderAdmin extends CoreAdmin
 
         $stateMachineFactory = $this->getConfigurationPool()->getContainer()->get('sm.factory');
         //
-        $payment = clone $order->getPayments()->first();
-        $shipment = clone $order->getShipments()->first();
+        //$payment = clone $order->getPayments()->first();
+        //$shipment = clone $order->getShipments()->first();
 
+        /* Why Clear What */
         $order->getPayments()->clear();
         $order->getShipments()->clear();
 
@@ -238,8 +248,8 @@ class OrderAdmin extends CoreAdmin
         $orderProcessor = $this->getConfigurationPool()->getContainer()->get('sylius.order_processing.order_processor');
         $orderProcessor->process($order);
 
-        $order->addPayment($payment);
-        $order->addShipment($shipment);
+        //$order->addPayment($payment);
+        //$order->addShipment($shipment);
 
         $stateMachine = $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH);
         $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);

@@ -15,17 +15,19 @@ namespace Librinfo\EcommerceBundle\Controller;
 use Blast\CoreBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Core\OrderPaymentStates;
+use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Core\OrderShippingStates;
+use Sylius\Component\Core\OrderShippingTransitions;
+//use Sylius\Component\Core\PaymentTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
+//use Sylius\Component\Core\ShipmentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
+use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sylius\Component\Core\OrderPaymentTransitions;
-use Sylius\Component\Core\OrderShippingTransitions;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -94,24 +96,27 @@ class OrderCRUDController extends CRUDController
         //    dump($curShip);
         //}
         //  die("DiE!");
-        $newOrder = $this->admin->getNewInstance();
 
-        $newOrder->setChannel($object->getChannel());
-        $newOrder->setCustomer($object->getCustomer());
-        $newOrder->setCurrencyCode($object->getCurrencyCode());
-        $newOrder->setLocaleCode($object->getLocaleCode());
-        $newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
-        $newOrder->setCheckoutCompletedAt(new \DateTime('NOW'));
-        $newOrder->setState(OrderInterface::STATE_NEW);
-        // $newOrder->setPaymentState(PaymentInterface::STATE_PROCESSING);
-        // $newOrder->setShippingState(ShipmentInterface::STATE_CART);
+        // 1
+        // $newOrder = $this->admin->getNewInstance();
+
+        // $newOrder->setChannel($object->getChannel());
+        // $newOrder->setCustomer($object->getCustomer());
+        // $newOrder->setCurrencyCode($object->getCurrencyCode());
+        // $newOrder->setLocaleCode($object->getLocaleCode());
+        // $newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
+        // $newOrder->setCheckoutCompletedAt(new \DateTime('NOW'));
+        // $newOrder->setState(OrderInterface::STATE_NEW);
+        // $newOrder->setPaymentState(OrderPaymentStates::STATE_CART);
+        // $newOrder->setShippingState(OrderShippingStates::STATE_CART);
+        // 1
+        
         //$newOrder->addPromotionCoupon($object->getPromotionCoupon());
 
         //$newOrder->addShipment(clone $object->getShipments()->first());
         //$newOrder->addPayment(clone $object->getPayments()->first());
 
-        /* @todo: payment or not payment */
-
+        /* @todo: payment or not payment : Not needed ! */
         /*
         foreach ($object->getPayments() as $oPayment) {
             $newOrder->addPayment(clone $oPayment);
@@ -123,39 +128,57 @@ class OrderCRUDController extends CRUDController
 
         /* @todo: clone or not clone ? */
 
-        foreach ($object->getPromotions() as $oPro) {
-            $newOrder->addPromotion(clone $oPro);
-        }
-        foreach ($object->getItems() as $oItem) {
-            $newOrder->addItem(clone $oItem);
-        }
-        $newOrder->recalculateItemsTotal();
+        // 2
+        // foreach ($object->getPromotions() as $oPro) {
+        //     $newOrder->addPromotion(clone $oPro);
+        // }
+        // foreach ($object->getItems() as $oItem) {
+        //     $newOrder->addItem(clone $oItem);
+        // }
+        // $newOrder->recalculateItemsTotal();
 
-        foreach ($object->getAdjustments() as $oAdjust) {
-            $newOrder->addAdjustment(clone $oAdjust);
-        }
-        $newOrder->recalculateAdjustmentsTotal();
-
+        // foreach ($object->getAdjustments() as $oAdjust) {
+        //     $newOrder->addAdjustment(clone $oAdjust);
+        // }
+        // $newOrder->recalculateAdjustmentsTotal();
+        // 2
+        
         //$newOrder->recalculateTotal();
 
         /* call prePersist to persist ? */
         //        $this->admin->prePersist($newOrder);
 
         /* @todo: factorize this in a service reusable in OrderAdmin.php */
-        $this->container->get('sylius.repository.order')->add($newOrder);
-        $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
+        // 3
+        // $this->container->get('sylius.repository.order')->add($newOrder);
+        // $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
 
-        $stateMachineFactory = $this->container->get('sm.factory');
-        $stateMachine = $stateMachineFactory->get($newOrder, OrderShippingTransitions::GRAPH);
-        $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
 
-        $stateMachine = $stateMachineFactory->get($newOrder, OrderPaymentTransitions::GRAPH);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
+        // //$this->container->get('sylius.manager.order')->flush($newOrder);
+        
+        // $stateMachineFactory = $this->container->get('sm.factory');
+        // $stateMachine = $stateMachineFactory->get($newOrder, OrderShippingTransitions::GRAPH);
+        // $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
+        // foreach ($newOrder->getShipments() as $oShipment) {
+        //     $stateMachine = $stateMachineFactory->get($oShipment, ShipmentTransitions::GRAPH);
+        //     $stateMachine->apply(ShipmentTransitions::TRANSITION_CREATE);
+        // }
 
-        $this->container->get('sylius.manager.order')->flush($newOrder);
+        // $stateMachine = $stateMachineFactory->get($newOrder, OrderPaymentTransitions::GRAPH);
+        // $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
+        // foreach ($newOrder->getPayments() as $oPayment) {
+        //     $stateMachine = $stateMachineFactory->get($oPayment, PaymentTransitions::GRAPH);
+        //     $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE);
+        //     //            $stateMachine->apply(PaymentTransitions::TRANSITION_PROCESS);
+        // }
+        // // die("DIE!");
+        // $this->container->get('sylius.manager.order')->flush($newOrder);
+        // 3
 
+        $newOrder = $this->container->get('librinfo_ecommerce.order_creation_manager')->duplicateOrder($object);
+        $this->container->get('librinfo_ecommerce.order_creation_manager')->saveOrder($newOrder);
         // dump($newOrder);
-        // die("DiE!");
+        //die("DiE!");
         // return $this->showAction($newOrder); /* Why show action does not work ? */
         return new RedirectResponse(
             $this->admin->generateUrl('show', ['id' => $newOrder->getId()])
