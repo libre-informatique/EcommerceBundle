@@ -154,7 +154,7 @@ librinfo:
         paymentmethod_create: Créer un mode de paiement
         paymentmethod_list: Liste des modes de paiement
         paymentstate: Etat du paiement
-        position: Fonctions
+        position: Emplacement
         price: Prix
         product_code: Code Produit
         product_create: Nouvel Article
@@ -221,6 +221,7 @@ Action: Action
 Add product: Ajouter un produit
 Add product: Ajouter un produit
 Add: Ajouter
+Amount: Montant
 Channel Create: Créer un canal
 Channel List: Liste des canaux
 Edit: Modifier
