@@ -121,6 +121,16 @@ services:
             - [setOrderNumberAssigner, ['@sylius.order_number_assigner']]
             - [setSalesJournalService, ['@librinfo_ecommerce.sales_journal.service']]
 
+# @TODO remove service_container and calls all the needed service
+
+    librinfo_ecommerce.order_creation_manager:
+        class: Librinfo\EcommerceBundle\Services\OrderCreationManager
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@service_container'
+        calls:
+            - [setStateMachineFactory, ['@sm.factory']]            
+
 # EVENT LISTENERS
 
     librinfo_ecommerce.listener.sylius_guidable:
