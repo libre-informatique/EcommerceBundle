@@ -375,7 +375,7 @@ services:
             - [setCustomerStrategy, ['@librinfo_ecommerce.sales_journal.strategy.customer.strategy']]
 
     librinfo_ecommerce.sales_journal.strategy.order_item.strategy:
-        class: Librinfo\EcommerceBundle\SalesJournal\Strategy\TaxCategoryBasedOrderItemStrategy
+        class: Librinfo\EcommerceBundle\SalesJournal\Strategy\OrderItemStrategy
 
     librinfo_ecommerce.sales_journal.strategy.order_adjustment.strategy:
         class: Librinfo\EcommerceBundle\SalesJournal\Strategy\OrderAdjustmentStrategy

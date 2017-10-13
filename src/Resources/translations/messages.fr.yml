@@ -57,6 +57,7 @@ librinfo:
             payment: Paiement
             payment_method: Mode de paiement
             channel: Canal de vente
+            Invoice: Facture
             order: Commande
             shop_user: Client boutique
             product:

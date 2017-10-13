@@ -55,7 +55,7 @@ class OrderHandler extends AbstractHandler
         // Generate Order Adjustments sales journal item(s)
 
         /** @var AdjustmentInterface $adjustment */
-        foreach ($order->getAdjustments() as $adjustment) {
+        foreach ($order->getAdjustmentsRecursively() as $adjustment) {
             $label = $this->orderAdjustmentStrategy->getLabel($adjustment);
             $salesJournalItem = $this->handleSalesJournalItem($label, $order, $invoice);
             $this->orderAdjustmentStrategy->handleOperation($salesJournalItem, $adjustment);
@@ -63,9 +63,9 @@ class OrderHandler extends AbstractHandler
 
         // Generate Customer sales journal item
 
-        $label = $this->customerStrategy->getLabel($order->getCustomer());
+        $label = $this->customerStrategy->getLabel($order);
         $salesJournalItem = $this->handleSalesJournalItem($label, $order, $invoice);
-        $this->customerStrategy->handleOperation($salesJournalItem, $order->getCustomer());
+        $this->customerStrategy->handleOperation($salesJournalItem, $order);
 
         // Persisting all sales journal items
 

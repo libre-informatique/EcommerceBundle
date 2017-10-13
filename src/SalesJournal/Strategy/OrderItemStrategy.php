@@ -15,9 +15,8 @@ namespace Librinfo\EcommerceBundle\SalesJournal\Strategy;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Librinfo\EcommerceBundle\Entity\ProductVariant;
 use Librinfo\EcommerceBundle\Entity\SalesJournalItem;
-use Librinfo\EcommerceBundle\SalesJournal\Strategy\StrategyInterface;
 
-class TaxCategoryBasedOrderItemStrategy implements StrategyInterface
+class OrderItemStrategy implements StrategyInterface
 {
     /**
      * @var string
@@ -33,7 +32,7 @@ class TaxCategoryBasedOrderItemStrategy implements StrategyInterface
     {
         /** @var ProductVariant $variant */
         $variant = $item->getVariant();
-        $itemIdentifier = $variant->getTaxCategory() ? $variant->getTaxCategory()->getName() : $this->default;
+        $itemIdentifier = $variant->getCode() ? $variant->getCode() : $this->default;
 
         return $itemIdentifier;
     }
@@ -43,6 +42,6 @@ class TaxCategoryBasedOrderItemStrategy implements StrategyInterface
      */
     public function handleOperation(SalesJournalItem $salesJournalItem, $orderItem): void
     {
-        $salesJournalItem->addCredit($orderItem->getTotal());
+        $salesJournalItem->addCredit($orderItem->getSubTotal());
     }
 }

@@ -1844,3 +1844,16 @@ parameters:
                     email: ~
                     enabled: ~
                     lastLogin: ~
+        Librinfo\EcommerceBundle\Entity\Invoice:
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    number: ~
+                    order: ~
+                    total:
+                        template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    number: ~
+                    order: ~
+                    total:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig

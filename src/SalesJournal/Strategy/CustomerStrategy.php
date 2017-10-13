@@ -13,7 +13,8 @@
 namespace Librinfo\EcommerceBundle\SalesJournal\Strategy;
 
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Librinfo\EcommerceBundle\Entity\Payment;
 use Librinfo\EcommerceBundle\Entity\SalesJournalItem;
 
@@ -29,9 +30,9 @@ class CustomerStrategy implements StrategyInterface
      *
      * @return string
      */
-    public function getLabel($customer): string
+    public function getLabel($order): string
     {
-        return (string) $customer;
+        return (string) $order->getCustomer();
     }
 
     /**
@@ -39,7 +40,7 @@ class CustomerStrategy implements StrategyInterface
      */
     public function handleOperation(SalesJournalItem $salesJournalItem, $orderOrPayment): void
     {
-        if ($orderOrPayment instanceof OrderInterface) {
+        if ($orderOrPayment instanceof OrderInterface || $orderOrPayment instanceof OrderItemInterface) {
             $salesJournalItem->addDebit($orderOrPayment->getTotal());
         } elseif ($orderOrPayment instanceof Payment) {
             $salesJournalItem->addCredit($orderOrPayment->getAmount());

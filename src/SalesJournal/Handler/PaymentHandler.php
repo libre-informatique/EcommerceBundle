@@ -47,7 +47,7 @@ class PaymentHandler extends AbstractHandler
 
         // Generate Customer credit sales journal item
 
-        $label = $this->customerStrategy->getLabel($order->getCustomer());
+        $label = $this->customerStrategy->getLabel($order);
         $salesJournalItem = $this->handleSalesJournalItem($label, $order, $invoice, $payment);
         $this->customerStrategy->handleOperation($salesJournalItem, $payment);
 
