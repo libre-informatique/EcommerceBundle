@@ -94,6 +94,7 @@ class OrderItem extends BaseOrderItem
         if (!$this->isBulk()) {
             return parent::getSubtotal();
         }
+
         return round($this->getDiscountedUnitPrice() * ($this->quantity / 1000));
     }
 }

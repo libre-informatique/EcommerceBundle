@@ -20,8 +20,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderPaymentTransitions;
@@ -130,7 +128,7 @@ class OrderAdmin extends CoreAdmin
                     $order->setChannel($channel);
                     /* @todo: check if shipping method is valid with this channel (Or inverse) */
                 }
-                
+
                 if (isset($data['shippingAddress']) && isset($data['shippingAddress']['email'])) {
                     $orderCreationTools->copyAddress($order, $data, 'shippingAddress');
                     $customer = $order->getCustomer();
@@ -155,11 +153,10 @@ class OrderAdmin extends CoreAdmin
                             'validation_groups' => false,
                         ]);
 
-                        
                         $data['billingAddress'] = $data['shippingAddress'];
                         unset($data['billingAddress']['useSameAddressForBilling']);
                         $orderCreationTools->copyAddress($order, $data, 'billingAddress');
-                        
+
                         /* ? useless as we already get the referenced object in getBillingAddress ? */
                         // $order->setBillingAddress($billingData);
                     }
@@ -178,7 +175,7 @@ class OrderAdmin extends CoreAdmin
 
                     $order->addPayment($payment);
                 }
-                
+
                 /* @todo: add a tools to set shipment from form in 'librinfo_ecommerce.order_creation_manager' */
                 if (isset($data['shipment'])) {
                     $shipmentCode = $data['shipment'];
@@ -190,7 +187,6 @@ class OrderAdmin extends CoreAdmin
 
                     $order->addShipment($shipment);
                 }
-                
 
                 //dump($order);
                 //die("DiE!");
@@ -222,12 +218,11 @@ class OrderAdmin extends CoreAdmin
         $order = $object;
 
         parent::prePersist($order);
-        
+
         $this->getConfigurationPool()->getContainer()->get('librinfo_ecommerce.order_customer_manager')->associateUserAndAddress($order);
 
-
         /* @todo: remove all this to use 'librinfo_ecommerce.order_creation_manager' */
-        
+
         $order->setCheckoutCompletedAt(new \DateTime('NOW'));
 
         $order->setState(OrderInterface::STATE_NEW);
@@ -239,7 +234,6 @@ class OrderAdmin extends CoreAdmin
         /* @todo should not be done ... */
         $payment = clone $order->getPayments()->first();
         $shipment = clone $order->getShipments()->first();
-
 
         /* Why Clear What */
         $order->getPayments()->clear();

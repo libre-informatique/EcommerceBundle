@@ -110,7 +110,7 @@ class OrderCRUDController extends CRUDController
         // $newOrder->setPaymentState(OrderPaymentStates::STATE_CART);
         // $newOrder->setShippingState(OrderShippingStates::STATE_CART);
         // 1
-        
+
         //$newOrder->addPromotionCoupon($object->getPromotionCoupon());
 
         //$newOrder->addShipment(clone $object->getShipments()->first());
@@ -142,7 +142,7 @@ class OrderCRUDController extends CRUDController
         // }
         // $newOrder->recalculateAdjustmentsTotal();
         // 2
-        
+
         //$newOrder->recalculateTotal();
 
         /* call prePersist to persist ? */
@@ -153,9 +153,8 @@ class OrderCRUDController extends CRUDController
         // $this->container->get('sylius.repository.order')->add($newOrder);
         // $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
 
-
         // //$this->container->get('sylius.manager.order')->flush($newOrder);
-        
+
         // $stateMachineFactory = $this->container->get('sm.factory');
         // $stateMachine = $stateMachineFactory->get($newOrder, OrderShippingTransitions::GRAPH);
         // $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);

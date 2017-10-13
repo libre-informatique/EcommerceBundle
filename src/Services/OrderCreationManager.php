@@ -13,7 +13,6 @@
 namespace Librinfo\EcommerceBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Librinfo\EcommerceBundle\Factory\InvoiceFactoryInterface;
 use SM\Factory\Factory;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
@@ -35,9 +34,6 @@ class OrderCreationManager
      */
     private $stateMachineFactory;
 
-    
-   
-    
     /**
      * @param EntityManager $em
      */
@@ -46,7 +42,6 @@ class OrderCreationManager
         $this->em = $em;
         $this->container = $container;
     }
-
 
     public function copyAddress(OrderInterface $order, array $data, string $key = 'shippingAddress')
     {
@@ -75,9 +70,10 @@ class OrderCreationManager
                 }
             }
         }
+
         return $orderAddress;
     }
-    
+
     /**
      * @param OrderInterface oldOrder
      *
@@ -95,7 +91,7 @@ class OrderCreationManager
         $newOrder->setLocaleCode($oldOrder->getLocaleCode());
         $newOrder->setBillingAddress(clone $oldOrder->getBillingAddress());
         $newOrder->setShippingAddress(clone $oldOrder->getShippingAddress());
-        
+
         foreach ($oldOrder->getPromotions() as $oPro) {
             $newOrder->addPromotion(clone $oPro);
         }
@@ -103,7 +99,7 @@ class OrderCreationManager
             $newOrder->addItem(clone $oItem);
         }
         $newOrder->recalculateItemsTotal();
-        
+
         foreach ($oldOrder->getAdjustments() as $oAdjust) {
             $newOrder->addAdjustment(clone $oAdjust);
         }
@@ -115,7 +111,6 @@ class OrderCreationManager
         return $newOrder;
     }
 
-
     public function saveOrder(OrderInterface $newOrder)
     {
         /* @todo: set sylius services as param */
@@ -123,9 +118,10 @@ class OrderCreationManager
         $this->container->get('sylius.repository.order')->add($newOrder);
         $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
         $this->container->get('sylius.manager.order')->flush($newOrder);
+
         return true;
     }
-    
+
     /**
      * @return OrderInterface
      */
@@ -136,19 +132,17 @@ class OrderCreationManager
         $newOrder = $this->container->get('sylius.factory.order')->createNew(); //$this->admin->getNewInstance();
         $addressFactory = $this->container->get('sylius.factory.address');
         $customerFactory = $this->container->get('sylius.factory.customer');
-        
+
         $newOrder->setShippingAddress($addressFactory->createNew());
         $newOrder->setBillingAddress($addressFactory->createNew());
         $newOrder->setCustomer($customerFactory->createNew());
-        
+
         $newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
         $newOrder->setCheckoutCompletedAt(new \DateTime('NOW'));
         $newOrder->setState(OrderInterface::STATE_NEW);
         $newOrder->setPaymentState(OrderPaymentStates::STATE_CART);
         $newOrder->setShippingState(OrderShippingStates::STATE_CART);
 
-
- 
         //$stateMachineFactory = $this->container->get('sm.factory');
         $stateMachine = $this->stateMachineFactory->get($newOrder, OrderShippingTransitions::GRAPH);
         $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
@@ -156,7 +150,7 @@ class OrderCreationManager
             $stateMachine = $this->stateMachineFactory->get($oShipment, ShipmentTransitions::GRAPH);
             $stateMachine->apply(ShipmentTransitions::TRANSITION_CREATE);
         }
-        
+
         $stateMachine = $this->stateMachineFactory->get($newOrder, OrderPaymentTransitions::GRAPH);
         $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
         foreach ($newOrder->getPayments() as $oPayment) {
@@ -164,10 +158,9 @@ class OrderCreationManager
             $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE);
             //            $stateMachine->apply(PaymentTransitions::TRANSITION_PROCESS);
         }
-        
+
         return $newOrder;
     }
-    
 
     /**
      * @param Factory stateMachine

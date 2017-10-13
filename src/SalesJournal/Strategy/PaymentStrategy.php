@@ -14,7 +14,6 @@ namespace Librinfo\EcommerceBundle\SalesJournal\Strategy;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 use Librinfo\EcommerceBundle\Entity\SalesJournalItem;
-use Librinfo\EcommerceBundle\SalesJournal\Strategy\StrategyInterface;
 
 class PaymentStrategy implements StrategyInterface
 {

@@ -20,7 +20,7 @@ class ShippingMethodAdmin extends SyliusGenericAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
-        
+
         /* @todo: we should never use explicit tab and group name in php code as it may be changed in blast.yml */
         $formMapper
             ->tab('form_tab_general')->with('form_group_parameters')
@@ -29,27 +29,25 @@ class ShippingMethodAdmin extends SyliusGenericAdmin
                 'configuration',
                 'sonata_type_immutable_array',
                 array(
-                      'label' => false,
+                      'label'    => false,
                       'required' => false,
-                      'keys' => array(
+                      'keys'     => array(
                           /* @todo: find a way to loop on channel */
                           array('default', 'sonata_type_immutable_array', array(
                               //'attr' => array('class' => 'inline-block'),
                               'keys' => array(
-                                  array('amount', PriceCentsType::class, array())
-                              )
+                                  array('amount', PriceCentsType::class, array()),
+                              ),
                           )),
                           array('FR_WEB', 'sonata_type_immutable_array', array(
                               //'attr' => array('class' => 'inline-block'),
                               'keys' => array(
-                                  array('amount', PriceCentsType::class, array())
-                              )
-                          ))
-                          //
-                      )
+                                  array('amount', PriceCentsType::class, array()),
+                              ),
+                          )),
+                      ),
                   )
             )
             ->end()->end();
-        ;
     }
 }

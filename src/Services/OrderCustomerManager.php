@@ -71,8 +71,6 @@ class OrderCustomerManager
         $object->setCustomer($customer);
         $customer->addOrder($object);
 
-
-
         // $this->em->flush($customer);
     }
 

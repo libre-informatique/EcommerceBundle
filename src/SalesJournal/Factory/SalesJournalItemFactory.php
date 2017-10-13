@@ -24,7 +24,7 @@ class SalesJournalItemFactory
         $salesJournalItem = new SalesJournalItem();
 
         $salesJournalItem->setLabel($label);
-        
+
         if ($order !== null) {
             $salesJournalItem->setOrder($order);
         }

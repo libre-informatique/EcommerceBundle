@@ -14,7 +14,6 @@ namespace Librinfo\EcommerceBundle\SalesJournal\Strategy;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Librinfo\EcommerceBundle\Entity\SalesJournalItem;
-use Librinfo\EcommerceBundle\SalesJournal\Strategy\StrategyInterface;
 
 class OrderAdjustmentStrategy implements StrategyInterface
 {
