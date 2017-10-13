@@ -1538,7 +1538,7 @@ parameters:
                                 template: SonataAdminBundle:CRUD:show_trans.html.twig
                             taxCategory: ~
                             enabled: ~
-                        show_group_channel:
+                    show_group_channel:
                           channels: ~
                           zone: ~
 
@@ -1566,12 +1566,14 @@ parameters:
                                 type: Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType
                             taxCategory: ~
                             enabled: ~
+
                         form_group_parameters:
+                            zone: ~
                             channels:
                                 type: Librinfo\EcommerceBundle\Form\Type\ShippingMethodChannelsType
                                 multiple: true
                                 expanded: true
-                            zone: ~
+
 
                     form_tab_history:
                         form_group_history:
