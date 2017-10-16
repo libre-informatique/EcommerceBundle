@@ -100,6 +100,10 @@ class OrderCreationManager
         }
     }
 
+    /**
+     * @param OrderInterface oldOrder
+     * @param OrderInterface newOrder
+     */
     public function copyShipment(OrderInterface $oldOrder, OrderInterface $newOrder)
     {
         foreach ($oldOrder->getShipments() as $oShipment) {
@@ -110,11 +114,36 @@ class OrderCreationManager
 
     /**
      * @param OrderInterface oldOrder
+     * @param OrderInterface newOrder
+     */
+    public function copyOrderItem(OrderInterface $oldOrder, OrderInterface $newOrder)
+    {
+        foreach ($oldOrder->getItems() as $oItem) {
+            $newItem =  $this->container->get('sylius.factory.order_item')->createNew() ; // clone $oItem;
+            $newItem->setVariant($oItem->getVariant());
+            $newItem->setUnitPrice($oItem->getUnitPrice());
+            //$newItem->setQuantity($oItem->getQuantity()); /* todo: find if it is needed for bulk mode or note */
+            // http://docs.sylius.org/en/latest/components_and_bundles/bundles/SyliusOrderBundle/services.html
+            $this->container->get('sylius.order_item_quantity_modifier')->modify($newItem, $oItem->getQuantity());
+
+            foreach ($oItem->getAdjustments() as $oItemAdjust) {
+                     $newItem->addAdjustment($oItemAdjust);
+            }
+            $newOrder->addItem($newItem);
+        }
+
+        // $newOrder->recalculateItemsTotal();
+    }
+    
+    
+    /**
+     * @param OrderInterface oldOrder
      *
      * @return OrderInterface
      */
     public function duplicateOrder(OrderInterface $oldOrder)
     {
+       
         $newOrder = $this->createOrder();
 
         $newOrder->setChannel($oldOrder->getChannel());
@@ -125,36 +154,39 @@ class OrderCreationManager
         $newOrder->setShippingAddress(clone $oldOrder->getShippingAddress());
 
         $this->copyShipment($oldOrder, $newOrder);
+        
 
         /* @todo : should not be done ? */
         // foreach ($oldOrder->getPayments() as $oPayment) {
         //     $newOrder->addPayment(clone $oPayment);
         // }
         // //        $this->initNewPayment($newOrder);
-
+ 
+        
         foreach ($oldOrder->getPromotions() as $oPro) {
             $newOrder->addPromotion(clone $oPro);
         }
-        foreach ($oldOrder->getItems() as $oItem) {
-            $newOrder->addItem(clone $oItem);
-        }
-        $newOrder->recalculateItemsTotal();
 
         foreach ($oldOrder->getAdjustments() as $oAdjust) {
             $newOrder->addAdjustment(clone $oAdjust);
         }
-        $newOrder->recalculateAdjustmentsTotal();
+        // $newOrder->recalculateAdjustmentsTotal();
 
-        // dump($oldOrder->getCustomer(), $oldOrder->getCustomer());
-        //  die("DiE!");
+        $this->copyOrderItem($oldOrder, $newOrder);
+        
+        // dump((new \ReflectionClass($newOrder))->getMethods());
+        // dump($oldOrder, $newOrder);
+        //die("DiE!");
         //$this->container->get('sylius.manager.order')->flush($newOrder);
+
+        
         return $newOrder;
     }
 
     public function saveOrder(OrderInterface $newOrder)
     {
         /* @todo: set sylius services as param */
-        $newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
+        $this->assignNumber($newOrder);
         $this->container->get('sylius.repository.order')->add($newOrder);
         $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
         $this->container->get('sylius.manager.order')->flush($newOrder);
@@ -169,7 +201,7 @@ class OrderCreationManager
             $order->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($order));
         }
     }
-
+    
     /**
      * @return OrderInterface
      */
