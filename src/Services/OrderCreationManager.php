@@ -99,7 +99,7 @@ class OrderCreationManager
             $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE);
         }
     }
-    
+
     public function copyShipment(OrderInterface $oldOrder, OrderInterface $newOrder)
     {
         foreach ($oldOrder->getShipments() as $oShipment) {
@@ -107,8 +107,7 @@ class OrderCreationManager
         }
         $this->initNewShipment($newOrder);
     }
-    
-    
+
     /**
      * @param OrderInterface oldOrder
      *
@@ -116,7 +115,6 @@ class OrderCreationManager
      */
     public function duplicateOrder(OrderInterface $oldOrder)
     {
-       
         $newOrder = $this->createOrder();
 
         $newOrder->setChannel($oldOrder->getChannel());
@@ -127,14 +125,12 @@ class OrderCreationManager
         $newOrder->setShippingAddress(clone $oldOrder->getShippingAddress());
 
         $this->copyShipment($oldOrder, $newOrder);
-       
 
         /* @todo : should not be done ? */
         // foreach ($oldOrder->getPayments() as $oPayment) {
         //     $newOrder->addPayment(clone $oPayment);
         // }
         // //        $this->initNewPayment($newOrder);
- 
 
         foreach ($oldOrder->getPromotions() as $oPro) {
             $newOrder->addPromotion(clone $oPro);
@@ -173,7 +169,7 @@ class OrderCreationManager
             $order->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($order));
         }
     }
-    
+
     /**
      * @return OrderInterface
      */
