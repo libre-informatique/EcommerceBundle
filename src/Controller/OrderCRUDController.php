@@ -12,6 +12,8 @@
 
 namespace Librinfo\EcommerceBundle\Controller;
 
+//use Sylius\Component\Core\PaymentTransitions;
+//use Sylius\Component\Core\ShipmentTransitions;
 use Blast\CoreBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -19,11 +21,9 @@ use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
-//use Sylius\Component\Core\PaymentTransitions;
-use Sylius\Component\Payment\PaymentTransitions;
-//use Sylius\Component\Core\ShipmentTransitions;
-use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -119,10 +119,10 @@ class OrderCRUDController extends CRUDController
         /* @todo: payment or not payment : Not needed ! */
         /*
         foreach ($object->getPayments() as $oPayment) {
-            $newOrder->addPayment(clone $oPayment);
+        $newOrder->addPayment(clone $oPayment);
         }
         foreach ($object->getShipments() as $oShipment) {
-            $newOrder->addShipment(clone $oShipment);
+        $newOrder->addShipment(clone $oShipment);
         }
         */
 
@@ -273,8 +273,15 @@ class OrderCRUDController extends CRUDController
             }
 
             try {
-                if ($action === OrderTransitions::TRANSITION_FULFILL && $selectedModel->getNumber() === null) {
-                    $this->container->get('sylius.order_number_assigner')->assignNumber($selectedModel);
+                /* @todo : state Machine manipulation should be done in service */
+                if ($action === OrderTransitions::TRANSITION_FULFILL) {
+                    $this->container
+                        ->get('librinfo_ecommerce.order_creation_manager')
+                        ->assignNumber($selectedModel);
+                    
+                    $this->container
+                        ->get('librinfo_ecommerce.order_creation_manager')
+                        ->initNewPayment($selectedModel);
                 }
                 $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
                 $stateMachine->apply($action);

@@ -19,6 +19,8 @@ use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 
@@ -76,13 +78,45 @@ class OrderCreationManager
 
     /**
      * @param OrderInterface oldOrder
+     */
+    public function initNewShipment(OrderInterface $order)
+    {
+        foreach ($order->getShipments() as $oShipment) {
+            // Ugly hack : we should not set state before stateMachine and we should not use OrderShippingStates as ShippingStates
+            $oShipment->setState(OrderShippingStates::STATE_CART);
+            $stateMachine = $this->stateMachineFactory->get($oShipment, ShipmentTransitions::GRAPH);
+            $stateMachine->apply(ShipmentTransitions::TRANSITION_CREATE);
+        }
+    }
+
+    /**
+     * @param OrderInterface oldOrder
+     */
+    public function initNewPayment(OrderInterface $order)
+    {
+        foreach ($order->getPayments() as $oPayment) {
+            $stateMachine = $this->stateMachineFactory->get($oPayment, PaymentTransitions::GRAPH);
+            $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE);
+        }
+    }
+    
+    public function copyShipment(OrderInterface $oldOrder, OrderInterface $newOrder)
+    {
+        foreach ($oldOrder->getShipments() as $oShipment) {
+            $newOrder->addShipment(clone $oShipment);
+        }
+        $this->initNewShipment($newOrder);
+    }
+    
+    
+    /**
+     * @param OrderInterface oldOrder
      *
      * @return OrderInterface
      */
     public function duplicateOrder(OrderInterface $oldOrder)
     {
-        //        dump($this->getContainer());
-        // die;
+       
         $newOrder = $this->createOrder();
 
         $newOrder->setChannel($oldOrder->getChannel());
@@ -91,6 +125,16 @@ class OrderCreationManager
         $newOrder->setLocaleCode($oldOrder->getLocaleCode());
         $newOrder->setBillingAddress(clone $oldOrder->getBillingAddress());
         $newOrder->setShippingAddress(clone $oldOrder->getShippingAddress());
+
+        $this->copyShipment($oldOrder, $newOrder);
+       
+
+        /* @todo : should not be done ? */
+        // foreach ($oldOrder->getPayments() as $oPayment) {
+        //     $newOrder->addPayment(clone $oPayment);
+        // }
+        // //        $this->initNewPayment($newOrder);
+ 
 
         foreach ($oldOrder->getPromotions() as $oPro) {
             $newOrder->addPromotion(clone $oPro);
@@ -122,6 +166,14 @@ class OrderCreationManager
         return true;
     }
 
+    public function assignNumber(OrderInterface $order)
+    {
+        /* @todo : should we use get('sylius.order_number_assigner')->assignNumber($order) ? */
+        if ($order->getNumber() === null) { //useless test as setNumber already check it
+            $order->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($order));
+        }
+    }
+    
     /**
      * @return OrderInterface
      */
@@ -146,18 +198,24 @@ class OrderCreationManager
         //$stateMachineFactory = $this->container->get('sm.factory');
         $stateMachine = $this->stateMachineFactory->get($newOrder, OrderShippingTransitions::GRAPH);
         $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
-        foreach ($newOrder->getShipments() as $oShipment) {
-            $stateMachine = $this->stateMachineFactory->get($oShipment, ShipmentTransitions::GRAPH);
-            $stateMachine->apply(ShipmentTransitions::TRANSITION_CREATE);
-        }
+
+        // dump($newOrder->getShipments()); die;
+        // useless as there is no shipment on new orger
+        // foreach ($newOrder->getShipments() as $oShipment) {
+        //     $stateMachine = $this->stateMachineFactory->get($oShipment, ShipmentTransitions::GRAPH);
+        //     $stateMachine->apply(ShipmentTransitions::TRANSITION_CREATE);
+        // }
 
         $stateMachine = $this->stateMachineFactory->get($newOrder, OrderPaymentTransitions::GRAPH);
         $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
-        foreach ($newOrder->getPayments() as $oPayment) {
-            $stateMachine = $this->stateMachineFactory->get($oPayment, PaymentTransitions::GRAPH);
-            $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE);
-            //            $stateMachine->apply(PaymentTransitions::TRANSITION_PROCESS);
-        }
+
+        // dump($newOrder->getPayments()); die;
+        // useless as there is no payments on new orger
+        // foreach ($newOrder->getPayments() as $oPayment) {
+        //     $stateMachine = $this->stateMachineFactory->get($oPayment, PaymentTransitions::GRAPH);
+        //     $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE);
+        //     //            $stateMachine->apply(PaymentTransitions::TRANSITION_PROCESS);
+        // }
 
         return $newOrder;
     }
