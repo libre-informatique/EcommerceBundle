@@ -129,7 +129,7 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@service_container'
         calls:
-            - [setStateMachineFactory, ['@sm.factory']]            
+            - [setStateMachineFactory, ['@sm.factory']]
 
 # EVENT LISTENERS
 
@@ -344,6 +344,14 @@ services:
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
         tags:
             - { name: doctrine.event_subscriber, connection: default }
+
+    librinfo_ecommerce.form.type.customer_guest_extension:
+        class: Librinfo\EcommerceBundle\Form\Type\CustomerGuestTypeExtension
+        arguments:
+            - '@sylius.repository.customer'
+            - '@sylius.factory.customer'
+        tags:
+            - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType }
 
 # SALES JOURNAL
 

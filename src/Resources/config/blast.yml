@@ -1053,7 +1053,7 @@ parameters:
                                     readonly: readonly
                             enabled: ~
                             position: ~
-
+                            channels: ~
 ############
 # CUSTOMER
 ############

@@ -47,9 +47,9 @@ class OrderCustomerManager
                        ->findOneBy(array('email' => $givenCustomer->getEmail())); /* As email must be unique */
 
         $customer = null; /* We love null :) */
-        if (isset($foundCustomer)) {
-            $customer = $foundCustomer;
 
+        if ($foundCustomer !== null) {
+            $customer = $foundCustomer;
             /* @todo: should not ask user to set a firstname and lastname if the email already exist */
         } else {
             $customer = $givenCustomer;
