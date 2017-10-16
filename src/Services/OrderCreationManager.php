@@ -119,7 +119,7 @@ class OrderCreationManager
     public function copyOrderItem(OrderInterface $oldOrder, OrderInterface $newOrder)
     {
         foreach ($oldOrder->getItems() as $oItem) {
-            $newItem =  $this->container->get('sylius.factory.order_item')->createNew() ; // clone $oItem;
+            $newItem = $this->container->get('sylius.factory.order_item')->createNew(); // clone $oItem;
             $newItem->setVariant($oItem->getVariant());
             $newItem->setUnitPrice($oItem->getUnitPrice());
             //$newItem->setQuantity($oItem->getQuantity()); /* todo: find if it is needed for bulk mode or note */
@@ -127,15 +127,14 @@ class OrderCreationManager
             $this->container->get('sylius.order_item_quantity_modifier')->modify($newItem, $oItem->getQuantity());
 
             foreach ($oItem->getAdjustments() as $oItemAdjust) {
-                     $newItem->addAdjustment($oItemAdjust);
+                $newItem->addAdjustment($oItemAdjust);
             }
             $newOrder->addItem($newItem);
         }
 
         // $newOrder->recalculateItemsTotal();
     }
-    
-    
+
     /**
      * @param OrderInterface oldOrder
      *
@@ -143,7 +142,6 @@ class OrderCreationManager
      */
     public function duplicateOrder(OrderInterface $oldOrder)
     {
-       
         $newOrder = $this->createOrder();
 
         $newOrder->setChannel($oldOrder->getChannel());
@@ -154,15 +152,13 @@ class OrderCreationManager
         $newOrder->setShippingAddress(clone $oldOrder->getShippingAddress());
 
         $this->copyShipment($oldOrder, $newOrder);
-        
 
         /* @todo : should not be done ? */
         // foreach ($oldOrder->getPayments() as $oPayment) {
         //     $newOrder->addPayment(clone $oPayment);
         // }
         // //        $this->initNewPayment($newOrder);
- 
-        
+
         foreach ($oldOrder->getPromotions() as $oPro) {
             $newOrder->addPromotion(clone $oPro);
         }
@@ -173,13 +169,12 @@ class OrderCreationManager
         // $newOrder->recalculateAdjustmentsTotal();
 
         $this->copyOrderItem($oldOrder, $newOrder);
-        
+
         // dump((new \ReflectionClass($newOrder))->getMethods());
         // dump($oldOrder, $newOrder);
         //die("DiE!");
         //$this->container->get('sylius.manager.order')->flush($newOrder);
 
-        
         return $newOrder;
     }
 
@@ -201,7 +196,7 @@ class OrderCreationManager
             $order->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($order));
         }
     }
-    
+
     /**
      * @return OrderInterface
      */

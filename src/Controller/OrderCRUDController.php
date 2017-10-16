@@ -278,7 +278,7 @@ class OrderCRUDController extends CRUDController
                     $this->container
                         ->get('librinfo_ecommerce.order_creation_manager')
                         ->assignNumber($selectedModel);
-                    
+
                     $this->container
                         ->get('librinfo_ecommerce.order_creation_manager')
                         ->initNewPayment($selectedModel);
