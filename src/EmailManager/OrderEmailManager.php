@@ -14,7 +14,7 @@ namespace Librinfo\EcommerceBundle\EmailManager;
 
 use Doctrine\ORM\EntityManager;
 use Librinfo\EcommerceBundle\Factory\InvoiceFactoryInterface;
-use Librinfo\EcommerceBundle\Services\OrderManager;
+use Librinfo\EcommerceBundle\Services\OrderInvoiceManager;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Bundle\ShopBundle\EmailManager\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -33,9 +33,9 @@ class OrderEmailManager implements OrderEmailManagerInterface
     private $emailSender;
 
     /**
-     * @var OrderManager
+     * @var OrderInvoiceManager
      */
-    private $orderManager;
+    private $orderInvoiceManager;
 
     /**
      * @var EntityManager
@@ -47,10 +47,10 @@ class OrderEmailManager implements OrderEmailManagerInterface
      * @param InvoiceFactoryInterface $invoiceFactory
      * @param EntityManager           $em
      */
-    public function __construct(SenderInterface $emailSender, OrderManager $orderManager, EntityManager $em)
+    public function __construct(SenderInterface $emailSender, OrderInvoiceManager $orderInvoiceManager, EntityManager $em)
     {
         $this->emailSender = $emailSender;
-        $this->orderManager = $orderManager;
+        $this->orderInvoiceManager = $orderInvoiceManager;
         $this->em = $em;
     }
 
@@ -73,7 +73,7 @@ class OrderEmailManager implements OrderEmailManagerInterface
     private function generateInvoice($order)
     {
         // create and persist the invoice entity
-        $invoice = $this->orderManager->generateDebitInvoice($order);
+        $invoice = $this->orderInvoiceManager->generateDebitInvoice($order);
 
         // write invoice contents (pdf) in a temporary file
         $temp_file = sys_get_temp_dir() . '/librinfo_invoice_' . $invoice->getNumber() . '.pdf';

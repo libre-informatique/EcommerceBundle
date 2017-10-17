@@ -15,9 +15,6 @@ namespace Librinfo\EcommerceBundle\Services;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Order\Model\OrderInterface;
 use SM\Factory\Factory;
-use Librinfo\EcommerceBundle\Factory\InvoiceFactoryInterface;
-use Librinfo\EcommerceBundle\Entity\Invoice;
-use Librinfo\EcommerceBundle\SalesJournal\SalesJournalService;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner;
 
 class OrderManager
@@ -32,26 +29,19 @@ class OrderManager
      */
     private $stateMachine;
 
-    /**
-     * @var InvoiceFactoryInterface
-     */
-    private $invoiceFactory;
-
+  
     /**
      * @var OrderNumberAssigner
      */
     private $orderNumberAssigner;
 
-    /**
-     * @var SalesJournalService
-     */
-    private $salesJournalService;
-
+  
     /**
      * @param EntityManager $em
      */
     public function __construct(EntityManager $em)
     {
+        /* @todo: as it is never used in this class, it should be removed */
         $this->em = $em;
     }
 
@@ -70,38 +60,12 @@ class OrderManager
         }
     }
 
-    public function generateDebitInvoice(OrderInterface $object): Invoice
-    {
-        $invoice = $object->getLastDebitInvoice();
-        if ($invoice) {
-            return $invoice;
-        }
-
-        $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_DEBIT);
-        $this->em->persist($invoice);
-
-        $this->salesJournalService->traceDebitInvoice($object, $invoice);
-        $this->em->flush();
-
-        return $invoice;
-    }
-
-    public function generateCreditInvoice(OrderInterface $object): Invoice
-    {
-        $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_CREDIT);
-
-        $this->em->persist($invoice);
-
-        $this->salesJournalService->traceCreditInvoice($object, $invoice);
-        $this->em->flush();
-
-        return $invoice;
-    }
-
     /**
      * @param Factory stateMachine
      *
      * @return self
+     *
+     * @todo: should be named setStateMachineFactory
      */
     public function setStateMachine(Factory $stateMachine)
     {
@@ -111,26 +75,12 @@ class OrderManager
     }
 
     /**
-     * @param InvoiceFactoryInterface invoiceFactory
-     */
-    public function setInvoiceFactory(InvoiceFactoryInterface $invoiceFactory): void
-    {
-        $this->invoiceFactory = $invoiceFactory;
-    }
-
-    /**
      * @param OrderNumberAssigner orderNumberAssigner
      */
     public function setOrderNumberAssigner(OrderNumberAssigner $orderNumberAssigner): void
     {
+        /*@todo : maybe should used Number generator as in OrderCreationManager */
+        
         $this->orderNumberAssigner = $orderNumberAssigner;
-    }
-
-    /**
-     * @param SalesJournalService $salesJournalService
-     */
-    public function setSalesJournalService(SalesJournalService $salesJournalService): void
-    {
-        $this->salesJournalService = $salesJournalService;
     }
 }

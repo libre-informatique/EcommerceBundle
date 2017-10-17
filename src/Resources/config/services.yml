@@ -101,10 +101,10 @@ services:
         class: Librinfo\EcommerceBundle\EmailManager\OrderEmailManager
         arguments:
             - '@sylius.email_sender'
-            - '@librinfo_ecommerce.order_manager'
+            - '@librinfo_ecommerce.order_invoice_manager'
             - '@doctrine.orm.entity_manager'
 
-# ORDER CUSTOMER MANAGER
+# ORDER MANAGERS
 
     librinfo_ecommerce.order_customer_manager:
         class: Librinfo\EcommerceBundle\Services\OrderCustomerManager
@@ -117,8 +117,15 @@ services:
             - '@doctrine.orm.entity_manager'
         calls:
             - [setStateMachine, ['@sm.factory']]
-            - [setInvoiceFactory, ['@librinfo_ecommerce.factory.invoice']]
             - [setOrderNumberAssigner, ['@sylius.order_number_assigner']]
+
+    librinfo_ecommerce.order_invoice_manager:
+        class: Librinfo\EcommerceBundle\Services\OrderInvoiceManager
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        calls:
+            - [setStateMachine, ['@sm.factory']]
+            - [setInvoiceFactory, ['@librinfo_ecommerce.factory.invoice']]
             - [setSalesJournalService, ['@librinfo_ecommerce.sales_journal.service']]
 
 # @TODO remove service_container and calls all the needed service
