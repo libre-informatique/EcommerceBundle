@@ -42,6 +42,7 @@ class OrderCreationManager
     public function __construct(EntityManager $em, $container)
     {
         $this->em = $em;
+        /* @todo: set sylius services as param */
         $this->container = $container;
     }
 
@@ -180,20 +181,21 @@ class OrderCreationManager
 
     public function saveOrder(OrderInterface $newOrder)
     {
-        /* @todo: set sylius services as param */
-        $this->assignNumber($newOrder);
-
+        $this->assignNumber($newOrder); /* in case it have not been done, but it should never hapen :) */
+        
         /* http://docs.sylius.org/en/latest/book/orders/orders.html */
-        $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
+        // Warning: process reset shipment if there is no item in the list
+        // $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
+      
         $this->container->get('sylius.repository.order')->add($newOrder);
-        $this->container->get('sylius.manager.order')->flush($newOrder);
 
+        $this->container->get('sylius.manager.order')->flush($newOrder);
         return true;
     }
 
     public function assignNumber(OrderInterface $order)
     {
-        /* @todo : should we use get('sylius.order_number_assigner')->assignNumber($order) ? */
+        /* @todo : should we use get('sylius.order_number_assigner')->assignNumber($order) ?  Or not ? */
         if ($order->getNumber() === null) { //useless test as setNumber already check it
             $order->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($order));
         }
