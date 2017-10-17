@@ -107,24 +107,25 @@ class OrderAdmin extends CoreAdmin
             ->tab('form_tab_general')
                 ->with('form_group_general')
                     ->add('locale_code', HiddenType::class, [
-                        'data' => $this->getConfigurationPool()->getContainer()->getParameter('locale'),
+                        'data' => $this->getConfigurationPool()->getContainer()
+                        ->getParameter('locale'),
                     ])
                 ->end()
             ->end()
         ;
         $admin = $this;
-        $mapper
-            ->getFormBuilder()
-
+        $mapper->getFormBuilder()
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($admin) {
                 $data = $event->getData();
                 $form = $event->getForm();
 
-                $orderCreationTools = $this->getConfigurationPool()->getContainer()->get('librinfo_ecommerce.order_creation_manager');
-                $order = $orderCreationTools->createOrder(); //$admin->getSubject();
+                $orderCreationTools = $this->getConfigurationPool()->getContainer()
+                                    ->get('librinfo_ecommerce.order_creation_manager');
+                $order = $admin->getSubject();
 
                 if (isset($data['channel'])) {
-                    $channel = $this->getConfigurationPool()->getContainer()->get('sylius.repository.channel')->find($data['channel']);
+                    $channel = $this->getConfigurationPool()->getContainer()
+                             ->get('sylius.repository.channel')->find($data['channel']);
                     $order->setChannel($channel);
                     /* @todo: check if shipping method is valid with this channel (Or inverse) */
                 }
@@ -166,10 +167,14 @@ class OrderAdmin extends CoreAdmin
                 if (isset($data['payment'])) {
                     $paymentCode = $data['payment'];
 
-                    $payment = $this->getConfigurationPool()->getContainer()->get('sylius.factory.payment')->createNew();
-                    $currency = $this->getConfigurationPool()->getContainer()->get('sylius.repository.currency')->find($data['currency_code']);
+                    $payment = $this->getConfigurationPool()->getContainer()
+                             ->get('sylius.factory.payment')->createNew();
+                    $currency = $this->getConfigurationPool()->getContainer()
+                              ->get('sylius.repository.currency')->find($data['currency_code']);
 
-                    $payment->setMethod($this->getConfigurationPool()->getContainer()->get('sylius.repository.payment_method')->findOneBy(['code' => $paymentCode]));
+                    $payment->setMethod($this->getConfigurationPool()->getContainer()
+                                        ->get('sylius.repository.payment_method')
+                                        ->findOneBy(['code' => $paymentCode]));
                     $payment->setCurrencyCode($currency->getCode());
                     $payment->setState(PaymentInterface::STATE_NEW);
 
@@ -180,16 +185,17 @@ class OrderAdmin extends CoreAdmin
                 if (isset($data['shipment'])) {
                     $shipmentCode = $data['shipment'];
 
-                    $shipment = $this->getConfigurationPool()->getContainer()->get('sylius.factory.shipment')->createNew();
+                    $shipment = $this->getConfigurationPool()->getContainer()
+                              ->get('sylius.factory.shipment')->createNew();
 
-                    $shipment->setMethod($this->getConfigurationPool()->getContainer()->get('sylius.repository.shipping_method')->findOneBy(['code' => $shipmentCode]));
+                    $shipment->setMethod($this->getConfigurationPool()->getContainer()
+                                         ->get('sylius.repository.shipping_method')
+                                         ->findOneBy(['code' => $shipmentCode]));
                     $shipment->setState(ShipmentInterface::STATE_READY);
 
                     $order->addShipment($shipment);
                 }
-
-                //dump($order);
-                //die("DiE!");
+          
                 $form->setData($order);
                 $event->setData($data); /* useless ? */
             });
@@ -197,16 +203,11 @@ class OrderAdmin extends CoreAdmin
 
     public function getNewInstance()
     {
-        $object = parent::getNewInstance();
-        /* @todo: check if we can use createOrder from 'librinfo_ecommerce.order_creation_manager' */
-        $addressFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.address');
-        $customerFactory = $this->getConfigurationPool()->getContainer()->get('sylius.factory.customer');
-
-        $object->setShippingAddress($addressFactory->createNew());
-        $object->setBillingAddress($addressFactory->createNew());
-        $object->setCustomer($customerFactory->createNew());
-
-        return $object;
+        // 1
+        $order = $this->getConfigurationPool()->getContainer()
+            ->get('librinfo_ecommerce.order_creation_manager')
+            ->createOrder();
+        return $order;
     }
 
     /**
@@ -214,45 +215,19 @@ class OrderAdmin extends CoreAdmin
      */
     public function prePersist($object)
     {
+        // 3
         /** @var Librinfo\EcommerceBundle\Entity\Order $order */
         $order = $object;
-
+        
+        // Hum why call Parent ?
         parent::prePersist($order);
+              
+        $this->getConfigurationPool()->getContainer()
+            ->get('librinfo_ecommerce.order_customer_manager')
+            ->associateUserAndAddress($order);
 
-        $this->getConfigurationPool()->getContainer()->get('librinfo_ecommerce.order_customer_manager')->associateUserAndAddress($order);
-
-        /* @todo: remove all this to use 'librinfo_ecommerce.order_creation_manager' */
-
-        $order->setCheckoutCompletedAt(new \DateTime('NOW'));
-
-        $order->setState(OrderInterface::STATE_NEW);
-        // $order->setPaymentState(PaymentInterface::STATE_NEW);
-        // $order->setShippingState(ShipmentInterface::STATE_READY);
-
-        $stateMachineFactory = $this->getConfigurationPool()->getContainer()->get('sm.factory');
-
-        /* @todo should not be done ... */
-        $payment = clone $order->getPayments()->first();
-        $shipment = clone $order->getShipments()->first();
-
-        /* Why Clear What */
-        $order->getPayments()->clear();
-        $order->getShipments()->clear();
-
-        $this->getConfigurationPool()->getContainer()->get('sylius.repository.order')->add($order);
-
-        $orderProcessor = $this->getConfigurationPool()->getContainer()->get('sylius.order_processing.order_processor');
-        $orderProcessor->process($order);
-
-        //$order->addPayment($payment);
-        //$order->addShipment($shipment);
-
-        $stateMachine = $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH);
-        $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
-
-        $stateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
-
-        $this->getConfigurationPool()->getContainer()->get('sylius.manager.order')->flush($order);
+        $this->getConfigurationPool()->getContainer()
+            ->get('librinfo_ecommerce.order_creation_manager')
+            ->saveOrder($order);
     }
 }
