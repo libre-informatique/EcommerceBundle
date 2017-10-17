@@ -110,7 +110,7 @@ class OrderCRUDController extends CRUDController
         $action = $request->get('_action');
         $tracking = $request->get('_tracking');
 
-        /* @todo: move this to a service */
+        /* @todo: move this to a OrderManagerService */
         $shipment = $modelManager->find($this->container->getParameter('sylius.model.shipment.class'), $shipmentId);
         // $order = $modelManager->find($this->admin->getClass(), $orderId);
 
@@ -135,7 +135,8 @@ class OrderCRUDController extends CRUDController
         $orderId = $request->get('id');
         $paymentId = $request->get('_paymentId');
         $action = $request->get('_action');
-
+        
+        /* @todo: move this to a OrderManagerService */
         $payment = $modelManager->find($this->container->getParameter('sylius.model.payment.class'), $paymentId);
         $order = $modelManager->find($this->admin->getClass(), $orderId);
 
