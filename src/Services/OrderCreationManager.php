@@ -42,6 +42,7 @@ class OrderCreationManager
     public function __construct(EntityManager $em, $container)
     {
         $this->em = $em;
+        /* @todo: set sylius services as param */
         $this->container = $container;
     }
 
@@ -180,18 +181,21 @@ class OrderCreationManager
 
     public function saveOrder(OrderInterface $newOrder)
     {
-        /* @todo: set sylius services as param */
-        $this->assignNumber($newOrder);
+        $this->assignNumber($newOrder); /* in case it have not been done, but it should never hapen :) */
+        
+        /* http://docs.sylius.org/en/latest/book/orders/orders.html */
+        // Warning: process reset shipment if there is no item in the list
+        // $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
+      
         $this->container->get('sylius.repository.order')->add($newOrder);
-        $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
-        $this->container->get('sylius.manager.order')->flush($newOrder);
 
+        $this->container->get('sylius.manager.order')->flush($newOrder);
         return true;
     }
 
     public function assignNumber(OrderInterface $order)
     {
-        /* @todo : should we use get('sylius.order_number_assigner')->assignNumber($order) ? */
+        /* @todo : should we use get('sylius.order_number_assigner')->assignNumber($order) ?  Or not ? */
         if ($order->getNumber() === null) { //useless test as setNumber already check it
             $order->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($order));
         }
@@ -202,8 +206,7 @@ class OrderCreationManager
      */
     public function createOrder()
     {
-        //@todo : how to new ?
-        /* @todo: set sylius services as param */
+        /* @todo: set sylius services as class param */
         $newOrder = $this->container->get('sylius.factory.order')->createNew(); //$this->admin->getNewInstance();
         $addressFactory = $this->container->get('sylius.factory.address');
         $customerFactory = $this->container->get('sylius.factory.customer');
@@ -211,8 +214,9 @@ class OrderCreationManager
         $newOrder->setShippingAddress($addressFactory->createNew());
         $newOrder->setBillingAddress($addressFactory->createNew());
         $newOrder->setCustomer($customerFactory->createNew());
-
-        $newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
+        
+        //$newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
+        $this->assignNumber($newOrder);
         $newOrder->setCheckoutCompletedAt(new \DateTime('NOW'));
         $newOrder->setState(OrderInterface::STATE_NEW);
         $newOrder->setPaymentState(OrderPaymentStates::STATE_CART);
