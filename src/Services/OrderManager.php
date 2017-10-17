@@ -29,13 +29,11 @@ class OrderManager
      */
     private $stateMachine;
 
-  
     /**
      * @var OrderNumberAssigner
      */
     private $orderNumberAssigner;
 
-  
     /**
      * @param EntityManager $em
      */
@@ -80,7 +78,7 @@ class OrderManager
     public function setOrderNumberAssigner(OrderNumberAssigner $orderNumberAssigner): void
     {
         /*@todo : maybe should used Number generator as in OrderCreationManager */
-        
+
         $this->orderNumberAssigner = $orderNumberAssigner;
     }
 }

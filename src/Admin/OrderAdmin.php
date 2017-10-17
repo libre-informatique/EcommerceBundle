@@ -22,8 +22,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\OrderPaymentTransitions;
-use Sylius\Component\Core\OrderShippingTransitions;
 
 class OrderAdmin extends CoreAdmin
 {
@@ -195,7 +193,7 @@ class OrderAdmin extends CoreAdmin
 
                     $order->addShipment($shipment);
                 }
-          
+
                 $form->setData($order);
                 $event->setData($data); /* useless ? */
             });
@@ -207,6 +205,7 @@ class OrderAdmin extends CoreAdmin
         $order = $this->getConfigurationPool()->getContainer()
             ->get('librinfo_ecommerce.order_creation_manager')
             ->createOrder();
+
         return $order;
     }
 
@@ -218,10 +217,10 @@ class OrderAdmin extends CoreAdmin
         // 3
         /** @var Librinfo\EcommerceBundle\Entity\Order $order */
         $order = $object;
-        
+
         // Hum why call Parent ?
         parent::prePersist($order);
-              
+
         $this->getConfigurationPool()->getContainer()
             ->get('librinfo_ecommerce.order_customer_manager')
             ->associateUserAndAddress($order);

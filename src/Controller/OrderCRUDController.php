@@ -16,11 +16,6 @@ namespace Librinfo\EcommerceBundle\Controller;
 //use Sylius\Component\Core\ShipmentTransitions;
 use Blast\CoreBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderPaymentStates;
-use Sylius\Component\Core\OrderPaymentTransitions;
-use Sylius\Component\Core\OrderShippingStates;
-use Sylius\Component\Core\OrderShippingTransitions;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
@@ -135,7 +130,7 @@ class OrderCRUDController extends CRUDController
         $orderId = $request->get('id');
         $paymentId = $request->get('_paymentId');
         $action = $request->get('_action');
-        
+
         /* @todo: move this to a OrderManagerService */
         $payment = $modelManager->find($this->container->getParameter('sylius.model.payment.class'), $paymentId);
         $order = $modelManager->find($this->admin->getClass(), $orderId);

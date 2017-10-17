@@ -84,7 +84,6 @@ class OrderInvoiceManager
      * @return self
      *
      * @todo: should be named setStateMachineFactory
-     *
      */
     public function setStateMachine(Factory $stateMachine)
     {
@@ -101,7 +100,6 @@ class OrderInvoiceManager
         $this->invoiceFactory = $invoiceFactory;
     }
 
-    
     /**
      * @param SalesJournalService $salesJournalService
      */

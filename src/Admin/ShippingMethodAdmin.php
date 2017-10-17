@@ -18,28 +18,27 @@ use Librinfo\EcommerceBundle\Form\Type\PriceCentsType;
 
 class ShippingMethodAdmin extends SyliusGenericAdmin
 {
-
-
     public function genChannelArray(string $sonataType = 'sonata_type_immutable_array')
     {
         $channelKeyTab = [];
 
         foreach ($this->getConfigurationPool()->getContainer()
          ->get('sylius.repository.channel')->findAll() as $channel) {
-            $channelKeyTab []=
+            $channelKeyTab[] =
             [$channel->getCode(), $sonataType, [
                 'keys' => [
                     ['amount', PriceCentsType::class, []],
                 ],
             ]];
         }
+
         return $channelKeyTab;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         parent::configureFormFields($formMapper);
-        
+
         /* @todo: we should never use explicit tab and group name in php code as it may be changed in blast.yml */
         $formMapper
         ->tab('form_tab_general')->with('form_group_parameters')
@@ -48,17 +47,17 @@ class ShippingMethodAdmin extends SyliusGenericAdmin
             'configuration',
             'sonata_type_immutable_array',
             ['label'    => false,
-            'required' => false,
-            'keys'     => $this->genChannelArray('sonata_type_immutable_array')
+            'required'  => false,
+            'keys'      => $this->genChannelArray('sonata_type_immutable_array'),
             ]
         )
         ->end()->end();
     }
-    
+
     protected function configureShowFields(ShowMapper $showMapper)
     {
         parent::configureShowFields($showMapper);
-        
+
         /* @todo: it look like it is more easy to show multi level array in form than in show ... great sonata */
         // $showMapper
         //  ->tab('show_tab_general')->with('show_group_parameters')

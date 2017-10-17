@@ -182,14 +182,15 @@ class OrderCreationManager
     public function saveOrder(OrderInterface $newOrder)
     {
         $this->assignNumber($newOrder); /* in case it have not been done, but it should never hapen :) */
-        
+
         /* http://docs.sylius.org/en/latest/book/orders/orders.html */
         // Warning: process reset shipment if there is no item in the list
         // $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
-      
+
         $this->container->get('sylius.repository.order')->add($newOrder);
 
         $this->container->get('sylius.manager.order')->flush($newOrder);
+
         return true;
     }
 
@@ -214,7 +215,7 @@ class OrderCreationManager
         $newOrder->setShippingAddress($addressFactory->createNew());
         $newOrder->setBillingAddress($addressFactory->createNew());
         $newOrder->setCustomer($customerFactory->createNew());
-        
+
         //$newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
         $this->assignNumber($newOrder);
         $newOrder->setCheckoutCompletedAt(new \DateTime('NOW'));
