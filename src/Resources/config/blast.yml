@@ -1538,9 +1538,9 @@ parameters:
                                 template: SonataAdminBundle:CRUD:show_trans.html.twig
                             taxCategory: ~
                             enabled: ~
-                    show_group_channel:
-                          channels: ~
-                          zone: ~
+                        show_group_channel:
+                            channels: ~
+                            zone: ~
 
                     show_tab_history:
                         show_group_history:
