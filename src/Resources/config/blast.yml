@@ -1524,22 +1524,24 @@ parameters:
 
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
+                forceTabs: true
                 remove:
                     id: ~
-                    configuration: ~
                 add:
                     show_tab_general:
                         show_group_general:
                             position: ~
                             code: ~
                             translation.name: ~
-#                            category: ~
                             calculator:
                                 template: SonataAdminBundle:CRUD:show_trans.html.twig
                             taxCategory: ~
                             enabled: ~
                         show_group_channel:
                             channels: ~
+                            configuration:
+                                label: 'librinfo.ecommercebundle.amount'
+                                template: LibrinfoEcommerceBundle:CRUD:show_shipping_method_configuration_array.html.twig
                             zone: ~
 
                     show_tab_history:
@@ -1559,22 +1561,16 @@ parameters:
                             code: ~
                             translation.name:
                                 type: text
-#                            category:
-#                                type: sonata_type_model
-#                                btn_add: Add
                             calculator:
                                 type: Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType
                             taxCategory: ~
                             enabled: ~
-
                         form_group_parameters:
                             zone: ~
                             channels:
                                 type: Librinfo\EcommerceBundle\Form\Type\ShippingMethodChannelsType
                                 multiple: true
                                 expanded: true
-
-
                     form_tab_history:
                         form_group_history:
                             createdAt:
@@ -1601,7 +1597,6 @@ parameters:
                     position: ~
                     code: ~
                     translation.name: ~
-#                    category: ~
                     calculator:
                         template: SonataAdminBundle:CRUD:list_trans.html.twig
                     taxCategory: ~
@@ -1618,10 +1613,8 @@ parameters:
                 add:
                     position: ~
                     code: ~
-                    # sonata s***
                     translation.name:
                         type: doctrine_orm_string
-#                    category: ~
                     calculator: ~
                     taxCategory: ~
                     zone: ~
