@@ -41,17 +41,15 @@ class ShippingMethodAdmin extends SyliusGenericAdmin
 
         /* @todo: we should never use explicit tab and group name in php code as it may be changed in blast.yml */
         $formMapper
-        ->tab('form_tab_general')->with('form_group_parameters')
-        /* @todo : add this also in show and list */
-        ->add(
-            'configuration',
-            'sonata_type_immutable_array',
-            ['label'    => false,
-            'required'  => false,
-            'keys'      => $this->genChannelArray('sonata_type_immutable_array'),
-            ]
-        )
-        ->end()->end();
+            ->tab('form_tab_general')->with('form_group_parameters')
+            ->add(
+                'configuration',
+                'sonata_type_immutable_array',
+                ['label'    => false,
+                 'required'  => false,
+                 'keys'      => $this->genChannelArray('sonata_type_immutable_array')]
+            )
+            ->end()->end();
     }
 
     protected function configureShowFields(ShowMapper $showMapper)
@@ -59,9 +57,13 @@ class ShippingMethodAdmin extends SyliusGenericAdmin
         parent::configureShowFields($showMapper);
 
         /* @todo: it look like it is more easy to show multi level array in form than in show ... great sonata */
-        // $showMapper
-        //  ->tab('show_tab_general')->with('show_group_parameters')
-        //   ->add('configuration', 'array', [])
-        //  ->end()->end();
+        $showMapper
+            ->tab('show_tab_general')->with('show_group_general')
+            ->add(
+                'configuration',
+                'array',
+                ['keys'      => $this->genChannelArray('array')]
+            )
+            ->end()->end();
     }
 }
