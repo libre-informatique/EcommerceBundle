@@ -1,9 +1,21 @@
 winzou_state_machine:
     sylius_order:
+        states:
+            cart: ~
+            draft: ~
+            new: ~
+            cancelled: ~
+            fulfilled: ~
         transitions:
+            create_draft:
+                from: [cart]
+                to: draft
             cancel:
-                from: [fulfilled]
+                from: [draft,fulfilled]
                 to: cancelled
+            confirm:
+                from: [draft]
+                to: new
         callbacks:
             before:
                 sylius_save_addresses_on_customer:
@@ -12,11 +24,11 @@ winzou_state_machine:
                     args: ["object"]
             after:
                 librinfo_ecommerce_order_validated:
-                    on:   ["create"]
+                    on:   ["fulfill"]
                     do:   ["@librinfo_ecommerce.order_manager", "validateOrder"]
                     args: ["object"]
                 librinfo_ecommerce_order_generate_debit_invoice:
-                    on:   ["fulfill"]
+                    on:   ["create","confirm"]
                     do:   ["@librinfo_ecommerce.order_invoice_manager", "generateDebitInvoice"]
                     args: ["object"]
                 librinfo_ecommerce_order_generate_credit_note:

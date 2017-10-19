@@ -13,7 +13,7 @@
 namespace Librinfo\EcommerceBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\Order\Model\OrderInterface;
+use Librinfo\EcommerceBundle\Entity\OrderInterface;
 use SM\Factory\Factory;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner;
 

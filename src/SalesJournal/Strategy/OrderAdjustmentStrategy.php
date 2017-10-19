@@ -52,7 +52,7 @@ class OrderAdjustmentStrategy implements StrategyInterface
     public function getLabel($adjustment): string
     {
         $allAdjustments = array_merge($this->rrrAdjustments, $this->chargeAdjustments);
-        $adjustmentIdentifier = in_array($adjustment->getType(), $allAdjustments) ? $adjustment->getLabel() : $this->default;
+        $adjustmentIdentifier = in_array($adjustment->getType(), $allAdjustments) ? $this->default . ' - ' . $adjustment->getLabel() : $this->default;
 
         return $adjustmentIdentifier;
     }

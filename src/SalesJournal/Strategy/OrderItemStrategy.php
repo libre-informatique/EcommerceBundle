@@ -21,7 +21,7 @@ class OrderItemStrategy implements StrategyInterface
     /**
      * @var string
      */
-    private $default = 'Products';
+    private $default = 'PRD';
 
     /**
      * @param OrderItemInterface $item
@@ -32,7 +32,7 @@ class OrderItemStrategy implements StrategyInterface
     {
         /** @var ProductVariant $variant */
         $variant = $item->getVariant();
-        $itemIdentifier = $variant->getCode() ? $variant->getCode() : $this->default;
+        $itemIdentifier = $variant->getCode() ? $this->default . ' - ' .$variant->getCode() : $this->default;
 
         return $itemIdentifier;
     }

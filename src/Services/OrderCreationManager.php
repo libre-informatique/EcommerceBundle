@@ -18,7 +18,7 @@ use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
-use Sylius\Component\Order\Model\OrderInterface;
+use Librinfo\EcommerceBundle\Entity\OrderInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
@@ -121,19 +121,19 @@ class OrderCreationManager
     {
         foreach ($oldOrder->getItems() as $oItem) {
             $newItem = $this->container->get('sylius.factory.order_item')->createNew(); // clone $oItem;
+            $newItem->setBulk($oItem->isBulk());
             $newItem->setVariant($oItem->getVariant());
             $newItem->setUnitPrice($oItem->getUnitPrice());
-            //$newItem->setQuantity($oItem->getQuantity()); /* todo: find if it is needed for bulk mode or note */
-            // http://docs.sylius.org/en/latest/components_and_bundles/bundles/SyliusOrderBundle/services.html
+
             $this->container->get('sylius.order_item_quantity_modifier')->modify($newItem, $oItem->getQuantity());
+
+            $newItem->setQuantity($oItem->getQuantity());
 
             foreach ($oItem->getAdjustments() as $oItemAdjust) {
                 $newItem->addAdjustment($oItemAdjust);
             }
             $newOrder->addItem($newItem);
         }
-
-        // $newOrder->recalculateItemsTotal();
     }
 
     /**
@@ -219,7 +219,7 @@ class OrderCreationManager
         //$newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
         $this->assignNumber($newOrder);
         $newOrder->setCheckoutCompletedAt(new \DateTime('NOW'));
-        $newOrder->setState(OrderInterface::STATE_NEW);
+        $newOrder->setState(OrderInterface::STATE_DRAFT);
         $newOrder->setPaymentState(OrderPaymentStates::STATE_CART);
         $newOrder->setShippingState(OrderShippingStates::STATE_CART);
 

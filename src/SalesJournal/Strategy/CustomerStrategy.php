@@ -23,7 +23,7 @@ class CustomerStrategy implements StrategyInterface
     /**
      * @var string
      */
-    private $default = 'Customer';
+    private $default = 'CUS';
 
     /**
      * @param CustomerInterface $payment
@@ -32,7 +32,7 @@ class CustomerStrategy implements StrategyInterface
      */
     public function getLabel($order): string
     {
-        return (string) $order->getCustomer();
+        return (string) $this->default . ' - ' . $order->getCustomer();
     }
 
     /**

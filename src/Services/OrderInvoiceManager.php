@@ -13,7 +13,7 @@
 namespace Librinfo\EcommerceBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use Sylius\Component\Order\Model\OrderInterface;
+use Librinfo\EcommerceBundle\Entity\OrderInterface;
 use SM\Factory\Factory;
 use Librinfo\EcommerceBundle\Factory\InvoiceFactoryInterface;
 use Librinfo\EcommerceBundle\Entity\Invoice;
@@ -68,12 +68,16 @@ class OrderInvoiceManager
 
     public function generateCreditInvoice(OrderInterface $object): Invoice
     {
-        $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_CREDIT);
+        if ($object->getInvoices()->count() !== 0) {
+            $invoice = $this->invoiceFactory->createForOrder($object, Invoice::TYPE_CREDIT);
 
-        $this->em->persist($invoice);
+            $this->em->persist($invoice);
 
-        $this->salesJournalService->traceCreditInvoice($object, $invoice);
-        $this->em->flush();
+            $this->salesJournalService->traceCreditInvoice($object, $invoice);
+            $this->em->flush();
+        } else {
+            $invoice = new Invoice(); // dummy invoice
+        }
 
         return $invoice;
     }

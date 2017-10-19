@@ -20,7 +20,7 @@ class PaymentStrategy implements StrategyInterface
     /**
      * @var string
      */
-    private $default = 'Payment';
+    private $default = 'PAY';
 
     /**
      * @param PaymentInterface $payment
@@ -29,7 +29,7 @@ class PaymentStrategy implements StrategyInterface
      */
     public function getLabel($payment): string
     {
-        $adjustmentIdentifier = $payment->getMethod()->getCode();
+        $adjustmentIdentifier = $this->default . ' - ' . $payment->getMethod()->getCode();
 
         return $adjustmentIdentifier;
     }

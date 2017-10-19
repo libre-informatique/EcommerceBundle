@@ -16,7 +16,7 @@ namespace Librinfo\EcommerceBundle\Controller;
 //use Sylius\Component\Core\ShipmentTransitions;
 use Blast\CoreBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Sylius\Component\Order\OrderTransitions;
+use Librinfo\EcommerceBundle\StateMachine\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -167,6 +167,11 @@ class OrderCRUDController extends CRUDController
         return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, $request->request->get('idx'));
     }
 
+    public function confirmOrderAction($id, Request $request = null)
+    {
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CONFIRM, [$id]);
+    }
+
     protected function validateOrCancelOrders($action, $targets)
     {
         $modelManager = $this->admin->getModelManager();
@@ -186,9 +191,9 @@ class OrderCRUDController extends CRUDController
                 );
             }
 
-            try {
+            // try {
                 /* @todo : state Machine manipulation should be done in service */
-                if ($action === OrderTransitions::TRANSITION_FULFILL) {
+                if ($action === OrderTransitions::TRANSITION_FULFILL || $action === OrderTransitions::TRANSITION_CONFIRM) {
                     $this->container
                         ->get('librinfo_ecommerce.order_creation_manager')
                         ->assignNumber($selectedModel);
@@ -201,9 +206,9 @@ class OrderCRUDController extends CRUDController
                 $stateMachine->apply($action);
                 $this->container->get('sylius.manager.order')->flush();
                 ++$successes;
-            } catch (\Exception $e) {
-                $this->addFlash('sonata_flash_error', $e->getMessage());
-            }
+            // } catch (\Exception $e) {
+            //     $this->addFlash('sonata_flash_error', $e->getMessage());
+            // }
         }
 
         if ($successes > 0) {
@@ -214,6 +219,8 @@ class OrderCRUDController extends CRUDController
             $this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
         );
     }
+
+
 
     /**
      * Redirect the user depend on this choice.

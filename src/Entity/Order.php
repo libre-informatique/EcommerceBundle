@@ -14,12 +14,12 @@ namespace Librinfo\EcommerceBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-/* @todo reference to AppBundle should be removed */
+use Librinfo\EcommerceBundle\Entity\OrderInterface;
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\OrderExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\Order as BaseOrder;
 
-class Order extends BaseOrder
+class Order extends BaseOrder implements OrderInterface
 {
     use OuterExtensible,
     OrderExtension;

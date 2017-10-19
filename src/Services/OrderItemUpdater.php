@@ -18,6 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use SM\Factory\Factory;
 use Sylius\Component\Order\Processor\CompositeOrderProcessor;
+use Librinfo\EcommerceBundle\StateMachine\OrderTransitions;
 
 /**
  * Manage order item quantity.
@@ -105,7 +106,7 @@ class OrderItemUpdater
 
         $orderStateMachine = $this->smFactory->get($order, 'sylius_order');
 
-        if ($orderStateMachine->getState() === 'cancelled' || $orderStateMachine->getState() === 'fulfilled') {
+        if (!$orderStateMachine->can(OrderTransitions::TRANSITION_CONFIRM)) {
             return [
                 'lastItem' => true,
                 'message'  => $this->translator->trans('cannot_edit_order_because_of_state', [], 'SonataCoreBundle'),
@@ -126,6 +127,7 @@ class OrderItemUpdater
                 }
             } else {
                 $this->orderItemQuantityModifier->modify($item, $quantity);
+                $item->setQuantity($quantity);
                 $item->recalculateUnitsTotal();
             }
 

@@ -17,6 +17,7 @@ librinfo:
         cart: Panier
         fulfilled: Validée
         new: Nouvelle
+        draft: Brouillon
     payment_state:
         awaiting_payment: En attente
         cancelled: Annulé
@@ -36,6 +37,7 @@ librinfo:
         order_is_fulfilled: Cette commande est validée, vous ne pouvez plus la modifier
         confirm_cancel: Voulez-vous vraiment annuler cette commande ?
         confirm_validate: Voulez-vous vraiment valider cette commande ?
+        confirm_confirmOrder: Voulez-vous vraiment confirmer cette commande ?
         quantity_in_grams: Quantité (g)
     confirm:
         delete_bulk_product: Voulez-vous vraiment supprimer cet article vrac ?
@@ -44,6 +46,8 @@ librinfo:
         cancel_this_order: Annuler cette commande
         fulfill_order: Terminer
         fulfill_this_order: Terminer cette commande
+        confirm_order: Confirmer
+        confirm_this_order: Confirmer cette commande
         generating_invoice: Génération de la facture en cours...
         order: Commande
         product: Article
@@ -225,7 +229,7 @@ Amount: Montant
 Channel Create: Créer un canal
 Channel List: Liste des canaux
 Edit: Modifier
-Order item units based: Basé sur les variantes de produit des commandes
+Order item units based: Basé sur chaque unités de produit des commandes
 Order items based: Basé sur les produits des commandes
 Products: Produits
 There must be at least one item left in the order: Il doit y avoir au moins un élément dans la commande

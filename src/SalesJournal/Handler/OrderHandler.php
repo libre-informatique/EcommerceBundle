@@ -12,7 +12,7 @@
 
 namespace Librinfo\EcommerceBundle\SalesJournal\Handler;
 
-use Sylius\Component\Order\Model\OrderInterface;
+use Librinfo\EcommerceBundle\Entity\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Librinfo\EcommerceBundle\Entity\Invoice;

@@ -16,7 +16,7 @@ use Blast\CoreBundle\Admin\CoreAdmin;
 use Librinfo\EcommerceBundle\Form\Type\OrderAddressType;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sylius\Component\Order\Model\OrderInterface;
+use Librinfo\EcommerceBundle\Entity\OrderInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -44,6 +44,7 @@ class OrderAdmin extends CoreAdmin
         $collection->add('updatePayment', $this->getRouterIdParameter() . '/updatePayment');
         $collection->add('cancelOrder', $this->getRouterIdParameter() . '/cancelOrder');
         $collection->add('validateOrder', $this->getRouterIdParameter() . '/validateOrder');
+        $collection->add('confirmOrder', $this->getRouterIdParameter() . '/confirmOrder');
     }
 
     public function configureBatchActions($actions)
@@ -139,7 +140,7 @@ class OrderAdmin extends CoreAdmin
 
                 if (isset($data['shippingAddress']) && isset($data['shippingAddress']['useSameAddressForBilling'])) {
                     if ((bool) $data['shippingAddress']['useSameAddressForBilling'] === true) {
-                        /* Hum... Why remove and add */
+                        // Allow empty sub form submit
                         $form->remove('billingAddress');
                         $form->add('billingAddress', OrderAddressType::class, [
                             'label'       => false,

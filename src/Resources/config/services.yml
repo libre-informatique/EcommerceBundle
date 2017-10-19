@@ -410,3 +410,18 @@ services:
 
     librinfo_ecommerce.sales_journal.strategy.customer.strategy:
         class: Librinfo\EcommerceBundle\SalesJournal\Strategy\CustomerStrategy
+
+    sylius.taxation.order_item_units_taxes_applicator:
+        class:  Librinfo\EcommerceBundle\Tax\OrderItemUnitsTaxesApplicator
+        arguments:
+            - "@sylius.tax_calculator"
+            - "@sylius.factory.adjustment"
+            - "@sylius.tax_rate_resolver"
+
+    sylius.taxation.order_items_taxes_applicator:
+        class: Librinfo\EcommerceBundle\Tax\OrderItemsTaxesApplicator
+        arguments:
+            - "@sylius.tax_calculator"
+            - "@sylius.factory.adjustment"
+            - "@sylius.integer_distributor"
+            - "@sylius.tax_rate_resolver"
