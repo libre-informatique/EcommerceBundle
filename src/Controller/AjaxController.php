@@ -15,6 +15,7 @@ namespace Librinfo\EcommerceBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 /**
  * @author Romain SANCHEZ <romain.sanchez@libre-informatique.fr>
@@ -31,13 +32,13 @@ class AjaxController extends Controller
     public function orderInlineEditAction(Request $request)
     {
         $value = $request->get('value');
-        $setter = 'set' . ucfirst($request->get('field'));
         $manager = $this->getDoctrine()->getManager();
         $repo = $manager->getRepository('LibrinfoEcommerceBundle:Order');
 
         $order = $repo->find($request->get('id'));
 
-        $order->$setter($value);
+        $propertyAccessor = new PropertyAccessor();
+        $propertyAccessor->setValue($order, $request->get('field'), $value);
 
         $manager->persist($order);
         $manager->flush();
@@ -77,7 +78,7 @@ class AjaxController extends Controller
         return new JsonResponse($result);
     }
 
-    public function addnewProductAction(Request $request)
+    public function addNewProductAction(Request $request)
     {
         $newProduct = $this->container
             ->get('librinfo_ecommerce.order.updater')
@@ -91,5 +92,18 @@ class AjaxController extends Controller
         }
 
         return new JsonResponse('ok');
+    }
+
+    public function updateOrderItemBulkQuatityAction(Request $request)
+    {
+        $updater = $this->container->get('librinfo_ecommerce.order.item_updater');
+
+        $result = $updater->updateItemCount($request->get('order'), $request->get('item'), true, 1000 * $request->get('bulkQuantity'));
+
+        if ($result['lastItem'] != null) {
+            $result['message'] = $this->container->get('translator')->trans('There must be at least one item left in the order');
+        }
+
+        return new JsonResponse($result);
     }
 }

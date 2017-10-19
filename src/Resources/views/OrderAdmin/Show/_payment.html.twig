@@ -3,7 +3,7 @@
 <td width="50%">
     <strong>
         {{ payment.method }}<br>
-        {{ money.convertAndFormat(payment.amount) }}
+        <span id="{{payment.id}}" class="order_payment_total">{{ money.convertAndFormat(payment.amount) }}</span>
     </strong>
 </td>
 <td width="50%">

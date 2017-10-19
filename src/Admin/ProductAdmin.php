@@ -146,7 +146,7 @@ class ProductAdmin extends SyliusGenericAdmin
             if (count($qb->getQuery()->getResult()) != 0) {
                 $errorElement
                     ->with('code')
-                    ->addViolation('lisem.product_code.not_unique')
+                    ->addViolation('librinfo.product_code.not_unique')
                     ->end();
             }
         }

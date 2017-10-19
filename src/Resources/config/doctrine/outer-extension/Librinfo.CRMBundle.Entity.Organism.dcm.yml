@@ -21,7 +21,7 @@ Librinfo\CRMBundle\Entity\Organism:
             targetEntity: Librinfo\CRMBundle\Entity\Address
             mappedBy: customer
             cascade: [ persist ]
-            
+
     manyToOne:
         group:
             targetEntity: Sylius\Component\Customer\Model\CustomerGroupInterface

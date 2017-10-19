@@ -82,25 +82,34 @@ class InvoiceFactory implements InvoiceFactoryInterface
      *
      * @return Invoice
      */
-    public function createForOrder(OrderInterface $order)
+    public function createForOrder(OrderInterface $order, $type = Invoice::TYPE_DEBIT)
     {
         $invoice = new Invoice();
         $number = $this->codeGenerator::generate($invoice);
 
         $data = [
-        'order'    => $order,
-        'number'   => $number,
-        'date'     => date('d/m/Y'),
-        'base_dir' => $this->rootDir . '/../web',
+            'order'        => $order,
+            'number'       => $number,
+            'date'         => date('d/m/Y'),
+            'base_dir'     => $this->rootDir . '/../web',
+            'invoice_type' => $type,
         ];
+
         $html = $this->templating->render($this->template, $data);
         $pdf = $this->pdfGenerator->getOutputFromHtml($html);
 
+        $total = $type === Invoice::TYPE_DEBIT ?
+            $order->getTotal() :
+            $order->getTotal() * -1
+        ;
+
+        $order->addInvoice($invoice);
         $invoice->setOrder($order);
         $invoice->setNumber($number);
         $invoice->setMimeType('application/pdf');
         $invoice->setFile($pdf);
-        $invoice->setTotal($order->getTotal());
+        $invoice->setType($type);
+        $invoice->setTotal($total);
 
         return $invoice;
     }

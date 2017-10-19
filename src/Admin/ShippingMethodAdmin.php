@@ -12,6 +12,41 @@
 
 namespace Librinfo\EcommerceBundle\Admin;
 
+use Sonata\AdminBundle\Form\FormMapper;
+use Librinfo\EcommerceBundle\Form\Type\PriceCentsType;
+
 class ShippingMethodAdmin extends SyliusGenericAdmin
 {
+    public function genChannelArray(string $sonataType = 'sonata_type_immutable_array')
+    {
+        $channelKeyTab = [];
+
+        foreach ($this->getConfigurationPool()->getContainer()
+        ->get('sylius.repository.channel')->findAll() as $channel) {
+            $channelKeyTab[] = [$channel->getCode(), $sonataType, [
+                'keys' => [
+                    ['amount', PriceCentsType::class, ['label'    => false]],
+                ],
+            ]];
+        }
+
+        return $channelKeyTab;
+    }
+
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        parent::configureFormFields($formMapper);
+
+        /* @todo: we should never use explicit tab and group name in php code as it may be changed in blast.yml */
+        $formMapper
+        ->tab('form_tab_general')->with('form_group_parameters')
+        ->add(
+            'configuration',
+            'sonata_type_immutable_array',
+            ['label'    => 'librinfo.ecommercebundle.amount',
+            'required'  => false,
+            'keys'      => $this->genChannelArray('sonata_type_immutable_array'), ]
+        )
+        ->end()->end();
+    }
 }

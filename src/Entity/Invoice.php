@@ -22,9 +22,13 @@ use Blast\BaseEntitiesBundle\Entity\Traits\Timestampable;
  */
 class Invoice
 {
-    use BaseEntity,
-    Timestampable
+    use
+        BaseEntity,
+        Timestampable
     ;
+
+    const TYPE_DEBIT = 0;
+    const TYPE_CREDIT = 1;
 
     /**
      * @var string
@@ -55,6 +59,11 @@ class Invoice
      * @var int
      */
     private $total;
+
+    /**
+     * @var int
+     */
+    private $type = self::TYPE_DEBIT;
 
     /**
      * Called by __toString().
@@ -208,5 +217,26 @@ class Invoice
     public function getOrder()
     {
         return $this->order;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int type
+     */
+    public function setType(int $type): void
+    {
+        $this->type = $type;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->number;
     }
 }

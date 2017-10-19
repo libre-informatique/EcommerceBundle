@@ -11,7 +11,9 @@
             <th class="one wide center aligned sylius-table-column-discount">{{ 'sylius.ui.discount'|trans }}</th>
             <th class="one wide center aligned sylius-table-column-tax">{{ 'sylius.ui.tax'|trans }}</th>
             <th class="two wide center aligned sylius-table-column-total">{{ 'sylius.ui.total'|trans }}</th>
-            <th class="two wide center aligned sylius-table-column-total">{{ 'Edit'|trans }}</th>
+            {% if sm_can(object, 'confirm', 'sylius_order') %}
+                <th class="two wide center aligned sylius-table-column-total">{{ 'Edit'|trans }}</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -24,7 +26,7 @@
     </tfoot>
 </table>
 
-{% if sm_state(object, 'sylius_order') != 'fulfilled' and sm_state(object, 'sylius_order') != 'cancelled' %}
+{% if sm_can(object, 'confirm', 'sylius_order') %}
     <a
         id="add-to-order"
         class="btn btn-primary pull-right"

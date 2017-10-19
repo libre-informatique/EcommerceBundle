@@ -4,6 +4,22 @@
 
 {% block field_value %}
     <div class="row">
+
+        {% if sm_can(object, 'confirm', 'sylius_order') %}
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="col-md-6">
+                    <span>
+                        {{ 'librinfo.label.confirm_this_order'|trans }}:
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ path('admin_librinfo_ecommerce_order_confirmOrder',{id: object.id})}}" class="btn btn-default confirmable" data-confirm-title="{{ 'librinfo.help.confirm_confirmOrder'|trans}}">
+                        {{ 'librinfo.label.confirm_order'|trans }}&nbsp;<i class="fa fa-paper-plane"></i>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+
         {% if sm_can(object, 'fulfill', 'sylius_order') %}
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="col-md-6">

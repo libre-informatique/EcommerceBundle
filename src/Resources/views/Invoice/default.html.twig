@@ -1,9 +1,11 @@
+{% set invoiceTypeDebit = invoice_type == constant('Librinfo\\EcommerceBundle\\Entity\\Invoice::TYPE_DEBIT') %}
+
 <html>
     <head>
         <title>facture</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ base_dir ~ asset('bundles/librinfoecommerce/css/default-invoice.css') }}" />
+            <link rel="stylesheet" href="{{ base_dir ~ asset('bundles/librinfoecommerce/css/default-invoice.css') }}"/>
         {% endblock %}
     </head>
 
@@ -18,7 +20,7 @@
                             29000 QUIMPER France
                         {% endblock %}
                     </td>
-                    <td id="invoice-title">FACTURE</td>
+                    <td id="invoice-title">{{ invoiceTypeDebit ? 'FACTURE' : 'AVOIR' }}</td>
                 </tr>
             </table>
         </header>
@@ -26,26 +28,37 @@
         <table id="invoice-details">
             <tr>
                 <td id="customer">
-                    Réf. client: {{ order.customer.customerCode }}<br>
+                    Réf. client:
+                    {{ order.customer.customerCode }}<br>
                     <address>
                         {% set address = order.billingAddress %}
-                        <strong>{{ address.firstName }} {{ address.lastName }}</strong>
+                        <strong>{{ address.firstName }}
+                            {{ address.lastName }}</strong>
                         {% if address.company %}
                             {{ address.company }}<br/>
                         {% endif %}
                         {{ address.phoneNumber }}<br/>
                         {{ address.street }}<br/>
-                        {{ address.postcode }} {{ address.city }}<br/>
-                        {% if address|sylius_province_name is not empty %}
+                        {{ address.postcode }}
+                        {{ address.city }}<br/>
+                        {% if address | sylius_province_name is not empty %}
                             {{ address|sylius_province_name }}<br/>
                         {% endif %}
                         {{ address.countryCode|sylius_country_name|upper }}
                     </address>
                 </td>
                 <td id="invoice-number">
-                    Facture n° {{ number }}<br>
-                    Date: {{ date }}<br>
-                    Réf. comande: {{ order.number }}
+                    {{ invoiceTypeDebit ? 'Facture' : 'Avoir' }}
+                    n°
+                    {{ number }}<br>
+                    Date:
+                    {{ date }}<br>
+                    Réf. comande:
+                    {{ order.number }}<br>
+                    {% if invoiceTypeDebit == false %}
+                        Réf. facture:
+                        {{ order.getLastDebitInvoice().number }}
+                    {% endif %}
                 </td>
             </tr>
         </table>
@@ -79,7 +92,6 @@
                 N°TVA intracommunautaire : FR12123456789
             {% endblock %}
         </footer>
-
 
     </body>
 </html>

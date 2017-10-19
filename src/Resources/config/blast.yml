@@ -20,17 +20,13 @@ parameters:
                 add:
                     form_group_general:
                         '':
-                            name:
-                                label: librinfo.label.product_name
+                            name: ~
                             slug:
-                                label: librinfo.label.product_shop_url
                                 template: "LibrinfoEcommerceBundle:ProductAdmin:show_field_shop_link.html.twig"
-                            code:
-                                label: librinfo.label.product_code
+                            code: ~
                             enabled: boolean
                             description: ~
-                            options:
-                                label: librinfo.label.product_options
+                            options: ~
                             shortDescription: ~
                             metaKeywords: ~
                             metaDescription: ~
@@ -64,20 +60,17 @@ parameters:
                                 class: col-md-12
                             name:
                                 type: text
-                                label: librinfo.label.product_name
                             slug:
                                 type: text
                                 attr:
                                     class: inline-block
                                     width: 50
                             code:
-                                label: librinfo.label.product_code
                                 attr:
                                     class: inline-block
                                     width: 50
                             enabled: boolean
                             options:
-                                label: librinfo.label.product_options
                                 required: false
                         form_group_description:
                             shortDescription:
@@ -117,7 +110,7 @@ parameters:
                                 label: false
                                 by_reference: true
                                 attr:
-                                    data-showFields: 'name,code'
+                                    data-showFields: 'name,code,enabled'
                                 type_options:
                                     btn_add: false
                                 required: true    # if not true, child form fields cannot be required (why ??)
@@ -138,10 +131,8 @@ parameters:
                 add:
                     name:
                         identifier: true
-                        label: librinfo.label.product_name
                     code:
                         identifier: true
-                        label: librinfo.label.product_code
                     enabled:
                         type: boolean
                     _options:
@@ -161,18 +152,12 @@ parameters:
                         xml: csv
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    translations.name:
-                        label: librinfo.label.product_name
-                    code:
-                        label: librinfo.label.product_code
-                    translations.description:
-                        label: librinfo.label.description
-                    translations.shortDescription:
-                        label: librinfo.label.short_description
-                    translations.metaKeywords:
-                        label: librinfo.label.meta_keywords
-                    translations.metaDescription:
-                        label: librinfo.label.meta_description
+                    translations.name: ~
+                    code: ~
+                    translations.description: ~
+                    translations.shortDescription: ~
+                    translations.metaKeywords: ~
+                    translations.metaDescription: ~
                     enabled: ~
                     _options:
                         fieldsOrder:
@@ -195,22 +180,19 @@ parameters:
                                 admin_code: librinfo_ecommerce.admin.product
                             name:
                                 type: text
-                                label: librinfo.label.product_variant_name
-                            code:
-                                label: librinfo.label.product_variant_code
+                            code: ~
                             optionValues:
                                 template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_optionvalues.html.twig
                                 admin_code: librinfo_ecommerce_option_value.admin.product
                         show_group_pricing:
                             taxCategory: ~
                             price:
-                                template: LibrinfoEcommerceBundle:ProductVariantAdmin:show_field_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                         show_group_stock:
                             onHand: ~
                             onHold: ~
                             tracked:
                                 type: boolean
-                                label: librinfo.label.tracked_stock
                         show_group_properties:
                             width: ~
                             height: ~
@@ -230,21 +212,19 @@ parameters:
                             id:
                                 type: hidden
                             name:
-                                label: librinfo.label.product_variant_name
                                 type: text
                             code:
                                 type: Blast\CoreBundle\Form\Type\EntityCodeType
-                                label: librinfo.label.product_variant_code
                             product:
                                 type: sonata_type_model_hidden
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
+                            enabled: ~
                             _options:
                                 fieldsOrder: [product, name, code]
                         form_group_pricing:
                             taxCategory: ~
                             channelPricings:
-                                label: librinfo.label.product_variant_prices
                                 type: sonata_type_collection
                                 type_options:
                                     btn_add: false
@@ -262,8 +242,7 @@ parameters:
                                 required: false
                             onHold:
                                 required: false
-                            tracked:
-                                label: librinfo.label.tracked_stock
+                            tracked: ~
                         form_group_properties:
                             width: ~
                             height: ~
@@ -276,10 +255,8 @@ parameters:
                 add:
                     code:
                         identifier: true
-                        label: librinfo.label.product_variant_code
                     translations.name:
                         identifier: true
-                        label: librinfo.label.product_variant_name
                     product:
                         admin_code: librinfo_ecommerce.admin.product
                     available:
@@ -293,7 +270,8 @@ parameters:
                     onHold: ~
                     tracked:
                         type: boolean
-                        label: librinfo.label.tracked_stock
+                    enabled:
+                        type: boolean
                     _options:
                         fieldsOrder:
                             - code
@@ -314,10 +292,8 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     # product.id: ~
-                    translations.name:
-                        label: librinfo.label.product_variant_name
-                    code:
-                        label: librinfo.label.product_variant_code
+                    translations.name: ~
+                    code: ~
                     product.code: ~
                     _options:
                         fieldsOrder:
@@ -359,13 +335,10 @@ parameters:
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.product
                             name:
-                                label: librinfo.label.product_variant_name
                                 type: text
                             code:
                                 type: Blast\CoreBundle\Form\Type\EntityCodeType
-                                label: librinfo.label.product_variant_code
                             # channelPricings:
-                            #     label: librinfo.label.product_variant_prices
                             #     type: sonata_type_collection
                             #     type_options:
                             #         btn_add: false
@@ -427,8 +400,7 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
-                    translations.name:
-                        label: librinfo.label.name
+                    translations.name: ~
                     type: ~
                     storageType: ~
                     createdAt: ~
@@ -487,8 +459,7 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
-                    translations.name:
-                        label: librinfo.label.name
+                    translations.name: ~
                     createdAt: ~
                     updatedAt: ~
 
@@ -505,8 +476,7 @@ parameters:
                         '':
                             code: ~
                             value: ~
-                            option:
-                                label: librinfo.label.product_option
+                            option: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
@@ -515,22 +485,19 @@ parameters:
                             code: ~
                             value:
                                 type: text
-                            option:
-                                label: librinfo.label.product_option
+                            option: ~
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     code:
                         identifier: true
                     value: ~
-                    option:
-                        label: librinfo.label.product_option
+                    option: ~
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     code: ~
-                    translations.value:
-                        label: librinfo.label.value
+                    translations.value: ~
 
 
 
@@ -545,22 +512,20 @@ parameters:
                     form_group_general:
                         '':
                             channelCode:
-                                label: librinfo.label.channel_code
                                 type: text
                                 attr:
                                     readonly: true
                             price:
-                                label: librinfo.label.price
                                 type: Librinfo\EcommerceBundle\Form\Type\PriceCentsType
                             original_price:
-                                label: librinfo.label.original_price
                                 type: Librinfo\EcommerceBundle\Form\Type\PriceCentsType
 
 ########
 # ORDER
 ########
 
-        Sylius\Component\Core\Model\Order:
+        # Sylius\Component\Core\Model\Order:
+        Librinfo\EcommerceBundle\Entity\Order:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
                 titleTemplate: LibrinfoEcommerceBundle:OrderAdmin/Show:show_title.html.twig
@@ -568,12 +533,9 @@ parameters:
                 add:
                     show_tab_order_details:
                         show_group_order:
-                            number:
-                                label: librinfo.label.order_number
-                            channel:
-                                label: librinfo.label.order_channel
+                            number: ~
+                            channel: ~
                             state:
-                                label: librinfo.label.order_state
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_order_state.html.twig
                             paymentState:
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_payment_state.html.twig
@@ -594,11 +556,11 @@ parameters:
                             tokenValue: ~
                         show_group_totals:
                             itemsTotal:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             adjustmentsTotal:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             total:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             currencyCode: ~
                             exchangeRate: ~
                         show_group_actions:
@@ -608,6 +570,8 @@ parameters:
                                 mapped: false
                                 template: LibrinfoEcommerceBundle:OrderAdmin/Show:_order_actions.html.twig
                         _options:
+                            attr:
+                                class: inline-block
                             groupsOrder:
                                 - show_group_actions
                                 - show_group_order
@@ -644,31 +608,84 @@ parameters:
                             checkoutCompletedAt: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
+                template:
+                remove:
+                    channel: ~
+                    notes: ~
+                    shipping_address: ~
+                    billing_address: ~
+                    customer: ~
                 add:
                     form_tab_general:
                         form_group_general:
-                            shipping_address: ~
-                            notes: ~
+                            channel:
+                                required: true
+                                attr:
+                                    class: inline-block
+                                    width: 50
+                            currency_code:
+                                type: sonata_type_model
+                                class: Sylius\Component\Currency\Model\Currency
+                                attr:
+                                    class: new-line-after
+                                    width: 50
+                            notes:
+                                type: Symfony\Component\Form\Extension\Core\Type\TextareaType
+                        form_group_shipping_and_payment_methods:
+                            payment:
+                                label: librinfo.label.payment_method
+                                type: Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType
+                                multiple: false
+                                mapped: false
+                                error_bubbling: true
+                                required: true
+                                constraints:
+                                    - Symfony\Component\Validator\Constraints\Valid
+                                    - Symfony\Component\Validator\Constraints\NotBlank
+                            shipment:
+                                label: librinfo.label.shipping_method
+                                type: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType
+                                multiple: false
+                                mapped: false
+                                error_bubbling: true
+                                required: true
+                                constraints:
+                                    - Symfony\Component\Validator\Constraints\Valid
+                                    - Symfony\Component\Validator\Constraints\NotBlank
+                        form_group_addresses:
+                            shippingAddress:
+                                type: Librinfo\EcommerceBundle\Form\Type\OrderAddressType
+                                attr:
+                                    class: nested-form inline-block
+                                    width: 50
+                                constraints:
+                                    - Symfony\Component\Validator\Constraints\Valid
+                            billingAddress:
+                                type: Librinfo\EcommerceBundle\Form\Type\OrderAddressType
+                                attr:
+                                    class: nested-form inline-block
+                                    width: 50
+                                constraints:
+                                    - Symfony\Component\Validator\Constraints\Valid
+                            _options:
+                                class: col-md-12
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
-                    _actions: [edit, duplicate]
-                    # _batch_actions: [delete]
+                    _actions: [edit]
+                    _batch_actions: [delete]
                     _list_actions: [create]
                 add:
                     _batch_actions: [cancel]
                     number:
-                        label: librinfo.label.order_number
                         identifier: true
                     createdAt: ~
                     updatedAt: ~
-                    channel:
-                        label: librinfo.label.order_channel
+                    channel: ~
                     customer:
                         admin_code: librinfo_ecommerce.admin.customer
                     notes: ~
                     state:
-                        label: librinfo.label.order_state
                         template: LibrinfoEcommerceBundle:OrderAdmin:list_field_state.html.twig
                     #checkoutState: ~
                     paymentState:
@@ -677,7 +694,6 @@ parameters:
                         template: LibrinfoEcommerceBundle:OrderAdmin:list_field_shipping_state.html.twig
                     total:
                         type: text
-                        label: librinfo.label.order_total
                         template: LibrinfoEcommerceBundle:OrderAdmin:list_field_total.html.twig
                     _actions:
                         delete:
@@ -685,8 +701,7 @@ parameters:
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    number:
-                        label: librinfo.label.order_number
+                    number: ~
                     customer.fulltextName:
                         type: doctrine_orm_callback
                         serviceCallback: [librinfo.ecommerce.filters.customer, filterOnFullname, callback]
@@ -701,7 +716,6 @@ parameters:
                     customer.customerCode: ~
                     notes: ~
                     state:
-                        label: librinfo.label.order_state
                         type: doctrine_orm_string
                         field_type: Librinfo\EcommerceBundle\Form\Type\OrderStateType
                         field_options:
@@ -721,8 +735,7 @@ parameters:
                     # TODO euros to cents transformer:
                     adjustmentsTotal: ~
                     # TODO euros to cents transformer:
-                    total:
-                        label: librinfo.label.order_total
+                    total: ~
                     createdAt:
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
@@ -857,54 +870,42 @@ parameters:
 # ORDER PAYMENT
 ################
 
-        Sylius\Component\Core\Model\Payment:
+        Librinfo\EcommerceBundle\Entity\Payment:
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
+                remove:
+                    createdAt: ~
+                    updatedAt: ~
                 forceTabs: true
                 add:
                     show_tab_payment_details:
                         show_group_payments:
-                            order.number:
-                                label: librinfo.label.order_number
-                            order.channel:
-                                label: librinfo.label.channel
-                            method:
-                                label: librinfo.label.payment_method
+                            order.number: ~
+                            order.channel: ~
+                            method: ~
                             state:
-                                label: librinfo.label.payment_state
                                 template: LibrinfoEcommerceBundle:PaymentAdmin/Show:_payment_state.html.twig
                             amount:
-                                label: librinfo.label.payment_amount
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
+                            updatedAt:
+                                label: librinfo.ecommercebundle.paid_at
                         show_group_order:
                             order.customer:
-                                label: librinfo.label.customer
                                 admin_code: librinfo_ecommerce.admin.customer
-                            order.tokenValue:
-                                label: librinfo.label.token_value
+                            order.tokenValue: ~
                         show_group_totals:
                             order.itemsTotal:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
-                                label: librinfo.label.items_total
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             order.adjustmentsTotal:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
-                                label: librinfo.label.adjustments_total
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
                             order.total:
-                                template: LibrinfoEcommerceBundle:OrderAdmin/Show:_price.html.twig
-                            order.currencyCode:
-                                label: librinfo.label.currency_code
-                            order.exchangeRate:
-                                label: librinfo.label.exchange_rate
-                    show_tab_history:
-                        '':
-                            createdAt: ~
-                            updatedAt: ~
+                                template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
+                            order.currencyCode: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     '':
                         '':
-
                             state:
                                 type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                             amount:
@@ -921,7 +922,6 @@ parameters:
                                 _options:
                                     admin_code: librinfo_ecommerce.admin.order
                             method:
-                                label: librinfo.label.payment_method
                                 type: sonata_type_model
                                 property: code
                                 btn_add: false
@@ -931,25 +931,29 @@ parameters:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
                     _actions: ~
-                    _batch_actions: ~
+                    # _batch_actions: ~
                     _list_actions: [create,edit]
                 add:
-                    order.number:
-                        label: librinfo.label.order_number
-                    order.channel:
-                        label: librinfo.label.order_channel
+                    order:
+                        label: librinfo.ecommercebundle.order_number
+                        admin_code: librinfo_ecommerce.admin.order
+                    order.getLastDebitInvoice.number:
+                        label: librinfo.ecommercebundle.invoice_number
                     order.customer:
-                        label: librinfo.label.customer
+                        label: librinfo.ecommercebundle.customer
                         admin_code: librinfo_ecommerce.admin.customer
+                    order.channel: ~
                     method:
-                        label: librinfo.label.payment_method
-                    state:
-                        label: librinfo.label.payment_state
+                        label: librinfo.ecommercebundle.payment_method
+                    order.paymentState:
                         template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_state.html.twig
                     amount:
                         type: text
-                        label: librinfo.label.amount
                         template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_amount.html.twig
+                    dueAmount:
+                        type: text
+                        template: LibrinfoEcommerceBundle:PaymentAdmin:list_field_due_amount.html.twig
+                        mapped: false
                     createdAt: ~
                     updatedAt: ~
                     _actions:
@@ -959,26 +963,22 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     order.number:
-                        label: librinfo.label.order_number
-                    order.customer.name:
-                        label: librinfo.label.customer_name
-                    order.customer.customerCode:
-                        label: librinfo.label.customer_customer_code
-                    # order.customer.circle:
-                    #     label: librinfo.label.customer_customer_circle
-                    state:
-                        label: librinfo.label.payment_state
+                        label: librinfo.ecommercebundle.order_number
+                    order.getLastDebitInvoice.number:
+                        label: librinfo.ecommercebundle.invoice_number
+                    order.customer.name: ~
+                    order.customer.customerCode: ~
+                    # order.customer.circle: ~
+                    order.paymentState:
                         type: doctrine_orm_string
                         field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
                         field_options:
                             no_cart: true
                     method:
-                        label: librinfo.label.payment_method
                         field_options:
                             multiple: true
                     amount: ~
                     createdAt:
-                        label: librinfo.label.payment_date
                         type: doctrine_orm_date_range
                         field_type: sonata_type_datetime_range_picker
                     updatedAt:
@@ -994,39 +994,37 @@ parameters:
 #            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
-                    updatedAt: ~
-                    notes: ~
+                    _action: ~
+                add:
+                    operationDate: ~
+                    # account: ~
+                    order:
+                        label: librinfo.ecommercebundle.order_number
+                    invoice:
+                        label: librinfo.ecommercebundle.invoice_number
+                    payment: ~
+                    label: ~
+                    debit:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig
+                    credit:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig
 
 
 #            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
-                remove:
-                    updatedAt: ~
-                    createdAt: ~
-                    notes: ~
-                    itemsTotal: ~
-                    adjustmentsTotal: ~
-                    checkoutCompletedAt: ~
-                    customerIp: ~
-                    states: ~
                 add:
-                    customer.group: ~
-                    state:
-                        label: librinfo.label.order_state
-                        type: doctrine_orm_string
-                        field_type: Librinfo\EcommerceBundle\Form\Type\OrderStateType
-                        field_options:
-                            no_cart: true
-                    paymentState:
-                        label: librinfo.label.payment_state
-                        type: doctrine_orm_string
-                        field_type: Librinfo\EcommerceBundle\Form\Type\PaymentStateType
-                        field_options:
-                            no_cart: true
-                    createdAt:
-                        label: librinfo.label.sale_date
-                        type: doctrine_orm_date_range
-                        field_type: sonata_type_datetime_range_picker
+                    operationDate: ~
+                    # account: ~
+                    order:
+                        label: librinfo.ecommercebundle.order_number
+                    invoice:
+                        label: librinfo.ecommercebundle.invoice_number
+                    payment: ~
+                    label: ~
+                    debit:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig
+                    credit:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig
 
 
 #################
@@ -1055,7 +1053,7 @@ parameters:
                                     readonly: readonly
                             enabled: ~
                             position: ~
-
+                            channels: ~
 ############
 # CUSTOMER
 ############
@@ -1066,15 +1064,13 @@ parameters:
                 add:
                     form_tab_general:
                         form_group_organism:
-                            group.name:
-                                label: librinfo.label.customer_group
+                            group.name: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_tab_general:
                         form_group_organism:
-                            group:
-                                label: librinfo.label.customer_group
+                            group: ~
                             _options:
                                 fieldsOrder:
                                     - active
@@ -1099,13 +1095,12 @@ parameters:
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
-                    group:
-                        label: librinfo.label.customer_group
+                    group: ~
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    group:
-                        label: librinfo.label.customer_group
+                    group: ~
+
 
 #################
 # CUSTOMER GROUP
@@ -1117,33 +1112,25 @@ parameters:
                 add:
                     form_tab_general:
                         '':
-                            name:
-                                label: librinfo.label.customer_group_name
-                            code:
-                                label: librinfo.label.customer_group_code
+                            name: ~
+                            code: ~
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_tab_general:
                         '':
-                            name:
-                                label: librinfo.label.customer_group_name
-                            code:
-                                label: librinfo.label.customer_group_code
+                            name: ~
+                            code: ~
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
-                    name:
-                        label: librinfo.label.customer_group_name
-                    code:
-                        label: librinfo.label.customer_group_code
+                    name: ~
+                    code: ~
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    name:
-                        label: librinfo.label.customer_group_name
-                    code:
-                        label: librinfo.label.customer_group_code
+                    name: ~
+                    code: ~
 
 ##########
 # TAXRATE
@@ -1313,12 +1300,12 @@ parameters:
                                 type: text
                             code: ~
                             parent: ~
+
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     translation.name:
                         template: LibrinfoEcommerceBundle:CRUD:list_field_treeable.html.twig
                         identifier: true
-                        label: librinfo.label.name
                     code:
                         sortable: false
             Sonata\AdminBundle\Datagrid\DatagridMapper:
@@ -1492,20 +1479,13 @@ parameters:
                     accountVerificationRequired: ~
                     updatedAt: ~
                 add:
-                    code:
-                        label: librinfo.label.code
-                    name:
-                        label: librinfo.label.name
-                    description:
-                        label: librinfo.label.description
-                    enabled:
-                        label: librinfo.label.enabled
-                    hostname:
-                        label: librinfo.label.hostname
-                    createdAt:
-                        label: librinfo.label.createdAt
-                    updatedAt:
-                        label: librinfo.label.updatedAt
+                    code: ~
+                    name: ~
+                    description: ~
+                    enabled: ~
+                    hostname: ~
+                    createdAt: ~
+                    updatedAt: ~
 
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
@@ -1524,20 +1504,13 @@ parameters:
                     skippingPaymentStepAllowed: ~
                     accountVerificationRequired: ~
                 add:
-                    code:
-                        label: librinfo.label.code
-                    name:
-                        label: librinfo.label.name
-                    description:
-                        label: librinfo.label.description
-                    enabled:
-                        label: librinfo.label.enabled
-                    hostname:
-                        label: librinfo.label.hostname
-                    createdAt:
-                        label: librinfo.label.createdAt
-                    updatedAt:
-                        label: librinfo.label.updatedAt
+                    code: ~
+                    name: ~
+                    description: ~
+                    enabled: ~
+                    hostname: ~
+                    createdAt: ~
+                    updatedAt: ~
 
 
 ################################################################################
@@ -1551,22 +1524,25 @@ parameters:
 
             # SHOW
             Sonata\AdminBundle\Show\ShowMapper:
+                forceTabs: true
                 remove:
                     id: ~
-                    configuration: ~
                 add:
                     show_tab_general:
                         show_group_general:
                             position: ~
                             code: ~
                             translation.name: ~
-#                            category: ~
-                            calculator: ~
+                            calculator:
+                                template: SonataAdminBundle:CRUD:show_trans.html.twig
                             taxCategory: ~
                             enabled: ~
                         show_group_channel:
-                          channels: ~
-                          zone: ~
+                            channels: ~
+                            configuration:
+                                label: 'librinfo.ecommercebundle.amount'
+                                template: LibrinfoEcommerceBundle:CRUD:show_shipping_method_configuration_array.html.twig
+                            zone: ~
 
                     show_tab_history:
                         show_group_history:
@@ -1584,22 +1560,17 @@ parameters:
                             position: ~
                             code: ~
                             translation.name:
-                                label: librinfo.label.translation_name
                                 type: text
-#                            category:
-#                                type: sonata_type_model
-#                                btn_add: Add
                             calculator:
                                 type: Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType
                             taxCategory: ~
                             enabled: ~
                         form_group_parameters:
+                            zone: ~
                             channels:
                                 type: Librinfo\EcommerceBundle\Form\Type\ShippingMethodChannelsType
                                 multiple: true
                                 expanded: true
-                            zone: ~
-                            
                     form_tab_history:
                         form_group_history:
                             createdAt:
@@ -1626,14 +1597,14 @@ parameters:
                     position: ~
                     code: ~
                     translation.name: ~
-#                    category: ~
-                    calculator: ~
+                    calculator:
+                        template: SonataAdminBundle:CRUD:list_trans.html.twig
                     taxCategory: ~
                     zone: ~
                     channels: ~
                     enabled: ~
-                    
-                                        
+
+
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove:
@@ -1642,17 +1613,15 @@ parameters:
                 add:
                     position: ~
                     code: ~
-                    # sonata s***                    
                     translation.name:
                         type: doctrine_orm_string
-#                    category: ~
                     calculator: ~
                     taxCategory: ~
                     zone: ~
                     channels: ~
                     enabled: ~
 
-                    
+
 ################################################################################
 # ShippingCategory
 ################################################################################
@@ -1661,7 +1630,7 @@ parameters:
 #            baseRoute:
 #                name: admin_librinfo_ecommerce_shipping_category
 #                pattern: librinfo/ecommerce/shipping_category
-#                
+#
 #            # SHOW
 #            Sonata\AdminBundle\Show\ShowMapper:
 #                remove:
@@ -1672,7 +1641,7 @@ parameters:
 #                            code: ~
 #                            name: ~
 #                            description: ~
-#    
+#
 #            # FORM
 #            Sonata\AdminBundle\Form\FormMapper:
 #                remove:
@@ -1683,7 +1652,7 @@ parameters:
 #                            code: ~
 #                            name: ~
 #                            description: ~
-#    
+#
 #            # LIST
 #            Sonata\AdminBundle\Datagrid\ListMapper:
 #                remove:
@@ -1692,7 +1661,7 @@ parameters:
 #                    code: ~
 #                    name: ~
 #                    description: ~
-#                
+#
 #            # FILTERS
 #            Sonata\AdminBundle\Datagrid\DatagridMapper:
 #                remove:
@@ -1720,7 +1689,7 @@ parameters:
                             name: ~
                             description: ~
                             locale: ~
-    
+
             # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 remove:
@@ -1731,7 +1700,7 @@ parameters:
                             name: ~
                             description: ~
                             locale: ~
-    
+
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
@@ -1741,7 +1710,7 @@ parameters:
                     description: ~
                     locale: ~
 
-    
+
 
             # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
@@ -1752,3 +1721,133 @@ parameters:
                     description: ~
                     locale: ~
 
+################################################################################
+# ShopUser
+################################################################################
+
+        Sylius\Component\Core\Model\ShopUser:
+            baseRoute:
+                name: admin_librinfo_ecommerce_shop_user
+                pattern: librinfo/ecommerce/shop_user
+
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                remove:
+                    createdAt: ~
+                    credentialsExpireAt: ~
+                    emailCanonical: ~
+                    emailVerificationToken: ~
+                    expiresAt: ~
+                    id: ~
+                    locked: ~
+                    password: ~
+                    passwordRequestedAt: ~
+                    passwordResetToken: ~
+                    roles: ~
+                    salt: ~
+                    updatedAt: ~
+                    usernameCanonical: ~
+                    verifiedAt: ~
+                add:
+                    show_tab_general:
+                        show_group_general:
+                            username: ~
+                            email: ~
+                            enabled: ~
+                            lastLogin: ~
+
+            # FORM
+            Sonata\AdminBundle\Form\FormMapper:
+                remove:
+                    usernameCanonical: ~
+                    passwordResetToken: ~
+                    passwordRequestedAt: ~
+                    emailVerificationToken: ~
+                    verifiedAt: ~
+                    expiresAt: ~
+                    credentialsExpireAt: ~
+                    roles: ~
+                    emailCanonical: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    id: ~
+                    password: ~
+                    salt: ~
+                    locked: ~
+                add:
+                    form_tab_general:
+                        form_group_general:
+                            username:
+                                attr:
+                                    readonly: true
+                            email:
+                                attr:
+                                    readonly: true
+                            enabled: ~
+                            lastLogin:
+                                type: sonata_type_datetime_picker
+                                attr:
+                                    readonly: true
+                                disabled: true
+                                required: false
+                                dp_side_by_side: true
+            # LIST
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                remove:
+                    usernameCanonical: ~
+                    passwordResetToken: ~
+                    passwordRequestedAt: ~
+                    emailVerificationToken: ~
+                    verifiedAt: ~
+                    expiresAt: ~
+                    credentialsExpireAt: ~
+                    roles: ~
+                    emailCanonical: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    id: ~
+                    password: ~
+                    salt: ~
+                    locked: ~
+                add:
+                    username: ~
+                    email: ~
+                    enabled: ~
+                    lastLogin: ~
+
+            # FILTERS
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                remove:
+                    usernameCanonical: ~
+                    passwordResetToken: ~
+                    passwordRequestedAt: ~
+                    emailVerificationToken: ~
+                    verifiedAt: ~
+                    expiresAt: ~
+                    credentialsExpireAt: ~
+                    roles: ~
+                    emailCanonical: ~
+                    createdAt: ~
+                    updatedAt: ~
+                    id: ~
+                    password: ~
+                    salt: ~
+                    locked: ~
+                add:
+                    username: ~
+                    email: ~
+                    enabled: ~
+                    lastLogin: ~
+        Librinfo\EcommerceBundle\Entity\Invoice:
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    number: ~
+                    order: ~
+                    total:
+                        template: LibrinfoEcommerceBundle:CRUD:show_field_money.html.twig
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    number: ~
+                    order: ~
+                    total:
+                        template: LibrinfoEcommerceBundle:CRUD:list_field_money.html.twig

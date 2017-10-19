@@ -5,10 +5,14 @@
 
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
+{% set amountFactor = invoiceTypeDebit
+    ? 1
+    : -1 %}
+
 <tr class="active">
     <th colspan="8" id="items-total" style="text-align: right">
         <strong>{{ 'sylius.ui.subtotal'|trans }}</strong>:
-        {{ money.convertAndFormat(order.itemsTotal) }}
+        {{ money.convertAndFormat(order.itemsTotal * amountFactor) }}
     </th>
 </tr>
 <tr>
@@ -27,12 +31,14 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p><small>{{ 'sylius.ui.no_shipping_charges'|trans }}</small></p>
+            <p>
+                <small>{{ 'sylius.ui.no_shipping_charges'|trans }}</small>
+            </p>
         {% endif %}
     </td>
     <td colspan="4" id="shipping-total" style="text-align: right">
         <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
-        {{ money.convertAndFormat(order.shippingTotal) }}
+        {{ money.convertAndFormat(order.shippingTotal * amountFactor) }}
     </td>
 </tr>
 <tr>
@@ -57,7 +63,7 @@
     </td>
     <td colspan="4" id="tax-total" style="text-align: right">
         <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>:
-        {{ money.convertAndFormat(order.taxTotal) }}
+        {{ money.convertAndFormat(order.taxTotal * amountFactor) }}
     </td>
 </tr>
 <tr>
@@ -82,12 +88,12 @@
     </td>
     <td colspan="4" id="promotion-total" style="text-align: right">
         <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
-        {{ money.convertAndFormat(order.orderPromotionTotal) }}
+        {{ money.convertAndFormat(order.orderPromotionTotal * amountFactor) }}
     </td>
 </tr>
 <tr class="active">
     <td colspan="8" id="total" class="ui large header" style="text-align: right; font-size: 1.5em">
         <strong>{{ 'sylius.ui.total'|trans }}</strong>:
-        {{ money.convertAndFormat(order.total) }}
+        {{ money.convertAndFormat(order.total * amountFactor) }}
     </td>
 </tr>

@@ -15,13 +15,13 @@ $(document).ready(
                         if(response.lastItem) {
                             Admin.flashMessage.show('error', response.message);
                         }
-                
+
                         if(response.remove) {
                             elem.parents('tr').remove();
                         }
-                    
+
                         var parent = elem.parent();
-                
+
                         if(!response.remove && !response.lastItem) {
                             $.each(
                                 response.item, function(key, value) {
@@ -38,11 +38,16 @@ $(document).ready(
                                 th.html(label).append(': ' + value);
                             }
                         );
+
+                        $.each(
+                            response.payments, function(key, value) {
+                                var span = $('#' + key);
+                                span.html(value);
+                            }
+                        );
                     }
                 );
             }
         );
     }
 );
-
-

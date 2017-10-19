@@ -115,7 +115,8 @@ class ProductVariantAdmin extends SyliusGenericAdmin
             return $product;
         }
 
-        if ($product_id = $this->getRequest()->get('product_id')) {
+        $product_id = $this->getRequest()->get('product_id') ?: $this->getRequest()->get('productId');
+        if ($product_id) {
             $product = $this->getConfigurationPool()->getContainer()->get('sylius.repository.product')->find($product_id);
             if (!$product) {
                 throw new \Exception(sprintf('Unable to find Product with id : %s', $product_id));
@@ -170,7 +171,7 @@ class ProductVariantAdmin extends SyliusGenericAdmin
             if (count($qb->getQuery()->getResult()) != 0) {
                 $errorElement
                     ->with('code')
-                    ->addViolation('lisem.product_variant_code.not_unique')
+                    ->addViolation('librinfo.product_variant_code.not_unique')
                     ->end();
             }
         }

@@ -1,41 +1,43 @@
 {% if category == 'order' %}
 
     {% set colors = {
-        'cancelled': 'orange', 
-        'cart':      'gray', 
-        'fulfilled': 'green', 
-        'new':       'blue'
+        'cancelled': 'orange',
+        'cart':      'gray',
+        'fulfilled': 'green',
+        'new':       'blue',
+        'draft':     'gray',
     } %}
 
     {% set icons = {
-        'cancelled':  'ban', 
+        'cancelled':  'ban',
         'cart':       'shopping-cart',
-        'fulfilled':  'check', 
-        'new':        'clock-o'
+        'fulfilled':  'check',
+        'new':        'clock-o',
+        'draft':      'file-o'
     } %}
 
 {% elseif category == 'payment' %}
 
     {% set colors = {
-        'awaiting_payment':   'blue', 
-        'cart':               'gray', 
-        'cancelled':          'orange', 
-        'paid':               'green', 
-        'completed':          'green', 
+        'awaiting_payment':   'blue',
+        'cart':               'gray',
+        'cancelled':          'orange',
+        'paid':               'green',
+        'completed':          'green',
         'partially_paid':     'yellow',
-        'partially_refunded': 'yellow', 
+        'partially_refunded': 'yellow',
         'refunded':           'purple',
         'new':                'gray'
     } %}
 
     {% set icons = {
-        'awaiting_payment':   'clock-o', 
-        'cart':               'shopping-cart', 
-        'cancelled':          'ban', 
-        'paid':               'check', 
-        'completed':          'check', 
+        'awaiting_payment':   'clock-o',
+        'cart':               'shopping-cart',
+        'cancelled':          'ban',
+        'paid':               'check',
+        'completed':          'check',
         'partially_paid':     'check',
-        'partially_refunded': 'reply-all', 
+        'partially_refunded': 'reply-all',
         'refunded':           'reply-all',
         'new':                'clock-o'
     } %}
@@ -43,16 +45,16 @@
 {% elseif category == 'shipping' %}
 
     {% set colors = {
-        'cancelled': 'orange', 
-        'cart':      'gray', 
-        'ready':     'blue', 
+        'cancelled': 'orange',
+        'cart':      'gray',
+        'ready':     'blue',
         'shipped':   'green'
     } %}
 
     {% set icons = {
-        'cancelled': 'ban', 
-        'cart':      'shopping-cart', 
-        'ready':     'clock-o', 
+        'cancelled': 'ban',
+        'cart':      'shopping-cart',
+        'ready':     'clock-o',
         'shipped':   'truck'
     } %}
 

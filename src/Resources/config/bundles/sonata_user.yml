@@ -1,8 +1,0 @@
-default:
-    sonata.user.admin.group.entity:
-        default: Application\Sonata\UserBundle\Entity\Group
-        replace: Librinfo\SonataSyliusUserBundle\Entity\Group
-    sonata.user.admin.user.entity:
-        default: Application\Sonata\UserBundle\Entity\User
-#        replace: Librinfo\EcommerceBundle\Entity\User
-        replace: Librinfo\SonataSyliusUserBundle\Entity\SonataUser
