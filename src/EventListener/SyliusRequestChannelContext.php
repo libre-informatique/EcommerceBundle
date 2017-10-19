@@ -31,9 +31,17 @@ class SyliusRequestChannelContext implements RequestResolverInterface
 
     public function findChannel(Request $request): ChannelInterface
     {
-        if ($request->cookies->get('_channel_code') === null && $request->query->get('_channel_code') === null) {
-            return $this->channelRepository->findOneByCode($this->fallbackChannelCode);
+        $channelCode = $this->fallbackChannelCode;
+        $cookiesChannelCode = $request->cookies->get('_channel_code');
+        $requestChannelCode = $request->query->get('_channel_code');
+        if (isset($cookiesChannelCode)) {
+            $channelCode = $cookiesChannelCode;
         }
+        // No else as query->get should be use if setted
+        if (isset($requestChannelCode)) {
+            $channelCode = $requestChannelCode;
+        }
+        return $this->channelRepository->findOneByCode($channelCode);
     }
 
     /**
