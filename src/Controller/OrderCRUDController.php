@@ -202,10 +202,10 @@ class OrderCRUDController extends CRUDController
                         ->get('librinfo_ecommerce.order_creation_manager')
                         ->initNewPayment($selectedModel);
                 }
-                $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
-                $stateMachine->apply($action);
-                $this->container->get('sylius.manager.order')->flush();
-                ++$successes;
+            $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
+            $stateMachine->apply($action);
+            $this->container->get('sylius.manager.order')->flush();
+            ++$successes;
             // } catch (\Exception $e) {
             //     $this->addFlash('sonata_flash_error', $e->getMessage());
             // }
@@ -219,8 +219,6 @@ class OrderCRUDController extends CRUDController
             $this->admin->generateUrl('list', array('filter' => $this->admin->getFilterParameters()))
         );
     }
-
-
 
     /**
      * Redirect the user depend on this choice.

@@ -41,6 +41,7 @@ class SyliusRequestChannelContext implements RequestResolverInterface
         if (isset($requestChannelCode)) {
             $channelCode = $requestChannelCode;
         }
+
         return $this->channelRepository->findOneByCode($channelCode);
     }
 

@@ -13,7 +13,6 @@
 namespace Librinfo\EcommerceBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Librinfo\EcommerceBundle\Form\Type\PriceCentsType;
 
 class ShippingMethodAdmin extends SyliusGenericAdmin
@@ -46,7 +45,7 @@ class ShippingMethodAdmin extends SyliusGenericAdmin
             'sonata_type_immutable_array',
             ['label'    => 'librinfo.ecommercebundle.amount',
             'required'  => false,
-            'keys'      => $this->genChannelArray('sonata_type_immutable_array')]
+            'keys'      => $this->genChannelArray('sonata_type_immutable_array'), ]
         )
         ->end()->end();
     }
