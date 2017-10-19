@@ -1,13 +1,21 @@
 # Change Log
 
+## [0.5.2](https://github.com/libre-informatique/EcommerceBundle/tree/0.5.2) (2017-10-19)
+[Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.5.1...0.5.2)
+
+**Merged pull requests:**
+
+- Lisem fix & features [\#27](https://github.com/libre-informatique/EcommerceBundle/pull/27) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- Label Translation Strategy Update [\#26](https://github.com/libre-informatique/EcommerceBundle/pull/26) ([FanchTheSystem](https://github.com/FanchTheSystem))
+
 ## [0.5.1](https://github.com/libre-informatique/EcommerceBundle/tree/0.5.1) (2017-09-15)
 [Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.4.5...0.5.1)
 
 **Merged pull requests:**
 
 - Lisem fix & features [\#25](https://github.com/libre-informatique/EcommerceBundle/pull/25) ([FanchTheSystem](https://github.com/FanchTheSystem))
-- Wip lisem [\#23](https://github.com/libre-informatique/EcommerceBundle/pull/23) ([AhamadaMBARAKA](https://github.com/AhamadaMBARAKA))
-- add ChannelAdmin [\#22](https://github.com/libre-informatique/EcommerceBundle/pull/22) ([AhamadaMBARAKA](https://github.com/AhamadaMBARAKA))
+- Wip lisem [\#23](https://github.com/libre-informatique/EcommerceBundle/pull/23) ([ghost](https://github.com/ghost))
+- add ChannelAdmin [\#22](https://github.com/libre-informatique/EcommerceBundle/pull/22) ([ghost](https://github.com/ghost))
 - PDF invoice generation [\#20](https://github.com/libre-informatique/EcommerceBundle/pull/20) ([marcoslibre](https://github.com/marcoslibre))
 
 ## [0.4.5](https://github.com/libre-informatique/EcommerceBundle/tree/0.4.5) (2017-07-28)
