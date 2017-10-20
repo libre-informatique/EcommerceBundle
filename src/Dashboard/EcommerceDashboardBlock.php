@@ -13,25 +13,32 @@
 namespace Librinfo\EcommerceBundle\Dashboard;
 
 use Blast\CoreBundle\Dashboard\AbstractDashboardBlock;
+use Librinfo\EcommerceBundle\Dashboard\Stats\Sales;
 
 class EcommerceDashboardBlock extends AbstractDashboardBlock
 {
+    /**
+     * @var Sales
+     */
+    private $salesStats;
+
     public function handleParameters()
     {
-        // @TODO: Call a stat manager to get real graph data
-        $fakeSalesData = [
-        ['x' => '2017-01-01', 'y' => 6500],
-        ['x' => '2017-02-01', 'y' => 5900],
-        ['x' => '2017-03-01', 'y' => 8000],
-        ['x' => '2017-04-01', 'y' => 8100],
-        ['x' => '2017-05-01', 'y' => 9600],
-        ['x' => '2017-06-01', 'y' => 12500],
-        ['x' => '2017-07-01', 'y' => 14000],
-        ];
+        $fakeSalesData = $this->salesStats->getData();
+
+        // dump($fakeSalesData);
 
         $this->templateParameters = [
-        'test'            => true,
-        'salesAmountData' => $fakeSalesData,
+            'test'            => true,
+            'salesAmountData' => $fakeSalesData,
         ];
+    }
+
+    /**
+     * @param Sales $salesStats
+     */
+    public function setSalesStats(Sales $salesStats): void
+    {
+        $this->salesStats = $salesStats;
     }
 }

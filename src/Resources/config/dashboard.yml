@@ -1,8 +1,25 @@
 services:
+
+    # BLOCKS
+
     librinfo_ecommerce.dashboard.main:
         parent: blast_core.dashboard.block
         class: Librinfo\EcommerceBundle\Dashboard\EcommerceDashboardBlock
         arguments:
             - 'LibrinfoEcommerceBundle:Dashboard:ecommerce_dashboard.html.twig'
+        calls:
+            - [setSalesStats, ['@librinfo_ecommerce.dashboard.stats.sales']]
         tags:
             - { name: blast.dashboard_block }
+
+    # STATS
+
+    librinfo_ecommerce.dashboard.stats.abstract_stats:
+        abstract: true
+        calls:
+            - [setDoctrine, ['@doctrine']]
+            - [setConnection, ['@database_connection']]
+
+    librinfo_ecommerce.dashboard.stats.sales:
+        parent: librinfo_ecommerce.dashboard.stats.abstract_stats
+        class: Librinfo\EcommerceBundle\Dashboard\Stats\Sales
