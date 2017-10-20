@@ -86,6 +86,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
 
             if ($item->isBulk()) {
                 $this->addItemTaxAdjustment($item, (int) $totalTaxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
+
                 return; // If item is bulk, process only first order item unit (it should be)
             }
 

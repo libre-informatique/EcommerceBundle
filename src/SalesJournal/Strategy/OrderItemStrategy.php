@@ -32,7 +32,7 @@ class OrderItemStrategy implements StrategyInterface
     {
         /** @var ProductVariant $variant */
         $variant = $item->getVariant();
-        $itemIdentifier = $variant->getCode() ? $this->default . ' - ' .$variant->getCode() : $this->default;
+        $itemIdentifier = $variant->getCode() ? $this->default . ' - ' . $variant->getCode() : $this->default;
 
         return $itemIdentifier;
     }

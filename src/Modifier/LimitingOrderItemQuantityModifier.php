@@ -47,7 +47,6 @@ class LimitingOrderItemQuantityModifier implements OrderItemQuantityModifierInte
      */
     public function modify(OrderItemInterface $orderItem, int $targetQuantity): void
     {
-
         if (!$orderItem->isBulk()) {
             $targetQuantity = min($targetQuantity, $this->limit);
             $this->decoratedOrderItemQuantityModifier->modify($orderItem, $targetQuantity);
