@@ -57,7 +57,7 @@ class OrderCustomerManager
             $customer->setCustomerCode($this->codeGenerator->generate($customer));
         }
 
-        $this->em->flush($customer);
+        // $this->em->flush($customer);
     }
 
     /**

@@ -108,12 +108,14 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
 
-    librinfo_ecommerce.order_state_manager:
-        class: Librinfo\EcommerceBundle\Services\OrderStateManager
+    librinfo_ecommerce.order_manager:
+        class: Librinfo\EcommerceBundle\Services\OrderManager
         arguments:
             - '@doctrine.orm.entity_manager'
         calls:
             - [setStateMachine, ['@sm.factory']]
+            - [setInvoiceFactory, ['@librinfo_ecommerce.factory.invoice']]
+            - [setOrderNumberAssigner, ['@sylius.order_number_assigner']]
 
 # EVENT LISTENERS
 
@@ -149,7 +151,6 @@ services:
     librinfo_ecommerce.sylius.factory.customer:
         class: Librinfo\EcommerceBundle\Factory\CustomerFactory
         decorates: 'sylius.factory.customer'
-        public: false
         arguments:
             - '@librinfo_ecommerce.sylius.factory.customer.inner'
             - '@librinfo_crm.code_generator.customer'
@@ -238,6 +239,7 @@ services:
             - '@sylius.factory.order_item'
             - '@sylius.factory.order_item_unit'
             - '@sm.factory'
+            - '@sylius.order_processing.order_processor.composite'
 
     librinfo_ecommerce.order.item_updater:
         class: Librinfo\EcommerceBundle\Services\OrderItemUpdater
@@ -248,6 +250,7 @@ services:
             - '%sylius.model.order_item.class%'
             - '@sm.factory'
             - '@translator'
+            - '@sylius.order_processing.order_processor.composite'
 
     librinfo.ecommerce.filters.customer:
         class: Librinfo\EcommerceBundle\Services\Filters\CustomerFilter
@@ -278,3 +281,18 @@ services:
             - [setValidator, ['@validator']]
         tags:
             - { name: form.type_extension, extended_type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType }
+
+    librinfo_ecommerce.form.type.order_address_type:
+        class: Librinfo\EcommerceBundle\Form\Type\OrderAddressType
+        calls:
+            - [setAddressClass, ['%sylius.model.address.class%']]
+        tags:
+            - { name: form.type }
+
+    librinfo_ecommerce.twig.shipment_cost:
+        class: Librinfo\EcommerceBundle\Twig\ShipmentCost
+        calls:
+            - [setShippingCalculator, ['@sylius.shipping_calculator']]
+            - [setMoneyFormater, ['@sylius.money_formatter']]
+        tags:
+            - { name: twig.extension }

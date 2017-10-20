@@ -24,6 +24,7 @@ form_group_variants: Variantes
 form_tab_new_product_variant : Nouvelle déclinaison d'article
 form_tab_values: Valeurs possibles
 form_tab_variants: Déclinaisons
+form_group_shipping_and_payment_methods: Paiements et Livraisons
 
 show_group_actions: Actions
 show_group_addresses: Adresses
@@ -45,6 +46,9 @@ show_tab_order_summary: Récapitulatif
 show_tab_payment_delivery: Paiement / Livraison
 show_tab_payment_details: Détails du paiement
 show_tab_variants: Déclinaisons
+
+flat_rate: Prix fixe par envoi
+per_unit_rate: Montant forfaitaire par unité
 
 librinfo:
     action:
@@ -105,14 +109,15 @@ librinfo:
         defaultTaxZone: Zone de taxe par défaut
         depth: profondeur
         exchange_rate: Taux de change
-        fulfill_order: Terminer
-        fulfill_this_order: Terminer cette commande
+        fulfill_order: Valider
+        fulfill_this_order: Valider cette commande
         generating_invoice: Génération de la facture en cours...
         height: hauteur
         hostname: Nom d'hôte
         id: Identifiant
         included_in_price: Compris dans le prix
         invoice_list: Factures
+        invoice_credit_item_name: Annulation de commande
         items_total: Total articles
         locale_code: Langue
         locales: Langues
@@ -225,6 +230,7 @@ librinfo:
         taxrate_list: Liste des taux de TVA
         zone_create: Nouvelle zone
         zone_list: Liste des zones
+        order_create: Nouvelle commande
     order_state:
         cancelled: Annulée
         cart: Panier

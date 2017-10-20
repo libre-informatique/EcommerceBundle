@@ -13,5 +13,9 @@ winzou_state_machine:
             after:
                 librinfo_ecommerce_order_validated:
                     on:   ["create"]
-                    do:   ["@librinfo_ecommerce.order_state_manager", "validateOrder"]
+                    do:   ["@librinfo_ecommerce.order_manager", "validateOrder"]
+                    args: ["object"]
+                librinfo_ecommerce_order_generate_credit_note:
+                    on:   ["cancel"]
+                    do:   ["@librinfo_ecommerce.order_manager", "generateCreditInvoice"]
                     args: ["object"]

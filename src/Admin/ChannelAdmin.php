@@ -103,7 +103,7 @@ class ChannelAdmin extends SyliusGenericAdmin
             if (count($qbCode->getQuery()->getResult()) != 0) {
                 $errorElement
                     ->with('code')
-                    ->addViolation('lisem.channel_code.not_unique', ['%code%' => $code])
+                    ->addViolation('librinfo.channel_code.not_unique', ['%code%' => $code])
                     ->end();
             }
 
@@ -116,7 +116,7 @@ class ChannelAdmin extends SyliusGenericAdmin
             if (count($qbName->getQuery()->getResult()) != 0) {
                 $errorElement
                     ->with('name')
-                    ->addViolation('lisem.channel_name.not_unique', ['%name%' => $name])
+                    ->addViolation('librinfo.channel_name.not_unique', ['%name%' => $name])
                     ->end();
             }
         }
