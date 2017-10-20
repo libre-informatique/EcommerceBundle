@@ -47,7 +47,11 @@
         {{ money.convertAndFormat(item.discountedUnitPrice * amountFactor) }}
     </td>
     <td class="quantity" style="text-align: right">
-        {{ item.quantity }}
+        {% if item.isBulk() %}
+            {{ convertValueWithUnit(item.quantity, 'g', 'mg') }}
+        {% else %}
+            {{ item.quantity }}
+        {% endif %}
     </td>
     <td class="subtotal" style="text-align: right">
         {{ money.convertAndFormat(item.subtotal * amountFactor) }}

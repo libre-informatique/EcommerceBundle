@@ -18,6 +18,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use SM\Factory\Factory;
 use Sylius\Component\Order\Processor\CompositeOrderProcessor;
+use Librinfo\EcommerceBundle\StateMachine\OrderTransitions;
 
 /**
  * Manage order item quantity.
@@ -89,10 +90,11 @@ class OrderItemUpdater
      * @param string $orderId
      * @param string $itemId
      * @param bool   $isAddition
+     * @param int    $quantity
      *
      * @return array
      */
-    public function updateItemCount($orderId, $itemId, $isAddition)
+    public function updateItemCount($orderId, $itemId, $isAddition, $stepQuantity = 1)
     {
         $remove = false;
         $lastItem = false;
@@ -104,16 +106,16 @@ class OrderItemUpdater
 
         $orderStateMachine = $this->smFactory->get($order, 'sylius_order');
 
-        if ($orderStateMachine->getState() === 'cancelled' || $orderStateMachine->getState() === 'fulfilled') {
+        if (!$orderStateMachine->can(OrderTransitions::TRANSITION_CONFIRM)) {
             return [
                 'lastItem' => true,
                 'message'  => $this->translator->trans('cannot_edit_order_because_of_state', [], 'SonataCoreBundle'),
             ];
         } else {
-            if ($isAddition) {
-                $quantity = $item->getQuantity() + 1;
+            if (!$item->isBulk()) {
+                $quantity = ($isAddition ? $item->getQuantity() + $stepQuantity : $item->getQuantity() - $stepQuantity);
             } else {
-                $quantity = $item->getQuantity() - 1;
+                $quantity = ($isAddition ? $stepQuantity : 0);
             }
 
             if ($quantity < 1) {
@@ -125,10 +127,11 @@ class OrderItemUpdater
                 }
             } else {
                 $this->orderItemQuantityModifier->modify($item, $quantity);
+                $item->setQuantity($quantity);
                 $item->recalculateUnitsTotal();
             }
 
-            // $order->recalculateItemsTotal();
+            $order->recalculateItemsTotal();
             $this->orderProcessor->process($order);
 
             $this->em->persist($order);

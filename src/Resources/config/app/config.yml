@@ -50,6 +50,10 @@ sylius_order:
         order:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\Order
+        order_item:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\OrderItem
+                controller: Librinfo\EcommerceBundle\Controller\SyliusOrderItemController
 
 sylius_taxation:
     resources:
@@ -124,6 +128,13 @@ sylius_shipping:
             classes:
                 model: Librinfo\EcommerceBundle\Entity\ShippingMethod
 
+sylius_payment:
+    driver: doctrine/orm
+    resources:
+        payment:
+            classes:
+                model: Librinfo\EcommerceBundle\Entity\Payment
+
 sylius_shop:
     # resources:
     #     checkout_address:
@@ -176,7 +187,8 @@ knp_snappy:
     #process_timeout: 20 # In seconds
     pdf:
         enabled: true
-        binary:  /usr/bin/xvfb-run /usr/bin/wkhtmltopdf
+        #        binary:  /usr/bin/xvfb-run /usr/bin/wkhtmltopdf
+        binary:  %kernel.project_dir%/bin/wkhtmltopdf-amd64
         options: []
     image:
         enabled: false

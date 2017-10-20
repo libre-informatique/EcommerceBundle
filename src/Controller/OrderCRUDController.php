@@ -12,16 +12,17 @@
 
 namespace Librinfo\EcommerceBundle\Controller;
 
+//use Sylius\Component\Core\PaymentTransitions;
+//use Sylius\Component\Core\ShipmentTransitions;
 use Blast\CoreBundle\Controller\CRUDController;
-use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Shipping\ShipmentTransitions;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
+use Librinfo\EcommerceBundle\StateMachine\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\Shipping\ShipmentTransitions;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 
 /**
  * @author Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
@@ -63,6 +64,19 @@ class OrderCRUDController extends CRUDController
         }
     }
 
+    public function duplicateAction()
+    {
+        $id = $this->getRequest()->get($this->admin->getIdParameter());
+        $object = $this->admin->getObject($id); //clone $this->admin->getObject($id);
+
+        $preResponse = $this->preDuplicate($object);
+        if ($preResponse !== null) {
+            return $preResponse;
+        }
+        throw new AccessDeniedException('we should never be here');
+        return $this->createAction(null);
+    }
+
     /**
      * @param mixed $object
      *
@@ -70,7 +84,16 @@ class OrderCRUDController extends CRUDController
      */
     protected function preDuplicate($object)
     {
-        throw new AccessDeniedException();
+        // dump($object);
+        // dump((new \ReflectionClass($object))->getMethods());
+        //  die("DiE!");
+
+        $newOrder = $this->container->get('librinfo_ecommerce.order_creation_manager')->duplicateOrder($object);
+        $this->container->get('librinfo_ecommerce.order_creation_manager')->saveOrder($newOrder);
+        // return $this->showAction($newOrder); /* Why show action does not work ? */
+        return new RedirectResponse(
+            $this->admin->generateUrl('show', ['id' => $newOrder->getId()])
+        );
     }
 
     public function updateShippingAction(Request $request)
@@ -82,8 +105,9 @@ class OrderCRUDController extends CRUDController
         $action = $request->get('_action');
         $tracking = $request->get('_tracking');
 
+        /* @todo: move this to a OrderManagerService */
         $shipment = $modelManager->find($this->container->getParameter('sylius.model.shipment.class'), $shipmentId);
-        $order = $modelManager->find($this->admin->getClass(), $orderId);
+        // $order = $modelManager->find($this->admin->getClass(), $orderId);
 
         $stateMachineFactory = $this->container->get('sm.factory');
 
@@ -107,6 +131,7 @@ class OrderCRUDController extends CRUDController
         $paymentId = $request->get('_paymentId');
         $action = $request->get('_action');
 
+        /* @todo: move this to a OrderManagerService */
         $payment = $modelManager->find($this->container->getParameter('sylius.model.payment.class'), $paymentId);
         $order = $modelManager->find($this->admin->getClass(), $orderId);
 
@@ -142,6 +167,11 @@ class OrderCRUDController extends CRUDController
         return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_FULFILL, $request->request->get('idx'));
     }
 
+    public function confirmOrderAction($id, Request $request = null)
+    {
+        return $this->validateOrCancelOrders(OrderTransitions::TRANSITION_CONFIRM, [$id]);
+    }
+
     protected function validateOrCancelOrders($action, $targets)
     {
         $modelManager = $this->admin->getModelManager();
@@ -161,17 +191,24 @@ class OrderCRUDController extends CRUDController
                 );
             }
 
-            try {
-                if ($action === OrderTransitions::TRANSITION_FULFILL && $selectedModel->getNumber() === null) {
-                    $this->container->get('sylius.order_number_assigner')->assignNumber($selectedModel);
-                }
-                $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
-                $stateMachine->apply($action);
-                $this->container->get('sylius.manager.order')->flush();
-                ++$successes;
-            } catch (\Exception $e) {
-                $this->addFlash('sonata_flash_error', $e->getMessage());
+            // try {
+            /* @todo : state Machine manipulation should be done in service */
+            if ($action === OrderTransitions::TRANSITION_FULFILL || $action === OrderTransitions::TRANSITION_CONFIRM) {
+                $this->container
+                    ->get('librinfo_ecommerce.order_creation_manager')
+                    ->assignNumber($selectedModel);
+
+                $this->container
+                    ->get('librinfo_ecommerce.order_creation_manager')
+                    ->initNewPayment($selectedModel);
             }
+            $stateMachine = $stateMachineFactory->get($selectedModel, OrderTransitions::GRAPH);
+            $stateMachine->apply($action);
+            $this->container->get('sylius.manager.order')->flush();
+            ++$successes;
+            // } catch (\Exception $e) {
+            //     $this->addFlash('sonata_flash_error', $e->getMessage());
+            // }
         }
 
         if ($successes > 0) {

@@ -78,7 +78,7 @@ class AjaxController extends Controller
         return new JsonResponse($result);
     }
 
-    public function addnewProductAction(Request $request)
+    public function addNewProductAction(Request $request)
     {
         $newProduct = $this->container
             ->get('librinfo_ecommerce.order.updater')
@@ -92,5 +92,18 @@ class AjaxController extends Controller
         }
 
         return new JsonResponse('ok');
+    }
+
+    public function updateOrderItemBulkQuatityAction(Request $request)
+    {
+        $updater = $this->container->get('librinfo_ecommerce.order.item_updater');
+
+        $result = $updater->updateItemCount($request->get('order'), $request->get('item'), true, 1000 * $request->get('bulkQuantity'));
+
+        if ($result['lastItem'] != null) {
+            $result['message'] = $this->container->get('translator')->trans('There must be at least one item left in the order');
+        }
+
+        return new JsonResponse($result);
     }
 }

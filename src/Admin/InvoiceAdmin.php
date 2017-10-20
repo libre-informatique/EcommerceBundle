@@ -22,6 +22,12 @@ class InvoiceAdmin extends CoreAdmin
         parent::configureRoutes($collection);
         $collection->add('showFile', $this->getRouterIdParameter() . '/show_file');
         $collection->add('generate', '{order_id}/generate');
+
+        /* see InvoiceCRUDController which trigger AccessDeniedException for some route */
+        $collection->remove('create');
+        $collection->remove('edit');
+        $collection->remove('delete');
+        $collection->remove('duplicate');
     }
 
     public function createQuery($context = 'list')

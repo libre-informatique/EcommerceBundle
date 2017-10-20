@@ -14,12 +14,11 @@ namespace Librinfo\EcommerceBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-/* @todo reference to AppBundle should be removed */
 use AppBundle\Entity\OuterExtension\LibrinfoEcommerceBundle\OrderExtension;
 use Blast\OuterExtensionBundle\Entity\Traits\OuterExtensible;
 use Sylius\Component\Core\Model\Order as BaseOrder;
 
-class Order extends BaseOrder
+class Order extends BaseOrder implements OrderInterface
 {
     use OuterExtensible,
     OrderExtension;
@@ -41,11 +40,6 @@ class Order extends BaseOrder
     public function setCurrencyCode(?string $currencyCode): void
     {
         $this->currencyCode = $currencyCode;
-    }
-
-    public function __toString()
-    {
-        return (string) $this->getId();
     }
 
     /**
@@ -90,5 +84,14 @@ class Order extends BaseOrder
         return $this->invoices->filter(function ($item) {
             return $item->getType() === Invoice::TYPE_DEBIT;
         })->first();
+    }
+
+    public function __toString()
+    {
+        if ($this->number !== null) {
+            return (string) $this->number;
+        }
+
+        return (string) $this->id;
     }
 }
