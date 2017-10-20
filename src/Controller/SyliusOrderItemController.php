@@ -28,13 +28,25 @@ class SyliusOrderItemController extends BaseOrderItemController
 
     private function handleBulkForm(Request $request)
     {
-        $this->get('librinfo_ecommerce.event_listener.sylius_order_item_controller')->setBulkInformations([
-            'bulk-surface'            => $request->request->get('bulk-surface'),
-            'bulk-surface-unit'       => $request->request->get('bulk-surface-unit'),
-            'bulk-weight'             => $request->request->get('bulk-weight'),
-            'bulk-weight-unit'        => $request->request->get('bulk-weight-unit'),
-            'product-variety-density' => $request->request->get('product-variety-density'),
-            'product-variety-tkw'     => $request->request->get('product-variety-tkw'),
-        ]);
+        if ($request->request->get('product-is-bulk') === '1') {
+            $bulkWeight = $request->request->get('bulk-weight');
+            if ($bulkWeight !== null && $bulkWeight !== '') {
+                $this->get('librinfo_ecommerce.event_listener.sylius_order_item_controller')->setBulkInformations([
+                    'bulk-surface'            => $request->request->get('bulk-surface'),
+                    'bulk-surface-unit'       => $request->request->get('bulk-surface-unit'),
+                    'bulk-weight'             => $bulkWeight,
+                    'bulk-weight-unit'        => $request->request->get('bulk-weight-unit'),
+                    'product-variety-density' => $request->request->get('product-variety-density'),
+                    'product-variety-tkw'     => $request->request->get('product-variety-tkw'),
+                ]);
+            } else {
+                $syliusAddToCart = $request->request->get('sylius_add_to_cart');
+                // Simulate a form error because bulk-weight is not filled
+                $syliusAddToCart['cartItem']['variant'] = null;
+                $syliusAddToCart['cartItem']['quantity'] = null;
+
+                $request->request->set('sylius_add_to_cart', $syliusAddToCart);
+            }
+        }
     }
 }

@@ -23,7 +23,7 @@ class SyliusOrderItemControllerListener
 
     public function onOrderItemAddToCart(GenericEvent $event): void
     {
-        if (!isset($this->bulkInformations['bulk-weight']) || $this->bulkInformations['bulk-weight'] === null || $this->bulkInformations['bulk-weight'] === '') {
+        if (!isset($this->bulkInformations['bulk-weight']) || $this->bulkInformations['bulk-weight'] === '') {
             return;
         }
 
