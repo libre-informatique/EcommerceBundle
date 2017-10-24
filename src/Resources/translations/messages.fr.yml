@@ -120,9 +120,11 @@ librinfo:
         itemstotal: Total
         label: Libélé
         lastlogin: Dernière connexion
+        last_commands: Dernières commandes
         locale_code: Code langue
         locale: Langue
         locales: Langues
+        manage_orders: Gérer les commandes
         maintaxon: Catégorie principale
         metadescription: Méta description
         metakeywords: Meta mots-clés
@@ -130,6 +132,7 @@ librinfo:
         name: Nom
         notes: Notes
         number: Numéro
+        number_of_products: Nombre de produits
         onhand: Disponible
         onhold: En attente
         operationdate: 'Date de l''opération'

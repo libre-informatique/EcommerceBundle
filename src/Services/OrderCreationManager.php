@@ -96,6 +96,7 @@ class OrderCreationManager
     public function initNewPayment(OrderInterface $order)
     {
         foreach ($order->getPayments() as $oPayment) {
+            $oPayment->setState(OrderPaymentStates::STATE_CART);
             $stateMachine = $this->stateMachineFactory->get($oPayment, PaymentTransitions::GRAPH);
             $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE);
         }
@@ -111,6 +112,18 @@ class OrderCreationManager
             $newOrder->addShipment(clone $oShipment);
         }
         $this->initNewShipment($newOrder);
+    }
+
+    /**
+     * @param OrderInterface oldOrder
+     * @param OrderInterface newOrder
+     */
+    public function copyPayment(OrderInterface $oldOrder, OrderInterface $newOrder)
+    {
+        foreach ($oldOrder->getPayments() as $oPayment) {
+            $newOrder->addPayment(clone $oPayment);
+        }
+        $this->initNewPayment($newOrder);
     }
 
     /**
@@ -153,6 +166,7 @@ class OrderCreationManager
         $newOrder->setShippingAddress(clone $oldOrder->getShippingAddress());
 
         $this->copyShipment($oldOrder, $newOrder);
+        $this->copyPayment($oldOrder, $newOrder);
 
         /* @todo : should not be done ? */
         // foreach ($oldOrder->getPayments() as $oPayment) {

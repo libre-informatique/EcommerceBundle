@@ -679,8 +679,7 @@ parameters:
                     _batch_actions: [cancel]
                     number:
                         identifier: true
-                    createdAt: ~
-                    updatedAt: ~
+                    checkoutCompletedAt: ~
                     channel: ~
                     customer:
                         admin_code: librinfo_ecommerce.admin.customer
