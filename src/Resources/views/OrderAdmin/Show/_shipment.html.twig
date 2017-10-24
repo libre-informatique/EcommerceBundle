@@ -3,19 +3,19 @@
     <i class="fa fa-globe"></i>&nbsp;{{ shipment.method.zone }}
 </td>
 <td width="50%">
-    <div class="label bg-green">
-        <i class="fa fa-truck"></i>&nbsp;{{ ('sylius.ui.'~shipment.state)|trans }}
-    </div>
-
     {% if sm_can(shipment, 'ship', 'sylius_shipment') %}
         <form action="{{ path('admin_librinfo_ecommerce_order_updateShipping',{id: object.id}) }}" method="POST" novalidate>
             <input type="hidden" name="_action" value="ship"/>
             <input type="hidden" name="_shipmentId" value="{{ shipment.id }}"/>
-            <input type="text" name="_tracking" placeholder="Code de suivi..." />
             <a href="#" onclick="$(this).closest('form').submit()" class="btn btn-success pull-right">
                 {{'librinfo.label.ship'|trans}}&nbsp;
                 <i class="fa fa-paper-plane"></i>
             </a>
+            <div class="input-group">
+                <div class="input-group-addon bg-green"><i class="fa fa-truck"></i>&nbsp;{{ ('sylius.ui.'~shipment.state)|trans }}</div>
+                <input type="text" name="_tracking" placeholder="Code de suivi..." class="form-control"/>
+            </div>
+
         </form>
     {% endif %}
 
