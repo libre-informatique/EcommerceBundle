@@ -134,9 +134,17 @@ services:
         class: Librinfo\EcommerceBundle\Services\OrderCreationManager
         arguments:
             - '@doctrine.orm.entity_manager'
-            - '@service_container'
         calls:
+
             - [setStateMachineFactory, ['@sm.factory']]
+            - [setOrderItemFactory, ['@sylius.factory.order_item']]
+            - [setOrderItemQuantityModifier, ['@sylius.order_item_quantity_modifier']]
+            - [setOrderRepository, ['@sylius.repository.order']]
+            - [setOrderManager, ['@sylius.manager.order']]
+            - [setOrderNumberAssigner, ['@sylius.order_number_assigner']]
+            - [setOrderFactory, ['@sylius.factory.order']]
+            - [setAddressFactory, ['@sylius.factory.address']]
+            - [setCustomerFactory, ['@sylius.factory.customer']]
 
 # EVENT LISTENERS
 

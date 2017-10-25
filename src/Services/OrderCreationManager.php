@@ -13,16 +13,20 @@
 namespace Librinfo\EcommerceBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use SM\Factory\Factory;
+use SM\Factory\Factory as SMFactory;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
 use Librinfo\EcommerceBundle\Entity\OrderInterface;
+use Librinfo\EcommerceBundle\Modifier\LimitingOrderItemQuantityModifier;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class OrderCreationManager
 {
@@ -32,19 +36,49 @@ class OrderCreationManager
     private $em;
 
     /**
-     * @var Factory
+     * @var SMFactory
      */
     private $stateMachineFactory;
 
     /**
-     * @param EntityManager $em
+     * @var FactoryInterface
      */
-    public function __construct(EntityManager $em, $container)
-    {
-        $this->em = $em;
-        /* @todo: set sylius services as param */
-        $this->container = $container;
-    }
+    private $orderItemFactory;
+
+    /**
+     * @var LimitingOrderItemQuantityModifier
+     */
+    private $orderItemQuantityModifier;
+
+    /**
+     * @var OrderRepository
+     */
+    private $orderRepository;
+
+    /**
+     * @var EntityManager
+     */
+    private $orderManager;
+
+    /**
+     * @var OrderNumberAssignerInterface
+     */
+    private $orderNumberAssigner;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $orderFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $addressFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $customerFactory;
 
     public function copyAddress(OrderInterface $order, array $data, string $key = 'shippingAddress')
     {
@@ -133,12 +167,12 @@ class OrderCreationManager
     public function copyOrderItem(OrderInterface $oldOrder, OrderInterface $newOrder)
     {
         foreach ($oldOrder->getItems() as $oItem) {
-            $newItem = $this->container->get('sylius.factory.order_item')->createNew(); // clone $oItem;
+            $newItem = $this->orderItemFactory->createNew(); // clone $oItem;
             $newItem->setBulk($oItem->isBulk());
             $newItem->setVariant($oItem->getVariant());
             $newItem->setUnitPrice($oItem->getUnitPrice());
 
-            $this->container->get('sylius.order_item_quantity_modifier')->modify($newItem, $oItem->getQuantity());
+            $this->orderItemQuantityModifier->modify($newItem, $oItem->getQuantity());
 
             $newItem->setQuantity($oItem->getQuantity());
 
@@ -168,12 +202,6 @@ class OrderCreationManager
         $this->copyShipment($oldOrder, $newOrder);
         $this->copyPayment($oldOrder, $newOrder);
 
-        /* @todo : should not be done ? */
-        // foreach ($oldOrder->getPayments() as $oPayment) {
-        //     $newOrder->addPayment(clone $oPayment);
-        // }
-        // //        $this->initNewPayment($newOrder);
-
         foreach ($oldOrder->getPromotions() as $oPro) {
             $newOrder->addPromotion(clone $oPro);
         }
@@ -181,14 +209,8 @@ class OrderCreationManager
         foreach ($oldOrder->getAdjustments() as $oAdjust) {
             $newOrder->addAdjustment(clone $oAdjust);
         }
-        // $newOrder->recalculateAdjustmentsTotal();
 
         $this->copyOrderItem($oldOrder, $newOrder);
-
-        // dump((new \ReflectionClass($newOrder))->getMethods());
-        // dump($oldOrder, $newOrder);
-        //die("DiE!");
-        //$this->container->get('sylius.manager.order')->flush($newOrder);
 
         return $newOrder;
     }
@@ -201,19 +223,15 @@ class OrderCreationManager
         // Warning: process reset shipment if there is no item in the list
         // $this->container->get('sylius.order_processing.order_processor')->process($newOrder);
 
-        $this->container->get('sylius.repository.order')->add($newOrder);
-
-        $this->container->get('sylius.manager.order')->flush($newOrder);
+        $this->orderRepository->add($newOrder);
+        $this->orderManager->flush($newOrder);
 
         return true;
     }
 
     public function assignNumber(OrderInterface $order)
     {
-        /* @todo : should we use get('sylius.order_number_assigner')->assignNumber($order) ?  Or not ? */
-        if ($order->getNumber() === null) { //useless test as setNumber already check it
-            $order->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($order));
-        }
+        $this->orderNumberAssigner->assignNumber($order);
     }
 
     /**
@@ -221,56 +239,106 @@ class OrderCreationManager
      */
     public function createOrder()
     {
-        /* @todo: set sylius services as class param */
-        $newOrder = $this->container->get('sylius.factory.order')->createNew(); //$this->admin->getNewInstance();
-        $addressFactory = $this->container->get('sylius.factory.address');
-        $customerFactory = $this->container->get('sylius.factory.customer');
+        $newOrder = $this->orderFactory->createNew();
+        $addressFactory = $this->addressFactory;
+        $customerFactory = $this->customerFactory;
 
         $newOrder->setShippingAddress($addressFactory->createNew());
         $newOrder->setBillingAddress($addressFactory->createNew());
         $newOrder->setCustomer($customerFactory->createNew());
 
-        //$newOrder->setNumber($this->container->get('sylius.sequential_order_number_generator')->generate($newOrder));
         $this->assignNumber($newOrder);
         $newOrder->setCheckoutCompletedAt(new \DateTime('NOW'));
         $newOrder->setState(OrderInterface::STATE_DRAFT);
         $newOrder->setPaymentState(OrderPaymentStates::STATE_CART);
         $newOrder->setShippingState(OrderShippingStates::STATE_CART);
 
-        //$stateMachineFactory = $this->container->get('sm.factory');
         $stateMachine = $this->stateMachineFactory->get($newOrder, OrderShippingTransitions::GRAPH);
         $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
 
-        // dump($newOrder->getShipments()); die;
-        // useless as there is no shipment on new orger
-        // foreach ($newOrder->getShipments() as $oShipment) {
-        //     $stateMachine = $this->stateMachineFactory->get($oShipment, ShipmentTransitions::GRAPH);
-        //     $stateMachine->apply(ShipmentTransitions::TRANSITION_CREATE);
-        // }
-
         $stateMachine = $this->stateMachineFactory->get($newOrder, OrderPaymentTransitions::GRAPH);
         $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
-
-        // dump($newOrder->getPayments()); die;
-        // useless as there is no payments on new orger
-        // foreach ($newOrder->getPayments() as $oPayment) {
-        //     $stateMachine = $this->stateMachineFactory->get($oPayment, PaymentTransitions::GRAPH);
-        //     $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE);
-        //     //            $stateMachine->apply(PaymentTransitions::TRANSITION_PROCESS);
-        // }
 
         return $newOrder;
     }
 
     /**
-     * @param Factory stateMachine
-     *
-     * @return self
+     * @param EntityManager $em
      */
-    public function setStateMachineFactory(Factory $stateMachineFactory)
+    public function setEm(EntityManager $em): void
+    {
+        $this->em = $em;
+    }
+
+    /**
+     * @param SMFactory $stateMachineFactory
+     */
+    public function setStateMachineFactory(SMFactory $stateMachineFactory): void
     {
         $this->stateMachineFactory = $stateMachineFactory;
+    }
 
-        return $this;
+    /**
+     * @param FactoryInterface $orderItemFactory
+     */
+    public function setOrderItemFactory(FactoryInterface $orderItemFactory): void
+    {
+        $this->orderItemFactory = $orderItemFactory;
+    }
+
+    /**
+     * @param LimitingOrderItemQuantityModifier $orderItemQuantityModifier
+     */
+    public function setOrderItemQuantityModifier(LimitingOrderItemQuantityModifier $orderItemQuantityModifier): void
+    {
+        $this->orderItemQuantityModifier = $orderItemQuantityModifier;
+    }
+
+    /**
+     * @param OrderRepository $orderRepository
+     */
+    public function setOrderRepository(OrderRepository $orderRepository): void
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
+    /**
+     * @param EntityManager $orderManager
+     */
+    public function setOrderManager(EntityManager $orderManager): void
+    {
+        $this->orderManager = $orderManager;
+    }
+
+    /**
+     * @param OrderNumberAssignerInterface $orderNumberAssigner
+     */
+    public function setOrderNumberAssigner(OrderNumberAssignerInterface $orderNumberAssigner): void
+    {
+        $this->orderNumberAssigner = $orderNumberAssigner;
+    }
+
+    /**
+     * @param FactoryInterface $orderFactory
+     */
+    public function setOrderFactory(FactoryInterface $orderFactory): void
+    {
+        $this->orderFactory = $orderFactory;
+    }
+
+    /**
+     * @param FactoryInterface $addressFactory
+     */
+    public function setAddressFactory(FactoryInterface $addressFactory): void
+    {
+        $this->addressFactory = $addressFactory;
+    }
+
+    /**
+     * @param FactoryInterface $customerFactory
+     */
+    public function setCustomerFactory(FactoryInterface $customerFactory): void
+    {
+        $this->customerFactory = $customerFactory;
     }
 }
