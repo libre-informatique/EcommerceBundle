@@ -18,7 +18,7 @@ librinfo:
         fulfilled: Validée
         new: Nouvelle
         draft: Brouillon
-    payment_state:
+    order_payment_state:
         awaiting_payment: En attente
         cancelled: Annulé
         cart: Panier
@@ -28,6 +28,20 @@ librinfo:
         partially_paid: Partiellement payé
         partially_refunded: Partiellement remboursé
         refunded: Remboursé
+    payment_state:
+        cart: Panier
+        new: Nouveau
+        processing: En cours
+        completed: Payé
+        failed: Échoué
+        cancelled: Annulé
+        refunded: Remboursé
+    order_shipping_state:
+        cart: Panier
+        cancelled: Annulé
+        ready: Prêt
+        partially_shipped: Partiellement expédié
+        shipped: Expédié
     shipping_state:
         cart: Panier
         cancelled: Annulé

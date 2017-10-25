@@ -11,7 +11,7 @@ winzou_state_machine:
                 from: [cart]
                 to: draft
             cancel:
-                from: [draft,fulfilled]
+                from: [draft,new]
                 to: cancelled
             confirm:
                 from: [draft]
