@@ -22,6 +22,8 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType;
 
 class OrderAdmin extends CoreAdmin
 {
@@ -86,10 +88,6 @@ class OrderAdmin extends CoreAdmin
     {
         $list = parent::configureActionButtons($action, $object);
 
-        if (isset($list['create'])) {
-            // unset($list['create']);
-        }
-
         return $list;
     }
 
@@ -119,14 +117,55 @@ class OrderAdmin extends CoreAdmin
                 $form = $event->getForm();
 
                 $orderCreationTools = $this->getConfigurationPool()->getContainer()
-                                    ->get('librinfo_ecommerce.order_creation_manager');
+                    ->get('librinfo_ecommerce.order_creation_manager');
                 $order = $admin->getSubject();
 
                 if (isset($data['channel'])) {
                     $channel = $this->getConfigurationPool()->getContainer()
                              ->get('sylius.repository.channel')->find($data['channel']);
                     $order->setChannel($channel);
-                    /* @todo: check if shipping method is valid with this channel (Or inverse) */
+
+                    // Handle payment methods values from selected channel
+
+                    $form->remove('payment');
+                    $paymentMethodRepo = $this->getConfigurationPool()->getContainer()
+                             ->get('sylius.repository.payment_method');
+
+                    $availablePaymentMethods = $paymentMethodRepo->createQueryBuilder('o')
+                        ->leftJoin('o.channels', 'c')
+                        ->where('c = :channel')
+                        ->andWhere('o.enabled = true')
+                        ->setParameter('channel', $channel)
+                        ->getQuery()->getResult();
+
+                    $form->add('payment', PaymentMethodChoiceType::class, [
+                        'label'    => 'librinfo.label.payment_method',
+                        'multiple' => false,
+                        'mapped'   => false,
+                        'required' => true,
+                        'choices'  => $availablePaymentMethods,
+                    ]);
+
+                    // Handle shipping methods values from selected channel
+
+                    $form->remove('shipment');
+                    $shippingMethodRepo = $this->getConfigurationPool()->getContainer()
+                             ->get('sylius.repository.shipping_method');
+
+                    $availableShippingMethods = $shippingMethodRepo->createQueryBuilder('o')
+                        ->leftJoin('o.channels', 'c')
+                        ->where('c = :channel')
+                        ->andWhere('o.enabled = true')
+                        ->setParameter('channel', $channel)
+                        ->getQuery()->getResult();
+
+                    $form->add('shipment', ShippingMethodChoiceType::class, [
+                        'label'    => 'librinfo.label.shipping_method',
+                        'multiple' => false,
+                        'mapped'   => false,
+                        'required' => true,
+                        'choices'  => $availableShippingMethods,
+                    ]);
                 }
 
                 if (isset($data['shippingAddress']) && isset($data['shippingAddress']['email'])) {
@@ -168,12 +207,15 @@ class OrderAdmin extends CoreAdmin
 
                     $payment = $this->getConfigurationPool()->getContainer()
                              ->get('sylius.factory.payment')->createNew();
+
                     $currency = $this->getConfigurationPool()->getContainer()
                               ->get('sylius.repository.currency')->find($data['currency_code']);
 
-                    $payment->setMethod($this->getConfigurationPool()->getContainer()
-                                        ->get('sylius.repository.payment_method')
-                                        ->findOneBy(['code' => $paymentCode]));
+                    $paymentMethod = $this->getConfigurationPool()->getContainer()
+                        ->get('sylius.repository.payment_method')
+                        ->findOneBy(['code' => $paymentCode]);
+
+                    $payment->setMethod($paymentMethod);
                     $payment->setCurrencyCode($currency->getCode());
                     $payment->setState(PaymentInterface::STATE_NEW);
 
@@ -185,11 +227,13 @@ class OrderAdmin extends CoreAdmin
                     $shipmentCode = $data['shipment'];
 
                     $shipment = $this->getConfigurationPool()->getContainer()
-                              ->get('sylius.factory.shipment')->createNew();
+                        ->get('sylius.factory.shipment')->createNew();
 
-                    $shipment->setMethod($this->getConfigurationPool()->getContainer()
-                                         ->get('sylius.repository.shipping_method')
-                                         ->findOneBy(['code' => $shipmentCode]));
+                    $shipmentMethod = $this->getConfigurationPool()->getContainer()
+                        ->get('sylius.repository.shipping_method')
+                        ->findOneBy(['code' => $shipmentCode]);
+
+                    $shipment->setMethod($shipmentMethod);
                     $shipment->setState(ShipmentInterface::STATE_READY);
 
                     $order->addShipment($shipment);
