@@ -2,7 +2,7 @@
 
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-{% block block_classes %}col-lg-6{% endblock block_classes %}
+{% block block_classes %}col-lg-12{% endblock block_classes %}
 
 {% block title %}
     {{ 'librinfo.label.dashboard_title'|trans }}
@@ -10,12 +10,12 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-lg-6 col-md-12">
-            <h4>{{ 'librinfo.label.sales_amount'|trans }}</h4>
+        <div class="col-lg-4 col-md-12">
+            <h4 class="text-center">{{ 'librinfo.label.sales_amount'|trans }}</h4>
             <canvas id="dashboard-ecommerce-sales-amount"></canvas>
         </div>
-        <div class="col-lg-6 col-md-12 table-responsive">
-            <h4>{{ 'librinfo.ecommercebundle.last_commands'|trans }}</h4>
+        <div class="col-lg-4 col-md-12 table-responsive">
+            <h4 class="text-center">{{ 'librinfo.ecommercebundle.last_commands'|trans }}</h4>
             <table class="table table-bordered table-striped table-condensed">
                 <thead>
                     <tr>
@@ -53,6 +53,23 @@
                             </a>
                         </td>
                     </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-4 col-md-12 table-responsive">
+            <h4 class="text-center">{{ 'librinfo.ecommercebundle.misc_stats'|trans }}</h4>
+            <table class="table table-bordered table-striped table-condensed">
+                <tbody>
+                    {% for stat in miscStats %}
+                        <tr>
+                            <td>
+                                {{ stat.label|trans }}
+                            </td>
+                            <td class="text-right">
+                                {{ stat.value }}
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

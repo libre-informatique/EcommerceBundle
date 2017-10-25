@@ -13,6 +13,7 @@
 namespace Librinfo\EcommerceBundle\Dashboard;
 
 use Blast\CoreBundle\Dashboard\AbstractDashboardBlock;
+use Librinfo\EcommerceBundle\Dashboard\Stats\Misc;
 use Librinfo\EcommerceBundle\Dashboard\Stats\Sales;
 use Librinfo\EcommerceBundle\Dashboard\Stats\OrdersToProcess;
 
@@ -28,14 +29,21 @@ class EcommerceDashboardBlock extends AbstractDashboardBlock
      */
     private $orderToProcessStats;
 
+    /**
+     * @var Misc
+     */
+    private $miscStats;
+
     public function handleParameters()
     {
-        $fakeSalesData = $this->salesStats->getData();
+        $salesData = $this->salesStats->getData();
         $orderToProcess = $this->orderToProcessStats->getData();
+        $miscStats = $this->miscStats->getData();
 
         $this->templateParameters = [
-            'salesAmountData'     => $fakeSalesData,
+            'salesAmountData'     => $salesData,
             'lastOrdersToProcess' => $orderToProcess,
+            'miscStats'           => $miscStats,
         ];
     }
 
@@ -53,5 +61,13 @@ class EcommerceDashboardBlock extends AbstractDashboardBlock
     public function setOrderToProcessStats(OrdersToProcess $orderToProcessStats): void
     {
         $this->orderToProcessStats = $orderToProcessStats;
+    }
+
+    /**
+     * @param Misc $miscStats
+     */
+    public function setMiscStats(Misc $miscStats): void
+    {
+        $this->miscStats = $miscStats;
     }
 }

@@ -129,6 +129,7 @@ librinfo:
         metadescription: Méta description
         metakeywords: Meta mots-clés
         method: Mode
+        misc_stats: Statistiques diverses
         name: Nom
         notes: Notes
         number: Numéro
@@ -176,6 +177,7 @@ librinfo:
         productvariant_create: 'Nouvelle déclinaisons d''article'
         productvariant_list: 'Liste des déclinaisons d''article'
         rates: Taux de TVA
+        sales_of_current_year: Ventes de l'année en cours
         salesjournal_list: Journal des ventes
         scope: Scope
         shipping_address: Adresse de livraison
@@ -192,6 +194,7 @@ librinfo:
         slug: Slug
         state: Etat
         storagetype: Type de stockage
+        taxes_of_current_year: Taxes de l'année
         taxcalculationstrategy: Stratégie de calcul de la TVA
         taxcategory_create: Nouvelle catégorie de TVA
         taxcategory_list: Liste des catégories de TVA
@@ -204,6 +207,8 @@ librinfo:
         themename: Thème
         tokenvalue: Jeton
         total: Total
+        total_sales: Total des ventes
+        total_taxes: Total des taxes
         tracked: Suivi
         translation__name: Nom
         translation_name: Nom
