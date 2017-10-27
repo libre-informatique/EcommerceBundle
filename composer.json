@@ -49,5 +49,6 @@
         "psr-4": {
             "Librinfo\\EcommerceBundle\\": "src/"
         }
-    }
+    },
+    "version": "dev-wip-lisem"
 }
