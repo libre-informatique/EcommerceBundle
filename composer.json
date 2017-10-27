@@ -1,8 +1,7 @@
 {
     "name": "libre-informatique/ecommerce-bundle",
     "type": "symfony-bundle",
-    "description": "Bridge bundle between librinfo bundles and sylius",
-    "minimum-stability": "dev",
+    "description": "Bridge bundle between librinfo bundles and sylius",    
     "require": {
         "php": ">=7.1",
         "symfony/symfony": ">=3.3",
@@ -18,14 +17,6 @@
     },
     "require-dev": {
         "symfony/phpunit-bridge": ">=3.2"
-    },
-    "config": {
-        "sllh-composer-lint": {
-            "php": true,
-            "type": true,
-            "minimum-stability": false,
-            "version-constraints": true
-        }
     },
     "license": "LGPL-3.0",
     "keywords": [
