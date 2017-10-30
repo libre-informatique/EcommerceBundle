@@ -165,7 +165,7 @@ parameters:
                             - translations.name
 
 ############################
-# PRODUCT VARIANT
+# PRODUCTVARIANT
 ############################
 
 
@@ -302,7 +302,7 @@ parameters:
                             - product.code
 
 ############################
-# PRODUCT VARIANT(EMBEDDED)
+# PRODUCTVARIANT(EMBEDDED)
 ############################
 
         Librinfo\EcommerceBundle\Admin\ProductVariantEmbeddedAdmin:
@@ -364,7 +364,7 @@ parameters:
                 add: ~
 
 ####################
-# PRODUCT ATTRIBUTE
+# PRODUCTATTRIBUTE
 ####################
 
         Sylius\Component\Product\Model\ProductAttribute:
@@ -407,7 +407,7 @@ parameters:
                     updatedAt: ~
 
 ####################
-# PRODUCT OPTION
+# PRODUCTOPTION
 ####################
 
         Librinfo\EcommerceBundle\Entity\ProductOption:
@@ -465,7 +465,7 @@ parameters:
 
 
 ####################
-# PRODUCT OPTION VALUE
+# PRODUCTOPTIONVALUE
 ####################
 
         Librinfo\EcommerceBundle\Entity\ProductOptionValue:
@@ -502,7 +502,7 @@ parameters:
 
 
 ##########################
-# PRODUCT CHANNEL PRICING
+# PRODUCTCHANNELPRICING
 ##########################
 
         Sylius\Component\Core\Model\ChannelPricing:
@@ -739,7 +739,7 @@ parameters:
                     customerIp: ~
 
 ################
-# ADMIN USER
+# ADMINUSER
 ################
 
         Librinfo\EcommerceBundle\Entity\AdminUser:
@@ -858,7 +858,7 @@ parameters:
                     id: ~
 
 ################
-# ORDER PAYMENT
+# PAYMENT
 ################
 
         Librinfo\EcommerceBundle\Entity\Payment:
@@ -978,7 +978,7 @@ parameters:
 
 
 ################
-# SALES JOURNAL
+# SALESJOURNAL
 ################
 
         Librinfo\EcommerceBundle\Admin\SalesJournalAdmin:
@@ -1019,10 +1019,12 @@ parameters:
 
 
 #################
-# PAYMENT METHOD
+# PAYMENTMETHOD
 #################
 
         Librinfo\EcommerceBundle\Admin\PaymentMethodAdmin:
+            form_theme:
+                - LibrinfoEcommerceBundle:Form:fields.html.twig
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove:
                     _actions: [duplicate]
@@ -1045,6 +1047,15 @@ parameters:
                             enabled: ~
                             position: ~
                             channels: ~
+                        form_group_description:
+                            translation.name:
+                                type: text
+                            translation.description:
+                                type: textarea
+                            translation.instructions:
+                                type: Blast\UtilsBundle\Form\Type\TinyMceType
+                                required: true
+                                help: librinfo.ecommercebundle.translation__instructions_help
 ############
 # CUSTOMER
 ############
@@ -1094,7 +1105,7 @@ parameters:
 
 
 #################
-# CUSTOMER GROUP
+# CUSTOMERGROUP
 #################
 
         # SHOW
@@ -1306,7 +1317,7 @@ parameters:
                     # code: ~
 
 ################################################################################
-# Channel
+# CHANNEL
 ################################################################################
 
         Librinfo\EcommerceBundle\Entity\Channel:
@@ -1505,7 +1516,7 @@ parameters:
 
 
 ################################################################################
-# ShippingMethod
+# SHIPPINGMETHOD
 ################################################################################
 
         Librinfo\EcommerceBundle\Entity\ShippingMethod:
@@ -1552,6 +1563,8 @@ parameters:
                             code: ~
                             translation.name:
                                 type: text
+                            translation.description:
+                                type: textarea
                             calculator:
                                 type: Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType
                             taxCategory: ~
@@ -1612,58 +1625,8 @@ parameters:
                     channels: ~
                     enabled: ~
 
-
 ################################################################################
-# ShippingCategory
-################################################################################
-
-#        Sylius\Component\Shipping\Model\ShippingCategory:
-#            baseRoute:
-#                name: admin_librinfo_ecommerce_shipping_category
-#                pattern: librinfo/ecommerce/shipping_category
-#
-#            # SHOW
-#            Sonata\AdminBundle\Show\ShowMapper:
-#                remove:
-#                    id: ~
-#                add:
-#                    show_tab_general:
-#                        show_group_general:
-#                            code: ~
-#                            name: ~
-#                            description: ~
-#
-#            # FORM
-#            Sonata\AdminBundle\Form\FormMapper:
-#                remove:
-#                    id: ~
-#                add:
-#                    form_tab_general:
-#                        form_group_general:
-#                            code: ~
-#                            name: ~
-#                            description: ~
-#
-#            # LIST
-#            Sonata\AdminBundle\Datagrid\ListMapper:
-#                remove:
-#                    id: ~
-#                add:
-#                    code: ~
-#                    name: ~
-#                    description: ~
-#
-#            # FILTERS
-#            Sonata\AdminBundle\Datagrid\DatagridMapper:
-#                remove:
-#                    id: ~
-#                add:
-#                    code: ~
-#                    name: ~
-#                    description: ~
-#
-################################################################################
-# ShippingMethodTranslation
+# SHIPPINGMETHODTRANSLATION
 ################################################################################
 
         Sylius\Component\Shipping\Model\ShippingMethodTranslation:
@@ -1713,7 +1676,7 @@ parameters:
                     locale: ~
 
 ################################################################################
-# ShopUser
+# SHOPUSER
 ################################################################################
 
         Sylius\Component\Core\Model\ShopUser:

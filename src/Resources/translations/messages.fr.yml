@@ -225,6 +225,9 @@ librinfo:
         total_taxes: Total des taxes
         tracked: Suivi
         translation__name: Nom
+        translation__description: Description
+        translation__instructions: Instructions
+        translation__instructions_help: Instructions qui seront affichées aux clients
         translation_name: Nom
         translations_description: Description
         translations_metadescription: Méta Description
