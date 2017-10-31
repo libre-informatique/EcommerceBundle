@@ -35,6 +35,20 @@ class ProductVariantAdmin extends SyliusGenericAdmin
      */
     protected $productAdminCode = 'librinfo_ecommerce.admin.product';
 
+    /**
+     * {@inheritdoc}
+     */
+    public function configureActionButtons($action, $object = null)
+    {
+        $list = parent::configureActionButtons($action, $object);
+
+        $list['show_product'] = [
+            'template' => 'LibrinfoEcommerceBundle:Button:show_product_button.html.twig'
+        ];
+
+        return $list;
+    }
+
     public function configureFormFields(FormMapper $mapper)
     {
         $product = $this->getProduct();

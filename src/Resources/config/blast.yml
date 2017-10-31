@@ -37,6 +37,7 @@ parameters:
                         '':
                             variants:
                                 admin_code: librinfo_ecommerce.admin.product_variant
+                                template: LibrinfoEcommerceBundle:ProductAdmin:show_field_product_variants.html.twig
                     form_tab_history:
                         form_group_history:
                             createdAt: ~
@@ -327,35 +328,47 @@ parameters:
                 add:
                     form_tab_general:
                         form_group_general:
-                            product:
-                                type: sonata_type_model_autocomplete
-                                property: [translations.name, code]
-                                attr:
-                                    readonly: ~
-                                _options:
-                                    admin_code: librinfo_ecommerce.admin.product
+                            id:
+                                type: hidden
                             name:
                                 type: text
                             code:
                                 type: Blast\CoreBundle\Form\Type\EntityCodeType
-                            # channelPricings:
-                            #     type: sonata_type_collection
-                            #     type_options:
-                            #         btn_add: false
-                            #         delete: false
-                            #     _options:
-                            #         admin_code: librinfo_ecommerce.admin.channel_pricing
-                            #         edit: inline
-                            #         inline: table
-#                            price:
-#                                type: text
-                            # optionValues:
-                            #     _options:
-                            #         admin_code: librinfo_ecommerce_option_value.admin.product
+                            product:
+                                type: sonata_type_model_hidden
+                                _options:
+                                    admin_code: librinfo_ecommerce.admin.product
+                            enabled: ~
                             _options:
                                 fieldsOrder: [product, name, code]
-                    _options:
-                        tabsOrder: [form_group_general]
+                        form_group_pricing:
+                            taxCategory: ~
+                            channelPricings:
+                                type: sonata_type_collection
+                                type_options:
+                                    btn_add: false
+                                    delete: false
+                                _options:
+                                    admin_code: librinfo_ecommerce.admin.channel_pricing
+                                    edit: inline
+                                    inline: table
+                        form_group_options:
+                            optionValues:
+                                _options:
+                                    admin_code: librinfo_ecommerce_option_value.admin.product
+                        form_group_stock:
+                            onHand:
+                                required: false
+                            onHold:
+                                required: false
+                            tracked: ~
+                        form_group_properties:
+                            width: ~
+                            height: ~
+                            depth: ~
+                            weight: ~
+                        _options:
+                            groupsOrder: [form_group_general,form_group_pricing,form_group_options,form_group_properties,form_group_stock]
             # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add: ~

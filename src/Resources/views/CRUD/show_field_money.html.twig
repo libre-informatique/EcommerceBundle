@@ -3,5 +3,7 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 {% block field_value %}
-    {{ money.convertAndFormat(value) }}
+    {% if value is defined and value is not null %}
+        {{ money.convertAndFormat(value) }}
+    {% endif %}
 {% endblock %}

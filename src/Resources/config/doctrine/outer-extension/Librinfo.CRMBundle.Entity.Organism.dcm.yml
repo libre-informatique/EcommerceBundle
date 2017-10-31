@@ -14,7 +14,7 @@ Librinfo\CRMBundle\Entity\Organism:
 
     oneToMany:
         orders:
-            targetEntity: Sylius\Component\Order\Model\OrderInterface
+            targetEntity: Librinfo\EcommerceBundle\Entity\Order
             mappedBy: customer
             cascade: [persist, remove]
         addresses:
@@ -24,5 +24,5 @@ Librinfo\CRMBundle\Entity\Organism:
 
     manyToOne:
         group:
-            targetEntity: Sylius\Component\Customer\Model\CustomerGroupInterface
+            targetEntity: Librinfo\EcommerceBundle\Entity\CustomerGroup
             inversedBy: customers

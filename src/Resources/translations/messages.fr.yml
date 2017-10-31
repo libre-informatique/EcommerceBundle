@@ -36,6 +36,10 @@ librinfo:
         failed: Échoué
         cancelled: Annulé
         refunded: Remboursé
+        awaiting_payment: En attente de paiment
+        paid: Payé
+        partially_paid: Partiellement payé
+        partially_refunded: Partiellement remboursé
     order_shipping_state:
         cart: Panier
         cancelled: Annulé
@@ -68,6 +72,13 @@ librinfo:
         purchased_from: Achété sur
         ship: Expédier
     ecommercebundle:
+        depth: Profondeur
+        height: Hauteur
+        optionValues: Options
+        prices: Prix
+        taxCategory: TVA
+        weight: Poids
+        width: Largeur
         dashboard_title: Statistiques de vente
         sales_amount: 'Chiffre d''affaire'
         localecode: Langue
@@ -81,6 +92,7 @@ librinfo:
             product:
                 product_attribute: 'Attribut d''article'
                 product_option: 'Option d''article'
+                product_variant: Variante de produit
             shipping_method: Méthode de Livraison
             TaxCategory: Catégories de TVA
         link:
@@ -101,6 +113,7 @@ librinfo:
         channel_list: Liste des canaux
         channel: Canal de vente
         channelcode: Code du canal
+        channelpricings: Prix
         channels: Canal de vente
         checkoutcompletedat: Panier validé le
         code: Code
@@ -145,6 +158,7 @@ librinfo:
         method: Mode
         misc_stats: Statistiques diverses
         name: Nom
+        no_product_variants: Pas de variantes de produit
         notes: Notes
         number: Numéro
         number_of_products: Nombre de produits
