@@ -24,15 +24,23 @@ parameters:
                             slug:
                                 template: "LibrinfoEcommerceBundle:ProductAdmin:show_field_shop_link.html.twig"
                             code: ~
-                            enabled: boolean
-                            description: ~
+                            enabled:
+                                type: boolean
                             options: ~
-                            shortDescription: ~
+                            description:
+                                safe: true
+                            shortDescription:
+                                safe: true
                             metaKeywords: ~
                             metaDescription: ~
+                        form_group_channels_and_taxonomy:
+                            channels: ~
+                            mainTaxon: ~
+                            taxons:
+                                admin_code: librinfo_ecommerce.admin.taxon
+                                template: LibrinfoEcommerceBundle:ProductAdmin:show_field_taxons.html.twig
                         show_group_availability:
                             available:
-                                type: boolean
                     show_tab_variants:
                         '':
                             variants:

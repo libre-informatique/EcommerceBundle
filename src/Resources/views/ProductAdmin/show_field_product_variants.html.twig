@@ -59,7 +59,7 @@
             </td>
             <td>
                 <div class="btn-group pull-right">
-                    <a href="{{ path('admin_librinfo_ecommerce_productvariant_edit', {'id': variant.id})}}" class="btn btn-sm btn-default edit_link" title="{{ 'action_edit'|trans({}, 'SonataAdminBundle') }}">
+                    <a href="{{ path('admin_librinfo_ecommerce_productvariant_edit', {'id': variant.id})}}" class="btn btn-sm btn-default edit_link openInModal" title="{{ 'action_edit'|trans({}, 'SonataAdminBundle') }}">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
                     <a href="{{ path('admin_librinfo_ecommerce_productvariant_delete', {'id': variant.id})}}" class="btn btn-sm btn-danger delete_link confirmable" title="{{ 'action_delete'|trans({}, 'SonataAdminBundle') }}">
@@ -80,5 +80,10 @@
         </tbody>
     </table>
 
+    <script>
+        jQuery(document).on('li-modal.success',function() {
+            window.location.reload();
+        });
+    </script>
 
 {% endblock %}
