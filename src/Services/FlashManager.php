@@ -39,4 +39,10 @@ class FlashManager extends BaseFlashManager
             $flashBag->add($type, $message);
         }
     }
+
+    public function addMessage($type, $message, $transChoices = [], $domain = 'messages')
+    {
+        $message = $this->getTranslator()->trans($message, $transChoices, $domain);
+        $this->getSession()->getFlashBag()->add($type, $message);
+    }
 }
