@@ -183,7 +183,7 @@ librinfo:
         order_total: Total commande
         original_price:  'Prix d''origine'
         paid_at: Payé le
-        parent: Variété
+        parent: Parent
         payment: Paiement
         payment_list: Liste des paiements
         payment_method: Mode de paiement
