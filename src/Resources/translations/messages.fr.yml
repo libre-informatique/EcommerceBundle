@@ -18,7 +18,7 @@ librinfo:
         fulfilled: Validée
         new: Nouvelle
         draft: Brouillon
-    payment_state:
+    order_payment_state:
         awaiting_payment: En attente
         cancelled: Annulé
         cart: Panier
@@ -28,6 +28,24 @@ librinfo:
         partially_paid: Partiellement payé
         partially_refunded: Partiellement remboursé
         refunded: Remboursé
+    payment_state:
+        cart: Panier
+        new: Nouveau
+        processing: En cours
+        completed: Payé
+        failed: Échoué
+        cancelled: Annulé
+        refunded: Remboursé
+        awaiting_payment: En attente de paiment
+        paid: Payé
+        partially_paid: Partiellement payé
+        partially_refunded: Partiellement remboursé
+    order_shipping_state:
+        cart: Panier
+        cancelled: Annulé
+        ready: Prêt
+        partially_shipped: Partiellement expédié
+        shipped: Expédié
     shipping_state:
         cart: Panier
         cancelled: Annulé
@@ -54,6 +72,13 @@ librinfo:
         purchased_from: Achété sur
         ship: Expédier
     ecommercebundle:
+        depth: Profondeur
+        height: Hauteur
+        optionValues: Options
+        prices: Prix
+        taxCategory: TVA
+        weight: Poids
+        width: Largeur
         dashboard_title: Statistiques de vente
         sales_amount: 'Chiffre d''affaire'
         localecode: Langue
@@ -67,6 +92,7 @@ librinfo:
             product:
                 product_attribute: 'Attribut d''article'
                 product_option: 'Option d''article'
+                product_variant: Variante de produit
             shipping_method: Méthode de Livraison
             TaxCategory: Catégories de TVA
         link:
@@ -87,6 +113,7 @@ librinfo:
         channel_list: Liste des canaux
         channel: Canal de vente
         channelcode: Code du canal
+        channelpricings: Prix
         channels: Canal de vente
         checkoutcompletedat: Panier validé le
         code: Code
@@ -120,16 +147,21 @@ librinfo:
         itemstotal: Total
         label: Libélé
         lastlogin: Dernière connexion
+        last_commands: Dernières commandes
         locale_code: Code langue
         locale: Langue
         locales: Langues
+        manage_orders: Gérer les commandes
         maintaxon: Catégorie principale
         metadescription: Méta description
         metakeywords: Meta mots-clés
         method: Mode
+        misc_stats: Statistiques diverses
         name: Nom
+        no_product_variants: Pas de variantes de produit
         notes: Notes
         number: Numéro
+        number_of_products: Nombre de produits
         onhand: Disponible
         onhold: En attente
         operationdate: 'Date de l''opération'
@@ -151,7 +183,7 @@ librinfo:
         order_total: Total commande
         original_price:  'Prix d''origine'
         paid_at: Payé le
-        parent: Variété
+        parent: Parent
         payment: Paiement
         payment_list: Liste des paiements
         payment_method: Mode de paiement
@@ -173,6 +205,7 @@ librinfo:
         productvariant_create: 'Nouvelle déclinaisons d''article'
         productvariant_list: 'Liste des déclinaisons d''article'
         rates: Taux de TVA
+        sales_of_current_year: Ventes de l'année en cours
         salesjournal_list: Journal des ventes
         scope: Scope
         shipping_address: Adresse de livraison
@@ -189,6 +222,7 @@ librinfo:
         slug: Slug
         state: Etat
         storagetype: Type de stockage
+        taxes_of_current_year: Taxes de l'année
         taxcalculationstrategy: Stratégie de calcul de la TVA
         taxcategory_create: Nouvelle catégorie de TVA
         taxcategory_list: Liste des catégories de TVA
@@ -201,8 +235,13 @@ librinfo:
         themename: Thème
         tokenvalue: Jeton
         total: Total
+        total_sales: Total des ventes
+        total_taxes: Total des taxes
         tracked: Suivi
         translation__name: Nom
+        translation__description: Description
+        translation__instructions: Instructions
+        translation__instructions_help: Instructions qui seront affichées aux clients
         translation_name: Nom
         translations_description: Description
         translations_metadescription: Méta Description

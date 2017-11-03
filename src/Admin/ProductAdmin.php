@@ -58,6 +58,15 @@ class ProductAdmin extends SyliusGenericAdmin
         parent::configureRoutes($collection);
         $collection->add('generateProductSlug', 'generate_product_slug');
         $collection->add('setAsCoverImage', 'setAsCoverImage');
+        $collection->remove('delete');
+    }
+
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+        unset($actions['delete']);
+
+        return $actions;
     }
 
     /**

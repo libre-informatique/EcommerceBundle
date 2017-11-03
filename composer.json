@@ -1,10 +1,9 @@
 {
     "name": "libre-informatique/ecommerce-bundle",
     "type": "symfony-bundle",
-    "description": "Bridge bundle between librinfo bundles and sylius",
-    "minimum-stability": "dev",
+    "description": "Bridge bundle between librinfo bundles and sylius",    
     "require": {
-        "php": ">= 7.1",
+        "php": ">=7.1",
         "symfony/symfony": ">=3.3",
         "blast-project/core-bundle": "self.version",
         "blast-project/base-entities-bundle": "self.version",
@@ -17,15 +16,8 @@
         "h4cc/wkhtmltopdf-amd64":  "^0.12.3"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": ">=3.2"
-    },
-    "config": {
-        "sllh-composer-lint": {
-            "php": true,
-            "type": true,
-            "minimum-stability": false,
-            "version-constraints": true
-        }
+        "symfony/phpunit-bridge": ">=3.2",
+        "phpunit/phpunit": "^6.4"
     },
     "license": "LGPL-3.0",
     "keywords": [
@@ -49,5 +41,6 @@
         "psr-4": {
             "Librinfo\\EcommerceBundle\\": "src/"
         }
-    }
+    },
+    "version": "dev-wip-lisem"
 }

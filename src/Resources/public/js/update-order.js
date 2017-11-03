@@ -5,6 +5,7 @@ $(document).ready(
             e.preventDefault();
             updateBulkQuantity($(this));
         });
+
     }
 );
 
@@ -111,7 +112,6 @@ var addProduct = function(orderId, variantId, url) {
 };
 
 
-//Add product to order
 var updateBulkQuantity = function(form) {
 
     var url = form.attr('action');

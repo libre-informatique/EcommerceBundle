@@ -39,7 +39,6 @@ class OrderManager
      */
     public function __construct(EntityManager $em)
     {
-        /* @todo: as it is never used in this class, it should be removed */
         $this->em = $em;
     }
 
@@ -53,7 +52,8 @@ class OrderManager
         }
 
         $stateMachine = $this->stateMachine->get($order, 'sylius_order');
-        if ($stateMachine->can('fulfill')) {
+
+        if ($stateMachine->can('fulfill') && $order->getItems()->count() > 0) {
             $stateMachine->apply('fulfill');
         }
     }

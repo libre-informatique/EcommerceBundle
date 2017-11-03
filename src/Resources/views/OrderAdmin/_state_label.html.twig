@@ -16,7 +16,7 @@
         'draft':      'file-o'
     } %}
 
-{% elseif category == 'payment' %}
+{% elseif category == 'order_payment' %}
 
     {% set colors = {
         'awaiting_payment':   'blue',
@@ -24,10 +24,10 @@
         'cancelled':          'orange',
         'paid':               'green',
         'completed':          'green',
-        'partially_paid':     'yellow',
-        'partially_refunded': 'yellow',
+        'partially_paid':     'orange',
+        'partially_refunded': 'orange',
         'refunded':           'purple',
-        'new':                'gray'
+        'new':                'blue'
     } %}
 
     {% set icons = {
@@ -40,6 +40,46 @@
         'partially_refunded': 'reply-all',
         'refunded':           'reply-all',
         'new':                'clock-o'
+    } %}
+
+{% elseif category == 'payment' %}
+
+    {% set colors = {
+        'cart':               'gray',
+        'new':                'blue',
+        'processing':         'blue',
+        'completed':          'green',
+        'failed':             'red',
+        'cancelled':          'orange',
+        'refunded':           'orange',
+    } %}
+
+    {% set icons = {
+        'cart':               'shopping-cart',
+        'new':                'clock-o',
+        'processing':         'clock-o',
+        'completed':          'check',
+        'failed':             'ban',
+        'cancelled':          'ban',
+        'refunded':           'reply-all',
+    } %}
+
+{% elseif category == 'order_shipping' %}
+
+    {% set colors = {
+        'cancelled':         'orange',
+        'cart':              'gray',
+        'ready':             'blue',
+        'partially_shipped': 'orange',
+        'shipped':           'green'
+    } %}
+
+    {% set icons = {
+        'cancelled':         'ban',
+        'cart':              'shopping-cart',
+        'ready':             'clock-o',
+        'partially_shipped': 'clock-o',
+        'shipped':           'truck'
     } %}
 
 {% elseif category == 'shipping' %}

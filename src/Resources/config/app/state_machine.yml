@@ -7,13 +7,13 @@ winzou_state_machine:
             cancelled: ~
             fulfilled: ~
         transitions:
-            create_draft:
+            cancel: # append draft state
+                from: [draft]
+                to: cancelled
+            create_draft: # add new transition
                 from: [cart]
                 to: draft
-            cancel:
-                from: [draft,fulfilled]
-                to: cancelled
-            confirm:
+            confirm: # add new transition
                 from: [draft]
                 to: new
         callbacks:
@@ -35,7 +35,6 @@ winzou_state_machine:
                     on:   ["cancel"]
                     do:   ["@librinfo_ecommerce.order_invoice_manager", "generateCreditInvoice"]
                     args: ["object"]
-
     sylius_payment:
         callbacks:
             after:
