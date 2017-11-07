@@ -1,15 +1,6 @@
 # Change Log
 
-## [0.6.4](https://github.com/libre-informatique/EcommerceBundle/tree/0.6.4) (2017-11-03)
-[Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.5.2...0.6.4)
-
-**Merged pull requests:**
-
-- DevKit updates for EcommerceBundle [\#31](https://github.com/libre-informatique/EcommerceBundle/pull/31) ([BlastCI](https://github.com/BlastCI))
-- Lisem fix & features [\#29](https://github.com/libre-informatique/EcommerceBundle/pull/29) ([FanchTheSystem](https://github.com/FanchTheSystem))
-- DevKit updates for EcommerceBundle [\#28](https://github.com/libre-informatique/EcommerceBundle/pull/28) ([BlastCI](https://github.com/BlastCI))
-
-## [0.5.2](https://github.com/libre-informatique/EcommerceBundle/tree/0.5.2) (2017-10-20)
+## [0.5.2](https://github.com/libre-informatique/EcommerceBundle/tree/0.5.2) (2017-10-19)
 [Full Changelog](https://github.com/libre-informatique/EcommerceBundle/compare/0.5.1...0.5.2)
 
 **Merged pull requests:**
